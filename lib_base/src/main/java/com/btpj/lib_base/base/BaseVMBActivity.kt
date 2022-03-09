@@ -47,7 +47,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         }
     }
 
-    /** View相关初始化 */
+    /** View相关初始化*/
     abstract fun initView()
 
     /** 提供编写LiveData监听逻辑的方法 */

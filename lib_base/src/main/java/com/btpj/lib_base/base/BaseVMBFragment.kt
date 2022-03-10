@@ -1,32 +1,42 @@
 package com.btpj.lib_base.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
-import com.btpj.lib_base.utils.StatusBarUtil
 import java.lang.reflect.ParameterizedType
 
 /**
- * 封装了ViewModel和DataBinding的Activity基类
+ * 封装了ViewModel和DataBinding的Fragment基类
  *
  * @author LTP  2021/11/23
  */
-abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private val contentViewResId: Int) :
-    AppCompatActivity() {
+abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private val contentViewResId: Int) :
+    Fragment() {
 
     private lateinit var mViewModel: VM
-    lateinit var mBinding: B
+    private lateinit var mBinding: B
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // 设置透明通知栏
-        StatusBarUtil.setImmersionStatus(this)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        mBinding = DataBindingUtil.inflate(inflater, contentViewResId, container, false)
+        return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        initDataBinding()
         initView()
+        createObserve()
+        setupDataBinding()
     }
 
     /** ViewModel初始化 */
@@ -40,12 +50,11 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         createObserve()
     }
 
-    /** DataBinding初始化 */
-    private fun initDataBinding() {
-        mBinding = DataBindingUtil.setContentView(this, contentViewResId)
+    /** DataBinding相关设置 */
+    private fun setupDataBinding() {
         mBinding.apply {
-            // 需绑定lifecycleOwner到activity,xml绑定的数据才会随着liveData数据源的改变而改变
-            lifecycleOwner = this@BaseVMBActivity
+            // 需绑定lifecycleOwner到Fragment,xml绑定的数据才会随着liveData数据源的改变而改变
+            lifecycleOwner = this@BaseVMBFragment
             setVariable(BR.viewModel, mViewModel)
         }
     }

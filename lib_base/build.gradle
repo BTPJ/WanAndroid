@@ -1,6 +1,3 @@
-import com.btpj.plugin.Versions
-import com.btpj.plugin.Deps
-
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
@@ -8,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk Versions.compileSdk
+    compileSdk rootProject.ext.android.compileSdk
 
     defaultConfig {
-        minSdk Versions.minSdk
-        targetSdk Versions.targetSdk
+        minSdk rootProject.ext.android.minSdk
+        targetSdk rootProject.ext.android.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,11 +34,12 @@ android {
 }
 
 dependencies {
-    api Deps.coreKtx
-    api Deps.appcompat
-    api Deps.material
-    api Deps.constraintlayout
-    api Deps.junit
-    api Deps.junitExt
-    api Deps.espresso
+    api rootProject.ext.dependencies.coreKtx
+    api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.material
+    api rootProject.ext.dependencies.constraintlayout
+    api rootProject.ext.dependencies.junit
+    api rootProject.ext.dependencies.junitExt
+    api rootProject.ext.dependencies.espresso
+    api rootProject.ext.dependencies.retrofit
 }

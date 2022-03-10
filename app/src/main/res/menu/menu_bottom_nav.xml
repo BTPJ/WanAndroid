@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:checked="true"
+        android:icon="@drawable/ic_tab_home"
+        android:title="@string/tab_home" />
+
+    <item
+        android:id="@+id/menu_project"
+        android:icon="@drawable/ic_tab_project"
+        android:title="@string/tab_project" />
+
+    <item
+        android:id="@+id/menu_square"
+        android:icon="@drawable/ic_tab_square"
+        android:title="@string/tab_square" />
+
+    <item
+        android:id="@+id/menu_wechat"
+        android:icon="@drawable/ic_tab_wechat"
+        android:title="@string/tab_wechat" />
+
+    <item
+        android:id="@+id/menu_mine"
+        android:icon="@drawable/ic_tab_mine"
+        android:title="@string/tab_mine" />
+</menu>

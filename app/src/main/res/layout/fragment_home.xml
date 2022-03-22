@@ -20,11 +20,9 @@
             app:isShowBack="false"
             app:titleText="@string/tab_home" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <include
+            android:id="@+id/include_list"
+            layout="@layout/include_swiperefresh_recyclerview" />
 
     </LinearLayout>
 </layout>

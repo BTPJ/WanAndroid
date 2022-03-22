@@ -2,7 +2,7 @@ package com.btpj.wanandroid.ui.main.wechat
 
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.databinding.HomeFragmentBinding
+import com.btpj.wanandroid.databinding.FragmentWechatBinding
 
 /**
  * 我的
@@ -10,7 +10,7 @@ import com.btpj.wanandroid.databinding.HomeFragmentBinding
  * @author LTP 2022/3/10
  */
 class WechatFragment :
-    BaseVMBFragment<WechatViewModel, HomeFragmentBinding>(R.layout.wechat_fragment) {
+    BaseVMBFragment<WechatViewModel, FragmentWechatBinding>(R.layout.fragment_wechat) {
 
     companion object {
         fun newInstance() = WechatFragment()

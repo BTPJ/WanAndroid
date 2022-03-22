@@ -41,5 +41,15 @@ dependencies {
     api rootProject.ext.dependencies.junit
     api rootProject.ext.dependencies.junitExt
     api rootProject.ext.dependencies.espresso
+
+    // jetpack
+    api rootProject.ext.dependencies.viewModelKtx
+    api rootProject.ext.dependencies.liveDataKtx
+
+    api rootProject.ext.dependencies.mmkv
+
     api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.converterMoshi
+    api rootProject.ext.dependencies.loggingInterceptor
+    api rootProject.ext.dependencies.PersistentCookieJar
 }

@@ -2,7 +2,7 @@ package com.btpj.wanandroid.ui.main.square
 
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.databinding.HomeFragmentBinding
+import com.btpj.wanandroid.databinding.FragmentSquareBinding
 
 /**
  * 我的
@@ -10,7 +10,7 @@ import com.btpj.wanandroid.databinding.HomeFragmentBinding
  * @author LTP 2022/3/10
  */
 class SquareFragment :
-    BaseVMBFragment<SquareViewModel, HomeFragmentBinding>(R.layout.square_fragment) {
+    BaseVMBFragment<SquareViewModel, FragmentSquareBinding>(R.layout.fragment_square) {
 
     companion object {
         fun newInstance() = SquareFragment()

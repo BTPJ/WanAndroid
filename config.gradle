@@ -9,20 +9,35 @@ ext {
 
     dependencies = [
             //----------- Android-------------
-            coreKtx         : "androidx.core:core-ktx:1.6.0",
-            appcompat       : "androidx.appcompat:appcompat:1.3.0",
-            material        : "com.google.android.material:material:1.4.0",
-            constraintlayout: "androidx.constraintlayout:constraintlayout:2.0.4",
-            junit           : "junit:junit:4.13.2",
-            junitExt        : "androidx.test.ext:junit:1.1.3",
-            espresso        : "androidx.test.espresso:espresso-core:3.4.0",
+            coreKtx                      : "androidx.core:core-ktx:1.6.0",
+            appcompat                    : "androidx.appcompat:appcompat:1.3.0",
+            material                     : "com.google.android.material:material:1.4.0",
+            constraintlayout             : "androidx.constraintlayout:constraintlayout:2.0.4",
+            junit                        : "junit:junit:4.13.2",
+            junitExt                     : "androidx.test.ext:junit:1.1.3",
+            espresso                     : "androidx.test.espresso:espresso-core:3.4.0",
 
             //----------- Jetpack----------------
-            viewModelKtx    : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1",
-            liveDataKtx     : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1",
-            activityKtx     : "androidx.activity:activity-ktx:1.2.3",
+            viewModelKtx                 : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1",
+            liveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1",
+            activityKtx                  : "androidx.activity:activity-ktx:1.2.3",
 
             //---------------Others-------------
-            retrofit        : "com.squareup.retrofit2:retrofit:2.9.0"
+            swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
+            // BaseRecyclerViewAdapterHelper
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
+
+            // 替代SharePreference
+            mmkv                         : 'com.tencent:mmkv:1.2.12',
+
+            retrofit                     : "com.squareup.retrofit2:retrofit:2.9.0",
+            converterMoshi               : 'com.squareup.retrofit2:converter-moshi:2.9.0',
+            // okhttp3 日志拦截器
+            loggingInterceptor           : 'com.squareup.okhttp3:logging-interceptor:4.8.0',
+            // okhttp3 缓存
+            PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
+
+            // 轮播图 https://github.com/zhpanvip/BannerViewPager
+            BannerViewPager              : 'com.github.zhpanvip:bannerviewpager:3.5.5'
     ]
 }

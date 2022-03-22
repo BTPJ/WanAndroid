@@ -36,7 +36,9 @@ android {
 
 dependencies {
     implementation project(path: ':lib_base')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    implementation rootProject.ext.dependencies.swiperefreshlayout
+    implementation rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+    // 轮播图 https://github.com/zhpanvip/BannerViewPager
+    implementation rootProject.ext.dependencies.BannerViewPager
 }

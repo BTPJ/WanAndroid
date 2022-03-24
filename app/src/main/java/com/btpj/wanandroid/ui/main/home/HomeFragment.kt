@@ -1,8 +1,7 @@
 package com.btpj.wanandroid.ui.main.home
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.bean.PageResponse
@@ -12,9 +11,9 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
+import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
 import com.youth.banner.indicator.CircleIndicator
-import okhttp3.internal.notify
 
 /**
  * 首页
@@ -43,11 +42,16 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
 
     @SuppressLint("InflateParams")
     override fun initView() {
-        val bannerView = LayoutInflater.from(context).inflate(R.layout.header_banner, null)
-        (bannerView.findViewById<View>(R.id.banner) as com.youth.banner.Banner<*, *>).apply {
-            addBannerLifecycleObserver(this@HomeFragment)
-                .setAdapter(mBannerAdapter)
-                .setIndicator(CircleIndicator(context))
+        val headerBannerBinding = DataBindingUtil.inflate<HeaderBannerBinding>(
+            layoutInflater,
+            R.layout.header_banner,
+            null,
+            false
+        ).apply {
+            banner.apply {
+                setAdapter(mBannerAdapter)
+                setIndicator(CircleIndicator(context))
+            }
         }
 
         mBinding.includeList.apply {
@@ -55,7 +59,7 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
-                    setHeaderView(bannerView)
+                    setHeaderView(headerBannerBinding.root)
                 }
             }
 
@@ -107,7 +111,8 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
             loadMoreModule.apply {
                 isEnableLoadMore = true
                 if (list.size < PAGE_SIZE || mCurrentCount == mTotalCount) {
-                    // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局
+                    // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
+                    // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
                     loadMoreEnd()
                 } else {
                     loadMoreComplete()

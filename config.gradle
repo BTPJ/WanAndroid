@@ -37,7 +37,9 @@ ext {
             // okhttp3 缓存
             PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
-            // 轮播图 https://github.com/zhpanvip/BannerViewPager
-            BannerViewPager              : 'com.github.zhpanvip:bannerviewpager:3.5.5'
+            // 适合kotlin的图片库
+            coil                         : 'io.coil-kt:coil:2.0.0-rc02',
+            // 轮播图 https://github.com/youth5201314/banner
+            banner                       : 'io.github.youth5201314:banner:2.2.2'
     ]
 }

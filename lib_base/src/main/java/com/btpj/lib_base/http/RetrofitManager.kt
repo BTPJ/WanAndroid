@@ -1,6 +1,6 @@
-package com.btpj.wanandroid.data.http
+package com.btpj.lib_base.http
 
-import com.btpj.wanandroid.App.Companion.appContext
+import com.btpj.lib_base.BaseApp.Companion.appContext
 import com.btpj.lib_base.http.interceptor.logInterceptor
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -20,7 +20,7 @@ object RetrofitManager {
     private const val TIME_OUT_SECONDS = 5
 
     /** 请求IP和端口*/
-    val baseUrl = "https://www.wanandroid.com"
+    const val BASE_URL = "https://www.wanandroid.com"
 
     /** OkHttpClient相关配置 */
     private val client: OkHttpClient
@@ -40,16 +40,13 @@ object RetrofitManager {
     /**
      * Retrofit相关配置
      */
-    private fun <T> getService(serviceClass: Class<T>): T {
+    fun <T> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
         return Retrofit.Builder()
             .client(client)
             // 使用Moshi更适合Kotlin
             .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl(baseUrl ?: BASE_URL)
             .build()
             .create(serviceClass)
     }
-
-    /** Retrofit的请求Service */
-    val service by lazy { getService(Api::class.java) }
 }

@@ -37,8 +37,6 @@ android {
 dependencies {
     implementation project(path: ':lib_base')
 
-    implementation rootProject.ext.dependencies.swiperefreshlayout
-    implementation rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
-    // 轮播图 https://github.com/zhpanvip/BannerViewPager
-    implementation rootProject.ext.dependencies.BannerViewPager
+    // 轮播图 https://github.com/youth5201314/banner
+    implementation rootProject.ext.dependencies.banner
 }

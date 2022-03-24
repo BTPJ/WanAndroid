@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.data.bean
+package com.btpj.lib_base.bean
 
 /**
  * 接口返回外层封装实体

@@ -46,8 +46,17 @@ dependencies {
     api rootProject.ext.dependencies.viewModelKtx
     api rootProject.ext.dependencies.liveDataKtx
 
+    // UI相关
+    api rootProject.ext.dependencies.swiperefreshlayout
+    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+
+    // 存储相关
     api rootProject.ext.dependencies.mmkv
 
+    // 图片
+    api rootProject.ext.dependencies.coil
+
+    // 网络相关
     api rootProject.ext.dependencies.retrofit
     api rootProject.ext.dependencies.converterMoshi
     api rootProject.ext.dependencies.loggingInterceptor

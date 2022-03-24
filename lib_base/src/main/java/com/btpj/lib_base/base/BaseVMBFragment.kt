@@ -19,8 +19,8 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private val contentViewResId: Int) :
     Fragment() {
 
-    private lateinit var mViewModel: VM
-    private lateinit var mBinding: B
+    protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: B
 
     override fun onCreateView(
         inflater: LayoutInflater,

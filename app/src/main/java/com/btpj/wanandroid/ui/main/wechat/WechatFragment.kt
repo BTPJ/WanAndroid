@@ -5,7 +5,7 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.FragmentWechatBinding
 
 /**
- * 我的
+ * 公众号Tab
  *
  * @author LTP 2022/3/10
  */

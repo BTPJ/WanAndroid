@@ -2,6 +2,7 @@ package com.btpj.wanandroid.ui.main
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.utils.ToastUtil
@@ -22,6 +23,8 @@ class MainActivity :
     BaseVMBActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
 
     companion object {
+        /** 记录修改配置（如页面旋转）前navBar的位置的常量 */
+        private const val CURRENT_NAV_POSITION = "currentNavPosition"
 
         /** 跳转 */
         fun launch(context: Context?) {
@@ -29,43 +32,72 @@ class MainActivity :
         }
     }
 
-    /** 当前显示的Fragment(默认开始为首页) */
-    private lateinit var mCurrentFragment: Fragment
     private val mHomeFragment by lazy { HomeFragment.newInstance() }
     private val mProjectFragment by lazy { ProjectFragment.newInstance() }
     private val mSquareFragment by lazy { SquareFragment.newInstance() }
     private val mWechatFragment by lazy { WechatFragment.newInstance() }
     private val mMineFragment by lazy { MineFragment.newInstance() }
 
-    override fun initView() {
-        mCurrentFragment = mHomeFragment
+    /** 当前显示的Fragment(默认开始为首页) */
+    private var mCurrentFragment: Fragment = mHomeFragment
+    private var mCurrentNavPosition = 0
+
+    override fun initView(savedInstanceState: Bundle?) {
         supportFragmentManager.beginTransaction()
             .add(R.id.fl_container, mHomeFragment, "HomeFragment")
             .commitAllowingStateLoss()
 
+        // 修改配置时（例如页面旋转、深浅模式切换等）的页面恢复
+        if (savedInstanceState != null) {
+            when (savedInstanceState.getInt(CURRENT_NAV_POSITION)) {
+                0 -> R.id.menu_home
+                1 -> R.id.menu_project
+                2 -> R.id.menu_square
+                3 -> R.id.menu_wechat
+                else -> R.id.menu_mine
+            }.let {
+                mBinding.bottomNavigationView.selectedItemId = it
+                onNavBarItemSelected(it)
+            }
+        }
+
         // 导航Tab
         mBinding.bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_home -> {
-                    switchFragment(mHomeFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_project -> {
-                    switchFragment(mProjectFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_square -> {
-                    switchFragment(mSquareFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.menu_wechat -> {
-                    switchFragment(mWechatFragment)
-                    return@setOnItemSelectedListener true
-                }
-                else -> {
-                    switchFragment(mMineFragment)
-                    return@setOnItemSelectedListener true
-                }
+            return@setOnItemSelectedListener onNavBarItemSelected(it.itemId)
+        }
+    }
+
+    /**
+     * bottomNavigationView切换时调用的方法
+     *
+     * @param itemId 切换Item的id
+     */
+    private fun onNavBarItemSelected(itemId: Int): Boolean {
+        when (itemId) {
+            R.id.menu_home -> {
+                mCurrentNavPosition = 0
+                switchFragment(mHomeFragment)
+                return true
+            }
+            R.id.menu_project -> {
+                mCurrentNavPosition = 1
+                switchFragment(mProjectFragment)
+                return true
+            }
+            R.id.menu_square -> {
+                mCurrentNavPosition = 2
+                switchFragment(mSquareFragment)
+                return true
+            }
+            R.id.menu_wechat -> {
+                mCurrentNavPosition = 3
+                switchFragment(mWechatFragment)
+                return true
+            }
+            else -> {
+                mCurrentNavPosition = 4
+                switchFragment(mMineFragment)
+                return true
             }
         }
     }
@@ -92,6 +124,13 @@ class MainActivity :
             // 将当前Fragment赋值为切换后的Fragment
             mCurrentFragment = fragment
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // 解决Fragment界面重叠问题,直接传递一个空的Bundle 参考http://blog.csdn.net/showdy/article/details/50825800
+        super.onSaveInstanceState(Bundle())
+        // 记录屏幕旋转/更换深浅模式等之前切换的Fragment的位置
+        outState.putInt(CURRENT_NAV_POSITION, mCurrentNavPosition)
     }
 
     /** 上一次点击返回键的时间 */

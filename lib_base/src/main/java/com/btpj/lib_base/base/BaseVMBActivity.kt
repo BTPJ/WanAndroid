@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.StatusBarUtil
 import java.lang.reflect.ParameterizedType
 
@@ -26,7 +27,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         StatusBarUtil.setImmersionStatus(this)
         initViewModel()
         initDataBinding()
-        initView()
+        initView(savedInstanceState)
     }
 
     /** ViewModel初始化 */
@@ -51,7 +52,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
     }
 
     /** View相关初始化 */
-    abstract fun initView()
+    abstract fun initView(savedInstanceState: Bundle?)
 
     /** 提供编写LiveData监听逻辑的方法 */
     open fun createObserve() {}

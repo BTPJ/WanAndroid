@@ -5,7 +5,7 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.FragmentMineBinding
 
 /**
- * 我的
+ * 我的Tab
  *
  * @author LTP 2022/3/10
  */

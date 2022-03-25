@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.main.home.HomeFragment">
+        tools:context=".ui.main.mine.MineFragment">
 
         <com.btpj.lib_base.widgets.TitleLayout
             android:id="@+id/titleLayout"

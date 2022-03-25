@@ -16,7 +16,7 @@ import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
 import com.youth.banner.indicator.CircleIndicator
 
 /**
- * 首页
+ * 首页Tab
  *
  * @author LTP 2022/3/10
  */

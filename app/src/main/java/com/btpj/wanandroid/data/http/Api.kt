@@ -4,6 +4,7 @@ import com.btpj.lib_base.bean.ApiResponse
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.data.bean.ProjectTitle
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -28,6 +29,18 @@ interface Api {
     suspend fun getArticlePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
+
+    /** 获取项目分类数据 */
+    @GET("project/tree/json")
+    suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>>
+
+    /** 获取项目列表分页数据 */
+    @GET("project/list/{pageNo}/json")
+    suspend fun getProjectPageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int,
+        @Query("cid") categoryId: Int
     ): ApiResponse<PageResponse<Article>>
 
     /** 获取体系数据 */

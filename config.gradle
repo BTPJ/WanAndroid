@@ -22,14 +22,18 @@ ext {
             liveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1",
             activityKtx                  : "androidx.activity:activity-ktx:1.2.3",
 
-            //---------------Others-------------
+            //---------------UI相关-------------
             swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
             // BaseRecyclerViewAdapterHelper
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
+            // 轮播图 https://github.com/youth5201314/banner
+            banner                       : 'io.github.youth5201314:banner:2.2.2',
 
+            //---------------存储相关------------------
             // 替代SharePreference
             mmkv                         : 'com.tencent:mmkv:1.2.12',
 
+            //---------------网络相关------------------
             retrofit                     : "com.squareup.retrofit2:retrofit:2.9.0",
             converterMoshi               : 'com.squareup.retrofit2:converter-moshi:2.9.0',
             // okhttp3 日志拦截器
@@ -37,9 +41,8 @@ ext {
             // okhttp3 缓存
             PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
+            //---------------图片相关------------------
             // 适合kotlin的图片库
-            coil                         : 'io.coil-kt:coil:2.0.0-rc02',
-            // 轮播图 https://github.com/youth5201314/banner
-            banner                       : 'io.github.youth5201314:banner:2.2.2'
+            coil                         : 'io.coil-kt:coil:2.0.0-rc02'
     ]
 }

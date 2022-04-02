@@ -7,7 +7,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -44,7 +44,7 @@ object RetrofitManager {
         return Retrofit.Builder()
             .client(client)
             // 使用Moshi更适合Kotlin
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl ?: BASE_URL)
             .build()
             .create(serviceClass)

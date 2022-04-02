@@ -10,8 +10,6 @@
             type="com.btpj.wanandroid.data.bean.Article" />
 
         <import type="android.text.Html" />
-
-        <import type="android.view.View" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -39,55 +37,6 @@
                 tools:text="张鸿洋" />
 
             <TextView
-                android:id="@+id/tv_isTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_red"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:text="@string/isTop"
-                android:textColor="@color/_ff4a57"
-                android:textSize="11sp"
-                android:visibility="@{article.type==1?View.VISIBLE:View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_author"
-                app:layout_constraintTop_toTopOf="@+id/tv_author" />
-
-            <TextView
-                android:id="@+id/tv_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_red"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@string/isNew"
-                android:textColor="@color/_ff4a57"
-                android:textSize="11sp"
-                android:visibility="@{article.fresh?View.VISIBLE:View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_isTop"
-                app:layout_constraintTop_toTopOf="@+id/tv_author" />
-
-            <TextView
-                android:id="@+id/tv_type1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_green"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@{article.tags[0].name}"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="11sp"
-                android:visibility="@{article.tags.size()==0?View.GONE:View.VISIBLE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_new"
-                app:layout_constraintTop_toTopOf="@+id/tv_author"
-                tools:text="本站发布" />
-
-            <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,26 +45,57 @@
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_author"
                 tools:text="1小时前" />
 
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/iv_project"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{article.envelopePic}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_author"
+                tools:ignore="ContentDescription"
+                tools:srcCompat="@drawable/default_project_img" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@{Html.fromHtml(article.title)}"
                 android:textColor="@color/_333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_author"
-                tools:text="这是一个根据JetpackMvvm框架开发玩Android的一个APP" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_project"
+                app:layout_constraintTop_toTopOf="@+id/iv_project"
+                tools:text="我是标题" />
 
             <TextView
-                android:id="@+id/tv_type2"
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.4"
+                android:maxLines="3"
+                android:text="@{Html.fromHtml(article.desc)}"
+                android:textColor="@color/_333333"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="一个Jetpack结合MVVM的快速开发框架，基于MVVM模式集成谷歌官方推荐的JetPack组件库：LiveData、ViewModel、Lifecycle组件 使用Kotlin语言，添加大量拓展函数，简化代码 加入Retrofit网络请求,协程，帮你简化各种操作，让你快速开发项目" />
+
+            <TextView
+                android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -126,7 +106,7 @@
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:layout_constraintTop_toBottomOf="@+id/iv_project"
                 tools:text="分类·项目" />
 
             <ImageView
@@ -134,9 +114,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@{article.zan==0?@drawable/ic_un_collect:@drawable/ic_collect}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_type2"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_type"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_type2"
+                app:layout_constraintTop_toTopOf="@+id/tv_type"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/ic_un_collect" />
         </androidx.constraintlayout.widget.ConstraintLayout>

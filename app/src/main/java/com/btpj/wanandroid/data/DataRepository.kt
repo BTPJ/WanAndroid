@@ -39,6 +39,13 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.getProjectTitleList() }
     }
 
+    override suspend fun getNewProjectPageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getNewProjectPageList(pageNo, pageSize) }
+    }
+
     override suspend fun getProjectPageList(
         @Path(value = "pageNo") pageNo: Int,
         @Query(value = "page_size") pageSize: Int,

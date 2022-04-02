@@ -58,7 +58,7 @@ dependencies {
 
     // 网络相关
     api rootProject.ext.dependencies.retrofit
-    api rootProject.ext.dependencies.converterMoshi
+    api rootProject.ext.dependencies.converterGson
     api rootProject.ext.dependencies.loggingInterceptor
     api rootProject.ext.dependencies.PersistentCookieJar
 }

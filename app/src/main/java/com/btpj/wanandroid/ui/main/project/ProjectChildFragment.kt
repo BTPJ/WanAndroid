@@ -6,11 +6,9 @@ import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
-import com.btpj.wanandroid.ui.main.home.ArticleListAdapter
 import com.btpj.wanandroid.ui.main.home.HomeViewModel
 
 /**
@@ -30,31 +28,33 @@ class ProjectChildFragment :
     /** 当前列表的数量 */
     private var mCurrentCount: Int = 0
 
-    private val mAdapter by lazy { ArticleListAdapter() }
+    private val mAdapter by lazy { ImageArticleListAdapter() }
 
     companion object {
+        private const val IS_NEW = "isNew"
         private const val CATEGORY_ID = "categoryId"
 
         /**
          * 创建实例
          *
+         * @param isNew 是否是最新项目
          * @param categoryId 分类Id
          */
-        fun newInstance(categoryId: Int) = ProjectChildFragment().apply {
-            arguments = Bundle().apply {
-                putInt(CATEGORY_ID, categoryId)
+        fun newInstance(isNew: Boolean = false, categoryId: Int = 0) =
+            ProjectChildFragment().apply {
+                arguments = Bundle().apply {
+                    putBoolean(IS_NEW, isNew)
+                    putInt(CATEGORY_ID, categoryId)
+                }
             }
-        }
     }
 
     override fun initView() {
-        LogUtil.d(arguments.toString())
         mBinding.apply {
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
-
                 }
 
                 swipeRefreshLayout.apply {
@@ -115,9 +115,12 @@ class ProjectChildFragment :
     /**
      * 获取文章分页列表
      */
-    private fun fetchArticlePageList(pageNo: Int = 1) {
-        arguments?.getInt(CATEGORY_ID)?.let { mViewModel.fetchProjectPageList(pageNo, it) }
-
+    private fun fetchArticlePageList(pageNo: Int = if (arguments?.getBoolean(IS_NEW) == true) 0 else 1) {
+        if (arguments?.getBoolean(IS_NEW) == true) {
+            mViewModel.fetchNewProjectPageList(pageNo)
+        } else {
+            arguments?.getInt(CATEGORY_ID)?.let { mViewModel.fetchProjectPageList(pageNo, it) }
+        }
     }
 
     /**下拉刷新 */

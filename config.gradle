@@ -35,7 +35,7 @@ ext {
 
             //---------------网络相关------------------
             retrofit                     : "com.squareup.retrofit2:retrofit:2.9.0",
-            converterMoshi               : 'com.squareup.retrofit2:converter-moshi:2.9.0',
+            converterGson               : 'com.squareup.retrofit2:converter-gson:2.9.0',
             // okhttp3 日志拦截器
             loggingInterceptor           : 'com.squareup.okhttp3:logging-interceptor:4.8.0',
             // okhttp3 缓存

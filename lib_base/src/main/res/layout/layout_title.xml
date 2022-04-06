@@ -16,9 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_titleBar"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@color/_6200EE"
-        android:paddingTop="30dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_500">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -28,7 +27,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="50dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/btn_back" />
+            app:srcCompat="@drawable/ic_back" />
 
         <ImageView
             android:id="@+id/iv_menu"
@@ -68,7 +67,7 @@
             android:ellipsize="marquee"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingStart="28dp"
+            android:paddingStart="40dp"
             android:paddingEnd="28dp"
             android:singleLine="true"
             android:textColor="@color/_ffffff"

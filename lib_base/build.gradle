@@ -48,6 +48,7 @@ dependencies {
 
     // UI相关
     api rootProject.ext.dependencies.swiperefreshlayout
+    api rootProject.ext.dependencies.recyclerview
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
 
     // 存储相关

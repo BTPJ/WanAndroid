@@ -2,7 +2,6 @@ package com.btpj.lib_base.widgets
 
 import android.app.Activity
 import android.content.Context
-import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -12,10 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.btpj.lib_base.R
 import com.btpj.lib_base.databinding.LayoutTitleBinding
-import com.btpj.lib_base.utils.StatusBarUtil
 
 /**
  * 封装的Title标题栏
+ * 比Toolbar更好用,当然没有Toolbar那么强大,不过通常的功能均能更好的满足,不满足的再用Toolbar就行了
  *
  * @author LTP 16/9/19.
  */
@@ -28,10 +27,10 @@ class TitleLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout)
         val titleBackgroundColor = typedArray.getColor(
             R.styleable.TitleLayout_titleBackgroundColor,
-            ContextCompat.getColor(context, R.color._6200EE)
+            ContextCompat.getColor(context, R.color.purple_500)
         )
         val backIconRes =
-            typedArray.getResourceId(R.styleable.TitleLayout_backIconRes, R.drawable.btn_back)
+            typedArray.getResourceId(R.styleable.TitleLayout_backIconRes, R.drawable.ic_back)
         val isShowBack = typedArray.getBoolean(R.styleable.TitleLayout_isShowBack, true)
         val titleTextColor = typedArray.getColor(
             R.styleable.TitleLayout_titleTextColor,
@@ -68,20 +67,6 @@ class TitleLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
             setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize.toFloat())
             text = titleText
             isSelected = true
-        }
-        setTitleHeightAndPadding()
-    }
-
-    /**
-     * 设置状态栏高度和PaddingTop，当设置透明状态栏时PaddingTop = statusBarHeight
-     */
-    private fun setTitleHeightAndPadding() {
-        val statusBarHeight = StatusBarUtil.getStatusBarHeight(context)
-        // LogUtil.d("状态栏高度:$statusBarHeight")
-        mBinding.clTitleBar.apply {
-            setPadding(0, statusBarHeight, 0, 0)
-            layoutParams.height =
-                resources.getDimension(R.dimen.app_bar_height).toInt() + statusBarHeight
         }
     }
 

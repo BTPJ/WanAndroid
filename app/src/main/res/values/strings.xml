@@ -9,4 +9,8 @@
     <string name="toast_double_back_exit">再按一次退出程序</string>
     <string name="isTop">置顶</string>
     <string name="isNew">新</string>
+    <string name="collect">收藏</string>
+    <string name="share">分享</string>
+    <string name="refresh">刷新</string>
+    <string name="openByBrowser">用浏览器打开</string>
 </resources>

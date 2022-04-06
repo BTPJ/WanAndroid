@@ -24,10 +24,13 @@ ext {
 
             //---------------UI相关-------------
             swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
+            recyclerview                 : 'androidx.recyclerview:recyclerview:1.2.1',
             // BaseRecyclerViewAdapterHelper
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
             // 轮播图 https://github.com/youth5201314/banner
             banner                       : 'io.github.youth5201314:banner:2.2.2',
+            // 更强大的webView
+            agentWeb                     : 'com.github.Justson.AgentWeb:agentweb-core:v4.1.9-androidx',
 
             //---------------存储相关------------------
             // 替代SharePreference
@@ -35,7 +38,7 @@ ext {
 
             //---------------网络相关------------------
             retrofit                     : "com.squareup.retrofit2:retrofit:2.9.0",
-            converterGson               : 'com.squareup.retrofit2:converter-gson:2.9.0',
+            converterGson                : 'com.squareup.retrofit2:converter-gson:2.9.0',
             // okhttp3 日志拦截器
             loggingInterceptor           : 'com.squareup.okhttp3:logging-interceptor:4.8.0',
             // okhttp3 缓存

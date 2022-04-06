@@ -2,10 +2,14 @@ package com.btpj.lib_base.utils
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
-import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
+import androidx.annotation.RequiresApi
+import com.btpj.lib_base.R
 
 /**
  * 屏幕相关工具类
@@ -16,13 +20,28 @@ import android.view.WindowManager
 object StatusBarUtil {
 
     /**
-     * 设置透明状态栏
+     * 模拟沉浸式状态栏，本质上是通过设置状态栏的颜色，可设置为与toolbar相同达到沉浸式的效果
      *
      * @param activity 要设置的Activity
      */
     fun setImmersionStatus(activity: Activity) {
         // 透明状态栏
-        activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        activity.window.statusBarColor = activity.resources.getColor(R.color.purple_500)
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param activity       需要设置的activity
+     * @param color          状态栏颜色值
+     */
+    fun setStatusBarColor(activity: Activity, @ColorInt color: Int) {
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+        activity.window.statusBarColor = color
     }
 
     /**

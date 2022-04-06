@@ -1,19 +1,26 @@
 package com.btpj.wanandroid.ui.main.home
 
 import android.annotation.SuppressLint
+import android.view.View
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
+import com.btpj.wanandroid.ui.web.WebActivity
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.util.LogUtils
 
 /**
  * 首页Tab
@@ -60,6 +67,12 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
                     setHeaderView(headerBannerBinding.root)
+                    setOnItemClickListener { _, _, position ->
+                        WebActivity.launch(
+                            context,
+                            mAdapter.data[position].link
+                        )
+                    }
                 }
             }
 

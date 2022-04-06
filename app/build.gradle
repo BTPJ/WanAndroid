@@ -39,4 +39,5 @@ dependencies {
 
     // 轮播图 https://github.com/youth5201314/banner
     implementation rootProject.ext.dependencies.banner
+    implementation rootProject.ext.dependencies.agentWeb
 }

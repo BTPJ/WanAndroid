@@ -11,6 +11,8 @@
 
         <import type="android.text.Html" />
 
+        <import type="com.btpj.lib_base.utils.CommonUtil" />
+
         <import type="android.view.View" />
     </data>
 
@@ -32,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_author"
-                android:text='@{Html.fromHtml(article.author==""?article.shareUser:article.author)}'
+                android:text="@{Html.fromHtml(CommonUtil.isEmpty(article.author)?article.shareUser:article.author)}"
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String" />
+
+        <import type="android.text.Html" />
+
+        <import type="com.btpj.lib_base.utils.CommonUtil" />
+    </data>
+
+    <TextView
+        android:id="@+id/flow_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:background="@drawable/selector_bg_tv"
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:text="@{Html.fromHtml(text)}"
+        android:textColor="@{CommonUtil.INSTANCE.randomColor()}"
+        android:textSize="15sp"
+        tools:text="Github" />
+</layout>

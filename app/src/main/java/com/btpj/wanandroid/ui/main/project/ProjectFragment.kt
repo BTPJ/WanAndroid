@@ -1,15 +1,13 @@
 package com.btpj.wanandroid.ui.main.project
 
 import android.annotation.SuppressLint
-import android.text.Html
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.ProjectTitle
-import com.btpj.wanandroid.databinding.FragmentProjectBinding
+import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -18,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @author LTP 2022/3/10
  */
 class ProjectFragment :
-    BaseVMBFragment<ProjectViewModel, FragmentProjectBinding>(R.layout.fragment_project) {
+    BaseVMBFragment<ProjectViewModel, FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
 
     /** TabLayout的标题集合 */
     private val mProjectTitleList = ArrayList<ProjectTitle>()

@@ -3,11 +3,9 @@ package com.btpj.wanandroid.data
 import com.btpj.lib_base.bean.ApiResponse
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.http.BaseRepository
-import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.http.Api
 import com.btpj.lib_base.http.RetrofitManager
-import com.btpj.wanandroid.data.bean.ProjectTitle
+import com.btpj.wanandroid.data.bean.*
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -54,7 +52,24 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.getProjectPageList(pageNo, pageSize, categoryId) }
     }
 
-    override suspend fun getTreeList(): ApiResponse<List<String>> {
+    override suspend fun getSquarePageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getSquarePageList(pageNo, pageSize) }
+    }
+
+    override suspend fun getAskPageList(
+        pageNo: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getAskPageList(pageNo) }
+    }
+
+    override suspend fun getTreeList(): ApiResponse<List<System>> {
         return apiCall { service.getTreeList() }
+    }
+
+    override suspend fun getNavigationList(): ApiResponse<List<Navigation>> {
+        return apiCall { service.getNavigationList() }
     }
 }

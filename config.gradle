@@ -25,6 +25,8 @@ ext {
             //---------------UI相关-------------
             swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
             recyclerview                 : 'androidx.recyclerview:recyclerview:1.2.1',
+            // google官方的flex布局
+            flexbox                      : 'com.google.android.flexbox:flexbox:3.0.0',
             // BaseRecyclerViewAdapterHelper
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
             // 轮播图 https://github.com/youth5201314/banner

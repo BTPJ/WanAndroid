@@ -26,10 +26,11 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="2dp"
             android:background="@color/_6200EE"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:layout_constraintBottom_toBottomOf="@+id/titleLayout"
+            app:tabGravity="center"
             app:tabIndicatorColor="@color/white"
             app:tabMode="scrollable"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabTextColor="@color/white" />
 
         <androidx.viewpager2.widget.ViewPager2

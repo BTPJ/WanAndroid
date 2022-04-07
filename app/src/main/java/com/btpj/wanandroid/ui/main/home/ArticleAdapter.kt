@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
  *
  * @author LTP  2022/3/23
  */
-class ArticleListAdapter :
+class ArticleAdapter :
     BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemArticleBinding>>(layoutResId = R.layout.list_item_article),
     LoadMoreModule {
 

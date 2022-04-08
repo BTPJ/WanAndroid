@@ -13,4 +13,15 @@
     <string name="share">分享</string>
     <string name="refresh">刷新</string>
     <string name="openByBrowser">用浏览器打开</string>
+    <string name="my_points">我的积分</string>
+    <string name="current_points">当前积分:</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="my_article">我的文章</string>
+    <string name="open_web">开源网站</string>
+    <string name="system_settings">系统设置</string>
+    <string name="login">登录</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="user_name">用户名</string>
+    <string name="to_register">去注册</string>
 </resources>

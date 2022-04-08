@@ -3,9 +3,7 @@ package com.btpj.wanandroid.data.http
 import com.btpj.lib_base.bean.ApiResponse
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.wanandroid.data.bean.*
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Http接口，Retrofit的请求Service
@@ -13,6 +11,14 @@ import retrofit2.http.Query
  * @author LTP  2022/3/21
  */
 interface Api {
+
+    /** 获取首页banner数据 */
+    @FormUrlEncoded
+    @POST("user/login")
+    suspend fun login(
+        @Field("username") username: String,
+        @Field("password") pwd: String
+    ): ApiResponse<User>
 
     /** 获取首页banner数据 */
     @GET("banner/json")

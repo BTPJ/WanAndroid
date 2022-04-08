@@ -3,6 +3,7 @@ package com.btpj.lib_base.ext
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.btpj.lib_base.widgets.TitleLayout
 
 /**
@@ -13,6 +14,16 @@ import com.btpj.lib_base.widgets.TitleLayout
 fun ImageView.setImageUrl(url: String) {
     // 利用coil装载图片
     load(url)
+}
+
+/**
+ * ImageView设置圆形图片
+ * @author LTP  2022/4/2
+ */
+@BindingAdapter("circleImageUrl")
+fun ImageView.setCircleImageUrl(url: String) {
+    // 利用coil装载图片
+    load(url) { transformations(CircleCropTransformation()) }
 }
 
 /**

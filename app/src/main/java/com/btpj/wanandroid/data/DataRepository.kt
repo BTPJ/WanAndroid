@@ -18,6 +18,10 @@ object DataRepository : BaseRepository(), Api {
 
     private val service by lazy { RetrofitManager.getService(Api::class.java) }
 
+    override suspend fun login(username: String, pwd: String): ApiResponse<User> {
+        return apiCall { service.login(username, pwd) }
+    }
+
     override suspend fun getBanner(): ApiResponse<List<Banner>> {
         return apiCall { service.getBanner() }
     }

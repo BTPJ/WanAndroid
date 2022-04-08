@@ -18,7 +18,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private val contentViewResId: Int) :
     AppCompatActivity() {
 
-    private lateinit var mViewModel: VM
+    lateinit var mViewModel: VM
     lateinit var mBinding: B
 
     override fun onCreate(savedInstanceState: Bundle?) {

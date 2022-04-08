@@ -3,17 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/bg_edit.xml" value="0.172" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/frame_green.xml" value="0.151" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/frame_red.xml" value="0.151" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_arrow_right.xml" value="0.1945" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_article.xml" value="0.1945" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_clear.xml" value="0.172" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_collect.xml" value="0.1905" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_points.xml" value="0.1945" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_see.xml" value="0.172" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_settings.xml" value="0.1945" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_tab_project.xml" value="0.187" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_tab_square.xml" value="0.187" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_tab_wechat.xml" value="0.187" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_un_collect.xml" value="0.1945" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_uncollect.xml" value="0.1905" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_unsee.xml" value="0.172" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_user.xml" value="0.1945" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/ic_web.xml" value="0.1355" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/selector_author.xml" value="0.151" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/selector_bg_tv.xml" value="0.1945" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/selector_btn_purple.xml" value="0.178" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/selector_keyvisibily.xml" value="0.172" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/selector_see.xml" value="0.172" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/shape_edit.xml" value="0.172" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/tab_home.xml" value="0.187" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/tab_personal_center.xml" value="0.187" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_main.xml" value="0.2966485507246377" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_web.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.28940217391304346" />

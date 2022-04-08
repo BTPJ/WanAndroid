@@ -61,12 +61,6 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
                     setHeaderView(headerBannerBinding.root)
-                    setOnItemClickListener { _, _, position ->
-                        WebActivity.launch(
-                            context,
-                            mAdapter.data[position].link
-                        )
-                    }
                 }
             }
 

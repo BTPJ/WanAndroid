@@ -6,7 +6,7 @@
     <item
         android:id="@+id/item_collect"
         android:checked="false"
-        android:icon="@drawable/ic_collect"
+        android:icon="@drawable/ic_un_collect"
         app:showAsAction="always"
         android:title="@string/collect" />
     <item

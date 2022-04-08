@@ -66,4 +66,16 @@ interface Api {
     /** 获取导航数据 */
     @GET("navi/json")
     suspend fun getNavigationList(): ApiResponse<List<Navigation>>
+
+    /** 获取公众号作者列表 */
+    @GET("wxarticle/chapters/json")
+    suspend fun getAuthorTitleList(): ApiResponse<List<Classify>>
+
+    /** 获取公众号作者文章分页列表 */
+    @GET("wxarticle/list/{authorId}/{pageNo}/json")
+    suspend fun getAuthorArticlePageList(
+        @Path("authorId") authorId: Int,
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
 }

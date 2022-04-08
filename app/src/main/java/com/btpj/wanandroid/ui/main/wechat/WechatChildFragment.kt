@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.main.project
+package com.btpj.wanandroid.ui.main.wechat
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -6,19 +6,20 @@ import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 import com.btpj.wanandroid.ui.main.home.HomeViewModel
-import com.btpj.wanandroid.ui.web.WebActivity
 
 /**
- * 项目Tab下的子Fragment
+ * 公众号Tab下的子Fragment
  *
  * @author LTP 2022/3/10
  */
-class ProjectChildFragment :
-    BaseVMBFragment<ProjectChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+class WechatChildFragment :
+    BaseVMBFragment<WechatChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     /** 列表总数 */
     private var mTotalCount: Int = 0
@@ -29,23 +30,20 @@ class ProjectChildFragment :
     /** 当前列表的数量 */
     private var mCurrentCount: Int = 0
 
-    private val mAdapter by lazy { ImageArticleAdapter() }
+    private val mAdapter by lazy { ArticleAdapter() }
 
     companion object {
-        private const val IS_NEW = "isNew"
-        private const val CATEGORY_ID = "categoryId"
+        private const val AUTHOR_ID = "authorId"
 
         /**
          * 创建实例
          *
-         * @param isNew 是否是最新项目
-         * @param categoryId 分类Id
+         * @param authorId 公众号作者Id
          */
-        fun newInstance(isNew: Boolean = false, categoryId: Int = 0) =
-            ProjectChildFragment().apply {
+        fun newInstance(authorId: Int) =
+            WechatChildFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(IS_NEW, isNew)
-                    putInt(CATEGORY_ID, categoryId)
+                    putInt(AUTHOR_ID, authorId)
                 }
             }
     }
@@ -91,7 +89,7 @@ class ProjectChildFragment :
                 if (list.isEmpty()) {
                     setEmptyView(getEmptyView(recyclerView))
                 }
-                // 如果是加载的第一页数据，用 setData()
+                // 如果是加载的第一页数据，用setList()
                 setList(list)
             } else {
                 // 不是第一页，则用add
@@ -100,9 +98,7 @@ class ProjectChildFragment :
             mCurrentCount = data.size
             loadMoreModule.apply {
                 isEnableLoadMore = true
-                if (list.size < HomeViewModel.PAGE_SIZE || mCurrentCount == mTotalCount) {
-                    // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
-                    // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
+                if (pageResponse.over) {
                     loadMoreEnd()
                 } else {
                     loadMoreComplete()
@@ -114,14 +110,10 @@ class ProjectChildFragment :
     }
 
     /**
-     * 获取文章分页列表
+     * 获取公众号作者文章分页列表
      */
-    private fun fetchArticlePageList(pageNo: Int = if (arguments?.getBoolean(IS_NEW) == true) 0 else 1) {
-        if (arguments?.getBoolean(IS_NEW) == true) {
-            mViewModel.fetchNewProjectPageList(pageNo)
-        } else {
-            arguments?.getInt(CATEGORY_ID)?.let { mViewModel.fetchProjectPageList(pageNo, it) }
-        }
+    private fun fetchArticlePageList(pageNo: Int = 1) {
+        arguments?.getInt(AUTHOR_ID)?.let { mViewModel.fetchAuthorArticlePageList(it, pageNo) }
     }
 
     /**下拉刷新 */

@@ -72,4 +72,16 @@ object DataRepository : BaseRepository(), Api {
     override suspend fun getNavigationList(): ApiResponse<List<Navigation>> {
         return apiCall { service.getNavigationList() }
     }
+
+    override suspend fun getAuthorTitleList(): ApiResponse<List<Classify>> {
+        return apiCall { service.getAuthorTitleList() }
+    }
+
+    override suspend fun getAuthorArticlePageList(
+        authorId: Int,
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getAuthorArticlePageList(authorId, pageNo, pageSize) }
+    }
 }

@@ -85,9 +85,7 @@ class SquareChildFragment :
             mCurrentCount = data.size
             loadMoreModule.apply {
                 isEnableLoadMore = true
-                if (list.size < SquareChildViewModel.PAGE_SIZE || mCurrentCount == mTotalCount) {
-                    // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
-                    // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
+                if (pageResponse.over) {
                     loadMoreEnd()
                 } else {
                     loadMoreComplete()

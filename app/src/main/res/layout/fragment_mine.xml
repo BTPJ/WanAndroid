@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.userName}"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -78,55 +79,36 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp">
-
-                    <ImageView
-                        android:id="@+id/iv_points"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_points"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="ContentDescription" />
+                    android:paddingTop="10dp">
 
                     <TextView
                         android:id="@+id/tv_points"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="?android:attr/selectableItemBackground"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
-                        android:paddingStart="40dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/my_points"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_points"
-                        app:layout_constraintTop_toTopOf="@+id/iv_points" />
-
-                    <ImageView
-                        android:id="@+id/iv_arrow_points"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_points"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/iv_points"
-                        tools:ignore="ContentDescription" />
+                        app:drawableEndCompat="@drawable/ic_arrow_right"
+                        app:drawableStartCompat="@drawable/ic_points"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_pointsNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="40dp"
                         android:textColor="@color/purple_500"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_points"
-                        app:layout_constraintEnd_toStartOf="@+id/iv_arrow_points"
-                        app:layout_constraintTop_toTopOf="@+id/iv_points"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_points"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_points"
                         tools:text="10000000" />
 
                     <TextView
@@ -137,75 +119,43 @@
                         android:text="@string/current_points"
                         android:textColor="@color/_999999"
                         android:textSize="13sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_points"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_points"
                         app:layout_constraintEnd_toStartOf="@+id/tv_pointsNum"
-                        app:layout_constraintTop_toTopOf="@+id/iv_points" />
+                        app:layout_constraintTop_toTopOf="@+id/tv_points" />
 
                     <TextView
                         android:id="@+id/tv_collect"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="?android:attr/selectableItemBackground"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
-                        android:paddingStart="40dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/my_collect"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_arrow_right"
+                        app:drawableStartCompat="@drawable/ic_collect"
                         app:layout_constraintTop_toBottomOf="@+id/tv_points" />
-
-                    <ImageView
-                        android:id="@+id/iv_collect"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_collect"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_collect"
-                        app:layout_constraintStart_toStartOf="@+id/iv_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_collect"
-                        tools:ignore="ContentDescription" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_collect"
-                        app:layout_constraintEnd_toEndOf="@+id/iv_arrow_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_collect"
-                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tv_article"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="?android:attr/selectableItemBackground"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
-                        android:paddingStart="40dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/my_article"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_arrow_right"
+                        app:drawableStartCompat="@drawable/ic_article"
                         app:layout_constraintTop_toBottomOf="@+id/tv_collect" />
-
-                    <ImageView
-                        android:id="@+id/iv_article"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_article"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_article"
-                        app:layout_constraintStart_toStartOf="@+id/iv_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_article"
-                        tools:ignore="ContentDescription" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_article"
-                        app:layout_constraintEnd_toEndOf="@+id/iv_arrow_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_article"
-                        tools:ignore="ContentDescription" />
 
                     <View
                         android:id="@+id/view_line"
@@ -219,66 +169,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="?android:attr/selectableItemBackground"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
-                        android:paddingStart="40dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/open_web"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_arrow_right"
+                        app:drawableStartCompat="@drawable/ic_web"
                         app:layout_constraintTop_toBottomOf="@+id/view_line" />
-
-                    <ImageView
-                        android:id="@+id/iv_web"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_web"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_web"
-                        app:layout_constraintStart_toStartOf="@+id/iv_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_web"
-                        tools:ignore="ContentDescription" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_web"
-                        app:layout_constraintEnd_toEndOf="@+id/iv_arrow_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_web"
-                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tv_settings"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="?android:attr/selectableItemBackground"
+                        android:drawablePadding="6dp"
                         android:gravity="center_vertical"
-                        android:paddingStart="40dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/system_settings"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_arrow_right"
+                        app:drawableStartCompat="@drawable/ic_settings"
                         app:layout_constraintTop_toBottomOf="@+id/tv_web" />
-
-                    <ImageView
-                        android:id="@+id/iv_settings"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_settings"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_settings"
-                        app:layout_constraintStart_toStartOf="@+id/iv_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_settings"
-                        tools:ignore="ContentDescription" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_settings"
-                        app:layout_constraintEnd_toEndOf="@+id/iv_arrow_points"
-                        app:layout_constraintTop_toTopOf="@+id/tv_settings"
-                        tools:ignore="ContentDescription" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

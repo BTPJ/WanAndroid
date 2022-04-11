@@ -9,7 +9,7 @@ import com.tencent.mmkv.MMKV
  *
  * @author LTP  17/8/25.
  */
-object CacheManager {
+object UserManager {
 
     /** 保存登录成功的用户的Json串的KEY */
     private const val KEY_USER = "user_data"
@@ -23,9 +23,9 @@ object CacheManager {
 
     private val mmkv by lazy { MMKV.defaultMMKV() }
 
-    private val userLiveData = MutableLiveData<User>()
+    private val userLiveData = MutableLiveData<User?>()
 
-    fun getUserLiveData(): MutableLiveData<User> {
+    fun getUserLiveData(): MutableLiveData<User?> {
         return userLiveData
     }
 
@@ -124,8 +124,8 @@ object CacheManager {
         mmkv.remove(KEY_USER)
         mmkv.remove(KEY_LAST_USER_PASSWORD)
         mmkv.remove(KEY_TOKEN)
-        //  if (userLiveData.hasObservers()) {
-        //      userLiveData.postValue(null)
-        //  }
+        if (userLiveData.hasObservers()) {
+            userLiveData.postValue(null)
+        }
     }
 }

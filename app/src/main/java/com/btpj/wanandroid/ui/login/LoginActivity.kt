@@ -33,4 +33,13 @@ class LoginActivity :
             }
         }
     }
+
+    override fun createObserve() {
+        super.createObserve()
+        mViewModel.apply {
+            user.observe(this@LoginActivity) {
+                onBackPressed()
+            }
+        }
+    }
 }

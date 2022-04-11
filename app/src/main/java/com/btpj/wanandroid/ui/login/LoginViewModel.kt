@@ -8,6 +8,7 @@ import com.btpj.lib_base.ext.handleResponse
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.User
+import com.btpj.wanandroid.data.local.UserManager
 
 /**
  * @author LTP  2022/3/9
@@ -39,7 +40,9 @@ class LoginViewModel : BaseViewModel() {
         launch({
             val response = DataRepository.login(userName, pwd)
             handleResponse(response, successBlock = {
-                user.value = response.data
+                user.value = response.data!!
+                UserManager.saveLastUserName(userName)
+                UserManager.saveUser(user.value!!)
             })
         })
     }

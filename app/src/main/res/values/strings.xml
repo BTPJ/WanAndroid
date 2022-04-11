@@ -24,4 +24,10 @@
     <string name="password">密码</string>
     <string name="user_name">用户名</string>
     <string name="to_register">去注册</string>
+    <string name="basic_setting">基本设置</string>
+    <string name="clearCache">清除缓存</string>
+    <string name="logout">退出登录</string>
+    <string name="version">版本</string>
+    <string name="author">作者</string>
+    <string name="source_code">项目源码</string>
 </resources>

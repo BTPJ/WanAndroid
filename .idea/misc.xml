@@ -31,6 +31,7 @@
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/drawable/tab_personal_center.xml" value="0.187" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_main.xml" value="0.2966485507246377" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_setting.xml" value="0.2046875" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/activity_web.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.28940217391304346" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/fragment_mine.xml" value="0.3269927536231884" />
@@ -40,6 +41,7 @@
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/fragment_wechat.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/header_banner.xml" value="0.28940217391304346" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/home_fragment.xml" value="0.33106884057971014" />
+        <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/include_line.xml" value="0.2046875" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/include_swiperefresh_recyclerview.xml" value="0.2046875" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/list_item_article.xml" value="0.3269927536231884" />
         <entry key="..\:/Android/Git/WanAndroid/app/src/main/res/layout/list_item_article_image.xml" value="0.33" />

@@ -2,7 +2,6 @@ package com.btpj.lib_base
 
 import android.app.Application
 import android.content.Context
-import com.tencent.mmkv.MMKV
 import kotlin.properties.Delegates
 
 /**

@@ -13,8 +13,7 @@
     <string name="share">分享</string>
     <string name="refresh">刷新</string>
     <string name="openByBrowser">用浏览器打开</string>
-    <string name="my_points">我的积分</string>
-    <string name="current_points">当前积分:</string>
+    <string name="my_integral">我的积分:</string>
     <string name="my_collect">我的收藏</string>
     <string name="my_article">我的文章</string>
     <string name="open_web">开源网站</string>
@@ -31,4 +30,7 @@
     <string name="author">作者</string>
     <string name="source_code">项目源码</string>
     <string name="id_and_rank">id：—　排名：—</string>
+    <string name="integral_rank">积分排行</string>
+    <string name="integral_rule">积分规则</string>
+    <string name="integral_record">积分记录</string>
 </resources>

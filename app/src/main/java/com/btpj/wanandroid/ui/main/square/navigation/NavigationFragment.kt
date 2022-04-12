@@ -43,7 +43,7 @@ class NavigationFragment :
             mBinding.swipeRefreshLayout.isRefreshing = false
             mAdapter.apply {
                 if (it.isEmpty()) {
-                    setEmptyView(getEmptyView(mBinding.recyclerView))
+                    setEmptyView(recyclerView.getEmptyView())
                 } else {
                     setList(it)
                 }

@@ -87,7 +87,7 @@ class WechatChildFragment :
         mAdapter.apply {
             if (mPageNo == 1) {
                 if (list.isEmpty()) {
-                    setEmptyView(getEmptyView(recyclerView))
+                    setEmptyView(recyclerView.getEmptyView())
                 }
                 // 如果是加载的第一页数据，用setList()
                 setList(list)

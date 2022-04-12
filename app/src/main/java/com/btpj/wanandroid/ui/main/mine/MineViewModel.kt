@@ -6,13 +6,13 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleResponse
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.Points
+import com.btpj.wanandroid.data.bean.Integral
 import com.btpj.wanandroid.data.bean.User
 import com.btpj.wanandroid.data.local.UserManager
 
 class MineViewModel : BaseViewModel() {
     val user = ObservableField<User?>()
-    val points = MutableLiveData<Points?>()
+    val integral = MutableLiveData<Integral?>()
 
     val userName = object : ObservableField<String>(user) {
         override fun get(): String {
@@ -29,9 +29,9 @@ class MineViewModel : BaseViewModel() {
     /** 获取个人积分 */
     fun fetchPoints() {
         launch({
-            val response = DataRepository.getUserPoints()
+            val response = DataRepository.getUserIntegral()
             handleResponse(response, {
-                points.value = response.data
+                integral.value = response.data
             })
         })
     }

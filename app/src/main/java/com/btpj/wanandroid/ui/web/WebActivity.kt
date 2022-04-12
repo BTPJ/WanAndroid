@@ -47,9 +47,7 @@ class WebActivity : BaseVMBActivity<WebViewModel, ActivityWebBinding>(R.layout.a
     override fun initView(savedInstanceState: Bundle?) {
         setSupportActionBar(mBinding.toolbar.apply { initTitle("加载中...") })
         // 返回点击事件必须在setSupportActionBar方法调用之后
-        mBinding.toolbar.apply {
-            initClose { onBackPressed() }
-        }
+        mBinding.toolbar.initClose { onBackPressed() }
 
         mUrl = intent.getStringExtra(EXTRA_URL) ?: ""
 

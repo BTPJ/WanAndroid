@@ -87,5 +87,13 @@ interface Api {
 
     /** 获取个人积分 */
     @GET("lg/coin/userinfo/json")
-    suspend fun getUserPoints(): ApiResponse<Points>
+    suspend fun getUserIntegral(): ApiResponse<Integral>
+
+    /** 获取积分排行列表分页 */
+    @GET("coin/rank/{pageNo}/json")
+    suspend fun getIntegralRankPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Integral>>
+
+    /** 获取积分历史 */
+    @GET("lg/coin/list/{pageNo}/json")
+    suspend fun getIntegralRecordPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<IntegralRecord>>
 }

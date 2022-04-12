@@ -16,6 +16,14 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".ui.integral.record.IntegralRecordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.integral.rank.IntegralRankActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.setting.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

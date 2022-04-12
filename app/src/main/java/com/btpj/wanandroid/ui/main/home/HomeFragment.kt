@@ -13,7 +13,6 @@ import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
-import com.btpj.wanandroid.ui.web.WebActivity
 import com.youth.banner.indicator.CircleIndicator
 
 /**
@@ -105,7 +104,7 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
         mAdapter.apply {
             if (mPageNo == 1) {
                 if (list.isEmpty()) {
-                    setEmptyView(getEmptyView(recyclerView))
+                    setEmptyView(recyclerView.getEmptyView())
                 }
                 // 如果是加载的第一页数据，用 setData()
                 setList(list)

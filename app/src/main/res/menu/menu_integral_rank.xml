@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <item
+        android:id="@+id/item_integralRule"
+        android:icon="@drawable/ic_integral_rule"
+        android:title="@string/integral_rule"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/item_integralRecord"
+        android:icon="@drawable/ic_integral_record"
+        android:title="@string/integral_record"
+        app:showAsAction="always" />
+</menu>

@@ -89,7 +89,15 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.getAuthorArticlePageList(authorId, pageNo, pageSize) }
     }
 
-    override suspend fun getUserPoints(): ApiResponse<Points> {
-        return apiCall { service.getUserPoints() }
+    override suspend fun getUserIntegral(): ApiResponse<Integral> {
+        return apiCall { service.getUserIntegral() }
+    }
+
+    override suspend fun getIntegralRankPageList(pageNo: Int): ApiResponse<PageResponse<Integral>> {
+        return apiCall { service.getIntegralRankPageList(pageNo) }
+    }
+
+    override suspend fun getIntegralRecordPageList(pageNo: Int): ApiResponse<PageResponse<IntegralRecord>> {
+        return apiCall { service.getIntegralRecordPageList(pageNo) }
     }
 }

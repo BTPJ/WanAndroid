@@ -1,11 +1,12 @@
 package com.btpj.lib_base.ext
 
-import android.app.Activity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.btpj.lib_base.R
-import com.btpj.lib_base.utils.LogUtil
-
 
 /**
  * SwipeRefreshLayout设置加载主题颜色
@@ -16,6 +17,14 @@ fun SwipeRefreshLayout.initColors() {
         android.R.color.holo_blue_light, android.R.color.holo_red_light,
         android.R.color.holo_orange_light, android.R.color.holo_green_light
     )
+}
+
+/**
+ * RecyclerView列表为空时的显示视图
+ */
+fun RecyclerView.getEmptyView(): View {
+    return LayoutInflater.from(context)
+        .inflate(R.layout.layout_empty, parent as ViewGroup, false)
 }
 
 /**

@@ -6,6 +6,8 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding
+import com.btpj.wanandroid.ext.launchCheckLogin
+import com.btpj.wanandroid.ui.integral.rank.IntegralRankActivity
 import com.btpj.wanandroid.ui.login.LoginActivity
 import com.btpj.wanandroid.ui.setting.SettingActivity
 import com.btpj.wanandroid.ui.web.WebActivity
@@ -34,10 +36,17 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
                 }
             }
 
+            // 我的积分
+            tvPoints.setOnClickListener {
+                IntegralRankActivity.launch(requireContext())
+            }
+
+            // 开源网站
             tvWeb.setOnClickListener {
                 WebActivity.launch(requireContext(), "https://www.wanandroid.com/")
             }
 
+            // 设置
             tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
         }
 
@@ -56,16 +65,17 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
         UserManager.getUserLiveData().observe(this) {
             mViewModel.user.set(it)
             if (it == null) {
-                mViewModel.points.value = null
+                mViewModel.integral.value = null
             } else {
                 onRefresh()
             }
         }
 
-        mViewModel.points.observe(this) {
+        mViewModel.integral.observe(this) {
             mBinding.apply {
                 swipeRefreshLayout.isRefreshing = false
                 tvInfo.text = "id：${it?.userId ?: '—'}　排名：${it?.rank ?: '—'}"
+                tvPointsNum.text = "${it?.coinCount ?: '—'}"
             }
         }
     }

@@ -1,12 +1,13 @@
 package com.btpj.wanandroid.ui.main.mine
 
+import android.annotation.SuppressLint
 import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.utils.LogUtil
+import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding
 import com.btpj.wanandroid.ui.login.LoginActivity
-import com.btpj.wanandroid.ui.main.setting.SettingActivity
+import com.btpj.wanandroid.ui.setting.SettingActivity
 import com.btpj.wanandroid.ui.web.WebActivity
 
 /**
@@ -22,6 +23,11 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
 
     override fun initView() {
         mBinding.apply {
+            swipeRefreshLayout.apply {
+                initColors()
+                setOnRefreshListener { onRefresh() }
+            }
+
             clUser.setOnClickListener {
                 if (!UserManager.isLogin()) {
                     LoginActivity.launch(requireContext())
@@ -34,13 +40,33 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
 
             tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
         }
+
+        onRefresh()
     }
 
+    /** 下拉刷新 */
+    private fun onRefresh() {
+        mBinding.swipeRefreshLayout.isRefreshing = true
+        mViewModel.fetchPoints()
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun createObserve() {
         super.createObserve()
         UserManager.getUserLiveData().observe(this) {
-            LogUtil.d(it?.nickname?:"")
             mViewModel.user.set(it)
+            if (it == null) {
+                mViewModel.points.value = null
+            } else {
+                onRefresh()
+            }
+        }
+
+        mViewModel.points.observe(this) {
+            mBinding.apply {
+                swipeRefreshLayout.isRefreshing = false
+                tvInfo.text = "id：${it?.userId ?: '—'}　排名：${it?.rank ?: '—'}"
+            }
         }
     }
 }

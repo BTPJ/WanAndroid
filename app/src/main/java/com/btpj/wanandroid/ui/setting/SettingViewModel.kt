@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.main.setting
+package com.btpj.wanandroid.ui.setting
 
 import com.btpj.lib_base.base.BaseViewModel
 

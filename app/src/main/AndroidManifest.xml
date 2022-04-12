@@ -16,7 +16,7 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity">
         <activity
-            android:name=".ui.main.setting.SettingActivity"
+            android:name=".ui.setting.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

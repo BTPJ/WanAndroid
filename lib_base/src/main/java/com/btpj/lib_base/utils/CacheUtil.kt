@@ -92,7 +92,7 @@ fun getFolderSize(file: File?): Long {
 fun getFormatSize(size: Double): String {
     val kiloByte = size / 1024
     if (kiloByte < 1) {
-        return size.toString() + "Byte"
+        return size.toString() + "B"
     }
     val megaByte = kiloByte / 1024
     if (megaByte < 1) {

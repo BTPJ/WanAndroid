@@ -19,6 +19,14 @@ object RetrofitManager {
     /** 请求超时时间 */
     private const val TIME_OUT_SECONDS = 5
 
+    /** 请求cookie */
+    val cookieJar: PersistentCookieJar by lazy {
+        PersistentCookieJar(
+            SetCookieCache(),
+            SharedPrefsCookiePersistor(appContext)
+        )
+    }
+
     /** 请求IP和端口*/
     const val BASE_URL = "https://www.wanandroid.com"
 
@@ -29,12 +37,7 @@ object RetrofitManager {
             .addInterceptor(logInterceptor)
             // 请求超时时间
             .connectTimeout(TIME_OUT_SECONDS.toLong(), TimeUnit.SECONDS)
-            .cookieJar(
-                PersistentCookieJar(
-                    SetCookieCache(),
-                    SharedPrefsCookiePersistor(appContext)
-                )
-            )
+            .cookieJar(cookieJar)
             .build()
 
     /**

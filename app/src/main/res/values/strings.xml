@@ -30,4 +30,5 @@
     <string name="version">版本</string>
     <string name="author">作者</string>
     <string name="source_code">项目源码</string>
+    <string name="id_and_rank">id：—　排名：—</string>
 </resources>

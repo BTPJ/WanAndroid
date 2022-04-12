@@ -88,4 +88,8 @@ object DataRepository : BaseRepository(), Api {
     ): ApiResponse<PageResponse<Article>> {
         return apiCall { service.getAuthorArticlePageList(authorId, pageNo, pageSize) }
     }
+
+    override suspend fun getUserPoints(): ApiResponse<Points> {
+        return apiCall { service.getUserPoints() }
+    }
 }

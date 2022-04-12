@@ -84,4 +84,8 @@ interface Api {
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
     ): ApiResponse<PageResponse<Article>>
+
+    /** 获取个人积分 */
+    @GET("lg/coin/userinfo/json")
+    suspend fun getUserPoints(): ApiResponse<Points>
 }

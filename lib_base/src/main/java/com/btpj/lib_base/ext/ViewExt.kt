@@ -22,7 +22,7 @@ import com.btpj.lib_base.R
  */
 fun SwipeRefreshLayout.initColors() {
     setColorSchemeResources(
-        android.R.color.holo_blue_light, android.R.color.holo_red_light,
+        R.color.purple_500, android.R.color.holo_red_light,
         android.R.color.holo_orange_light, android.R.color.holo_green_light
     )
 }

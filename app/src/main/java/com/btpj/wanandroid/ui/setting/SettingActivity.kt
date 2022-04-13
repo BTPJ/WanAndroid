@@ -1,13 +1,14 @@
 package com.btpj.wanandroid.ui.setting
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.lib_base.ext.showDialog
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.ActivitySettingBinding
@@ -36,32 +37,20 @@ class SettingActivity :
             tvCacheNum.text = CacheUtil.getTotalCacheSize(this@SettingActivity)
             // 清理缓存
             layerClearCache.setOnClickListener {
-                AlertDialog.Builder(this@SettingActivity)
-                    .setTitle("温馨提示")
-                    .setMessage("确定清理缓存吗")
-                    .setNegativeButton("取消") { _, _ -> }
-                    .setPositiveButton(
-                        "清理"
-                    ) { _, _ ->
-                        CacheUtil.clearAllCache(this@SettingActivity)
-                        tvCacheNum.text = CacheUtil.getTotalCacheSize(this@SettingActivity)
-                    }
-                    .create()
-                    .show()
+                showDialog("确定清理缓存吗?", positiveButtonText = "清理", positiveAction = {
+                    CacheUtil.clearAllCache(this@SettingActivity)
+                    tvCacheNum.text = CacheUtil.getTotalCacheSize(this@SettingActivity)
+                })
             }
 
             tvVersionName.text = AppUtil.getAppVersionName(this@SettingActivity)
 
             // 作者
             layerAuthor.setOnClickListener {
-                AlertDialog.Builder(this@SettingActivity)
-                    .setTitle("联系作者")
-                    .setMessage("Q\tQ：1069113473\n\n微信：BTPJ1314\n\n邮箱：1069113473@qq.com")
-                    .setPositiveButton(
-                        "确定"
-                    ) { _, _ -> }
-                    .create()
-                    .show()
+                showDialog(
+                    "Q\tQ：1069113473\n\n微信：BTPJ1314\n\n邮箱：1069113473@qq.com",
+                    "联系作者", negativeButtonText = ""
+                )
             }
 
             // 项目源码
@@ -71,20 +60,13 @@ class SettingActivity :
 
             // 退出登录
             btnLogout.setOnClickListener {
-                AlertDialog.Builder(this@SettingActivity)
-                    .setTitle("温馨提示")
-                    .setMessage("确定退出登录吗")
-                    .setNegativeButton("取消") { _, _ -> }
-                    .setPositiveButton(
-                        "退出"
-                    ) { _, _ ->
-                        // 手动清除cookie
-                        RetrofitManager.cookieJar.clear()
-                        UserManager.logout()
-                        onBackPressed()
-                    }
-                    .create()
-                    .show()
+                showDialog("确定退出登录吗?", positiveButtonText = "退出", positiveAction = {
+                    // 手动清除cookie
+                    RetrofitManager.cookieJar.clear()
+                    UserManager.logout()
+                    App.appViewModel.userEvent.value = null
+                    onBackPressed()
+                })
             }
         }
     }

@@ -10,12 +10,11 @@
     <string name="isTop">置顶</string>
     <string name="isNew">新</string>
     <string name="collect">收藏</string>
-    <string name="share">分享</string>
     <string name="refresh">刷新</string>
     <string name="openByBrowser">用浏览器打开</string>
     <string name="my_integral">我的积分:</string>
     <string name="my_collect">我的收藏</string>
-    <string name="my_article">我的文章</string>
+    <string name="my_share_article">我分享的文章</string>
     <string name="open_web">开源网站</string>
     <string name="system_settings">系统设置</string>
     <string name="login">登录</string>
@@ -33,4 +32,11 @@
     <string name="integral_rank">积分排行</string>
     <string name="integral_rule">积分规则</string>
     <string name="integral_record">积分记录</string>
+    <string name="share_article">分享文章</string>
+    <string name="title">标题</string>
+    <string name="article_title">文章标题</string>
+    <string name="link">链接</string>
+    <string name="share_user">分享人</string>
+    <string name="share">分享</string>
+    <string name="article_link">文章链接</string>
 </resources>

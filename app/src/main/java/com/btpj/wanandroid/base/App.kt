@@ -1,4 +1,4 @@
-package com.btpj.wanandroid
+package com.btpj.wanandroid.base
 
 import com.btpj.lib_base.BaseApp
 import com.tencent.mmkv.MMKV
@@ -10,8 +10,14 @@ import com.tencent.mmkv.MMKV
  */
 class App : BaseApp() {
 
+    companion object {
+        lateinit var appViewModel: AppViewModel
+    }
+
     override fun onCreate() {
         super.onCreate()
+        appViewModel = getAppViewModelProvider().get(AppViewModel::class.java)
+
         // MMKV初始化
         MMKV.initialize(this)
     }

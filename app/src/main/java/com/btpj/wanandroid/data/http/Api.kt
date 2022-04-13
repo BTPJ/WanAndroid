@@ -104,4 +104,20 @@ interface Api {
     /** 获取收藏网址列表 */
     @GET("lg/collect/usertools/json")
     suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>>
+
+    /** 获取我分享的文章分页列表 */
+    @GET("user/lg/private_articles/{pageNo}/json")
+    suspend fun getMyShareArticlePageList(@Path("pageNo") pageNo: Int): ApiResponse<Share>
+
+    /** 添加要分享的文章 */
+    @POST("lg/user_article/add/json")
+    @FormUrlEncoded
+    suspend fun addArticle(
+        @Field("title") title: String,
+        @Field("link") link: String
+    ): ApiResponse<Any?>
+
+    /** 删除自己分享的文章 */
+    @POST("lg/user_article/delete/{id}/json")
+    suspend fun deleteShareArticle(@Path("id") id: Int): ApiResponse<Any?>
 }

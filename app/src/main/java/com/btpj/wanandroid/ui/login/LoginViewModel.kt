@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleResponse
 import com.btpj.lib_base.ext.launch
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.User
 import com.btpj.wanandroid.data.local.UserManager
@@ -43,6 +44,7 @@ class LoginViewModel : BaseViewModel() {
                 user.value = response.data!!
                 UserManager.saveLastUserName(userName)
                 UserManager.saveUser(user.value!!)
+                App.appViewModel.userEvent.value = user.value
             })
         })
     }

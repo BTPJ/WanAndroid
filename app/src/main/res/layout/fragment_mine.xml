@@ -152,7 +152,7 @@
                         android:gravity="center_vertical"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
-                        android:text="@string/my_article"
+                        android:text="@string/my_share_article"
                         android:textColor="@color/_333333"
                         android:textSize="14sp"
                         android:textStyle="bold"

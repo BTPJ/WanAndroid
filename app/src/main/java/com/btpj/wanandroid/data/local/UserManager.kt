@@ -1,6 +1,5 @@
 package com.btpj.wanandroid.data.local
 
-import androidx.lifecycle.MutableLiveData
 import com.btpj.wanandroid.data.bean.User
 import com.tencent.mmkv.MMKV
 
@@ -23,12 +22,6 @@ object UserManager {
 
     private val mmkv by lazy { MMKV.defaultMMKV() }
 
-    private val userLiveData = MutableLiveData<User?>()
-
-    fun getUserLiveData(): MutableLiveData<User?> {
-        return userLiveData
-    }
-
     /**
      * 存储用户到本地
      *
@@ -36,9 +29,6 @@ object UserManager {
      */
     fun saveUser(user: User) {
         mmkv.encode(KEY_USER, user)
-        if (userLiveData.hasObservers()) {
-            userLiveData.postValue(user)
-        }
     }
 
     /**
@@ -124,8 +114,5 @@ object UserManager {
         mmkv.remove(KEY_USER)
         mmkv.remove(KEY_LAST_USER_PASSWORD)
         mmkv.remove(KEY_TOKEN)
-        if (userLiveData.hasObservers()) {
-            userLiveData.postValue(null)
-        }
     }
 }

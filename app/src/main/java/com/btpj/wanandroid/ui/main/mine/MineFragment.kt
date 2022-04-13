@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.main.mine
 import android.annotation.SuppressLint
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.ext.initColors
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding
@@ -11,6 +12,7 @@ import com.btpj.wanandroid.ui.collect.CollectActivity
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankActivity
 import com.btpj.wanandroid.ui.login.LoginActivity
 import com.btpj.wanandroid.ui.setting.SettingActivity
+import com.btpj.wanandroid.ui.share.list.MyArticleActivity
 import com.btpj.wanandroid.ui.web.WebActivity
 
 /**
@@ -42,9 +44,14 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
                 IntegralRankActivity.launch(requireContext())
             }
 
-            // 我的收藏
+            // 我的收藏（需要登录）
             tvCollect.setOnClickListener {
                 requireContext().launchCheckLogin { CollectActivity.launch(it) }
+            }
+            
+            // 我分享的文章（需要登录）
+            tvArticle.setOnClickListener {
+                requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
             }
 
             // 开源网站
@@ -68,7 +75,7 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
     @SuppressLint("SetTextI18n")
     override fun createObserve() {
         super.createObserve()
-        UserManager.getUserLiveData().observe(this) {
+        App.appViewModel.userEvent.observe(this) {
             mViewModel.user.set(it)
             if (it == null) {
                 mViewModel.integral.value = null

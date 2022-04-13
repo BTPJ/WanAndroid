@@ -1,9 +1,12 @@
 package com.btpj.lib_base.ext
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.btpj.lib_base.R
@@ -48,4 +51,58 @@ fun Toolbar.initClose(
 ) {
     setNavigationIcon(backImg)
     setNavigationOnClickListener { onBack() }
+}
+
+/**
+ * Activity上显示AlertDialog
+ *
+ * @param message AlertDialog内容信息
+ * @param title AlertDialog标题，默认为 "温馨提示"
+ * @param positiveButtonText AlertDialog右侧按键内容 默认为 "确定"
+ * @param positiveAction AlertDialog点击右侧按键的行为 默认是空方法
+ * @param negativeButtonText AlertDialog左侧按键内容 默认为 "取消"
+ * @param negativeAction AlertDialog点击左侧按键的行为 默认是空方法
+ */
+fun Activity.showDialog(
+    message: String,
+    title: String = "温馨提示",
+    positiveButtonText: String = "确定",
+    positiveAction: () -> Unit = {},
+    negativeButtonText: String = "取消",
+    negativeAction: () -> Unit = {}
+) {
+    AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(positiveButtonText) { _, _ -> positiveAction.invoke() }
+        .setNegativeButton(negativeButtonText) { _, _ -> negativeAction.invoke() }
+        .create()
+        .show()
+}
+
+/**
+ * Fragment上显示AlertDialog
+ *
+ * @param message AlertDialog内容信息
+ * @param title AlertDialog标题，默认为 "温馨提示"
+ * @param positiveButtonText AlertDialog右侧按键内容 默认为 "确定"
+ * @param positiveAction AlertDialog点击右侧按键的行为 默认是空方法
+ * @param negativeButtonText AlertDialog左侧按键内容 默认为 "取消"
+ * @param negativeAction AlertDialog点击左侧按键的行为 默认是空方法
+ */
+fun Fragment.showDialog(
+    message: String,
+    title: String = "温馨提示",
+    positiveButtonText: String = "确定",
+    positiveAction: () -> Unit = {},
+    negativeButtonText: String = "取消",
+    negativeAction: () -> Unit = {}
+) {
+    AlertDialog.Builder(requireContext())
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(positiveButtonText) { _, _ -> positiveAction.invoke() }
+        .setNegativeButton(negativeButtonText) { _, _ -> negativeAction.invoke() }
+        .create()
+        .show()
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    EditText的灰色边框  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/_eeeeee" />
+            <corners android:radius="2dp" />
+            <stroke
+                android:width="0.5dp"
+                android:color="@color/_797979" />
+        </shape>
+    </item>
+</layer-list>

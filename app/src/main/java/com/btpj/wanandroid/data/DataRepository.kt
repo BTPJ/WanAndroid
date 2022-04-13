@@ -108,4 +108,16 @@ object DataRepository : BaseRepository(), Api {
     override suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>> {
         return apiCall { service.getCollectUrlList() }
     }
+
+    override suspend fun getMyShareArticlePageList(pageNo: Int): ApiResponse<Share> {
+        return apiCall { service.getMyShareArticlePageList(pageNo) }
+    }
+
+    override suspend fun addArticle(title: String, link: String): ApiResponse<Any?> {
+        return apiCall { service.addArticle(title, link) }
+    }
+
+    override suspend fun deleteShareArticle(id: Int): ApiResponse<Any?> {
+        return apiCall { service.deleteShareArticle(id) }
+    }
 }

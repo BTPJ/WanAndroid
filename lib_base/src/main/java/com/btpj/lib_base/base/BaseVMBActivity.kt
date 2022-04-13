@@ -83,7 +83,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
 
             // 全局服务器返回的错误信息监听
             errorMsg.observe(this@BaseVMBActivity) {
-//                hideLoading()
+                hideLoading()
                 it?.run {
                     ToastUtil.showShort(this@BaseVMBActivity, it)
                 }

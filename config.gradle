@@ -29,6 +29,10 @@ ext {
             flexbox                      : 'com.google.android.flexbox:flexbox:3.0.0',
             // BaseRecyclerViewAdapterHelper
             BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
+            // material风格功能强大的Dialog
+            materialDialogsCore          : 'com.afollestad.material-dialogs:core:3.3.0',
+            materialDialogsLifecycle     : 'com.afollestad.material-dialogs:lifecycle:3.3.0',
+            materialDialogsbottomsheets  : 'com.afollestad.material-dialogs:bottomsheets:3.3.0',
             // 轮播图 https://github.com/youth5201314/banner
             banner                       : 'io.github.youth5201314:banner:2.2.2',
             // 更强大的webView

@@ -16,8 +16,6 @@ import com.btpj.wanandroid.data.local.UserManager
  */
 class LoginViewModel : BaseViewModel() {
 
-    val user = MutableLiveData<User>()
-
     val userName = ObservableField("")
     val userPwd = ObservableField("")
 
@@ -28,8 +26,8 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-
     override fun start() {
+        userName.set(UserManager.getLastUserName())
     }
 
     /**
@@ -37,14 +35,14 @@ class LoginViewModel : BaseViewModel() {
      * @param userName 用户名
      * @param pwd 密码
      */
-    fun login(userName: String, pwd: String) {
+    fun login(userName: String, pwd: String, successCall: () -> Any? = {}) {
         launch({
             val response = DataRepository.login(userName, pwd)
             handleResponse(response, successBlock = {
-                user.value = response.data!!
                 UserManager.saveLastUserName(userName)
-                UserManager.saveUser(user.value!!)
-                App.appViewModel.userEvent.value = user.value
+                UserManager.saveUser(response.data)
+                App.appViewModel.userEvent.value = response.data
+                successCall.invoke()
             })
         })
     }

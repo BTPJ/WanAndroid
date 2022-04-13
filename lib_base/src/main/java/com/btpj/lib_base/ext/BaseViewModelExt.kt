@@ -22,6 +22,7 @@ fun BaseViewModel.launch(
         try {
             tryBlock()
         } catch (e: Exception) {
+            exception.value = e
             catchBlock()
         } finally {
             finallyBlock()
@@ -32,14 +33,15 @@ fun BaseViewModel.launch(
 /**
  * 处理请求结果
  */
-suspend fun <T> handleResponse(
+suspend fun <T> BaseViewModel.handleResponse(
     response: ApiResponse<T>,
     successBlock: suspend CoroutineScope.() -> Unit = {},
     errorBlock: suspend CoroutineScope.() -> Unit = {}
 ) {
     coroutineScope {
         // 统一处理服务器返回错误码的情况
-        if (response.errorCode == 1) {
+        if (response.errorCode == -1) {
+            errorMsg.value = response.errorMsg
             errorBlock()
         } else {
             successBlock()

@@ -50,6 +50,9 @@ dependencies {
     api rootProject.ext.dependencies.swiperefreshlayout
     api rootProject.ext.dependencies.recyclerview
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+    api rootProject.ext.dependencies.materialDialogsCore
+    api rootProject.ext.dependencies.materialDialogsLifecycle
+    api rootProject.ext.dependencies.materialDialogsbottomsheets
 
     // 存储相关
     api rootProject.ext.dependencies.mmkv

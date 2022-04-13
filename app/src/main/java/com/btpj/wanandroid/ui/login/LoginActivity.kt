@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.lib_base.ext.hideLoading
+import com.btpj.lib_base.ext.showLoading
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.ActivityLoginBinding
 
@@ -29,16 +31,11 @@ class LoginActivity :
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.apply {
             btnLogin.setOnClickListener {
-                mViewModel.login(mViewModel.userName.get()!!, mViewModel.userPwd.get()!!)
-            }
-        }
-    }
-
-    override fun createObserve() {
-        super.createObserve()
-        mViewModel.apply {
-            user.observe(this@LoginActivity) {
-                onBackPressed()
+                showLoading("登录中...")
+                mViewModel.login(mViewModel.userName.get()!!, mViewModel.userPwd.get()!!) {
+                    hideLoading()
+                    onBackPressed()
+                }
             }
         }
     }

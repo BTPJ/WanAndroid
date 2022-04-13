@@ -1,14 +1,19 @@
 package com.btpj.lib_base.ext
 
-import android.app.Activity
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.btpj.lib_base.R
 
 /**
@@ -63,7 +68,7 @@ fun Toolbar.initClose(
  * @param negativeButtonText AlertDialog左侧按键内容 默认为 "取消"
  * @param negativeAction AlertDialog点击左侧按键的行为 默认是空方法
  */
-fun Activity.showDialog(
+fun AppCompatActivity.showDialog(
     message: String,
     title: String = "温馨提示",
     positiveButtonText: String = "确定",
@@ -71,13 +76,15 @@ fun Activity.showDialog(
     negativeButtonText: String = "取消",
     negativeAction: () -> Unit = {}
 ) {
-    AlertDialog.Builder(this)
-        .setTitle(title)
-        .setMessage(message)
-        .setPositiveButton(positiveButtonText) { _, _ -> positiveAction.invoke() }
-        .setNegativeButton(negativeButtonText) { _, _ -> negativeAction.invoke() }
-        .create()
-        .show()
+    MaterialDialog(this)
+        .cancelable(true)
+        .lifecycleOwner(this)
+        .show {
+            title(text = title)
+            message(text = message)
+            positiveButton(text = positiveButtonText) { positiveAction.invoke() }
+            negativeButton(text = negativeButtonText) { negativeAction.invoke() }
+        }
 }
 
 /**
@@ -98,11 +105,44 @@ fun Fragment.showDialog(
     negativeButtonText: String = "取消",
     negativeAction: () -> Unit = {}
 ) {
-    AlertDialog.Builder(requireContext())
-        .setTitle(title)
-        .setMessage(message)
-        .setPositiveButton(positiveButtonText) { _, _ -> positiveAction.invoke() }
-        .setNegativeButton(negativeButtonText) { _, _ -> negativeAction.invoke() }
-        .create()
-        .show()
+    MaterialDialog(requireContext())
+        .cancelable(true)
+        .lifecycleOwner(viewLifecycleOwner)
+        .show {
+            title(text = title)
+            message(text = message)
+            positiveButton(text = positiveButtonText) { positiveAction.invoke() }
+            negativeButton(text = negativeButtonText) { negativeAction.invoke() }
+        }
+}
+
+/** 加载框 */
+@SuppressLint("StaticFieldLeak")
+private var mLoadingDialog: MaterialDialog? = null
+
+/**
+ * 打开等待框
+ */
+fun AppCompatActivity.showLoading(message: String = "请求网络中") {
+    if (!this.isFinishing) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = MaterialDialog(this)
+                .cancelable(true)
+                .cancelOnTouchOutside(false)
+                .cornerRadius(6f)
+                .customView(R.layout.dialog_loading)
+                .maxWidth(R.dimen.loading_width)
+                .lifecycleOwner(this)
+            mLoadingDialog?.getCustomView()?.run {
+                this.findViewById<TextView>(R.id.tv_loadingMsg).text = message
+            }
+        }
+        mLoadingDialog?.show()
+    }
+}
+
+/** 隐藏Loading加载框 */
+fun hideLoading() {
+    mLoadingDialog?.dismiss()
+    mLoadingDialog = null
 }

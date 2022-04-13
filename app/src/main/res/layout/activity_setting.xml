@@ -5,6 +5,11 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.btpj.wanandroid.ui.setting.SettingViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -191,6 +196,7 @@
             android:layout_marginTop="50dp"
             android:padding="10dp"
             android:text="@string/logout"
+            android:visibility="@{viewModel.showLogoutBtn?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_sourceCode" />

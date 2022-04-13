@@ -7,6 +7,7 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding
 import com.btpj.wanandroid.ext.launchCheckLogin
+import com.btpj.wanandroid.ui.collect.CollectActivity
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankActivity
 import com.btpj.wanandroid.ui.login.LoginActivity
 import com.btpj.wanandroid.ui.setting.SettingActivity
@@ -39,6 +40,11 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
             // 我的积分
             tvPoints.setOnClickListener {
                 IntegralRankActivity.launch(requireContext())
+            }
+
+            // 我的收藏
+            tvCollect.setOnClickListener {
+                requireContext().launchCheckLogin { CollectActivity.launch(it) }
             }
 
             // 开源网站

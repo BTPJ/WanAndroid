@@ -96,4 +96,12 @@ interface Api {
     /** 获取积分历史 */
     @GET("lg/coin/list/{pageNo}/json")
     suspend fun getIntegralRecordPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<IntegralRecord>>
+
+    /** 获取收藏文章分页列表 */
+    @GET("lg/collect/list/{pageNo}/json")
+    suspend fun getCollectArticlePageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<CollectArticle>>
+
+    /** 获取收藏网址列表 */
+    @GET("lg/collect/usertools/json")
+    suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>>
 }

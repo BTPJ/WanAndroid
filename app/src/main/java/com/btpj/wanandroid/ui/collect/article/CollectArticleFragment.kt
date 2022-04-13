@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.main.square.square
+package com.btpj.wanandroid.ui.collect.article
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.base.BaseVMBFragment
@@ -6,27 +6,25 @@ import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.CollectArticle
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
-import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 
 /**
- * 广场Tab里的子广场
+ * 收藏的文章
  *
  * @author LTP 2022/3/10
  */
-class SquareChildFragment :
-    BaseVMBFragment<SquareChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+class CollectArticleFragment :
+    BaseVMBFragment<CollectArticleViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     /** 页数 */
     private var mPageNo: Int = 0
-
-    private val mAdapter by lazy { ArticleAdapter() }
+    private val mAdapter by lazy { CollectArticleAdapter() }
 
     companion object {
 
         /** 创建实例 */
-        fun newInstance() = SquareChildFragment()
+        fun newInstance() = CollectArticleFragment()
     }
 
     override fun initView() {
@@ -50,7 +48,7 @@ class SquareChildFragment :
     override fun createObserve() {
         super.createObserve()
         mViewModel.apply {
-            articlePageListLiveData.observe(viewLifecycleOwner) {
+            collectArticlePageList.observe(viewLifecycleOwner) {
                 it?.let { handleArticleData(it) }
             }
         }
@@ -61,7 +59,7 @@ class SquareChildFragment :
      *
      * @param pageResponse PageResponse
      */
-    private fun handleArticleData(pageResponse: PageResponse<Article>) {
+    private fun handleArticleData(pageResponse: PageResponse<CollectArticle>) {
         mPageNo = pageResponse.curPage
         val list = pageResponse.datas
         mAdapter.apply {
@@ -93,13 +91,13 @@ class SquareChildFragment :
         mBinding.swipeRefreshLayout.isRefreshing = true
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         mAdapter.loadMoreModule.isEnableLoadMore = false
-        mViewModel.fetchSquarePageList()
+        mViewModel.fetchCollectArticlePageList()
     }
 
     /** 下拉加载更多 */
     private fun loadMoreData() {
         // 上拉加载时禁止下拉刷新
         mBinding.swipeRefreshLayout.isEnabled = false
-        mViewModel.fetchSquarePageList(++mPageNo)
+        mViewModel.fetchCollectArticlePageList(++mPageNo)
     }
 }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".ui.collect.CollectActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.integral.record.IntegralRecordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

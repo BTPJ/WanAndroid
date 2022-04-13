@@ -100,4 +100,12 @@ object DataRepository : BaseRepository(), Api {
     override suspend fun getIntegralRecordPageList(pageNo: Int): ApiResponse<PageResponse<IntegralRecord>> {
         return apiCall { service.getIntegralRecordPageList(pageNo) }
     }
+
+    override suspend fun getCollectArticlePageList(pageNo: Int): ApiResponse<PageResponse<CollectArticle>> {
+        return apiCall { service.getCollectArticlePageList(pageNo) }
+    }
+
+    override suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>> {
+        return apiCall { service.getCollectUrlList() }
+    }
 }

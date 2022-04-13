@@ -6,14 +6,12 @@
     <data>
 
         <variable
-            name="article"
-            type="com.btpj.wanandroid.data.bean.Article" />
+            name="collectArticle"
+            type="com.btpj.wanandroid.data.bean.CollectArticle" />
 
         <import type="android.text.Html" />
 
         <import type="com.btpj.lib_base.utils.CommonUtil" />
-
-        <import type="android.view.View" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -35,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_author"
-                android:text="@{CommonUtil.isEmpty(article.author)?article.shareUser:article.author}"
+                android:text='@{CommonUtil.isEmpty(collectArticle.author)?"匿名用户":collectArticle.author}'
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,60 +41,11 @@
                 tools:text="张鸿洋" />
 
             <TextView
-                android:id="@+id/tv_isTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_red"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:text="@string/isTop"
-                android:textColor="@color/_ff4a57"
-                android:textSize="11sp"
-                android:visibility="@{article.type==1?View.VISIBLE:View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_author"
-                app:layout_constraintTop_toTopOf="@+id/tv_author" />
-
-            <TextView
-                android:id="@+id/tv_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_red"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@string/isNew"
-                android:textColor="@color/_ff4a57"
-                android:textSize="11sp"
-                android:visibility="@{article.fresh?View.VISIBLE:View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_isTop"
-                app:layout_constraintTop_toTopOf="@+id/tv_author" />
-
-            <TextView
-                android:id="@+id/tv_type1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/frame_green"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@{article.tags[0].name}"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="11sp"
-                android:visibility="@{article.tags.size()==0?View.GONE:View.VISIBLE}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-                app:layout_constraintStart_toEndOf="@+id/tv_new"
-                app:layout_constraintTop_toTopOf="@+id/tv_author"
-                tools:text="本站发布" />
-
-            <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@{article.niceDate}"
+                android:text="@{collectArticle.niceDate}"
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_author"
@@ -110,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{Html.fromHtml(article.title)}"
+                android:text="@{Html.fromHtml(collectArticle.title)}"
                 android:textColor="@color/_333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -126,7 +75,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:text="@{Html.fromHtml(article.superChapterName+'·'+article.chapterName)}"
+                android:text="@{Html.fromHtml(collectArticle.chapterName)}"
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,12 +86,11 @@
                 android:id="@+id/iv_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{article.collect?@drawable/ic_collect:@drawable/ic_un_collect}"
+                android:src="@drawable/ic_collect"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_type2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_type2"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/ic_un_collect" />
+                tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

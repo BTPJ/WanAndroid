@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Classify
-import com.btpj.wanandroid.data.bean.ProjectTitle
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -37,11 +35,15 @@ class WechatFragment :
             }
 
             override fun createFragment(position: Int): Fragment {
-               return WechatChildFragment.newInstance(authorId = mAuthorTitleList[position].id)
+                return WechatChildFragment.newInstance(authorId = mAuthorTitleList[position].id)
             }
         }
 
         mBinding.apply {
+            // 由于标题也需要请求（只有请求完标题后才会加载Fragment从而显示swipeRefreshLayout），
+            // 所以在请求标题之前也需要一个loading
+            showLoading = true
+
             viewPager2.apply {
                 adapter = mFragmentStateAdapter
             }
@@ -57,6 +59,7 @@ class WechatFragment :
         super.createObserve()
         mViewModel.apply {
             authorTitleListLiveData.observe(viewLifecycleOwner) { list ->
+                mBinding.showLoading = false
                 mAuthorTitleList.apply {
                     clear()
                     addAll(list)

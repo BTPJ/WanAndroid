@@ -43,6 +43,10 @@ class ProjectFragment :
         }
 
         mBinding.apply {
+            // 由于标题也需要请求（只有请求完标题后才会加载Fragment从而显示swipeRefreshLayout），
+            // 所以在请求标题之前也需要一个loading
+            showLoading = true
+
             viewPager2.apply {
                 adapter = mFragmentStateAdapter
             }
@@ -58,6 +62,7 @@ class ProjectFragment :
         super.createObserve()
         mViewModel.apply {
             projectTitleListLiveData.observe(viewLifecycleOwner) { list ->
+                mBinding.showLoading = false
                 mProjectTitleList.apply {
                     clear()
                     addAll(list)

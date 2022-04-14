@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.btpj.lib_base.R
 import com.btpj.lib_base.databinding.LayoutTitleBinding
+import com.btpj.lib_base.utils.ScreenUtil
 
 /**
  * 封装的Title标题栏
@@ -38,7 +39,7 @@ class TitleLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
         )
         val titleTextSize = typedArray.getDimensionPixelSize(
             R.styleable.TitleLayout_titleTextSize,
-            resources.getDimension(R.dimen.title_text_size).toInt()
+            ScreenUtil.sp2px(context, 20f)
         )
         val titleText = typedArray.getString(R.styleable.TitleLayout_titleText)
         typedArray.recycle()

@@ -1,14 +1,19 @@
 package com.btpj.wanandroid.ui.main.square
 
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.btpj.lib_base.base.BaseVMBFragment
+import com.btpj.lib_base.utils.ScreenUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
+import com.btpj.wanandroid.ext.launchCheckLogin
 import com.btpj.wanandroid.ui.main.square.ask.AskFragment
 import com.btpj.wanandroid.ui.main.square.navigation.NavigationFragment
 import com.btpj.wanandroid.ui.main.square.square.SquareChildFragment
 import com.btpj.wanandroid.ui.main.square.system.SystemFragment
+import com.btpj.wanandroid.ui.share.add.AddArticleActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -25,6 +30,19 @@ class SquareFragment :
 
     private lateinit var mTabLayoutMediator: TabLayoutMediator
     private lateinit var mFragmentStateAdapter: FragmentStateAdapter
+
+    private val mPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            if (position == 0) {
+                mBinding.titleLayout.setRightView(R.drawable.ic_add) {
+                    requireContext().launchCheckLogin { AddArticleActivity.launch(it) }
+                }
+            } else {
+                mBinding.titleLayout.setRightView("")
+            }
+        }
+    }
 
     init {
         mFragmentList.add(SquareChildFragment.newInstance())
@@ -49,8 +67,18 @@ class SquareFragment :
         }
 
         mBinding.apply {
+            tabLayout.layoutParams =
+                    // 不想重新写布局...
+                ConstraintLayout.LayoutParams(tabLayout.layoutParams).apply {
+                    marginStart = ScreenUtil.dp2px(requireContext(), 40f)
+                    marginEnd = ScreenUtil.dp2px(requireContext(), 60f)
+                    topToTop = mBinding.root.top
+                    topMargin = ScreenUtil.dp2px(requireContext(), 6f)
+                }
+
             viewPager2.apply {
                 adapter = mFragmentStateAdapter
+                registerOnPageChangeCallback(mPageChangeCallback)
             }
 
             mTabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
@@ -62,5 +90,6 @@ class SquareFragment :
     override fun onDestroy() {
         super.onDestroy()
         mTabLayoutMediator.detach()
+        mBinding.viewPager2.unregisterOnPageChangeCallback(mPageChangeCallback)
     }
 }

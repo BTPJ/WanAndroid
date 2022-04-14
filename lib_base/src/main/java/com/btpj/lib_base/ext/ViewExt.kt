@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.btpj.lib_base.R
+import com.btpj.lib_base.utils.ScreenUtil
 
 /**
  * SwipeRefreshLayout设置加载主题颜色
@@ -120,9 +121,7 @@ fun Fragment.showDialog(
 @SuppressLint("StaticFieldLeak")
 private var mLoadingDialog: MaterialDialog? = null
 
-/**
- * 打开等待框
- */
+/** 打开加载框 */
 fun AppCompatActivity.showLoading(message: String = "请求网络中") {
     if (!this.isFinishing) {
         if (mLoadingDialog == null) {
@@ -131,7 +130,26 @@ fun AppCompatActivity.showLoading(message: String = "请求网络中") {
                 .cancelOnTouchOutside(false)
                 .cornerRadius(6f)
                 .customView(R.layout.dialog_loading)
-                .maxWidth(R.dimen.loading_width)
+                .maxWidth(ScreenUtil.dp2px(this, 120f))
+                .lifecycleOwner(this)
+            mLoadingDialog?.getCustomView()?.run {
+                this.findViewById<TextView>(R.id.tv_loadingMsg).text = message
+            }
+        }
+        mLoadingDialog?.show()
+    }
+}
+
+/** 打开加载框 */
+fun Fragment.showLoading(message: String = "请求网络中") {
+    if (!this.isRemoving) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = MaterialDialog(requireContext())
+                .cancelable(true)
+                .cancelOnTouchOutside(false)
+                .cornerRadius(6f)
+                .customView(R.layout.dialog_loading)
+                .maxWidth(ScreenUtil.dp2px(requireContext(), 120f))
                 .lifecycleOwner(this)
             mLoadingDialog?.getCustomView()?.run {
                 this.findViewById<TextView>(R.id.tv_loadingMsg).text = message

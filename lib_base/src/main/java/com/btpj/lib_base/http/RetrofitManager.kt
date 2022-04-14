@@ -38,10 +38,10 @@ object RetrofitManager {
         get() = OkHttpClient.Builder()
             // 请求过滤器
             .addInterceptor(logInterceptor)
-            //设置缓存配置,缓存最大10M,设置了缓存之后可缓存请求的数据
+            //设置缓存配置,缓存最大10M,设置了缓存之后可缓存请求的数据到data/data/包名/cache/net_cache目录中
             .cache(Cache(File(appContext.cacheDir, "net_cache"), 10 * 1024 * 1024))
-            //添加缓存拦截器 可传入缓存天数，不传默认7天
-            .addInterceptor(CacheInterceptor())
+            //添加缓存拦截器 可传入缓存天数
+            .addInterceptor(CacheInterceptor(30))
             // 请求超时时间
             .connectTimeout(TIME_OUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .cookieJar(cookieJar)

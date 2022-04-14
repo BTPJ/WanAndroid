@@ -8,6 +8,7 @@ import okhttp3.Response
 
 /**
  * 缓存拦截器,用于无网情况下传递header直接拉取之前缓存的数据
+ * @param day 缓存天数
  *
  * @author LTP 2022/4/14
  */

@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Integral
 import com.btpj.wanandroid.data.bean.User
@@ -28,7 +28,7 @@ class MineViewModel : BaseViewModel() {
 
     /** 获取个人积分 */
     fun fetchPoints() {
-        launch({
+        request({
             val response = DataRepository.getUserIntegral()
             handleResponse(response, {
                 integral.value = response.data

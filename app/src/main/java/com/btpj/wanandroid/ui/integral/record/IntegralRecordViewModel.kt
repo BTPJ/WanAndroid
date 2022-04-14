@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.IntegralRecord
 
@@ -19,7 +19,7 @@ class IntegralRecordViewModel : BaseViewModel() {
      * @param pageNo 页码
      */
     fun fetchIntegralRecordPageList(pageNo: Int = 1) {
-        launch({
+        request({
             val response = DataRepository.getIntegralRecordPageList(pageNo)
             handleResponse(response, {
                 integralRecordPageList.value = response.data!!

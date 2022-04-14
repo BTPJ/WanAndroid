@@ -112,4 +112,9 @@ class AskFragment :
         mBinding.swipeRefreshLayout.isEnabled = false
         mViewModel.fetchAskPageList(++mPageNo)
     }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.swipeRefreshLayout.isRefreshing = false
+    }
 }

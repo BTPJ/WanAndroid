@@ -73,7 +73,7 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     open fun createObserve() {     // 全局服务器请求错误监听
         mViewModel.apply {
             exception.observe(viewLifecycleOwner) {
-                hideLoading()
+                requestError(it.message)
                 LogUtil.e("网络请求错误：${it.message}")
                 when (it) {
                     is SocketTimeoutException -> ToastUtil.showShort(
@@ -92,12 +92,16 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
 
             // 全局服务器返回的错误信息监听
             errorMsg.observe(viewLifecycleOwner) {
-                hideLoading()
+                requestError(it)
                 it?.run {
                     ToastUtil.showShort(requireContext(), it)
                 }
             }
         }
+    }
 
+    /** 提供一个请求错误的方法,用于像关闭加载框之类的 */
+    open fun requestError(msg: String? = null) {
+        hideLoading()
     }
 }

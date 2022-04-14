@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
@@ -34,7 +34,7 @@ class HomeViewModel : BaseViewModel() {
 
     /** 请求首页轮播图 */
     fun fetchBanners() {
-        launch({
+        request({
             val response = DataRepository.getBanner()
             handleResponse(response, {
                 bannerListLiveData.value = response.data
@@ -48,7 +48,7 @@ class HomeViewModel : BaseViewModel() {
      * @param pageNo 页码（0表示请求第1页）
      */
     fun fetchArticlePageList(pageNo: Int = 0) {
-        launch({
+        request({
             if (pageNo == 0) {
                 // 使用async需要单独加作用域,不然没网时会崩溃
                 withContext(Dispatchers.IO) {

@@ -56,4 +56,9 @@ class SystemFragment :
         mBinding.swipeRefreshLayout.isRefreshing = true
         mViewModel.fetchSystemList()
     }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.swipeRefreshLayout.isRefreshing = false
+    }
 }

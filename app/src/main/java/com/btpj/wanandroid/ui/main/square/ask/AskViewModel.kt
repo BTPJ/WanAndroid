@@ -4,11 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
-import com.btpj.lib_base.utils.LogUtil
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.ProjectTitle
 
 class AskViewModel : BaseViewModel() {
 
@@ -19,7 +17,7 @@ class AskViewModel : BaseViewModel() {
 
     /** 请求每日一问分页列表 */
     fun fetchAskPageList(pageNo: Int = 1) {
-        launch({
+        request({
             DataRepository.getAskPageList(pageNo).let {
                 handleResponse(it, { articlePageListLiveData.value = it.data })
             }

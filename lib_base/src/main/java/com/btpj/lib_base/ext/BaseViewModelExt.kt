@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
  *
  * @author LTP  2022/3/22
  */
-fun BaseViewModel.launch(
+fun BaseViewModel.request(
     tryBlock: suspend CoroutineScope.() -> Unit,
     catchBlock: suspend CoroutineScope.() -> Unit = {},
     finallyBlock: suspend CoroutineScope.() -> Unit = {}

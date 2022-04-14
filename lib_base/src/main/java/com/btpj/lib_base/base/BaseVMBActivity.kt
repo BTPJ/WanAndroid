@@ -65,7 +65,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         // 全局服务器请求错误监听
         mViewModel.apply {
             exception.observe(this@BaseVMBActivity) {
-                hideLoading()
+                requestError(it.message)
                 LogUtil.e("网络请求错误：${it.message}")
                 when (it) {
                     is SocketTimeoutException -> ToastUtil.showShort(
@@ -84,11 +84,16 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
 
             // 全局服务器返回的错误信息监听
             errorMsg.observe(this@BaseVMBActivity) {
-                hideLoading()
+                requestError(it)
                 it?.run {
                     ToastUtil.showShort(this@BaseVMBActivity, it)
                 }
             }
         }
+    }
+
+    /** 提供一个请求错误的方法,用于像关闭加载框,显示错误布局之类的 */
+    open fun requestError(msg: String?) {
+        hideLoading()
     }
 }

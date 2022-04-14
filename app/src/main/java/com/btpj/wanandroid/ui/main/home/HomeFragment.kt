@@ -146,4 +146,9 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
         mBinding.includeList.swipeRefreshLayout.isEnabled = false
         mViewModel.fetchArticlePageList(++mPageNo)
     }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.includeList.swipeRefreshLayout.isRefreshing = false
+    }
 }

@@ -102,4 +102,9 @@ class SquareChildFragment :
         mBinding.swipeRefreshLayout.isEnabled = false
         mViewModel.fetchSquarePageList(++mPageNo)
     }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.swipeRefreshLayout.isRefreshing = false
+    }
 }

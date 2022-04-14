@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.share.add
 import androidx.databinding.ObservableField
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
 
@@ -24,7 +24,7 @@ class AddArticleViewModel : BaseViewModel() {
      * @param link 文章链接
      */
     fun addArticle(title: String, link: String, successAction: () -> Any? = {}) {
-        launch({
+        request({
             val response = DataRepository.addArticle(title, link)
             handleResponse(response, {
                 successAction.invoke()

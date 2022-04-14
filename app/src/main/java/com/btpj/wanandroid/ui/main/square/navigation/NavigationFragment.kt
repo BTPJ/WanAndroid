@@ -56,4 +56,9 @@ class NavigationFragment :
         mBinding.swipeRefreshLayout.isRefreshing = true
         mViewModel.fetchNavigationList()
     }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.swipeRefreshLayout.isRefreshing = false
+    }
 }

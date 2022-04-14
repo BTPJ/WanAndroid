@@ -4,11 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.launch
-import com.btpj.lib_base.utils.LogUtil
+import com.btpj.lib_base.ext.request
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.ProjectTitle
 
 class ProjectChildViewModel : BaseViewModel() {
 
@@ -24,7 +22,7 @@ class ProjectChildViewModel : BaseViewModel() {
 
     /** 请求最新项目分页列表 */
     fun fetchNewProjectPageList(pageNo: Int = 0) {
-        launch({
+        request({
             DataRepository.getNewProjectPageList(pageNo, PAGE_SIZE).let {
                 handleResponse(it, { articlePageListLiveData.value = it.data })
             }
@@ -33,7 +31,7 @@ class ProjectChildViewModel : BaseViewModel() {
 
     /** 请求项目分页列表 */
     fun fetchProjectPageList(pageNo: Int = 1, categoryId: Int) {
-        launch({
+        request({
             DataRepository.getProjectPageList(pageNo, PAGE_SIZE, categoryId).let {
                 handleResponse(it, { articlePageListLiveData.value = it.data })
             }

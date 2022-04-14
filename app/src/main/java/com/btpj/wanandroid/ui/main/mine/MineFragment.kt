@@ -48,7 +48,7 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
             tvCollect.setOnClickListener {
                 requireContext().launchCheckLogin { CollectActivity.launch(it) }
             }
-            
+
             // 我分享的文章（需要登录）
             tvArticle.setOnClickListener {
                 requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
@@ -91,5 +91,10 @@ class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layou
                 tvPointsNum.text = "${it?.coinCount ?: '—'}"
             }
         }
+    }
+
+    override fun requestError(msg: String?) {
+        super.requestError(msg)
+        mBinding.swipeRefreshLayout.isRefreshing = false
     }
 }

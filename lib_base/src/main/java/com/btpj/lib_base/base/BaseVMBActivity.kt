@@ -14,6 +14,7 @@ import com.btpj.lib_base.utils.ToastUtil
 import java.lang.reflect.ParameterizedType
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * 封装了ViewModel和DataBinding的Activity基类
@@ -71,7 +72,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
                         this@BaseVMBActivity,
                         getString(R.string.request_time_out)
                     )
-                    is ConnectException -> ToastUtil.showShort(
+                    is ConnectException, is UnknownHostException -> ToastUtil.showShort(
                         this@BaseVMBActivity,
                         getString(R.string.network_error)
                     )

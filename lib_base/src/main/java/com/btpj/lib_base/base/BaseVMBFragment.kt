@@ -9,7 +9,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
+import com.btpj.lib_base.R
+import com.btpj.lib_base.ext.hideLoading
+import com.btpj.lib_base.utils.LogUtil
+import com.btpj.lib_base.utils.ToastUtil
 import java.lang.reflect.ParameterizedType
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * 封装了ViewModel和DataBinding的Fragment基类
@@ -63,5 +70,34 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     abstract fun initView()
 
     /** 提供编写LiveData监听逻辑的方法 */
-    open fun createObserve() {}
+    open fun createObserve() {     // 全局服务器请求错误监听
+        mViewModel.apply {
+            exception.observe(viewLifecycleOwner) {
+                hideLoading()
+                LogUtil.e("网络请求错误：${it.message}")
+                when (it) {
+                    is SocketTimeoutException -> ToastUtil.showShort(
+                        requireContext(),
+                        getString(R.string.request_time_out)
+                    )
+                    is ConnectException, is UnknownHostException -> ToastUtil.showShort(
+                        requireContext(),
+                        getString(R.string.network_error)
+                    )
+                    else -> ToastUtil.showShort(
+                        requireContext(), it.message ?: getString(R.string.response_error)
+                    )
+                }
+            }
+
+            // 全局服务器返回的错误信息监听
+            errorMsg.observe(viewLifecycleOwner) {
+                hideLoading()
+                it?.run {
+                    ToastUtil.showShort(requireContext(), it)
+                }
+            }
+        }
+
+    }
 }

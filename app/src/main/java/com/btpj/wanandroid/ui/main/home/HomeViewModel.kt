@@ -5,7 +5,6 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.bean.PageResponse
 import com.btpj.lib_base.ext.handleResponse
 import com.btpj.lib_base.ext.launch
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner

@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.FrameLayout
-import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
@@ -21,7 +21,7 @@ import com.just.agentweb.WebChromeClient
  *
  * @author LTP 2022/4/2
  */
-class WebActivity : BaseVMBActivity<WebViewModel, ActivityWebBinding>(R.layout.activity_web) {
+class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.activity_web) {
 
     private lateinit var mAgentWeb: AgentWeb
 

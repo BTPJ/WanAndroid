@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.data.bean
 
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.lib_base.data.bean.PageResponse
 
 /**
  * 我的分享

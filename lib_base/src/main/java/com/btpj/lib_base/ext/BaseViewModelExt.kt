@@ -2,7 +2,7 @@ package com.btpj.lib_base.ext
 
 import androidx.lifecycle.viewModelScope
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.bean.ApiResponse
+import com.btpj.lib_base.data.bean.ApiResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -35,16 +35,16 @@ fun BaseViewModel.request(
  */
 suspend fun <T> BaseViewModel.handleResponse(
     response: ApiResponse<T>,
-    successBlock: suspend CoroutineScope.() -> Unit = {},
-    errorBlock: suspend CoroutineScope.() -> Unit = {}
+    successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {},
+    errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {}
 ) {
     coroutineScope {
-        // 统一处理服务器返回错误码的情况
-        if (response.errorCode == -1) {
-            errorMsg.value = response.errorMsg
-            errorBlock()
-        } else {
-            successBlock()
+        when (response.errorCode) {
+            0 -> successBlock(response) // 服务器返回请求成功码
+            else -> { // 服务器返回的其他错误码
+                errorResponse.value = response
+                errorBlock(response)
+            }
         }
     }
 }

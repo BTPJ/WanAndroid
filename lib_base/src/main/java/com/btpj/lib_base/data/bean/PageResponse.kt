@@ -1,4 +1,4 @@
-package com.btpj.lib_base.bean
+package com.btpj.lib_base.data.bean
 
 /**
  * 分页实体

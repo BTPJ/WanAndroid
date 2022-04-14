@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.data.http
 
-import com.btpj.lib_base.bean.ApiResponse
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.lib_base.data.bean.ApiResponse
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.wanandroid.data.bean.*
 import retrofit2.http.*
 
@@ -34,6 +34,14 @@ interface Api {
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
     ): ApiResponse<PageResponse<Article>>
+
+    /** 收藏站内文章 */
+    @POST("lg/collect/{id}/json")
+    suspend fun collectArticle(@Path("id") id: Int): ApiResponse<Any?>
+
+    /** 取消收藏站内文章 */
+    @POST("lg/uncollect_originId/{id}/json")
+    suspend fun unCollectArticle(@Path("id") id: Int): ApiResponse<Any?>
 
     /** 获取项目分类数据 */
     @GET("project/tree/json")

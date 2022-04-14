@@ -35,11 +35,10 @@ class LoginViewModel : BaseViewModel() {
      */
     fun login(userName: String, pwd: String, successCall: () -> Any? = {}) {
         request({
-            val response = DataRepository.login(userName, pwd)
-            handleResponse(response, successBlock = {
+            handleResponse(DataRepository.login(userName, pwd), successBlock = {
                 UserManager.saveLastUserName(userName)
-                UserManager.saveUser(response.data)
-                App.appViewModel.userEvent.value = response.data
+                UserManager.saveUser(it.data)
+                App.appViewModel.userEvent.value = it.data
                 successCall.invoke()
             })
         })

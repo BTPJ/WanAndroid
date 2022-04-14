@@ -3,8 +3,8 @@ package com.btpj.wanandroid.ui.main.home
 import android.annotation.SuppressLint
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseFragment
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
@@ -20,7 +20,7 @@ import com.youth.banner.indicator.CircleIndicator
  *
  * @author LTP 2022/3/10
  */
-class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
 
     /** 列表总数 */
     private var mTotalCount: Int = 0
@@ -60,6 +60,23 @@ class HomeFragment : BaseVMBFragment<HomeViewModel, FragmentHomeBinding>(R.layou
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
                     setHeaderView(headerBannerBinding.root)
+                    addChildClickViewIds(R.id.iv_collect)
+                    setOnItemChildClickListener { _, _, position ->
+                        if (mAdapter.getItem(position).collect) {
+                            mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
+                                // 取消收藏成功后,手动更改避免刷新整个列表
+                                mAdapter.getItem(position).collect = false
+                                // 注意:这里position需要+1,因为0位置属于轮播图HeaderView
+                                mAdapter.notifyItemChanged(position + 1)
+                            }
+                        } else {
+                            mViewModel.collectArticle(mAdapter.getItem(position).id) {
+                                // 收藏成功后,手动更改避免刷新整个列表
+                                mAdapter.getItem(position).collect = true
+                                mAdapter.notifyItemChanged(position + 1)
+                            }
+                        }
+                    }
                 }
             }
 

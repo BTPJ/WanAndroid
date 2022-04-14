@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.main.square.navigation
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBFragment
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
@@ -13,7 +13,7 @@ import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
  * @author LTP 2022/4/7
  */
 class NavigationFragment :
-    BaseVMBFragment<NavigationViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<NavigationViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     private val mAdapter by lazy { NavigationAdapter() }
 

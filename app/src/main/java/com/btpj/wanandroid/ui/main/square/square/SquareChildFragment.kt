@@ -1,8 +1,8 @@
 package com.btpj.wanandroid.ui.main.square.square
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseFragment
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
@@ -16,7 +16,7 @@ import com.btpj.wanandroid.ui.main.home.ArticleAdapter
  * @author LTP 2022/3/10
  */
 class SquareChildFragment :
-    BaseVMBFragment<SquareChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<SquareChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     /** 页数 */
     private var mPageNo: Int = 0

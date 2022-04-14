@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.main.mine
 
 import android.annotation.SuppressLint
-import com.btpj.lib_base.base.BaseVMBFragment
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
@@ -20,7 +20,7 @@ import com.btpj.wanandroid.ui.web.WebActivity
  *
  * @author LTP 2022/3/10
  */
-class MineFragment : BaseVMBFragment<MineViewModel, FragmentMineBinding>(R.layout.fragment_mine) {
+class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.fragment_mine) {
 
     companion object {
         fun newInstance() = MineFragment()

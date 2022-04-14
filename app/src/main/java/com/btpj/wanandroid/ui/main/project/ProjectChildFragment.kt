@@ -2,15 +2,14 @@ package com.btpj.wanandroid.ui.main.project
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseFragment
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.main.home.HomeViewModel
-import com.btpj.wanandroid.ui.web.WebActivity
 
 /**
  * 项目Tab下的子Fragment
@@ -18,7 +17,7 @@ import com.btpj.wanandroid.ui.web.WebActivity
  * @author LTP 2022/3/10
  */
 class ProjectChildFragment :
-    BaseVMBFragment<ProjectChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<ProjectChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     /** 列表总数 */
     private var mTotalCount: Int = 0

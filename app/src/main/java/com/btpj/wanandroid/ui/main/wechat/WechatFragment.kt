@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.main.wechat
 import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.btpj.lib_base.base.BaseVMBFragment
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @author LTP 2022/3/10
  */
 class WechatFragment :
-    BaseVMBFragment<WechatViewModel, FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
+    BaseFragment<WechatViewModel, FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
 
     /** TabLayout的标题集合 */
     private val mAuthorTitleList = ArrayList<Classify>()

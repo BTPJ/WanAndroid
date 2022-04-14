@@ -4,7 +4,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.btpj.lib_base.base.BaseVMBFragment
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.utils.ScreenUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @author LTP 2022/3/10
  */
 class SquareFragment :
-    BaseVMBFragment<SquareViewModel, FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
+    BaseFragment<SquareViewModel, FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
 
     /** 标题 */
     private val mTitleList = arrayListOf("广场", "每日一问", "体系", "导航")

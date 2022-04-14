@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.ActivityMainBinding
@@ -20,7 +20,7 @@ import com.btpj.wanandroid.ui.main.wechat.WechatFragment
  * @author LTP 2022/3/9
  */
 class MainActivity :
-    BaseVMBActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
+    BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
 
     companion object {
         /** 记录修改配置（如页面旋转）前navBar的位置的常量 */

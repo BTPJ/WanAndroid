@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.wanandroid.R
@@ -15,7 +15,7 @@ import com.btpj.wanandroid.databinding.ActivityLoginBinding
  * @author LTP 2022/4/8
  */
 class LoginActivity :
-    BaseVMBActivity<LoginViewModel, ActivityLoginBinding>(R.layout.activity_login) {
+    BaseActivity<LoginViewModel, ActivityLoginBinding>(R.layout.activity_login) {
 
     companion object {
 

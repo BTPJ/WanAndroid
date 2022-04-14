@@ -2,12 +2,13 @@ package com.btpj.wanandroid.ui.main.home
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.bean.PageResponse
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.data.bean.PageResponse
+
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.lib_base.ext.handleResponse
+import com.btpj.lib_base.ext.request
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -35,9 +36,8 @@ class HomeViewModel : BaseViewModel() {
     /** 请求首页轮播图 */
     fun fetchBanners() {
         request({
-            val response = DataRepository.getBanner()
-            handleResponse(response, {
-                bannerListLiveData.value = response.data
+            handleResponse(DataRepository.getBanner(), {
+                bannerListLiveData.value = it.data
             })
         })
     }
@@ -69,11 +69,34 @@ class HomeViewModel : BaseViewModel() {
                     })
                 }
             } else {
-                val response = DataRepository.getArticlePageList(pageNo, PAGE_SIZE)
-                handleResponse(response, { articlePageListLiveData.value = response.data })
+                handleResponse(
+                    DataRepository.getArticlePageList(pageNo, PAGE_SIZE),
+                    { articlePageListLiveData.value = it.data })
             }
         })
     }
 
+    /**
+     * 收藏文章
+     * @param id 文章id
+     */
+    fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        request({
+            handleResponse(DataRepository.collectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
 
+    /**
+     * 取消收藏文章
+     * @param id 文章id
+     */
+    fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        request({
+            handleResponse(DataRepository.unCollectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
 }

@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.data
 
-import com.btpj.lib_base.bean.ApiResponse
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.lib_base.data.bean.ApiResponse
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.http.BaseRepository
 import com.btpj.wanandroid.data.http.Api
 import com.btpj.lib_base.http.RetrofitManager
@@ -35,6 +35,14 @@ object DataRepository : BaseRepository(), Api {
         pageSize: Int
     ): ApiResponse<PageResponse<Article>> {
         return apiCall { service.getArticlePageList(pageNo, pageSize) }
+    }
+
+    override suspend fun collectArticle(id: Int): ApiResponse<Any?> {
+        return apiCall { service.collectArticle(id) }
+    }
+
+    override suspend fun unCollectArticle(id: Int): ApiResponse<Any?> {
+        return apiCall { service.unCollectArticle(id) }
     }
 
     override suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>> {

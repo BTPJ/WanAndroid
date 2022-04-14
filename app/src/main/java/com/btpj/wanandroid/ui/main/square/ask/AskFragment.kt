@@ -1,15 +1,14 @@
 package com.btpj.wanandroid.ui.main.square.ask
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBFragment
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseFragment
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
-import com.btpj.wanandroid.ui.main.home.HomeViewModel
 
 /**
  * 广场Tab里的每日一问
@@ -17,7 +16,7 @@ import com.btpj.wanandroid.ui.main.home.HomeViewModel
  * @author LTP 2022/3/10
  */
 class AskFragment :
-    BaseVMBFragment<AskViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<AskViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
 
     /** 列表总数 */
     private var mTotalCount: Int = 0

@@ -17,9 +17,7 @@ class CollectUrlViewModel : BaseViewModel() {
     /** 请求收藏网址列表 */
     fun fetchCollectUrlList() {
         request({
-            DataRepository.getCollectUrlList().let {
-                handleResponse(it, { collectUrlList.value = it.data })
-            }
+            handleResponse(DataRepository.getCollectUrlList(), { collectUrlList.value = it.data })
         })
     }
 }

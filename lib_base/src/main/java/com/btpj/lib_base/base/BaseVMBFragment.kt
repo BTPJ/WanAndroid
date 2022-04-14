@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
 import com.btpj.lib_base.R
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.ToastUtil
@@ -91,10 +92,10 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
             }
 
             // 全局服务器返回的错误信息监听
-            errorMsg.observe(viewLifecycleOwner) {
-                requestError(it)
-                it?.run {
-                    ToastUtil.showShort(requireContext(), it)
+            errorResponse.observe(viewLifecycleOwner) {
+                requestError(it?.errorMsg)
+                it?.errorMsg?.run {
+                    ToastUtil.showShort(requireContext(), this)
                 }
             }
         }

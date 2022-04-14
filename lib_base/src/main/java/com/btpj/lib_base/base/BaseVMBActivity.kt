@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
 import com.btpj.lib_base.R
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.StatusBarUtil
@@ -83,10 +84,10 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
             }
 
             // 全局服务器返回的错误信息监听
-            errorMsg.observe(this@BaseVMBActivity) {
-                requestError(it)
-                it?.run {
-                    ToastUtil.showShort(this@BaseVMBActivity, it)
+            errorResponse.observe(this@BaseVMBActivity) {
+                requestError(it?.errorMsg)
+                it?.errorMsg?.run {
+                    ToastUtil.showShort(this@BaseVMBActivity, this)
                 }
             }
         }

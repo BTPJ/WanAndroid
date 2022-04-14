@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.setting
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.showDialog
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
@@ -20,7 +20,7 @@ import com.btpj.wanandroid.ui.web.WebActivity
  * @author LTP 2022/4/11
  */
 class SettingActivity :
-    BaseVMBActivity<SettingViewModel, ActivitySettingBinding>(R.layout.activity_setting) {
+    BaseActivity<SettingViewModel, ActivitySettingBinding>(R.layout.activity_setting) {
 
     companion object {
         /**

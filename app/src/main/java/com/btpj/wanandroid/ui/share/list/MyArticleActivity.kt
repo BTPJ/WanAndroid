@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBActivity
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseActivity
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.showDialog
@@ -22,7 +22,7 @@ import com.btpj.wanandroid.ui.share.add.AddArticleActivity
  * @author LTP 2022/4/12
  */
 class MyArticleActivity :
-    BaseVMBActivity<MyArticleViewModel, ActivityIntegralRecordBinding>(R.layout.activity_integral_record) {
+    BaseActivity<MyArticleViewModel, ActivityIntegralRecordBinding>(R.layout.activity_integral_record) {
 
     /** 页数 */
     private var mPageNo: Int = 0

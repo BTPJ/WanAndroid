@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.lib_base.base.BaseVMBActivity
-import com.btpj.lib_base.bean.PageResponse
+import com.btpj.wanandroid.base.BaseActivity
+import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
@@ -22,7 +22,7 @@ import com.btpj.wanandroid.ui.web.WebActivity
  * @author LTP 2022/4/12
  */
 class IntegralRankActivity :
-    BaseVMBActivity<IntegralRankViewModel, ActivityIntegralRankBinding>(R.layout.activity_integral_rank) {
+    BaseActivity<IntegralRankViewModel, ActivityIntegralRankBinding>(R.layout.activity_integral_rank) {
 
     /** 页数 */
     private var mPageNo: Int = 0

@@ -7,7 +7,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.lib_base.utils.ToastUtil
@@ -21,7 +21,7 @@ import com.btpj.wanandroid.databinding.ActivityAddArticleBinding
  * @author LTP 2022/4/12
  */
 class AddArticleActivity :
-    BaseVMBActivity<AddArticleViewModel, ActivityAddArticleBinding>(R.layout.activity_add_article) {
+    BaseActivity<AddArticleViewModel, ActivityAddArticleBinding>(R.layout.activity_add_article) {
 
     companion object {
 

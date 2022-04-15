@@ -25,7 +25,7 @@ class ImageArticleAdapter :
             article = item
             executePendingBindings()
 
-            clItem.setOnClickListener { WebActivity.launch(context, item.link) }
+            clItem.setOnClickListener { WebActivity.launch(context, item) }
         }
     }
 }

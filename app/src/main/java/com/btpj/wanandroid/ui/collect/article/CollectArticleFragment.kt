@@ -33,6 +33,13 @@ class CollectArticleFragment :
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
+                    addChildClickViewIds(R.id.iv_collect)
+                    setOnItemChildClickListener { _, _, position ->
+                        mViewModel.unCollectArticle(mAdapter.getItem(position).originId) {
+                            // 取消收藏成功后,直接删除
+                            mAdapter.removeAt(position)
+                        }
+                    }
                 }
 
                 swipeRefreshLayout.apply {

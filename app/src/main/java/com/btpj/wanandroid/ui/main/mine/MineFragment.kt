@@ -5,6 +5,7 @@ import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding
 import com.btpj.wanandroid.ext.launchCheckLogin
@@ -56,7 +57,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             // 开源网站
             tvWeb.setOnClickListener {
-                WebActivity.launch(requireContext(), "https://www.wanandroid.com/")
+                WebActivity.launch(requireContext(), Banner(title = "玩Android网站", url = "https://www.wanandroid.com/"))
             }
 
             // 设置
@@ -68,8 +69,10 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
     /** 下拉刷新 */
     private fun onRefresh() {
-        mBinding.swipeRefreshLayout.isRefreshing = true
-        mViewModel.fetchPoints()
+        if (UserManager.isLogin()) {
+            mBinding.swipeRefreshLayout.isRefreshing = true
+            mViewModel.fetchPoints()
+        }
     }
 
     @SuppressLint("SetTextI18n")

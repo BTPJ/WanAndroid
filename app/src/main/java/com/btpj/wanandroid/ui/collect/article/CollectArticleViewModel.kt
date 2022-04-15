@@ -23,4 +23,16 @@ class CollectArticleViewModel : BaseViewModel() {
                 { collectArticlePageList.value = it.data })
         })
     }
+
+    /**
+     * 取消收藏文章
+     * @param id 文章id
+     */
+    fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.unCollectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
 }

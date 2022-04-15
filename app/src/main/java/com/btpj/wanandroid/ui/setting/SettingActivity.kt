@@ -10,6 +10,7 @@ import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
 import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.ActivitySettingBinding
 import com.btpj.wanandroid.ui.web.WebActivity
@@ -55,7 +56,10 @@ class SettingActivity :
 
             // 项目源码
             tvSourceCode.setOnClickListener {
-                WebActivity.launch(this@SettingActivity, "https://gitee.com/BTPJ_git/WanAndroid")
+                WebActivity.launch(
+                    this@SettingActivity,
+                    Banner(title = "项目源码", url = "https://gitee.com/BTPJ_git/WanAndroid")
+                )
             }
 
             // 退出登录

@@ -28,4 +28,28 @@ class SquareChildViewModel : BaseViewModel() {
             }
         })
     }
+
+    /**
+     * 收藏文章
+     * @param id 文章id
+     */
+    fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.collectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
+
+    /**
+     * 取消收藏文章
+     * @param id 文章id
+     */
+    fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.unCollectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
 }

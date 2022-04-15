@@ -128,4 +128,15 @@ interface Api {
     /** 删除自己分享的文章 */
     @POST("lg/user_article/delete/{id}/json")
     suspend fun deleteShareArticle(@Path("id") id: Int): ApiResponse<Any?>
+
+    /** 收藏网址 */
+    @POST("lg/collect/addtool/json")
+    suspend fun collectUrl(
+        @Query("name") name: String,
+        @Query("link") link: String
+    ): ApiResponse<Any?>
+
+    /** 取消收藏站内文章 */
+    @POST("lg/collect/deletetool/json")
+    suspend fun unCollectUrl(@Query("id") id: Int): ApiResponse<Any?>
 }

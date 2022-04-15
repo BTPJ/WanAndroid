@@ -8,10 +8,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.data.bean.CollectArticle
+import com.btpj.wanandroid.data.bean.CollectUrl
 import com.btpj.wanandroid.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
@@ -25,21 +30,66 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
 
     private lateinit var mAgentWeb: AgentWeb
 
+    private var mArticle: Article? = null
+    private var mCollectArticle: CollectArticle? = null
+    private var mCollectUrl: CollectUrl? = null
+    private var mBanner: Banner? = null
+
     private lateinit var mUrl: String
+    private var mCollect = false
     private lateinit var mTitle: String
 
     companion object {
-        private const val EXTRA_URL = "url"
+        private const val EXTRA_ARTICLE = "extra_article"
+        private const val EXTRA_COLLECT_ARTICLE = "extra_collect_article"
+        private const val EXTRA_COLLECT_URL = "extra_collect_url"
+        private const val EXTRA_BANNER = "extra_banner"
 
         /**
          * 页面跳转
          *
          * @param context Context
-         * @param url web页面链接
+         * @param article Article
          */
-        fun launch(context: Context, url: String) {
+        fun launch(context: Context, article: Article) {
             context.startActivity(Intent(context, WebActivity::class.java).apply {
-                putExtra(EXTRA_URL, url)
+                putExtra(EXTRA_ARTICLE, article)
+            })
+        }
+
+        /**
+         * 页面跳转
+         *
+         * @param context Context
+         * @param collectArticle CollectArticle
+         */
+        fun launch(context: Context, collectArticle: CollectArticle) {
+            context.startActivity(Intent(context, WebActivity::class.java).apply {
+                putExtra(EXTRA_COLLECT_ARTICLE, collectArticle)
+            })
+        }
+
+        /**
+         * 页面跳转
+         *
+         * @param context Context
+         * @param collectUrl CollectUrl
+         */
+        fun launch(context: Context, collectUrl: CollectUrl) {
+            context.startActivity(Intent(context, WebActivity::class.java).apply {
+                putExtra(EXTRA_COLLECT_URL, collectUrl)
+            })
+        }
+
+        /**
+         * 页面跳转
+         *
+         * @param context Context
+         * @param banner Banner
+         */
+        fun launch(context: Context, banner: Banner) {
+            context.startActivity(Intent(context, WebActivity::class.java).apply {
+                putExtra(EXTRA_BANNER, banner)
             })
         }
     }
@@ -49,7 +99,31 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
         // 返回点击事件必须在setSupportActionBar方法调用之后
         mBinding.toolbar.initClose { onBackPressed() }
 
-        mUrl = intent.getStringExtra(EXTRA_URL) ?: ""
+        intent.apply {
+            mArticle = getParcelableExtra(EXTRA_ARTICLE)
+            mCollectArticle = getParcelableExtra(EXTRA_COLLECT_ARTICLE)
+            mCollectUrl = getParcelableExtra(EXTRA_COLLECT_URL)
+            mBanner = getParcelableExtra(EXTRA_BANNER)
+        }
+
+        when {
+            mArticle != null -> {
+                mUrl = mArticle!!.link
+                mCollect = mArticle!!.collect
+            }
+            mCollectArticle != null -> {
+                mUrl = mCollectArticle!!.link
+                mCollect = true
+            }
+            mCollectUrl != null -> {
+                mUrl = mCollectUrl!!.link
+                mCollect = true
+            }
+            else -> {
+                mUrl = mBanner!!.url
+                mCollect = false // 无法得知是否收藏直接置为false
+            }
+        }
 
         mAgentWeb = AgentWeb.with(this)
             .setAgentWebParent(mBinding.flWeb, FrameLayout.LayoutParams(-1, -1))
@@ -64,8 +138,6 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
             .createAgentWeb()
             .ready()
             .go(mUrl)
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,10 +145,19 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.item_collect)?.icon = ContextCompat.getDrawable(
+            this,
+            if (mCollect) R.drawable.ic_collect else R.drawable.ic_un_collect
+        )
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 注意：item.setIcon(R.drawable.ic_un_collect)这样设置一点击菜单就恢复成onPrepareOptionsMenu的初始状态
         when (item.itemId) {
             R.id.item_collect -> { // 收藏
-
+                handleCollect()
             }
             R.id.item_share -> { // 分享
                 startActivity(Intent.createChooser(Intent().apply {
@@ -93,6 +174,66 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /** 收藏与取消收藏处理 */
+    private fun handleCollect() {
+        when {
+            mArticle != null -> {
+                if (mCollect) {
+                    mViewModel.unCollectArticle(mArticle!!.id) {
+                        // 重置mCollect为false然后强制刷新menu即可
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                } else {
+                    mViewModel.collectArticle(mArticle!!.id) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                }
+            }
+            mCollectArticle != null -> {
+                if (mCollect) {
+                    mViewModel.unCollectArticle(mCollectArticle!!.originId) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                } else {
+                    mViewModel.collectArticle(mCollectArticle!!.originId) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                }
+            }
+            mCollectUrl != null -> {
+                if (mCollect) {
+                    mViewModel.unCollectUrl(mCollectUrl!!.id) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                } else {
+                    mViewModel.collectUrl(mCollectUrl!!.name, mCollectUrl!!.link) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                }
+            }
+            else -> {
+                if (mCollect) {
+                    mViewModel.unCollectUrl(mBanner!!.id) {
+                        // 重置mCollect为false然后强制刷新menu即可
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                } else {
+                    mViewModel.collectUrl(mBanner!!.title, mBanner!!.url) {
+                        mCollect = !mCollect
+                        invalidateOptionsMenu()
+                    }
+                }
+            }
+        }
     }
 
     override fun onResume() {

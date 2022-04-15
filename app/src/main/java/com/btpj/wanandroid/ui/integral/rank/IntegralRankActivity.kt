@@ -11,6 +11,8 @@ import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.data.bean.CollectUrl
 import com.btpj.wanandroid.data.bean.Integral
 import com.btpj.wanandroid.databinding.ActivityIntegralRankBinding
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordActivity
@@ -53,7 +55,10 @@ class IntegralRankActivity :
                                 // 积分规则
                                 WebActivity.launch(
                                     this@IntegralRankActivity,
-                                    "https://www.wanandroid.com/blog/show/2653"
+                                    Banner(
+                                        title = "积分规则",
+                                        url = "https://www.wanandroid.com/blog/show/2653"
+                                    )
                                 )
 
                             R.id.item_integralRecord ->

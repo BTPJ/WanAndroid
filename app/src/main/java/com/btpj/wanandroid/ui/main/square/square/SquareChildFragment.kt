@@ -35,6 +35,22 @@ class SquareChildFragment :
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
+                    addChildClickViewIds(R.id.iv_collect)
+                    setOnItemChildClickListener { _, _, position ->
+                        if (mAdapter.getItem(position).collect) {
+                            mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
+                                // 取消收藏成功后,手动更改避免刷新整个列表
+                                mAdapter.getItem(position).collect = false
+                                mAdapter.notifyItemChanged(position)
+                            }
+                        } else {
+                            mViewModel.collectArticle(mAdapter.getItem(position).id) {
+                                // 收藏成功后,手动更改避免刷新整个列表
+                                mAdapter.getItem(position).collect = true
+                                mAdapter.notifyItemChanged(position)
+                            }
+                        }
+                    }
                 }
 
                 swipeRefreshLayout.apply {

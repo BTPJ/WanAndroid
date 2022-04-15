@@ -25,14 +25,15 @@
             android:id="@+id/cl_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="10dp">
+            android:background="?android:attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/tv_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_author"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:text='@{CommonUtil.isEmpty(collectArticle.author)?"匿名用户":collectArticle.author}'
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
@@ -44,7 +45,7 @@
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="10dp"
                 android:text="@{collectArticle.niceDate}"
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
@@ -55,15 +56,18 @@
 
             <TextView
                 android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@{Html.fromHtml(collectArticle.title)}"
                 android:textColor="@color/_333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date"
+                app:layout_constraintStart_toStartOf="@+id/tv_author"
                 app:layout_constraintTop_toBottomOf="@+id/tv_author"
                 tools:text="这是一个根据JetpackMvvm框架开发玩Android的一个APP" />
 
@@ -78,7 +82,7 @@
                 android:text="@{Html.fromHtml(collectArticle.chapterName)}"
                 android:textColor="@color/_666666"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_author"
                 app:layout_constraintTop_toBottomOf="@+id/tv_content"
                 tools:text="分类·项目" />
 
@@ -86,6 +90,7 @@
                 android:id="@+id/iv_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:src="@drawable/ic_collect"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_type2"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -21,7 +21,6 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding>(contentView
             LogUtil.d("空间和空间")
             if (it?.errorCode == -1001) { // 需要登录
                 LoginActivity.launch(requireContext())
-                LogUtil.d("空间和空间1")
             }
         }
     }

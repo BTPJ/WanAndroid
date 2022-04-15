@@ -20,4 +20,13 @@ class CollectUrlViewModel : BaseViewModel() {
             handleRequest(DataRepository.getCollectUrlList(), { collectUrlList.value = it.data })
         })
     }
+
+    /** 取消收藏网址*/
+    fun unCollectUrl(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.unCollectUrl(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
 }

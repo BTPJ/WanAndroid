@@ -27,7 +27,15 @@ class CollectUrlFragment :
         mBinding.apply {
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = mAdapter
+                adapter = mAdapter.apply {
+                    addChildClickViewIds(R.id.iv_collect)
+                    setOnItemChildClickListener { _, _, position ->
+                        mViewModel.unCollectUrl(mAdapter.getItem(position).id) {
+                            // 取消收藏成功后,直接删除
+                            mAdapter.removeAt(position)
+                        }
+                    }
+                }
 
                 swipeRefreshLayout.apply {
                     initColors()

@@ -1,41 +1,45 @@
 package com.btpj.wanandroid.data.bean
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 /**
  * 文章实体
  * @author LTP  2022/3/22
  */
+@Parcelize
 data class Article(
-    val apkLink: String,
-    val audit: Int,
-    val author: String,
-    val canEdit: Boolean,
-    val chapterId: Int,
-    val chapterName: String,
+    var apkLink: String,
+    var audit: Int,
+    var author: String,
+    var canEdit: Boolean,
+    var chapterId: Int,
+    var chapterName: String,
     var collect: Boolean,
-    val courseId: Int,
-    val desc: String,
-    val descMd: String,
-    val envelopePic: String,
-    val fresh: Boolean,
-    val host: String,
-    val id: Int,
-    val link: String,
-    val niceDate: String,
-    val niceShareDate: String,
-    val origin: String,
-    val prefix: String,
-    val projectLink: String,
-    val publishTime: Long,
-    val realSuperChapterId: Int,
-    val selfVisible: Int,
-    val shareDate: Long,
-    val shareUser: String,
-    val superChapterId: Int,
-    val superChapterName: String,
-    val tags: List<Tag>,
-    val title: String,
-    val type: Int,
-    val userId: Int,
-    val visible: Int,
-    val zan: Int
-)
+    var courseId: Int,
+    var desc: String,
+    var descMd: String,
+    var envelopePic: String,
+    var fresh: Boolean,
+    var host: String,
+    var id: Int,
+    var link: String,
+    var niceDate: String,
+    var niceShareDate: String,
+    var origin: String,
+    var prefix: String,
+    var projectLink: String,
+    var publishTime: Long,
+    var realSuperChapterId: Int,
+    var selfVisible: Int,
+    var shareDate: Long,
+    var shareUser: String,
+    var superChapterId: Int,
+    var superChapterName: String,
+    var tags: List<Tag>,
+    var title: String,
+    var type: Int,
+    var userId: Int,
+    var visible: Int,
+    var zan: Int
+) : Parcelable

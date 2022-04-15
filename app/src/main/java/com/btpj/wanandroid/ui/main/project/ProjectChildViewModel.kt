@@ -23,18 +23,42 @@ class ProjectChildViewModel : BaseViewModel() {
     /** 请求最新项目分页列表 */
     fun fetchNewProjectPageList(pageNo: Int = 0) {
         launch({
-            DataRepository.getNewProjectPageList(pageNo, PAGE_SIZE).let {
-                handleRequest(it, { articlePageListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getNewProjectPageList(pageNo, PAGE_SIZE),
+                { articlePageListLiveData.value = it.data })
         })
     }
 
     /** 请求项目分页列表 */
     fun fetchProjectPageList(pageNo: Int = 1, categoryId: Int) {
         launch({
-            DataRepository.getProjectPageList(pageNo, PAGE_SIZE, categoryId).let {
-                handleRequest(it, { articlePageListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getProjectPageList(pageNo, PAGE_SIZE, categoryId),
+                { articlePageListLiveData.value = it.data })
+        })
+    }
+
+    /**
+     * 收藏文章
+     * @param id 文章id
+     */
+    fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.collectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
+
+    /**
+     * 取消收藏文章
+     * @param id 文章id
+     */
+    fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.unCollectArticle(id), {
+                successCallBack.invoke()
+            })
         })
     }
 }

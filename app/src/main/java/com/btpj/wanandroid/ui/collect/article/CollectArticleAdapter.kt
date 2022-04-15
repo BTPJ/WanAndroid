@@ -24,7 +24,7 @@ class CollectArticleAdapter :
             collectArticle = item
             executePendingBindings()
 
-            clItem.setOnClickListener { WebActivity.launch(context, item.link) }
+            clItem.setOnClickListener { WebActivity.launch(context, item) }
         }
     }
 }

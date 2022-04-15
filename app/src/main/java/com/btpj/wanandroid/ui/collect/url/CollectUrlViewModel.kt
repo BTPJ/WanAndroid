@@ -2,8 +2,8 @@ package com.btpj.wanandroid.ui.collect.url
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
 
@@ -16,8 +16,8 @@ class CollectUrlViewModel : BaseViewModel() {
 
     /** 请求收藏网址列表 */
     fun fetchCollectUrlList() {
-        request({
-            handleResponse(DataRepository.getCollectUrlList(), { collectUrlList.value = it.data })
+        launch({
+            handleRequest(DataRepository.getCollectUrlList(), { collectUrlList.value = it.data })
         })
     }
 }

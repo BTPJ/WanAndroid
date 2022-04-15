@@ -7,8 +7,8 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -35,8 +35,8 @@ class HomeViewModel : BaseViewModel() {
 
     /** 请求首页轮播图 */
     fun fetchBanners() {
-        request({
-            handleResponse(DataRepository.getBanner(), {
+        launch({
+            handleRequest(DataRepository.getBanner(), {
                 bannerListLiveData.value = it.data
             })
         })
@@ -48,7 +48,7 @@ class HomeViewModel : BaseViewModel() {
      * @param pageNo 页码（0表示请求第1页）
      */
     fun fetchArticlePageList(pageNo: Int = 0) {
-        request({
+        launch({
             if (pageNo == 0) {
                 // 使用async需要单独加作用域,不然没网时会崩溃
                 withContext(Dispatchers.IO) {
@@ -56,9 +56,9 @@ class HomeViewModel : BaseViewModel() {
                     val response1 = async { DataRepository.getArticlePageList(pageNo, PAGE_SIZE) }
                     val response2 = async { DataRepository.getArticleTopList() }
 
-                    handleResponse(response1.await(), {
+                    handleRequest(response1.await(), {
                         val list = response1.await()
-                        handleResponse(response2.await(), {
+                        handleRequest(response2.await(), {
                             (list.data.datas as ArrayList<Article>).addAll(
                                 0,
                                 response2.await().data
@@ -69,7 +69,7 @@ class HomeViewModel : BaseViewModel() {
                     })
                 }
             } else {
-                handleResponse(
+                handleRequest(
                     DataRepository.getArticlePageList(pageNo, PAGE_SIZE),
                     { articlePageListLiveData.value = it.data })
             }
@@ -81,8 +81,8 @@ class HomeViewModel : BaseViewModel() {
      * @param id 文章id
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
-        request({
-            handleResponse(DataRepository.collectArticle(id), {
+        launch({
+            handleRequest(DataRepository.collectArticle(id), {
                 successCallBack.invoke()
             })
         })
@@ -93,8 +93,8 @@ class HomeViewModel : BaseViewModel() {
      * @param id 文章id
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
-        request({
-            handleResponse(DataRepository.unCollectArticle(id), {
+        launch({
+            handleRequest(DataRepository.unCollectArticle(id), {
                 successCallBack.invoke()
             })
         })

@@ -12,7 +12,15 @@ import kotlinx.coroutines.launch
  *
  * @author LTP  2022/3/22
  */
-fun BaseViewModel.request(
+
+/**
+ * 启动协程，封装了viewModelScope.launch
+ *
+ * @param tryBlock try语句运行的函数
+ * @param catchBlock catch语句运行的函数，可以用来做一些网络异常等的处理，默认空实现
+ * @param finallyBlock finally语句运行的函数，可以用来做一些资源回收等，默认空实现
+ */
+fun BaseViewModel.launch(
     tryBlock: suspend CoroutineScope.() -> Unit,
     catchBlock: suspend CoroutineScope.() -> Unit = {},
     finallyBlock: suspend CoroutineScope.() -> Unit = {}
@@ -31,9 +39,13 @@ fun BaseViewModel.request(
 }
 
 /**
- * 处理请求结果
+ * 请求结果处理
+ *
+ * @param response ApiResponse
+ * @param successBlock 服务器请求成功返回成功码的执行回调，默认空实现
+ * @param errorBlock 服务器请求成功返回错误码的执行回调，默认空实现
  */
-suspend fun <T> BaseViewModel.handleResponse(
+suspend fun <T> BaseViewModel.handleRequest(
     response: ApiResponse<T>,
     successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {},
     errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {}

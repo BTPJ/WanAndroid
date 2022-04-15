@@ -3,8 +3,8 @@ package com.btpj.wanandroid.ui.login
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
@@ -34,8 +34,8 @@ class LoginViewModel : BaseViewModel() {
      * @param pwd 密码
      */
     fun login(userName: String, pwd: String, successCall: () -> Any? = {}) {
-        request({
-            handleResponse(DataRepository.login(userName, pwd), successBlock = {
+        launch({
+            handleRequest(DataRepository.login(userName, pwd), successBlock = {
                 UserManager.saveLastUserName(userName)
                 UserManager.saveUser(it.data)
                 App.appViewModel.userEvent.value = it.data

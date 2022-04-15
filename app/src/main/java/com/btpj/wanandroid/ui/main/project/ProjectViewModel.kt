@@ -2,8 +2,8 @@ package com.btpj.wanandroid.ui.main.project
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.ProjectTitle
 
@@ -18,9 +18,9 @@ class ProjectViewModel : BaseViewModel() {
 
     /** 请求项目标题列表 */
     private fun fetchProjectTitleList() {
-        request({
+        launch({
             DataRepository.getProjectTitleList().let {
-                handleResponse(it, { projectTitleListLiveData.value = it.data })
+                handleRequest(it, { projectTitleListLiveData.value = it.data })
             }
         })
     }

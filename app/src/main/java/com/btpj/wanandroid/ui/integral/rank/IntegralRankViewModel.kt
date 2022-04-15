@@ -7,8 +7,8 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Integral
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.lib_base.ext.handleResponse
-import com.btpj.lib_base.ext.request
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 
 class IntegralRankViewModel : BaseViewModel() {
     /** 我的积分信息 */
@@ -27,8 +27,8 @@ class IntegralRankViewModel : BaseViewModel() {
      * @param pageNo 页码
      */
     fun fetchIntegralRankList(pageNo: Int = 1) {
-        request({
-            handleResponse(DataRepository.getIntegralRankPageList(pageNo), {
+        launch({
+            handleRequest(DataRepository.getIntegralRankPageList(pageNo), {
                 integralPageList.value = it.data!!
             })
         })
@@ -36,8 +36,8 @@ class IntegralRankViewModel : BaseViewModel() {
 
     /** 获取个人积分 */
     private fun fetchPoints() {
-        request({
-            handleResponse(DataRepository.getUserIntegral(), {
+        launch({
+            handleRequest(DataRepository.getUserIntegral(), {
                 myIntegral.set(it.data)
             })
         })

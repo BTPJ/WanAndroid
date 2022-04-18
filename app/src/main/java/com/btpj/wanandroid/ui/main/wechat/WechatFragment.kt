@@ -49,7 +49,11 @@ class WechatFragment :
             }
 
             mTabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                tab.text = mAuthorTitleList[position].name
+                tab.apply {
+                    // 处理长按出现toast的问题
+                    view.setOnLongClickListener { true }
+                    text = mAuthorTitleList[position].name
+                }
             }.apply { attach() }
         }
     }

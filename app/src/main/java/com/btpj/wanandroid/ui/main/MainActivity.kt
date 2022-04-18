@@ -3,16 +3,19 @@ package com.btpj.wanandroid.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.ActivityMainBinding
+import com.btpj.wanandroid.ext.clearLongClickToast
 import com.btpj.wanandroid.ui.main.home.HomeFragment
 import com.btpj.wanandroid.ui.main.mine.MineFragment
 import com.btpj.wanandroid.ui.main.project.ProjectFragment
 import com.btpj.wanandroid.ui.main.square.SquareFragment
 import com.btpj.wanandroid.ui.main.wechat.WechatFragment
+import java.util.*
 
 /**
  * 主页
@@ -62,8 +65,21 @@ class MainActivity :
         }
 
         // 导航Tab
-        mBinding.bottomNavigationView.setOnItemSelectedListener {
-            return@setOnItemSelectedListener onNavBarItemSelected(it.itemId)
+        mBinding.bottomNavigationView.apply {
+            // 处理bottomNavigationView的item长按出现Toast的问题
+            clearLongClickToast(
+                mutableListOf(
+                    R.id.menu_home,
+                    R.id.menu_project,
+                    R.id.menu_square,
+                    R.id.menu_wechat,
+                    R.id.menu_mine
+                )
+            )
+
+            setOnItemSelectedListener {
+                return@setOnItemSelectedListener onNavBarItemSelected(it.itemId)
+            }
         }
     }
 

@@ -52,7 +52,11 @@ class ProjectFragment :
             }
 
             mTabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                tab.text = mTitleList[position]
+                tab.apply {
+                    // 处理长按出现toast的问题
+                    view.setOnLongClickListener { true }
+                    text = mTitleList[position]
+                }
             }.apply { attach() }
         }
     }

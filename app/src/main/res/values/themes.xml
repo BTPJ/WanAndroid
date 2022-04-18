@@ -20,12 +20,17 @@
     </style>
 
     <!--Toolbar的Theme的设置，都是针对popup的设置-->
-    <style name="ToolbarPopTheme" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="ToolbarPopTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="actionOverflowMenuStyle">@style/OverflowMenuTheme</item><!--设置弹出位置的主题-->
     </style>
 
     <!--Toolbar弹出popup主题的设置-->
     <style name="OverflowMenuTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item><!--这个属性设置为false，就能使得popup在Toolbar的下面显示-->
+    </style>
+
+    <!--CollapsingToolbarLayout中title主题的设置-->
+    <style name="ExpandedTitleStyle">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

@@ -9,7 +9,6 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
-import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.Article
@@ -50,10 +49,7 @@ class AuthorActivity :
         mAuthorId = intent.getIntExtra(EXTRA_AUTHOR_ID, 0)
 
         mBinding.apply {
-            toolbar.apply {
-                initTitle("他的信息")
-                initClose { onBackPressed() }
-            }
+            toolbar.initClose { onBackPressed() }
 
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
@@ -135,7 +131,17 @@ class AuthorActivity :
         mBinding.swipeRefreshLayout.isRefreshing = true
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         mAdapter.loadMoreModule.isEnableLoadMore = false
-        mViewModel.apply { fetchShareArticlePageList(mAuthorId) }
+        mViewModel.apply {
+            fetchShareArticlePageList(mAuthorId) {
+                mAdapter.setEmptyView(
+                    mBinding.recyclerView.getEmptyView(
+                        "该用户不存在"
+                    )
+                )
+                mBinding.swipeRefreshLayout.isRefreshing = false
+                true
+            }
+        }
     }
 
     /** 下拉加载更多 */
@@ -143,10 +149,5 @@ class AuthorActivity :
         // 上拉加载时禁止下拉刷新
         mBinding.swipeRefreshLayout.isEnabled = false
         mViewModel.fetchShareArticlePageList(mAuthorId, ++mPageNo)
-    }
-
-    override fun requestError(msg: String?) {
-        super.requestError(msg)
-        mBinding.swipeRefreshLayout.isRefreshing = false
     }
 }

@@ -43,19 +43,21 @@ fun BaseViewModel.launch(
  *
  * @param response ApiResponse
  * @param successBlock 服务器请求成功返回成功码的执行回调，默认空实现
- * @param errorBlock 服务器请求成功返回错误码的执行回调，默认空实现
+ * @param errorBlock 服务器请求成功返回错误码的执行回调，默认返回false的空实现，函数返回值true:拦截统一错误处理，false:不拦截
  */
 suspend fun <T> BaseViewModel.handleRequest(
     response: ApiResponse<T>,
     successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {},
-    errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {}
+    errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Boolean = { false }
 ) {
     coroutineScope {
         when (response.errorCode) {
             0 -> successBlock(response) // 服务器返回请求成功码
             else -> { // 服务器返回的其他错误码
-                errorResponse.value = response
-                errorBlock(response)
+                if (!errorBlock(response)) {
+                    // 只有errorBlock返回false不拦截处理时，才去统一提醒错误提示
+                    errorResponse.value = response
+                }
             }
         }
     }

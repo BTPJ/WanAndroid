@@ -18,9 +18,15 @@ class AuthorViewModel : BaseViewModel() {
     val coinInfo = ObservableField<CoinInfo>()
     val articlePageList = MutableLiveData<PageResponse<Article>>()
 
+    val name = object : ObservableField<String>(coinInfo) {
+        override fun get(): String {
+            return coinInfo.get()?.nickname ?: "该用户不存在"
+        }
+    }
+
     val info = object : ObservableField<String>(coinInfo) {
         override fun get(): String {
-            return "积分：${coinInfo.get()?.coinCount}\t\t排名：${coinInfo.get()?.rank}"
+            return "积分：${coinInfo.get()?.coinCount ?: "——"}\t\t排名：${coinInfo.get()?.rank ?: "——"}"
         }
     }
 
@@ -31,16 +37,24 @@ class AuthorViewModel : BaseViewModel() {
      *
      * @param id 作者Id
      * @param pageNo 页码
+     * @param errorCallback 请求失败的回调函数，函数返回值表示是否拦截统一的错误提示
      */
-    fun fetchShareArticlePageList(id: Int, pageNo: Int = 1) {
+    fun fetchShareArticlePageList(
+        id: Int,
+        pageNo: Int = 1,
+        errorCallback: () -> Boolean = { false }
+    ) {
         launch({
-            handleRequest(DataRepository.getOtherAuthorArticlePageList(id, pageNo), {
-                if (pageNo == 1) {
-                    // 反正信息都一样，没必要每次上拉加载都更新一遍
-                    coinInfo.set(it.data.coinInfo)
-                }
-                articlePageList.value = it.data.shareArticles
-            })
+            handleRequest(
+                DataRepository.getOtherAuthorArticlePageList(id, pageNo),
+                {
+                    if (pageNo == 1) {
+                        // 反正信息都一样，没必要每次上拉加载都更新一遍
+                        coinInfo.set(it.data.coinInfo)
+                    }
+                    articlePageList.value = it.data.shareArticles
+                }, { errorCallback.invoke() }
+            )
         })
     }
 

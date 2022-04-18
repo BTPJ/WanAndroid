@@ -31,9 +31,11 @@ fun SwipeRefreshLayout.initColors() {
 /**
  * RecyclerView列表为空时的显示视图
  */
-fun RecyclerView.getEmptyView(): View {
+fun RecyclerView.getEmptyView(message: String = "列表为空"): View {
     return LayoutInflater.from(context)
-        .inflate(R.layout.layout_empty, parent as ViewGroup, false)
+        .inflate(R.layout.layout_empty, parent as ViewGroup, false).apply {
+            findViewById<TextView>(R.id.tv_empty).text = message
+        }
 }
 
 /**

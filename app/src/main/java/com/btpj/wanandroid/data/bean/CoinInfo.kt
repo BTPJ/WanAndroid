@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
  * @author LTP  2022/4/12
  */
 @Parcelize
-data class Integral(
+data class CoinInfo(
     val coinCount: Int, // 当前积分
     val rank: String,
     val userId: Int,

@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.integral.rank
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Integral
+import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.databinding.ListItemIntegralBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
@@ -13,10 +13,10 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
  * @author LTP  2022/3/23
  */
 class IntegralAdapter :
-    BaseQuickAdapter<Integral, BaseDataBindingHolder<ListItemIntegralBinding>>(layoutResId = R.layout.list_item_integral),
+    BaseQuickAdapter<CoinInfo, BaseDataBindingHolder<ListItemIntegralBinding>>(layoutResId = R.layout.list_item_integral),
     LoadMoreModule {
 
-    override fun convert(holder: BaseDataBindingHolder<ListItemIntegralBinding>, item: Integral) {
+    override fun convert(holder: BaseDataBindingHolder<ListItemIntegralBinding>, item: CoinInfo) {
         holder.dataBinding?.apply {
             integral = item
             executePendingBindings()

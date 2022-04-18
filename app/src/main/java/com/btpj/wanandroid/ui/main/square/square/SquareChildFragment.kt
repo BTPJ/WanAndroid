@@ -8,6 +8,7 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 
 /**
@@ -35,20 +36,30 @@ class SquareChildFragment :
                 layoutManager = LinearLayoutManager(context)
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
-                    addChildClickViewIds(R.id.iv_collect)
-                    setOnItemChildClickListener { _, _, position ->
-                        if (mAdapter.getItem(position).collect) {
-                            mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
-                                // 取消收藏成功后,手动更改避免刷新整个列表
-                                mAdapter.getItem(position).collect = false
-                                mAdapter.notifyItemChanged(position)
-                            }
-                        } else {
-                            mViewModel.collectArticle(mAdapter.getItem(position).id) {
-                                // 收藏成功后,手动更改避免刷新整个列表
-                                mAdapter.getItem(position).collect = true
-                                mAdapter.notifyItemChanged(position)
-                            }
+                    addChildClickViewIds(R.id.tv_author, R.id.iv_collect)
+                    setOnItemChildClickListener { _, view, position ->
+                        when (view.id) {
+                            // 查看作者文章列表
+                            R.id.tv_author ->
+                                AuthorActivity.launch(
+                                    requireContext(),
+                                    mAdapter.getItem(position).userId
+                                )
+                            // 收藏与取消收藏
+                            R.id.iv_collect ->
+                                if (mAdapter.getItem(position).collect) {
+                                    mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
+                                        // 取消收藏成功后,手动更改避免刷新整个列表
+                                        mAdapter.getItem(position).collect = false
+                                        mAdapter.notifyItemChanged(position)
+                                    }
+                                } else {
+                                    mViewModel.collectArticle(mAdapter.getItem(position).id) {
+                                        // 收藏成功后,手动更改避免刷新整个列表
+                                        mAdapter.getItem(position).collect = true
+                                        mAdapter.notifyItemChanged(position)
+                                    }
+                                }
                         }
                     }
                 }

@@ -10,8 +10,10 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.data.bean.OtherAuthor
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
+import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
 import com.youth.banner.indicator.CircleIndicator
 
@@ -60,21 +62,31 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
                 adapter = mAdapter.apply {
                     loadMoreModule.setOnLoadMoreListener { loadMoreData() }
                     setHeaderView(headerBannerBinding.root)
-                    addChildClickViewIds(R.id.iv_collect)
-                    setOnItemChildClickListener { _, _, position ->
-                        if (mAdapter.getItem(position).collect) {
-                            mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
-                                // 取消收藏成功后,手动更改避免刷新整个列表
-                                mAdapter.getItem(position).collect = false
-                                // 注意:这里position需要+1,因为0位置属于轮播图HeaderView
-                                mAdapter.notifyItemChanged(position + 1)
-                            }
-                        } else {
-                            mViewModel.collectArticle(mAdapter.getItem(position).id) {
-                                // 收藏成功后,手动更改避免刷新整个列表
-                                mAdapter.getItem(position).collect = true
-                                mAdapter.notifyItemChanged(position + 1)
-                            }
+                    addChildClickViewIds(R.id.tv_author, R.id.iv_collect)
+                    setOnItemChildClickListener { _, view, position ->
+                        when (view.id) {
+                            // 查看作者文章列表
+                            R.id.tv_author ->
+                                AuthorActivity.launch(
+                                    requireContext(),
+                                    mAdapter.getItem(position).userId
+                                )
+                            // 收藏与取消收藏
+                            R.id.iv_collect ->
+                                if (mAdapter.getItem(position).collect) {
+                                    mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
+                                        // 取消收藏成功后,手动更改避免刷新整个列表
+                                        mAdapter.getItem(position).collect = false
+                                        // 注意:这里position需要+1,因为0位置属于轮播图HeaderView
+                                        mAdapter.notifyItemChanged(position + 1)
+                                    }
+                                } else {
+                                    mViewModel.collectArticle(mAdapter.getItem(position).id) {
+                                        // 收藏成功后,手动更改避免刷新整个列表
+                                        mAdapter.getItem(position).collect = true
+                                        mAdapter.notifyItemChanged(position + 1)
+                                    }
+                                }
                         }
                     }
                 }

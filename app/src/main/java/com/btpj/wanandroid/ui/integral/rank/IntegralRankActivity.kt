@@ -12,8 +12,7 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Banner
-import com.btpj.wanandroid.data.bean.CollectUrl
-import com.btpj.wanandroid.data.bean.Integral
+import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.databinding.ActivityIntegralRankBinding
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordActivity
 import com.btpj.wanandroid.ui.web.WebActivity
@@ -114,7 +113,7 @@ class IntegralRankActivity :
      *
      * @param pageResponse
      */
-    private fun handleData(pageResponse: PageResponse<Integral>) {
+    private fun handleData(pageResponse: PageResponse<CoinInfo>) {
         mPageNo = pageResponse.curPage
         val list = pageResponse.datas
         mAdapter.apply {

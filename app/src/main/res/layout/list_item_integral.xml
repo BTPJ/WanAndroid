@@ -7,7 +7,7 @@
 
         <variable
             name="integral"
-            type="com.btpj.wanandroid.data.bean.Integral" />
+            type="com.btpj.wanandroid.data.bean.CoinInfo" />
     </data>
 
     <androidx.cardview.widget.CardView

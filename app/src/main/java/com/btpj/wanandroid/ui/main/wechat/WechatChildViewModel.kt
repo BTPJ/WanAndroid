@@ -23,9 +23,33 @@ class WechatChildViewModel : BaseViewModel() {
     /** 请求公众号作者文章分页列表 */
     fun fetchAuthorArticlePageList(authorId: Int, pageNo: Int = 1) {
         launch({
-            DataRepository.getAuthorArticlePageList(authorId, pageNo, PAGE_SIZE).let {
-                handleRequest(it, { articlePageListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getAuthorArticlePageList(authorId, pageNo, PAGE_SIZE),
+                { articlePageListLiveData.value = it.data })
+        })
+    }
+
+    /**
+     * 收藏文章
+     * @param id 文章id
+     */
+    fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.collectArticle(id), {
+                successCallBack.invoke()
+            })
+        })
+    }
+
+    /**
+     * 取消收藏文章
+     * @param id 文章id
+     */
+    fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
+        launch({
+            handleRequest(DataRepository.unCollectArticle(id), {
+                successCallBack.invoke()
+            })
         })
     }
 }

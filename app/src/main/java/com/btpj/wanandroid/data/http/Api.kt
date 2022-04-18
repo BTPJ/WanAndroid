@@ -95,11 +95,11 @@ interface Api {
 
     /** 获取个人积分 */
     @GET("lg/coin/userinfo/json")
-    suspend fun getUserIntegral(): ApiResponse<Integral>
+    suspend fun getUserIntegral(): ApiResponse<CoinInfo>
 
     /** 获取积分排行列表分页 */
     @GET("coin/rank/{pageNo}/json")
-    suspend fun getIntegralRankPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Integral>>
+    suspend fun getIntegralRankPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<CoinInfo>>
 
     /** 获取积分历史 */
     @GET("lg/coin/list/{pageNo}/json")
@@ -139,4 +139,11 @@ interface Api {
     /** 取消收藏站内文章 */
     @POST("lg/collect/deletetool/json")
     suspend fun unCollectUrl(@Query("id") id: Int): ApiResponse<Any?>
+
+    /** 获取其他作者分享的文章分页列表 */
+    @GET("user/{id}/share_articles/{page}/json")
+    suspend fun getOtherAuthorArticlePageList(
+        @Path("id") id: Int,
+        @Path("page") page: Int
+    ): ApiResponse<OtherAuthor>
 }

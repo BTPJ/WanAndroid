@@ -8,6 +8,6 @@ import com.btpj.lib_base.data.bean.PageResponse
  * @author LTP  2022/4/13
  */
 data class Share(
-    var coinInfo: Integral,
+    var coinInfo: CoinInfo,
     var shareArticles: PageResponse<Article>
 )

@@ -143,4 +143,15 @@ object DataRepository : BaseRepository(), Api {
     ): ApiResponse<OtherAuthor> {
         return apiCall { service.getOtherAuthorArticlePageList(id, page) }
     }
+
+    override suspend fun getHotSearchList(): ApiResponse<List<HotSearch>> {
+        return apiCall { service.getHotSearchList() }
+    }
+
+    override suspend fun getSearchDataByKey(
+        pageNo: Int,
+        searchKey: String
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getSearchDataByKey(pageNo, searchKey) }
+    }
 }

@@ -10,6 +10,9 @@ import com.tencent.mmkv.MMKV
  */
 object UserManager {
 
+    /** MMKV独有的mmapId */
+    private const val MMKV_MAP_ID = "user"
+
     /** 保存登录成功的用户的Json串的KEY */
     private const val KEY_USER = "user_data"
 
@@ -20,7 +23,7 @@ object UserManager {
     /** 保存登录成功的用户Token */
     private const val KEY_TOKEN = "token"
 
-    private val mmkv by lazy { MMKV.defaultMMKV() }
+    private val mmkv by lazy { MMKV.mmkvWithID(MMKV_MAP_ID) }
 
     /**
      * 存储用户到本地

@@ -16,6 +16,14 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".ui.search.result.SearchResultActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.author.AuthorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

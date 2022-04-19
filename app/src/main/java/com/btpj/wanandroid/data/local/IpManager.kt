@@ -8,7 +8,10 @@ import com.tencent.mmkv.MMKV
  *
  * @author LTP 2022/4/8
  */
-object IPManager {
+object IpManager {
+
+    /** MMKV独有的mmapId */
+    private const val MMKV_MAP_ID = "ip"
 
     /** 常用的IP */
     private const val DEFAULT_IP_ADDRESS_REMOTE = "chengwenking.yicp.io:53470"     // 外网
@@ -19,7 +22,7 @@ object IPManager {
     private const val KEY_IP_SET = "data_ip_set"
     private const val KEY_DEFAULT_IP_AND_PORT = "data_default_ip_and_port"
 
-    private val mmkv by lazy { MMKV.defaultMMKV() }
+    private val mmkv by lazy { MMKV.mmkvWithID(MMKV_MAP_ID) }
 
     /**
      * 保存默认IP

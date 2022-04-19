@@ -146,4 +146,15 @@ interface Api {
         @Path("id") id: Int,
         @Path("page") page: Int
     ): ApiResponse<OtherAuthor>
+
+    /** 获取热门搜索数据 */
+    @GET("hotkey/json")
+    suspend fun getHotSearchList(): ApiResponse<List<HotSearch>>
+
+    /** 根据关键词搜索数据 */
+    @POST("article/query/{pageNo}/json")
+    suspend fun getSearchDataByKey(
+        @Path("pageNo") pageNo: Int,
+        @Query("k") searchKey: String
+    ): ApiResponse<PageResponse<Article>>
 }

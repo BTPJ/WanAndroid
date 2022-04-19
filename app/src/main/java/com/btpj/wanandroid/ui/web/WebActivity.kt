@@ -95,9 +95,11 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        setSupportActionBar(mBinding.toolbar.apply { initTitle("加载中...") })
-        // 返回点击事件必须在setSupportActionBar方法调用之后
-        mBinding.toolbar.initClose { onBackPressed() }
+        mBinding.toolbar.apply {
+            setSupportActionBar(this)
+            initTitle("加载中...")
+            initClose { onBackPressed() }
+        }
 
         intent.apply {
             mArticle = getParcelableExtra(EXTRA_ARTICLE)

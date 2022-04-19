@@ -1,80 +1,71 @@
-package com.btpj.wanandroid.ui.main.home
+package com.btpj.wanandroid.ui.search.result
 
 import android.annotation.SuppressLint
-import androidx.databinding.DataBindingUtil
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
+import com.btpj.lib_base.ext.setTitle
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Banner
-import com.btpj.wanandroid.data.bean.OtherAuthor
-import com.btpj.wanandroid.databinding.FragmentHomeBinding
-import com.btpj.wanandroid.databinding.HeaderBannerBinding
+import com.btpj.wanandroid.databinding.ActivitySearchResultBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
-import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
+import com.btpj.wanandroid.ui.main.home.ArticleAdapter
+import com.btpj.wanandroid.ui.main.home.HomeViewModel
 import com.btpj.wanandroid.ui.search.SearchActivity
-import com.youth.banner.indicator.CircleIndicator
 
 /**
- * 首页Tab
+ * 搜索结果列表
  *
- * @author LTP 2022/3/10
+ * @author LTP 2022/4/19
  */
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
+class SearchResultActivity :
+    BaseActivity<SearchResultViewModel, ActivitySearchResultBinding>(R.layout.activity_search_result) {
 
-    /** 列表总数 */
-    private var mTotalCount: Int = 0
+    private lateinit var mSearchKeyStr: String
 
-    /** 页数 */
-    private var mPageNo: Int = 0
-
-    /** 当前列表的数量 */
-    private var mCurrentCount: Int = 0
-
-    private val mBannerList = ArrayList<Banner>()
-    private val mBannerAdapter = MyBannerAdapter(mBannerList)
-
+    private var mPageNo = 0
     private val mAdapter by lazy { ArticleAdapter() }
 
     companion object {
-        fun newInstance() = HomeFragment()
+
+        private const val EXTRA_SEARCH_KEY = "search_key"
+
+        /**
+         * 页面启动
+         * @param context Context
+         * @param searchKeyStr 搜索关键词
+         */
+        fun launch(context: Context, searchKeyStr: String) {
+            context.startActivity(Intent(context, SearchResultActivity::class.java).apply {
+                putExtra(EXTRA_SEARCH_KEY, searchKeyStr)
+            })
+        }
     }
 
-    @SuppressLint("InflateParams")
-    override fun initView() {
-        val headerBannerBinding = DataBindingUtil.inflate<HeaderBannerBinding>(
-            layoutInflater,
-            R.layout.header_banner,
-            null,
-            false
-        ).apply {
-            banner.apply {
-                setAdapter(mBannerAdapter)
-                setIndicator(CircleIndicator(context))
-            }
-        }
+    override fun initView(savedInstanceState: Bundle?) {
+        mSearchKeyStr = intent.getStringExtra(EXTRA_SEARCH_KEY) ?: ""
 
         mBinding.apply {
-            titleLayout.setRightView(R.drawable.ic_search) {
-                SearchActivity.launch(requireContext())
-            }
+            titleLayout.setTitleText(mSearchKeyStr)
 
             includeList.apply {
                 recyclerView.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter = mAdapter.apply {
                         loadMoreModule.setOnLoadMoreListener { loadMoreData() }
-                        setHeaderView(headerBannerBinding.root)
                         addChildClickViewIds(R.id.tv_author, R.id.iv_collect)
                         setOnItemChildClickListener { _, view, position ->
                             when (view.id) {
                                 // 查看作者文章列表
                                 R.id.tv_author ->
                                     AuthorActivity.launch(
-                                        requireContext(),
+                                        this@SearchResultActivity,
                                         mAdapter.getItem(position).userId
                                     )
                                 // 收藏与取消收藏
@@ -83,14 +74,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
                                         mViewModel.unCollectArticle(mAdapter.getItem(position).id) {
                                             // 取消收藏成功后,手动更改避免刷新整个列表
                                             mAdapter.getItem(position).collect = false
-                                            // 注意:这里position需要+1,因为0位置属于轮播图HeaderView
-                                            mAdapter.notifyItemChanged(position + 1)
+                                            mAdapter.notifyItemChanged(position)
                                         }
                                     } else {
                                         mViewModel.collectArticle(mAdapter.getItem(position).id) {
                                             // 收藏成功后,手动更改避免刷新整个列表
                                             mAdapter.getItem(position).collect = true
-                                            mAdapter.notifyItemChanged(position + 1)
+                                            mAdapter.notifyItemChanged(position)
                                         }
                                     }
                             }
@@ -112,17 +102,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     override fun createObserve() {
         super.createObserve()
         mViewModel.apply {
-            bannerListLiveData.observe(viewLifecycleOwner) {
-                it?.let {
-                    mBannerList.apply {
-                        clear()
-                        addAll(it)
-                    }
-                }
-                mBannerAdapter.notifyDataSetChanged()
-            }
-
-            articlePageListLiveData.observe(viewLifecycleOwner) {
+            articlePageList.observe(this@SearchResultActivity) {
                 it?.let { handleArticleData(it) }
             }
         }
@@ -135,7 +115,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
      */
     private fun handleArticleData(pageResponse: PageResponse<Article>) {
         mPageNo = pageResponse.curPage
-        mTotalCount = pageResponse.pageCount
         val list = pageResponse.datas
         mAdapter.apply {
             if (mPageNo == 1) {
@@ -148,12 +127,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
                 // 不是第一页，则用add
                 addData(list)
             }
-            mCurrentCount = data.size
             loadMoreModule.apply {
                 isEnableLoadMore = true
-                if (list.size < PAGE_SIZE || mCurrentCount == mTotalCount) {
-                    // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
-                    // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
+                if (pageResponse.over) {
                     loadMoreEnd()
                 } else {
                     loadMoreComplete()
@@ -170,21 +146,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         mBinding.includeList.swipeRefreshLayout.isRefreshing = true
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         mAdapter.loadMoreModule.isEnableLoadMore = false
-        mViewModel.apply {
-            fetchBanners()
-            fetchArticlePageList()
-        }
+        mViewModel.fetchSearchResultPageList(mSearchKeyStr)
     }
 
     /** 下拉加载更多 */
     private fun loadMoreData() {
         // 上拉加载时禁止下拉刷新
         mBinding.includeList.swipeRefreshLayout.isEnabled = false
-        mViewModel.fetchArticlePageList(++mPageNo)
-    }
-
-    override fun requestError(msg: String?) {
-        super.requestError(msg)
-        mBinding.includeList.swipeRefreshLayout.isRefreshing = false
+        mViewModel.fetchSearchResultPageList(mSearchKeyStr, ++mPageNo)
     }
 }

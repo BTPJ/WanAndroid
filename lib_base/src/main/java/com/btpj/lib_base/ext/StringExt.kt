@@ -3,6 +3,7 @@ package com.btpj.lib_base.ext
 import android.annotation.SuppressLint
 import android.text.Html
 import android.text.Spanned
+import com.google.gson.Gson
 
 /**
  * String扩展类
@@ -14,4 +15,9 @@ fun String.toHtml(@SuppressLint("InlinedApi") flag: Int = Html.FROM_HTML_MODE_LE
     } else {
         Html.fromHtml(this)
     }
+}
+
+/** 将对象转为JSON字符串 */
+fun Any?.toJson(): String {
+    return Gson().toJson(this)
 }

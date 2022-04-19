@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:contentScrim="@color/purple_500"
+                android:background="@color/purple_500"
                 app:expandedTitleGravity="start"
                 app:expandedTitleMarginStart="100dp"
                 app:expandedTitleTextAppearance="@style/ExpandedTitleStyle"

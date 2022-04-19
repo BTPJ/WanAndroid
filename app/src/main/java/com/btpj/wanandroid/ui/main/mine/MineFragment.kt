@@ -57,7 +57,10 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             // 开源网站
             tvWeb.setOnClickListener {
-                WebActivity.launch(requireContext(), Banner(title = "玩Android网站", url = "https://www.wanandroid.com/"))
+                WebActivity.launch(
+                    requireContext(),
+                    Banner(title = "玩Android网站", url = "https://www.wanandroid.com/")
+                )
             }
 
             // 设置
@@ -70,8 +73,11 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
     /** 下拉刷新 */
     private fun onRefresh() {
         if (UserManager.isLogin()) {
+            mBinding.swipeRefreshLayout.isEnabled = true
             mBinding.swipeRefreshLayout.isRefreshing = true
             mViewModel.fetchPoints()
+        } else {
+            mBinding.swipeRefreshLayout.isEnabled = false
         }
     }
 
@@ -82,9 +88,8 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
             mViewModel.user.set(it)
             if (it == null) {
                 mViewModel.integral.value = null
-            } else {
-                onRefresh()
             }
+            onRefresh()
         }
 
         mViewModel.integral.observe(this) {

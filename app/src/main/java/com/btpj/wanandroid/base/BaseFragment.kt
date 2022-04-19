@@ -18,7 +18,6 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding>(contentView
     override fun createObserve() {
         super.createObserve()
         mViewModel.errorResponse.observe(viewLifecycleOwner) {
-            LogUtil.d("空间和空间")
             if (it?.errorCode == -1001) { // 需要登录
                 LoginActivity.launch(requireContext())
             }

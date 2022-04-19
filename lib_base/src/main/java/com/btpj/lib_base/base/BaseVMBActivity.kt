@@ -34,6 +34,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         StatusBarUtil.setImmersionStatus(this)
         initViewModel()
         initDataBinding()
+        createObserve()
         initView(savedInstanceState)
     }
 
@@ -45,7 +46,6 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
             (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>
         mViewModel = ViewModelProvider(this).get(type)
         mViewModel.start()
-        createObserve()
     }
 
     /** DataBinding初始化 */

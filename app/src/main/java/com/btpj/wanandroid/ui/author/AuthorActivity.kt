@@ -134,9 +134,7 @@ class AuthorActivity :
         mViewModel.apply {
             fetchShareArticlePageList(mAuthorId) {
                 mAdapter.setEmptyView(
-                    mBinding.recyclerView.getEmptyView(
-                        "该用户不存在"
-                    )
+                    mBinding.recyclerView.getEmptyView("该用户不存在")
                 )
                 mBinding.swipeRefreshLayout.isRefreshing = false
                 true

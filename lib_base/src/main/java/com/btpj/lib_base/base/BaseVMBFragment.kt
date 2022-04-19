@@ -43,8 +43,8 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         initView()
-        createObserve()
         setupDataBinding()
+        createObserve()
     }
 
     /** ViewModel初始化 */
@@ -55,7 +55,6 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
             (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>
         mViewModel = ViewModelProvider(this).get(type)
         mViewModel.start()
-        createObserve()
     }
 
     /** DataBinding相关设置 */

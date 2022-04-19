@@ -20,7 +20,7 @@ class AuthorViewModel : BaseViewModel() {
 
     val name = object : ObservableField<String>(coinInfo) {
         override fun get(): String {
-            return coinInfo.get()?.nickname ?: "该用户不存在"
+            return coinInfo.get()?.nickname ?: "——"
         }
     }
 

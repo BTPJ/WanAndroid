@@ -13,7 +13,7 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity,UnusedAttribute">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.search.result.SearchResultActivity"
@@ -60,8 +60,9 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
+            android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

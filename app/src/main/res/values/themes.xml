@@ -33,4 +33,17 @@
     <style name="ExpandedTitleStyle">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <!-- 启动图配置 -->
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- 启动画面的背景，默认使用 windowBackground -->
+        <item name="windowSplashScreenBackground">@color/purple_500</item>
+        <!-- 指定 icon，支持静态 drawable 或动画 vector drawable -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <!-- 动画 icon 时长，上限 1000 ms -->
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+    </style>
 </resources>

@@ -29,7 +29,8 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
         }
-        // 使用SplashScreen后这个可以不要
+
+        // 使用SplashScreen后下面也可以不要
         setContentView(R.layout.activity_splash)
 
         lifecycleScope.launch {

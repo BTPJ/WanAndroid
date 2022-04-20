@@ -1,16 +1,18 @@
 package com.btpj.lib_base.base
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
 import com.btpj.lib_base.R
-import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.ToastUtil
@@ -27,6 +29,10 @@ import java.net.UnknownHostException
 abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private val contentViewResId: Int) :
     Fragment() {
 
+    /** 是否第一次加载 */
+    private var mIsFirstLoading = true
+    private val mHandler = Handler(Looper.myLooper()!!)
+
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: B
 
@@ -41,6 +47,7 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mIsFirstLoading = true
         initViewModel()
         initView()
         setupDataBinding()
@@ -68,6 +75,20 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
 
     /** View相关初始化 */
     abstract fun initView()
+
+    override fun onResume() {
+        super.onResume()
+        if (lifecycle.currentState == Lifecycle.State.STARTED && mIsFirstLoading) {
+            // 延迟加载300ms 防止 切换动画还没执行完毕时数据就已经加载好了，这时页面会有渲染卡顿
+            mHandler.postDelayed({
+                lazyLoadData()
+                mIsFirstLoading = false
+            }, 300)
+        }
+    }
+
+    /** 数据懒加载 */
+    open fun lazyLoadData() {}
 
     /** 提供编写LiveData监听逻辑的方法 */
     open fun createObserve() {     // 全局服务器请求错误监听
@@ -103,5 +124,10 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     /** 提供一个请求错误的方法,用于像关闭加载框之类的 */
     open fun requestError(msg: String? = null) {
         hideLoading()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHandler.removeCallbacksAndMessages(null)
     }
 }

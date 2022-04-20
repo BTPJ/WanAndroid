@@ -88,7 +88,10 @@ class ProjectChildFragment :
                 }
             }
         }
+    }
 
+    override fun lazyLoadData() {
+        super.lazyLoadData()
         onRefresh()
     }
 

@@ -70,6 +70,8 @@ class WechatFragment :
                 }
 
                 mFragmentStateAdapter.notifyDataSetChanged()
+                // 这里的方案是直接缓存所有子Fragment然后让子Fragment懒加载数据体验更好
+                mBinding.viewPager2.offscreenPageLimit = mAuthorTitleList.size
             }
         }
     }

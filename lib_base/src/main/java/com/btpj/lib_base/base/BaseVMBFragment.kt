@@ -61,7 +61,7 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     private fun setupDataBinding() {
         mBinding.apply {
             // 需绑定lifecycleOwner到Fragment,xml绑定的数据才会随着liveData数据源的改变而改变
-            lifecycleOwner = this@BaseVMBFragment
+            lifecycleOwner = viewLifecycleOwner
             setVariable(BR.viewModel, mViewModel)
         }
     }

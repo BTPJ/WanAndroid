@@ -58,7 +58,7 @@ dependencies {
     api rootProject.ext.dependencies.mmkv
 
     // 图片
-    api rootProject.ext.dependencies.coil
+    api rootProject.ext.dependencies.glide
 
     // 网络相关
     api rootProject.ext.dependencies.retrofit

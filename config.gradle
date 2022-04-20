@@ -23,6 +23,7 @@ ext {
             activityKtx                  : "androidx.activity:activity-ktx:1.2.3",
 
             //---------------UI相关-------------
+            splashscreen                 : "androidx.core:core-splashscreen:1.0.0-beta01",
             swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
             recyclerview                 : 'androidx.recyclerview:recyclerview:1.2.1',
             // google官方的flex布局
@@ -51,7 +52,6 @@ ext {
             PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
             //---------------图片相关------------------
-            // 适合kotlin的图片库
-            coil                         : 'io.coil-kt:coil:2.0.0-rc02'
+            glide                         : 'com.github.bumptech.glide:glide:4.11.0'
     ]
 }

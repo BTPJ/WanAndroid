@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.main.home
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.btpj.lib_base.ext.load
 import com.btpj.wanandroid.data.bean.Banner
 import com.youth.banner.adapter.BannerAdapter
 

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -16,6 +18,33 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.btpj.lib_base.R
 import com.btpj.lib_base.utils.ScreenUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
+
+/**
+ * ImageView利用Glide加载图片
+ * @param url 图片url（可远程可本地）
+ */
+fun ImageView.load(url: String) {
+    Glide.with(context).load(url)
+        .placeholder(R.drawable.ic_default_img)
+        .transition(DrawableTransitionOptions.withCrossFade(500))
+        .into(this)
+}
+
+/**
+ * ImageView利用Glide加载圆形图片
+ * @param url 图片url（可远程可本地）
+ */
+fun ImageView.loadCircle(url: String) {
+    Glide.with(context).load(url)
+        .placeholder(R.drawable.ic_default_img)
+        .apply(RequestOptions.bitmapTransform(CircleCrop()))
+        .transition(DrawableTransitionOptions.withCrossFade(500))
+        .into(this)
+}
 
 /**
  * SwipeRefreshLayout设置加载主题颜色

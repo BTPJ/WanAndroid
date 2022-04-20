@@ -2,9 +2,11 @@ package com.btpj.lib_base.ext
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.btpj.lib_base.widgets.TitleLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 
 /**
  * DataBinding的自定义属性
@@ -12,7 +14,6 @@ import com.btpj.lib_base.widgets.TitleLayout
  */
 @BindingAdapter("imageUrl")
 fun ImageView.setImageUrl(url: String) {
-    // 利用coil装载图片
     load(url)
 }
 
@@ -22,8 +23,7 @@ fun ImageView.setImageUrl(url: String) {
  */
 @BindingAdapter("circleImageUrl")
 fun ImageView.setCircleImageUrl(url: String) {
-    // 利用coil装载图片
-    load(url) { transformations(CircleCropTransformation()) }
+    loadCircle(url)
 }
 
 /**

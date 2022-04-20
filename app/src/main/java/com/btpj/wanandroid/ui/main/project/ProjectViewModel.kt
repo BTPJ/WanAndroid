@@ -19,9 +19,9 @@ class ProjectViewModel : BaseViewModel() {
     /** 请求项目标题列表 */
     private fun fetchProjectTitleList() {
         launch({
-            DataRepository.getProjectTitleList().let {
-                handleRequest(it, { projectTitleListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getProjectTitleList(),
+                { projectTitleListLiveData.value = it.data })
         })
     }
 }

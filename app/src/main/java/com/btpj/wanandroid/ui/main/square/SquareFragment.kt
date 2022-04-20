@@ -78,6 +78,7 @@ class SquareFragment :
 
             viewPager2.apply {
                 adapter = mFragmentStateAdapter
+                offscreenPageLimit = mFragmentList.size
                 registerOnPageChangeCallback(mPageChangeCallback)
             }
 

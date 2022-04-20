@@ -1,8 +1,6 @@
 package com.btpj.lib_base.base
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +29,6 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
 
     /** 是否第一次加载 */
     private var mIsFirstLoading = true
-    private val mHandler = Handler(Looper.myLooper()!!)
 
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: B
@@ -79,11 +76,8 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     override fun onResume() {
         super.onResume()
         if (lifecycle.currentState == Lifecycle.State.STARTED && mIsFirstLoading) {
-            // 延迟加载300ms 防止 切换动画还没执行完毕时数据就已经加载好了，这时页面会有渲染卡顿
-            mHandler.postDelayed({
-                lazyLoadData()
-                mIsFirstLoading = false
-            }, 300)
+            lazyLoadData()
+            mIsFirstLoading = false
         }
     }
 
@@ -124,10 +118,5 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
     /** 提供一个请求错误的方法,用于像关闭加载框之类的 */
     open fun requestError(msg: String? = null) {
         hideLoading()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mHandler.removeCallbacksAndMessages(null)
     }
 }

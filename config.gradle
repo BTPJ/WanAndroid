@@ -1,8 +1,8 @@
 ext {
     android = [
-            compileSdk : 32,
+            compileSdk : 31,
             minSdk     : 21,
-            targetSdk  : 32,
+            targetSdk  : 31,
             versionCode: 1,
             versionName: "1.0"
     ]
@@ -23,7 +23,6 @@ ext {
             activityKtx                  : "androidx.activity:activity-ktx:1.2.3",
 
             //---------------UI相关-------------
-            splashscreen                 : "androidx.core:core-splashscreen:1.0.0-beta01",
             swiperefreshlayout           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
             recyclerview                 : 'androidx.recyclerview:recyclerview:1.2.1',
             // google官方的flex布局

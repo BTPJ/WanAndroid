@@ -44,4 +44,5 @@
     <string name="clear">清空</string>
     <string name="search">搜索</string>
     <string name="input_search_key_to_search">输入关键字搜索</string>
+    <string name="enter_immediately">立即进入</string>
 </resources>

@@ -10,7 +10,6 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
-import com.btpj.wanandroid.data.bean.OtherAuthor
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
@@ -53,7 +52,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         ).apply {
             banner.apply {
                 setAdapter(mBannerAdapter)
-                setIndicator(CircleIndicator(context))
+                indicator = CircleIndicator(context)
+                addBannerLifecycleObserver(viewLifecycleOwner)
             }
         }
 

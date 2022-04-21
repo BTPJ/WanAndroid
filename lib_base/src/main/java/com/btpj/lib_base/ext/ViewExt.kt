@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.annotation.Nullable
+import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
@@ -35,11 +38,34 @@ fun ImageView.load(url: String) {
 }
 
 /**
+ * ImageView利用Glide加载图片
+ * @param resourceId 本地图片资源Id
+ */
+fun ImageView.load(@DrawableRes resourceId: Int) {
+    Glide.with(context).load(resourceId)
+        .placeholder(R.drawable.ic_default_img)
+        .transition(DrawableTransitionOptions.withCrossFade(500))
+        .into(this)
+}
+
+/**
  * ImageView利用Glide加载圆形图片
  * @param url 图片url（可远程可本地）
  */
 fun ImageView.loadCircle(url: String) {
     Glide.with(context).load(url)
+        .placeholder(R.drawable.ic_default_img)
+        .apply(RequestOptions.bitmapTransform(CircleCrop()))
+        .transition(DrawableTransitionOptions.withCrossFade(500))
+        .into(this)
+}
+
+/**
+ * ImageView利用Glide加载圆形图片
+ * @param resourceId 本地图片资源Id
+ */
+fun ImageView.loadCircle(@DrawableRes resourceId: Int) {
+    Glide.with(context).load(resourceId)
         .placeholder(R.drawable.ic_default_img)
         .apply(RequestOptions.bitmapTransform(CircleCrop()))
         .transition(DrawableTransitionOptions.withCrossFade(500))

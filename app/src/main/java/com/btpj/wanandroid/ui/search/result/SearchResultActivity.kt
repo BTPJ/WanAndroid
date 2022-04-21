@@ -3,21 +3,17 @@ package com.btpj.wanandroid.ui.search.result
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
-import com.btpj.lib_base.ext.setTitle
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.databinding.ActivitySearchResultBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
-import com.btpj.wanandroid.ui.main.home.HomeViewModel
-import com.btpj.wanandroid.ui.search.SearchActivity
 
 /**
  * 搜索结果列表

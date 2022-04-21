@@ -14,6 +14,7 @@ import com.tencent.mmkv.MMKV
 object CacheManager {
 
     private const val KEY_SEARCH_HISTORY = "search_history"
+    private const val KEY_FIRST_USE = "first_use"
 
     private val mmkv by lazy { MMKV.defaultMMKV() }
 
@@ -29,5 +30,15 @@ object CacheManager {
     /** 存储搜索历史数据 */
     fun saveSearchHistoryData(searchHistoryDeque: ArrayDeque<String>) {
         mmkv.encode(KEY_SEARCH_HISTORY, searchHistoryDeque.toJson())
+    }
+
+    /** 存储是否首次使用APP */
+    fun saveFirstUse(isFirstUse: Boolean): Boolean {
+        return mmkv.encode(KEY_FIRST_USE, isFirstUse)
+    }
+
+    /** 是否首次使用APP */
+    fun isFirstUse(): Boolean {
+        return mmkv.decodeBool(KEY_FIRST_USE, true)
     }
 }

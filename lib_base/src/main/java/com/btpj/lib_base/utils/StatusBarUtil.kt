@@ -32,6 +32,16 @@ object StatusBarUtil {
     }
 
     /**
+     * 设置无状态栏
+     *
+     * @param activity 要设置的Activity
+     */
+    fun setNoStatus(activity: Activity) {
+        // 透明状态栏
+        activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    }
+
+    /**
      * 设置状态栏颜色
      *
      * @param activity       需要设置的activity

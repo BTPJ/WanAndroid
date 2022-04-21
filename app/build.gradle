@@ -42,5 +42,4 @@ dependencies {
     implementation rootProject.ext.dependencies.banner
     implementation rootProject.ext.dependencies.agentWeb
     implementation rootProject.ext.dependencies.flexbox
-    implementation rootProject.ext.dependencies.splashscreen
 }

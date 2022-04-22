@@ -12,13 +12,22 @@ import retrofit2.http.*
  */
 interface Api {
 
-    /** 获取首页banner数据 */
+    /** 登录 */
     @FormUrlEncoded
     @POST("user/login")
     suspend fun login(
         @Field("username") username: String,
         @Field("password") pwd: String
     ): ApiResponse<User>
+
+    /** 注册 */
+    @FormUrlEncoded
+    @POST("user/register")
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") pwd: String,
+        @Field("repassword") pwdSure: String
+    ): ApiResponse<Any?>
 
     /** 获取首页banner数据 */
     @GET("banner/json")

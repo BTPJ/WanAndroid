@@ -22,6 +22,14 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.login(username, pwd) }
     }
 
+    override suspend fun register(
+        username: String,
+        pwd: String,
+        pwdSure: String
+    ): ApiResponse<Any?> {
+        return apiCall { service.register(username, pwd, pwdSure) }
+    }
+
     override suspend fun getBanner(): ApiResponse<List<Banner>> {
         return apiCall { service.getBanner() }
     }

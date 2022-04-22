@@ -20,6 +20,7 @@
     <string name="login">登录</string>
     <string name="account">账号</string>
     <string name="password">密码</string>
+    <string name="password_sure">确认密码</string>
     <string name="user_name">用户名</string>
     <string name="to_register">去注册</string>
     <string name="basic_setting">基本设置</string>
@@ -45,4 +46,5 @@
     <string name="search">搜索</string>
     <string name="input_search_key_to_search">输入关键字搜索</string>
     <string name="enter_immediately">立即进入</string>
+    <string name="register">注册</string>
 </resources>

@@ -7,21 +7,21 @@
 
         <variable
             name="viewModel"
-            type="com.btpj.wanandroid.ui.login.LoginViewModel" />
+            type="com.btpj.wanandroid.ui.login.register.RegisterViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.login.LoginActivity">
+        tools:context=".ui.login.register.RegisterActivity">
 
         <com.btpj.lib_base.widgets.TitleLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleText="@string/login" />
+            app:titleText="@string/register" />
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -82,8 +82,33 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_passwordSure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:boxBackgroundColor="@color/_f5f5f5"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_passwordSure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:cursorVisible="true"
+                android:hint="@string/password_sure"
+                android:inputType="textPassword"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:text="@={viewModel.userPwdSure}"
+                android:textColor="@color/_333333"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -93,22 +118,8 @@
             android:backgroundTint="@color/purple_500"
             android:enabled="@{viewModel.loginBtnEnable}"
             android:padding="10dp"
-            android:text="@string/login"
+            android:text="@string/register"
             android:textColor="@color/_ffffff"
             android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="?attr/selectableItemBackground"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:text="@string/to_register"
-            android:textColor="@color/purple_500"
-            android:textSize="15sp" />
     </LinearLayout>
 </layout>

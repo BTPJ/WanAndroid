@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.btpj.wanandroid.ui.ip.ChangeIpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".ui.ip.ChangeIpActivity">
+
+        <com.btpj.lib_base.widgets.TitleLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:titleText="@string/changeIp" />
+
+        <EditText
+            android:id="@+id/et_ipAndPort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/please_input_ip_and_port"
+            android:inputType="text"
+            android:singleLine="true"
+            android:text="@={viewModel.ipAndPort}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_sure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLayout"
+            tools:ignore="Autofill" />
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:alpha="@{viewModel.ipAndPort.isEmpty()?0.5f:1f}"
+            android:backgroundTint="@color/purple_500"
+            android:enabled="@{!viewModel.ipAndPort.isEmpty()}"
+            android:text="@string/sure"
+            android:textColor="@color/_ffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_ipAndPort"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_ipAndPort" />
+
+        <TextView
+            android:id="@+id/tv_ipHistory"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:background="@color/_f0f0f0"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="@string/history_ip_and_port"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_ipAndPort" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_ipHistory" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

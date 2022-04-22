@@ -47,4 +47,8 @@
     <string name="input_search_key_to_search">输入关键字搜索</string>
     <string name="enter_immediately">立即进入</string>
     <string name="register">注册</string>
+    <string name="changeIp">切换IP</string>
+    <string name="please_input_ip_and_port">请输入IP和端口</string>
+    <string name="sure">确认</string>
+    <string name="history_ip_and_port">历史IP与端口(可选择)</string>
 </resources>

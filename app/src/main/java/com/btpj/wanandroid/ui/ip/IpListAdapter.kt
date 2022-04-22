@@ -1,8 +1,12 @@
 package com.btpj.wanandroid.ui.ip
 
+import android.view.View
+import com.btpj.lib_base.data.local.IpManager
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.databinding.ListItemIpBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
+import kotlin.collections.HashSet
 
 /**
  * 历史IP列表的Adapter
@@ -10,16 +14,20 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  * @author LTP  2017/11/3
  * @param currentIp 当前IP
  */
-class IpListAdapter(private val currentIp: String) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.list_item_ip) {
+class IpListAdapter(private val currentIp: String) :
+    BaseQuickAdapter<String, BaseDataBindingHolder<ListItemIpBinding>>(R.layout.list_item_ip) {
 
-    override fun convert(holder: BaseViewHolder, item: String) {
-//        holder.setText(R.id.tv_ip, item)
-//                .setVisible(R.id.iv_delete, item != currentIp)
-//                // 当前IP地址不显示删除按键
-//                .getView<View>(R.id.iv_delete).setOnClickListener {
-//                    data.remove(item)
-//                    SharedPreferencesUtil.writeData(context, "ipList", Gson().toJson(data))
-//                    notifyDataSetChanged()
-//                }
+    override fun convert(holder: BaseDataBindingHolder<ListItemIpBinding>, item: String) {
+        holder.dataBinding?.apply {
+            this.item = item
+            executePendingBindings()
+
+            ivDelete.visibility = if (item != currentIp) View.VISIBLE else View.GONE
+            ivDelete.setOnClickListener {
+                data.remove(item)
+                notifyItemRemoved(holder.layoutPosition)
+                IpManager.saveIPSet(HashSet(data))
+            }
+        }
     }
 }

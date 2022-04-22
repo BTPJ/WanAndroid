@@ -14,7 +14,7 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
  * @author LTP  2022/3/23
  */
 class ArticleAdapter :
-    BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemArticleBinding>>(layoutResId = R.layout.list_item_article),
+    BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemArticleBinding>>(R.layout.list_item_article),
     LoadMoreModule {
 
     override fun convert(holder: BaseDataBindingHolder<ListItemArticleBinding>, item: Article) {

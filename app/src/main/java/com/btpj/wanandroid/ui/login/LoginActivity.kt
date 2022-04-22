@@ -4,12 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.hideLoading
+import com.btpj.lib_base.ext.launch
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.ActivityLoginBinding
+import com.btpj.wanandroid.ui.ip.ChangeIpActivity
 import com.btpj.wanandroid.ui.login.register.RegisterActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * 登录
@@ -53,6 +58,27 @@ class LoginActivity :
                     onBackPressed()
                 }
             }
+
+            ivLogo.setOnClickListener {
+                launchChangeIpActivity()
+            }
+        }
+    }
+
+    /** 点击次数 */
+    private var mClickTimes: Int = 0
+
+    /** 2S内连续点击5次打开IP选择框 */
+    private fun launchChangeIpActivity() {
+        lifecycleScope.launch {
+            delay(2000)
+            // 2s后重置mClickTimes为0
+            mClickTimes = 0
+        }
+
+        mClickTimes++
+        if (mClickTimes > 4) {
+            ChangeIpActivity.launch(this)
         }
     }
 }

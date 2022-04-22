@@ -1,8 +1,10 @@
 package com.btpj.lib_base.http
 
 import com.btpj.lib_base.BaseApp.Companion.appContext
+import com.btpj.lib_base.data.local.IpManager
 import com.btpj.lib_base.http.interceptor.CacheInterceptor
 import com.btpj.lib_base.http.interceptor.logInterceptor
+import com.btpj.lib_base.utils.LogUtil
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -30,8 +32,8 @@ object RetrofitManager {
         )
     }
 
-    /** 请求IP和端口*/
-    const val BASE_URL = "https://www.wanandroid.com"
+    /** 请求根地址 */
+    val BASE_URL = IpManager.getDefaultIP()
 
     /** OkHttpClient相关配置 */
     private val client: OkHttpClient
@@ -51,6 +53,7 @@ object RetrofitManager {
      * Retrofit相关配置
      */
     fun <T> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
+        LogUtil.d(BASE_URL)
         return Retrofit.Builder()
             .client(client)
             // 使用Moshi更适合Kotlin

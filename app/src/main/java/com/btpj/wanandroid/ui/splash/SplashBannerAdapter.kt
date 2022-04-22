@@ -28,7 +28,7 @@ class SplashBannerAdapter(dataList: List<Int>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Int, position: Int, size: Int) {
-        holder.imageView.load(data)
+        holder.imageView.setImageResource(data)
     }
 
     inner class BannerViewHolder(var imageView: ImageView) : RecyclerView.ViewHolder(imageView)

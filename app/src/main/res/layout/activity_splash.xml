@@ -14,9 +14,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_500"
+        android:background="@drawable/ic_splash"
         tools:context=".ui.splash.SplashActivity">
 
         <com.youth.banner.Banner
@@ -30,30 +31,19 @@
             app:banner_indicator_normal_width="18dp"
             app:banner_indicator_selected_color="@color/_e91e63"
             app:banner_indicator_selected_width="20dp"
+            app:banner_indicator_marginBottom="50dp"
             app:banner_infinite_loop="false" />
 
         <Button
             android:id="@+id/btn_enter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="72dp"
+            android:layout_marginBottom="100dp"
             android:text="@string/enter_immediately"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_splash"
-            android:visibility="@{viewModel.isFirstUse?View.GONE:View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

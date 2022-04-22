@@ -32,7 +32,7 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置无状态栏
+     * 设置无状态栏，直接干掉顶部的状态栏，但要注意例如一些actionbar会自动顶到最上方需要适配
      *
      * @param activity 要设置的Activity
      */

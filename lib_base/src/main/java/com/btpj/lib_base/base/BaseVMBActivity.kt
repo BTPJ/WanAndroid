@@ -28,10 +28,22 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
     lateinit var mViewModel: VM
     lateinit var mBinding: B
 
+    /** 是否是无状态栏的全屏模式 */
+    open fun setFullScreen(): Boolean {
+        return false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 设置透明通知栏
-        StatusBarUtil.setImmersionStatus(this)
+        // 设置沉浸式状态栏，由于启动页SplashActivity需要无状态栏，这里写死不太好
+        // 直接在主题里将其他的状态栏颜色写成跟ActionBar相同，而启动页则是无状态栏
+        // 或者提供一个修改的api让SplashActivity重写，两者均可（假如需要更换主题用代码设置更灵活）
+        if (setFullScreen()) {
+            StatusBarUtil.setNoStatus(this)
+        } else {
+            StatusBarUtil.setImmersionStatus(this)
+        }
+
         initViewModel()
         initDataBinding()
         createObserve()

@@ -99,8 +99,8 @@
             android:text="@{viewModel.shareUserName}"
             android:textColor="@color/_999999"
             android:textSize="15sp"
-            tools:text="BTPJ"
-            tools:ignore="Autofill" />
+            tools:ignore="Autofill"
+            tools:text="BTPJ" />
 
         <Button
             android:id="@+id/btn_share"
@@ -109,8 +109,12 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="18dp"
+            android:alpha="@{viewModel.shareBtnEnable?1f:0.5f}"
+            android:backgroundTint="@color/purple_500"
+            android:enabled="@{viewModel.shareBtnEnable}"
             android:padding="6dp"
             android:text="@string/share"
+            android:textColor="@color/_ffffff"
             android:textSize="16sp" />
     </LinearLayout>
 </layout>

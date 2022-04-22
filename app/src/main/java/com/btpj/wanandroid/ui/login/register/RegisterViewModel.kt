@@ -21,7 +21,7 @@ class RegisterViewModel : BaseViewModel() {
     /** 注册按键是否可点击(这样可避免在dataBinding中写较复杂的逻辑) */
     val loginBtnEnable = object : ObservableBoolean(userName, userPwd, userPwdSure) {
         override fun get(): Boolean {
-            return !userName.get().isNullOrEmpty() && !userPwd.get()
+            return !userName.get()?.trim().isNullOrEmpty() && !userPwd.get()
                 .isNullOrEmpty() && !userPwdSure.get().isNullOrEmpty()
         }
     }

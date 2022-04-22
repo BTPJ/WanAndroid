@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.share.add
 
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
@@ -9,9 +10,18 @@ import com.btpj.wanandroid.data.local.UserManager
 
 class AddArticleViewModel : BaseViewModel() {
 
-    val title = ObservableField<String>()
-    val articleLink = ObservableField<String>()
-    val shareUserName = ObservableField<String>()
+    val title = ObservableField("")
+    val articleLink = ObservableField("")
+    val shareUserName = ObservableField("")
+
+
+    /** 登录按键是否可点击(这样可避免在dataBinding中写较复杂的逻辑) */
+    val shareBtnEnable = object : ObservableBoolean(title, articleLink) {
+        override fun get(): Boolean {
+            return !title.get()?.trim().isNullOrEmpty() && !articleLink.get()?.trim()
+                .isNullOrEmpty()
+        }
+    }
 
     override fun start() {
         shareUserName.set(UserManager.getUser()?.nickname ?: "")

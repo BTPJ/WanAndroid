@@ -20,7 +20,7 @@ class LoginViewModel : BaseViewModel() {
     /** 登录按键是否可点击(这样可避免在dataBinding中写较复杂的逻辑) */
     val loginBtnEnable = object : ObservableBoolean(userName, userPwd) {
         override fun get(): Boolean {
-            return !userName.get().isNullOrEmpty() && !userPwd.get().isNullOrEmpty()
+            return !userName.get()?.trim().isNullOrEmpty() && !userPwd.get().isNullOrEmpty()
         }
     }
 

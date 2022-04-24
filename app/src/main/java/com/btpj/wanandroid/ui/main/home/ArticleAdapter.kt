@@ -17,6 +17,10 @@ class ArticleAdapter :
     BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemArticleBinding>>(R.layout.list_item_article),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemArticleBinding>, item: Article) {
         holder.dataBinding?.apply {
             article = item

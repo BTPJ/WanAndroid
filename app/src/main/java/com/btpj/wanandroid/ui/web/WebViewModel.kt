@@ -4,6 +4,7 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
+import com.btpj.wanandroid.data.bean.CollectUrl
 
 /**
  * @author LTP  2022/4/2
@@ -40,10 +41,14 @@ class WebViewModel : BaseViewModel() {
      * @param name 网址名
      * @param link 网址链接
      */
-    fun collectUrl(name: String, link: String, successCallBack: () -> Any? = {}) {
+    fun collectUrl(
+        name: String,
+        link: String,
+        successCallBack: (CollectUrl: CollectUrl?) -> Any? = {}
+    ) {
         launch({
             handleRequest(DataRepository.collectUrl(name, link), {
-                successCallBack.invoke()
+                successCallBack.invoke(it.data)
             })
         })
     }

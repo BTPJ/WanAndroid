@@ -18,6 +18,10 @@ class SystemChildAdapter :
     BaseQuickAdapter<Classify, BaseDataBindingHolder<ListItemTvBinding>>(layoutResId = R.layout.list_item_tv),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemTvBinding>, item: Classify) {
         holder.dataBinding?.apply {
             text = item.name

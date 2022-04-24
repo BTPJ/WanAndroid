@@ -16,6 +16,10 @@ class SearchHistoryAdapter :
     BaseQuickAdapter<String, BaseDataBindingHolder<ListItemIpBinding>>(layoutResId = R.layout.list_item_ip),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemIpBinding>, item: String) {
         holder.dataBinding?.apply {
             this.item = item

@@ -19,6 +19,10 @@ class MyArticleAdapter :
         layoutResId = R.layout.list_item_share_article
     ), LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun convert(
         holder: BaseDataBindingHolder<ListItemShareArticleBinding>,

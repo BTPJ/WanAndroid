@@ -137,7 +137,7 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.deleteShareArticle(id) }
     }
 
-    override suspend fun collectUrl(name: String, link: String): ApiResponse<Any?> {
+    override suspend fun collectUrl(name: String, link: String): ApiResponse<CollectUrl?> {
         return apiCall { service.collectUrl(name, link) }
     }
 

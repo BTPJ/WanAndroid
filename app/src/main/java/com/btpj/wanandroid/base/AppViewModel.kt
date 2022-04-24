@@ -2,6 +2,7 @@ package com.btpj.wanandroid.base
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.data.bean.User
 
 /**
@@ -17,4 +18,7 @@ class AppViewModel : BaseViewModel() {
 
     /** 分享添加文章 */
     val shareArticleEvent = MutableLiveData<Boolean>()
+
+    /** 文章收藏 */
+    val collectEvent = MutableLiveData<CollectData>()
 }

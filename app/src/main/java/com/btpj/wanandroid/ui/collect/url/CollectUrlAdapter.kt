@@ -15,6 +15,10 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 class CollectUrlAdapter :
     BaseQuickAdapter<CollectUrl, BaseDataBindingHolder<ListItemCollectUrlBinding>>(layoutResId = R.layout.list_item_collect_url) {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemCollectUrlBinding>, item: CollectUrl) {
         holder.dataBinding?.apply {
             collectUrl = item

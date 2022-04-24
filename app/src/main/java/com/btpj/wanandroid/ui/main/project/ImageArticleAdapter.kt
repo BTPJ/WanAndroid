@@ -17,6 +17,10 @@ class ImageArticleAdapter :
     BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemArticleImageBinding>>(layoutResId = R.layout.list_item_article_image),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(
         holder: BaseDataBindingHolder<ListItemArticleImageBinding>,
         item: Article

@@ -13,10 +13,8 @@ import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Banner
-import com.btpj.wanandroid.data.bean.CollectArticle
-import com.btpj.wanandroid.data.bean.CollectUrl
+import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.data.bean.*
 import com.btpj.wanandroid.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
@@ -187,11 +185,17 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
                         // 重置mCollect为false然后强制刷新menu即可
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mArticle!!.id, collect = false)
+                        )
                     }
                 } else {
                     mViewModel.collectArticle(mArticle!!.id) {
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mArticle!!.id, collect = true)
+                        )
                     }
                 }
             }
@@ -200,11 +204,17 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
                     mViewModel.unCollectArticle(mCollectArticle!!.originId) {
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mCollectArticle!!.id, collect = false)
+                        )
                     }
                 } else {
                     mViewModel.collectArticle(mCollectArticle!!.originId) {
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mCollectArticle!!.id, collect = true)
+                        )
                     }
                 }
             }
@@ -213,11 +223,20 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
                     mViewModel.unCollectUrl(mCollectUrl!!.id) {
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        // 连续收藏取消收藏，id会变这里直接以link为唯一标志
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mCollectUrl!!.id, mCollectUrl!!.link, false)
+                        )
                     }
                 } else {
                     mViewModel.collectUrl(mCollectUrl!!.name, mCollectUrl!!.link) {
                         mCollect = !mCollect
                         invalidateOptionsMenu()
+                        // 取消后再重新收藏id会变，故重新赋值
+                        mCollectUrl = it
+                        App.appViewModel.collectEvent.setValue(
+                            CollectData(mCollectUrl!!.id, mCollectUrl!!.link, true)
+                        )
                     }
                 }
             }

@@ -5,6 +5,7 @@ import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 
 /**
@@ -54,8 +55,32 @@ class CollectUrlFragment :
             mAdapter.apply {
                 if (it.isEmpty()) {
                     setEmptyView(mBinding.recyclerView.getEmptyView())
-                } else {
-                    setList(it)
+                }
+                setList(it)
+            }
+        }
+
+        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
+            // 连续收藏取消收藏，id会变这里直接以link来匹配
+            if (!it.collect) {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].link == it.link) {
+                        mAdapter.removeAt(position)
+                        if (mAdapter.data.isEmpty()) {
+                            mAdapter.setEmptyView(mBinding.recyclerView.getEmptyView())
+                            mAdapter.setList(null)
+                        }
+                        break
+                    }
+                }
+            } else {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].link == it.link) {
+                        // 重新收藏的collectUrl的id会变，重新赋值即可
+                        mAdapter.data[position].id = it.id
+                        mAdapter.notifyItemChanged(position)
+                        break
+                    }
                 }
             }
         }

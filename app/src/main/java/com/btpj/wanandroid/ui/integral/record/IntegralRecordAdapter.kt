@@ -18,6 +18,10 @@ class IntegralRecordAdapter :
         layoutResId = R.layout.list_item_integral_record
     ), LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun convert(
         holder: BaseDataBindingHolder<ListItemIntegralRecordBinding>,

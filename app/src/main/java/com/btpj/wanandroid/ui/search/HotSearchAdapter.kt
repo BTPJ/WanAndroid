@@ -16,6 +16,10 @@ class HotSearchAdapter :
     BaseQuickAdapter<HotSearch, BaseDataBindingHolder<ListItemTvBinding>>(layoutResId = R.layout.list_item_tv),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemTvBinding>, item: HotSearch) {
         holder.dataBinding?.apply {
             text = item.name

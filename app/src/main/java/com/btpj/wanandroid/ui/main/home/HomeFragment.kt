@@ -8,8 +8,11 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.data.bean.CollectArticle
+import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
@@ -67,7 +70,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
                     layoutManager = LinearLayoutManager(context)
                     adapter = mAdapter.apply {
                         loadMoreModule.setOnLoadMoreListener { loadMoreData() }
-                        setHeaderView(headerBannerBinding.root)
+                        addHeaderView(headerBannerBinding.root)
                         addChildClickViewIds(R.id.tv_author, R.id.iv_collect)
                         setOnItemChildClickListener { _, view, position ->
                             when (view.id) {
@@ -85,12 +88,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
                                             mAdapter.getItem(position).collect = false
                                             // 注意:这里position需要+1,因为0位置属于轮播图HeaderView
                                             mAdapter.notifyItemChanged(position + 1)
+                                            App.appViewModel.collectEvent.setValue(
+                                                CollectData(
+                                                    mAdapter.getItem(position).id,
+                                                    collect = false
+                                                )
+                                            )
                                         }
                                     } else {
                                         mViewModel.collectArticle(mAdapter.getItem(position).id) {
                                             // 收藏成功后,手动更改避免刷新整个列表
                                             mAdapter.getItem(position).collect = true
                                             mAdapter.notifyItemChanged(position + 1)
+                                            App.appViewModel.collectEvent.setValue(
+                                                CollectData(
+                                                    mAdapter.getItem(position).id,
+                                                    collect = true
+                                                )
+                                            )
                                         }
                                     }
                             }
@@ -125,6 +140,36 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             articlePageListLiveData.observe(viewLifecycleOwner) {
                 it?.let { handleArticleData(it) }
             }
+        }
+
+        // 全局收藏监听
+        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
+            for (position in mAdapter.data.indices) {
+                if (mAdapter.data[position].id == it.id) {
+                    mAdapter.data[position].collect = it.collect
+                    mAdapter.notifyItemChanged(position + 1)
+                    break
+                }
+            }
+        }
+
+        // 用户退出时，收藏应全为false，登录时获取collectIds
+        App.appViewModel.userEvent.observe(this) {
+            if (it != null) {
+                it.collectIds.forEach { id ->
+                    for (item in mAdapter.data) {
+                        if (id.toInt() == item.id) {
+                            item.collect = true
+                            break
+                        }
+                    }
+                }
+            } else {
+                for (item in mAdapter.data) {
+                    item.collect = false
+                }
+            }
+            mAdapter.notifyDataSetChanged()
         }
     }
 

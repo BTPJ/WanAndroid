@@ -17,6 +17,10 @@ import kotlin.collections.HashSet
 class IpListAdapter(private val currentIp: String) :
     BaseQuickAdapter<String, BaseDataBindingHolder<ListItemIpBinding>>(R.layout.list_item_ip) {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemIpBinding>, item: String) {
         holder.dataBinding?.apply {
             this.item = item

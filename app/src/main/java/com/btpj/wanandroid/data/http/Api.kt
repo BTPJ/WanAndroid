@@ -143,7 +143,7 @@ interface Api {
     suspend fun collectUrl(
         @Query("name") name: String,
         @Query("link") link: String
-    ): ApiResponse<Any?>
+    ): ApiResponse<CollectUrl?>
 
     /** 取消收藏站内文章 */
     @POST("lg/collect/deletetool/json")

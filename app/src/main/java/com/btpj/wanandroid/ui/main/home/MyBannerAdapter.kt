@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.btpj.lib_base.ext.load
 import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.ui.web.WebActivity
 import com.youth.banner.adapter.BannerAdapter
 
 /**
@@ -27,7 +28,10 @@ class MyBannerAdapter(dataList: ArrayList<Banner>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Banner, position: Int, size: Int) {
-        holder.imageView.load(data.imagePath)
+        holder.imageView.apply {
+            load(data.imagePath)
+            setOnClickListener { WebActivity.launch(context, data) }
+        }
     }
 
     inner class BannerViewHolder(var imageView: ImageView) : RecyclerView.ViewHolder(imageView)

@@ -16,6 +16,10 @@ class IntegralAdapter :
     BaseQuickAdapter<CoinInfo, BaseDataBindingHolder<ListItemIntegralBinding>>(layoutResId = R.layout.list_item_integral),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemIntegralBinding>, item: CoinInfo) {
         holder.dataBinding?.apply {
             integral = item

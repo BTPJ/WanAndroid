@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.main.wechat
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.wanandroid.base.BaseFragment
@@ -7,7 +8,9 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
@@ -69,12 +72,24 @@ class WechatChildFragment :
                                         // 取消收藏成功后,手动更改避免刷新整个列表
                                         mAdapter.getItem(position).collect = false
                                         mAdapter.notifyItemChanged(position)
+                                        App.appViewModel.collectEvent.setValue(
+                                            CollectData(
+                                                mAdapter.getItem(position).id,
+                                                collect = false
+                                            )
+                                        )
                                     }
                                 } else {
                                     mViewModel.collectArticle(mAdapter.getItem(position).id) {
                                         // 收藏成功后,手动更改避免刷新整个列表
                                         mAdapter.getItem(position).collect = true
                                         mAdapter.notifyItemChanged(position)
+                                        App.appViewModel.collectEvent.setValue(
+                                            CollectData(
+                                                mAdapter.getItem(position).id,
+                                                collect = true
+                                            )
+                                        )
                                     }
                                 }
                         }
@@ -94,12 +109,42 @@ class WechatChildFragment :
         onRefresh()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun createObserve() {
         super.createObserve()
         mViewModel.apply {
             articlePageListLiveData.observe(viewLifecycleOwner) {
                 it?.let { handleArticleData(it) }
             }
+        }
+
+        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
+            for (position in mAdapter.data.indices) {
+                if (mAdapter.data[position].id == it.id) {
+                    mAdapter.data[position].collect = it.collect
+                    mAdapter.notifyItemChanged(position)
+                    break
+                }
+            }
+        }
+
+        // 用户退出时，收藏应全为false，登录时获取collectIds
+        App.appViewModel.userEvent.observe(this) {
+            if (it != null) {
+                it.collectIds.forEach { id ->
+                    for (item in mAdapter.data) {
+                        if (id.toInt() == item.id) {
+                            item.collect = true
+                            break
+                        }
+                    }
+                }
+            } else {
+                for (item in mAdapter.data) {
+                    item.collect = false
+                }
+            }
+            mAdapter.notifyDataSetChanged()
         }
     }
 

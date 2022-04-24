@@ -19,6 +19,10 @@ class NavigationChildAdapter :
     BaseQuickAdapter<Article, BaseDataBindingHolder<ListItemTvBinding>>(layoutResId = R.layout.list_item_tv),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemTvBinding>, item: Article) {
         holder.dataBinding?.apply {
             text = item.title

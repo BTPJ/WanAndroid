@@ -6,8 +6,11 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.data.bean.CollectArticle
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * 收藏的文章
@@ -57,6 +60,42 @@ class CollectArticleFragment :
         mViewModel.apply {
             collectArticlePageList.observe(viewLifecycleOwner) {
                 it?.let { handleArticleData(it) }
+            }
+        }
+
+        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
+            if (!it.collect) {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].id == it.id) {
+                        mAdapter.removeAt(position)
+                        if (mAdapter.data.isEmpty()) {
+                            mAdapter.setEmptyView(mBinding.recyclerView.getEmptyView())
+                            mAdapter.setList(null)
+                        }
+                        break
+                    }
+                }
+            } else {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].id == it.id) {
+                        // 取消收藏再次收藏会回到第一个,收藏时间也会变为 “刚刚”
+                        /**-----不想重新请求刷新的话，这种处理会有问题---start---------
+                        mAdapter.data[position].niceDate = "刚刚"
+                        mAdapter.notifyItemChanged(position)
+                        mAdapter.notifyItemMoved(position, 0)
+                        --------------------end--------------------------------*/
+
+                        // 采用直接操作List的方式,分页请求时重新刷新体验不太好
+                        val oldList = ArrayList(mAdapter.data)
+                        val tempList = mAdapter.data.subList(0, position)
+                        tempList.add(0, oldList[position].apply { niceDate = "刚刚" })
+                        val newList = ArrayList<CollectArticle>()
+                        newList.addAll(tempList)
+                        newList.addAll(oldList.subList(position + 1, oldList.size))
+                        mAdapter.setList(newList)
+                        break
+                    }
+                }
             }
         }
     }

@@ -17,6 +17,10 @@ class SystemAdapter :
     BaseQuickAdapter<System, BaseDataBindingHolder<ListItemSystemBinding>>(layoutResId = R.layout.list_item_system),
     LoadMoreModule {
 
+    init {
+        setAnimationWithDefault(AnimationType.ScaleIn)
+    }
+
     override fun convert(holder: BaseDataBindingHolder<ListItemSystemBinding>, item: System) {
         holder.dataBinding?.apply {
             text = item.name

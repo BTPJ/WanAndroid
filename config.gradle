@@ -37,6 +37,8 @@ ext {
             banner                       : 'io.github.youth5201314:banner:2.2.2',
             // 更强大的webView
             agentWeb                     : 'com.github.Justson.AgentWeb:agentweb-core:v4.1.9-androidx',
+            // 屏幕适配https://github.com/JessYanCoding/AndroidAutoSize
+            AndroidAutoSize                     : 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1',
 
             //---------------存储相关------------------
             // 替代SharePreference
@@ -51,6 +53,6 @@ ext {
             PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
             //---------------图片相关------------------
-            glide                         : 'com.github.bumptech.glide:glide:4.11.0'
+            glide                        : 'com.github.bumptech.glide:glide:4.11.0'
     ]
 }

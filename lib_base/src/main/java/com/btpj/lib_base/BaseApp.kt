@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.tencent.mmkv.MMKV
 import kotlin.properties.Delegates
 
 /**
@@ -25,6 +26,9 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         super.onCreate()
         appContext = applicationContext
         mAppViewModelStore = ViewModelStore()
+
+        // MMKV初始化
+        MMKV.initialize(this)
     }
 
     /** 获取一个全局的ViewModel */

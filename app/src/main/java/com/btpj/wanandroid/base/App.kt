@@ -1,7 +1,6 @@
 package com.btpj.wanandroid.base
 
 import com.btpj.lib_base.BaseApp
-import com.tencent.mmkv.MMKV
 
 /**
  * Application基类
@@ -17,8 +16,5 @@ class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
         appViewModel = getAppViewModelProvider().get(AppViewModel::class.java)
-
-        // MMKV初始化
-        MMKV.initialize(this)
     }
 }

@@ -38,11 +38,11 @@ ext {
             // 更强大的webView
             agentWeb                     : 'com.github.Justson.AgentWeb:agentweb-core:v4.1.9-androidx',
             // 屏幕适配https://github.com/JessYanCoding/AndroidAutoSize
-            AndroidAutoSize                     : 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1',
+            AndroidAutoSize              : 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1',
 
             //---------------存储相关------------------
             // 替代SharePreference
-            mmkv                         : 'com.tencent:mmkv:1.2.12',
+            mmkv                         : 'com.tencent:mmkv:1.2.13',
 
             //---------------网络相关------------------
             retrofit                     : "com.squareup.retrofit2:retrofit:2.9.0",
@@ -53,6 +53,10 @@ ext {
             PersistentCookieJar          : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
             //---------------图片相关------------------
-            glide                        : 'com.github.bumptech.glide:glide:4.11.0'
+            glide                        : 'com.github.bumptech.glide:glide:4.11.0',
+
+            // 应用优化升级
+            bugly_update                 : 'com.tencent.bugly:crashreport_upgrade:1.5.23',
+            bugly_nativecrashreport      : 'com.tencent.bugly:nativecrashreport:3.7.1'
     ]
 }

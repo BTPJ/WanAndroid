@@ -1,6 +1,8 @@
 package com.btpj.wanandroid.base
 
 import com.btpj.lib_base.BaseApp
+import com.btpj.wanandroid.BuildConfig
+import com.tencent.bugly.Bugly
 
 /**
  * Application基类
@@ -16,5 +18,8 @@ class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
         appViewModel = getAppViewModelProvider().get(AppViewModel::class.java)
+
+        // bugly初始化
+        Bugly.init(applicationContext, "99ff7c64d9", BuildConfig.DEBUG)
     }
 }

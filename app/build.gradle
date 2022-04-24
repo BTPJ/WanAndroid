@@ -14,6 +14,11 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 
+       // ndk {
+       //     // 设置支持的SO库架构
+       //     abiFilters 'armeabi'//, 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+       // }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -43,4 +48,6 @@ dependencies {
     implementation rootProject.ext.dependencies.agentWeb
     implementation rootProject.ext.dependencies.flexbox
     implementation rootProject.ext.dependencies.AndroidAutoSize
+    implementation rootProject.ext.dependencies.bugly_update
+    implementation rootProject.ext.dependencies.bugly_nativecrashreport
 }

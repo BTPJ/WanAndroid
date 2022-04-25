@@ -33,7 +33,10 @@ class SystemFragment :
                 }
             }
         }
+    }
 
+    override fun lazyLoadData() {
+        super.lazyLoadData()
         onRefresh()
     }
 

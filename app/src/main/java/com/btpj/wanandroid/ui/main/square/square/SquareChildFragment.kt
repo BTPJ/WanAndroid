@@ -85,7 +85,10 @@ class SquareChildFragment :
                 }
             }
         }
+    }
 
+    override fun lazyLoadData() {
+        super.lazyLoadData()
         onRefresh()
     }
 

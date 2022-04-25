@@ -91,7 +91,10 @@ class AskFragment :
                 }
             }
         }
+    }
 
+    override fun lazyLoadData() {
+        super.lazyLoadData()
         onRefresh()
     }
 

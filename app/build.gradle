@@ -14,15 +14,30 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 
-       // ndk {
-       //     // 设置支持的SO库架构
-       //     abiFilters 'armeabi'//, 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-       // }
+        // ndk {
+        //     // 设置支持的SO库架构
+        //     abiFilters 'armeabi'//, 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        // }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // 调试版设置统一的Key，多人开发时更方便
+    signingConfigs {
+        debug {
+            storeFile file('./sign/debug.jks')
+            storePassword '19910901'
+            keyAlias = 'LTP'
+            keyPassword '19910901'
+        }
+    }
+
     buildTypes {
+        debug {
+            // 设置调试时包名后添加debug以防止与正式版安装冲突
+            applicationIdSuffix '.debug'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

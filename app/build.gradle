@@ -22,7 +22,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // 调试版设置统一的Key，多人开发时更方便
+    // 调试版设置统一的Key，多人开发时更方便，
+    // 譬如一些地图配置调试的key时，每个开发者都能正常显示（不配置时默认签名每个人都不一样）
     signingConfigs {
         debug {
             storeFile file('./sign/debug.jks')

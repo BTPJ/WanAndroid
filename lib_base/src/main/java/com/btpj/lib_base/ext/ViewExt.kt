@@ -51,14 +51,13 @@ fun ImageView.load(url: String, showPlaceholder: Boolean = true) {
  * @param showPlaceholder 是否展示placeholder，默认为false
  */
 fun ImageView.load(@DrawableRes resourceId: Int, showPlaceholder: Boolean = false) {
+    // 之所以不添加withCrossFade渐变效果，是由于SplashBannerAdapter启动加载本地大图会出现滑动时图片闪烁
     if (showPlaceholder) {
         Glide.with(context).load(resourceId)
             .placeholder(R.drawable.ic_default_img)
-            .transition(DrawableTransitionOptions.withCrossFade(500))
             .into(this)
     } else {
         Glide.with(context).load(resourceId)
-            .transition(DrawableTransitionOptions.withCrossFade(500))
             .into(this)
     }
 }

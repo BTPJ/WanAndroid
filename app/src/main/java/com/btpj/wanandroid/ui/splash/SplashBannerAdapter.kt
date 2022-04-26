@@ -26,6 +26,7 @@ class SplashBannerAdapter(dataList: List<Int>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Int, position: Int, size: Int) {
+        // 注意：Glide添加withCrossFade渐变效果，这里会出现滑动时图片闪烁
         holder.imageView.load(data)
     }
 

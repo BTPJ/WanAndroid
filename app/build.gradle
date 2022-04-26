@@ -38,7 +38,7 @@ android {
             // 设置调试时包名后添加debug以防止与正式版安装冲突
             applicationIdSuffix '.debug'
 
-            // 假如打包报错，可以在调试模式下打开混淆查看日志找出混淆问题
+            // 假如打包后运行闪退，可以在调试模式下打开混淆查看日志找出混淆问题
             minifyEnabled false //开启混淆
             shrinkResources false
             zipAlignEnabled false //去除无用资源

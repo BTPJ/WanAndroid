@@ -11,6 +11,7 @@ import androidx.annotation.Nullable
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.Placeholder
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -29,23 +30,37 @@ import com.bumptech.glide.request.RequestOptions
 /**
  * ImageView利用Glide加载图片
  * @param url 图片url（可远程可本地）
+ * @param showPlaceholder 是否展示placeholder，默认为true
  */
-fun ImageView.load(url: String) {
-    Glide.with(context).load(url)
-        .placeholder(R.drawable.ic_default_img)
-        .transition(DrawableTransitionOptions.withCrossFade(500))
-        .into(this)
+fun ImageView.load(url: String, showPlaceholder: Boolean = true) {
+    if (showPlaceholder) {
+        Glide.with(context).load(url)
+            .placeholder(R.drawable.ic_default_img)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(this)
+    } else {
+        Glide.with(context).load(url)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(this)
+    }
 }
 
 /**
  * ImageView利用Glide加载图片
  * @param resourceId 本地图片资源Id
+ * @param showPlaceholder 是否展示placeholder，默认为false
  */
-fun ImageView.load(@DrawableRes resourceId: Int) {
-    Glide.with(context).load(resourceId)
-        .placeholder(R.drawable.ic_default_img)
-        .transition(DrawableTransitionOptions.withCrossFade(500))
-        .into(this)
+fun ImageView.load(@DrawableRes resourceId: Int, showPlaceholder: Boolean = false) {
+    if (showPlaceholder) {
+        Glide.with(context).load(resourceId)
+            .placeholder(R.drawable.ic_default_img)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(this)
+    } else {
+        Glide.with(context).load(resourceId)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(this)
+    }
 }
 
 /**

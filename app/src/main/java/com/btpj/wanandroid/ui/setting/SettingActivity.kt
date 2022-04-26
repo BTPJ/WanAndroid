@@ -45,6 +45,7 @@ class SettingActivity :
             }
 
             tvVersionName.text = AppUtil.getAppVersionName(this@SettingActivity)
+            layerVersion.setOnClickListener { mViewModel.checkAppUpdate(true) }
 
             // 作者
             layerAuthor.setOnClickListener {

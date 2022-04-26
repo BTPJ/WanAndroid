@@ -2,10 +2,8 @@ package com.btpj.wanandroid.ui.splash
 
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.btpj.lib_base.ext.load
-import com.btpj.wanandroid.data.bean.Banner
 import com.youth.banner.adapter.BannerAdapter
 
 /**
@@ -28,7 +26,7 @@ class SplashBannerAdapter(dataList: List<Int>) :
     }
 
     override fun onBindView(holder: BannerViewHolder, data: Int, position: Int, size: Int) {
-        holder.imageView.setImageResource(data)
+        holder.imageView.load(data)
     }
 
     inner class BannerViewHolder(var imageView: ImageView) : RecyclerView.ViewHolder(imageView)

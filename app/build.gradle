@@ -81,4 +81,5 @@ dependencies {
     implementation rootProject.ext.dependencies.AndroidAutoSize
     implementation rootProject.ext.dependencies.bugly_update
     implementation rootProject.ext.dependencies.bugly_nativecrashreport
+    implementation rootProject.ext.dependencies.leakcanary
 }

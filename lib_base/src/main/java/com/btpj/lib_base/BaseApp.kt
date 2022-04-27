@@ -33,7 +33,7 @@ open class BaseApp : Application(), ViewModelStoreOwner {
 
     /** 获取一个全局的ViewModel */
     fun getAppViewModelProvider(): ViewModelProvider {
-        return ViewModelProvider(this, this.getAppFactory())
+        return ViewModelProvider(this, getAppFactory())
     }
 
     private fun getAppFactory(): ViewModelProvider.Factory {

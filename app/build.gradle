@@ -81,5 +81,6 @@ dependencies {
     implementation rootProject.ext.dependencies.AndroidAutoSize
     implementation rootProject.ext.dependencies.bugly_update
     implementation rootProject.ext.dependencies.bugly_nativecrashreport
-    implementation rootProject.ext.dependencies.leakcanary
+    // 使用debugImplementation只在调试时引入
+    debugImplementation rootProject.ext.dependencies.leakcanary
 }

@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 2,
-      "versionName": "1.2",
-      "outputFile": "WanAndroid_V1.2.apk"
+      "versionCode": 3,
+      "versionName": "1.3",
+      "outputFile": "WanAndroid_V1.3.apk"
     }
   ],
   "elementType": "File"

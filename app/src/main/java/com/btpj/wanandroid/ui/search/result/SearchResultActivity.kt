@@ -118,6 +118,17 @@ class SearchResultActivity :
                 it?.let { handleArticleData(it) }
             }
         }
+
+        // 全局收藏监听
+        App.appViewModel.collectEvent.observe(this) {
+            for (position in mAdapter.data.indices) {
+                if (mAdapter.data[position].id == it.id) {
+                    mAdapter.data[position].collect = it.collect
+                    mAdapter.notifyItemChanged(position)
+                    break
+                }
+            }
+        }
     }
 
     /**

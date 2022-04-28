@@ -9,11 +9,11 @@ import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.*
 import com.btpj.wanandroid.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb

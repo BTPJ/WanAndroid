@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">玩Android</string>
     <string name="tab_home">首页</string>
     <string name="tab_project">项目</string>

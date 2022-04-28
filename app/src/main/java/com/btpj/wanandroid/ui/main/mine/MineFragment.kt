@@ -1,10 +1,10 @@
 package com.btpj.wanandroid.ui.main.mine
 
 import android.annotation.SuppressLint
-import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.FragmentMineBinding

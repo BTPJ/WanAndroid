@@ -3,13 +3,13 @@ package com.btpj.wanandroid.ui.setting
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.showDialog
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
-import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.ActivitySettingBinding

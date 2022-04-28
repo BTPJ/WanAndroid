@@ -19,9 +19,9 @@ class WechatViewModel : BaseViewModel() {
     /** 请求公众号作者标题列表 */
     private fun fetchAuthorTitleList() {
         launch({
-            DataRepository.getAuthorTitleList().let {
-                handleRequest(it, { authorTitleListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getAuthorTitleList(),
+                { authorTitleListLiveData.value = it.data })
         })
     }
 }

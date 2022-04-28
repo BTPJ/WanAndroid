@@ -6,7 +6,6 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.databinding.ListItemIpBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import kotlin.collections.HashSet
 
 /**
  * 历史IP列表的Adapter

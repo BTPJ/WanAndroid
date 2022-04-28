@@ -19,9 +19,9 @@ class NavigationViewModel : BaseViewModel() {
     /** 请求导航列表 */
     fun fetchNavigationList(pageNo: Int = 0) {
         launch({
-            DataRepository.getNavigationList().let {
-                handleRequest(it, { navigationListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getNavigationList(),
+                { navigationListLiveData.value = it.data })
         })
     }
 }

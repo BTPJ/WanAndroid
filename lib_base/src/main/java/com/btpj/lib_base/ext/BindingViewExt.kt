@@ -3,10 +3,6 @@ package com.btpj.lib_base.ext
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.btpj.lib_base.widgets.TitleLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 
 /**
  * DataBinding的自定义属性

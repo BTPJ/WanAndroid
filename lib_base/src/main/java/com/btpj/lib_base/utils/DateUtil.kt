@@ -3,7 +3,6 @@ package com.btpj.lib_base.utils
 import java.text.ParsePosition
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * 时间处理工具类
@@ -283,12 +282,12 @@ object DateUtil {
         val month = strArray[1]
 
         val mon = Integer.parseInt(month)
-        if (mon == 1 || mon == 3 || mon == 5 || mon == 7 || mon == 8 || mon == 10 || mon == 12) {
-            str += "31"
+        str += if (mon == 1 || mon == 3 || mon == 5 || mon == 7 || mon == 8 || mon == 10 || mon == 12) {
+            "31"
         } else if (mon == 4 || mon == 6 || mon == 9 || mon == 11) {
-            str += "30"
+            "30"
         } else {
-            str += if (isLeapYear(dateStr)) {
+            if (isLeapYear(dateStr)) {
                 "29"
             } else {
                 "28"
@@ -457,7 +456,7 @@ object DateUtil {
      */
     fun getCurrentDayInEveryMonth(year: Int, month: Int, day: Int): Int {
         return try {
-            var endDateOfMonth = getEndDateOfMonth(year.toString() + "-" + month + "-" + day)
+            var endDateOfMonth = getEndDateOfMonth("$year-$month-$day")
             endDateOfMonth =
                 endDateOfMonth.substring(endDateOfMonth.length - 2, endDateOfMonth.length)
             if (day > 0 && day < Integer.parseInt(endDateOfMonth)) {

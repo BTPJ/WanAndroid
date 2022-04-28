@@ -3,11 +3,10 @@ package com.btpj.wanandroid.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
-import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.databinding.ActivityMainBinding
 import com.btpj.wanandroid.ext.clearLongClickToast
 import com.btpj.wanandroid.ui.main.home.HomeFragment
@@ -15,7 +14,6 @@ import com.btpj.wanandroid.ui.main.mine.MineFragment
 import com.btpj.wanandroid.ui.main.project.ProjectFragment
 import com.btpj.wanandroid.ui.main.square.SquareFragment
 import com.btpj.wanandroid.ui.main.wechat.WechatFragment
-import java.util.*
 
 /**
  * 主页

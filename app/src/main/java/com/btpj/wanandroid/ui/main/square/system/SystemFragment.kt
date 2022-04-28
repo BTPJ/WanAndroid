@@ -1,10 +1,10 @@
 package com.btpj.wanandroid.ui.main.square.system
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 
 /**

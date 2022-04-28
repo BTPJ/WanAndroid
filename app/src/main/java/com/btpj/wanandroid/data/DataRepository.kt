@@ -3,9 +3,9 @@ package com.btpj.wanandroid.data
 import com.btpj.lib_base.data.bean.ApiResponse
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.http.BaseRepository
-import com.btpj.wanandroid.data.http.Api
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.wanandroid.data.bean.*
+import com.btpj.wanandroid.data.http.Api
 import retrofit2.http.Path
 import retrofit2.http.Query
 

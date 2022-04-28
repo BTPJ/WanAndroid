@@ -23,9 +23,9 @@ class SquareChildViewModel : BaseViewModel() {
     /** 请求广场分页列表 */
     fun fetchSquarePageList(pageNo: Int = 0) {
         launch({
-            DataRepository.getSquarePageList(pageNo, PAGE_SIZE).let {
-                handleRequest(it, { articlePageListLiveData.value = it.data })
-            }
+            handleRequest(
+                DataRepository.getSquarePageList(pageNo, PAGE_SIZE),
+                { articlePageListLiveData.value = it.data })
         })
     }
 

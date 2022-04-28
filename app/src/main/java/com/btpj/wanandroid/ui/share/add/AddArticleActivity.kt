@@ -7,12 +7,12 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.databinding.ActivityAddArticleBinding
 
 /**

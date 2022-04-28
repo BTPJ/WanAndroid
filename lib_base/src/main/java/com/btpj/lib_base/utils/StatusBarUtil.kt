@@ -2,13 +2,10 @@ package com.btpj.lib_base.utils
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.ColorInt
-import androidx.annotation.IntRange
-import androidx.annotation.RequiresApi
 import com.btpj.lib_base.R
 
 /**

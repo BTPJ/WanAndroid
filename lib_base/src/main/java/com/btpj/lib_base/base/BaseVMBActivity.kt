@@ -7,7 +7,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.btpj.lib_base.BR
 import com.btpj.lib_base.R
-import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.StatusBarUtil

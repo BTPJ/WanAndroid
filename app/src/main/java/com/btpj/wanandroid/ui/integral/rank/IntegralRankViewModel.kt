@@ -4,11 +4,11 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.data.bean.PageResponse
+import com.btpj.lib_base.ext.handleRequest
+import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.lib_base.ext.handleRequest
-import com.btpj.lib_base.ext.launch
 
 class IntegralRankViewModel : BaseViewModel() {
     /** 我的积分信息 */

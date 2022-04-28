@@ -2,9 +2,6 @@ package com.btpj.wanandroid.ui.main.square.navigation
 
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Classify
-import com.btpj.wanandroid.data.bean.System
-import com.btpj.wanandroid.databinding.ListItemSystemBinding
 import com.btpj.wanandroid.databinding.ListItemTvBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule

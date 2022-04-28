@@ -2,13 +2,6 @@ package com.btpj.lib_base.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.telephony.TelephonyManager
-import java.io.IOException
-import java.lang.Exception
-import java.net.HttpURLConnection
-import java.net.NetworkInterface
-import java.net.SocketException
-import java.net.URL
 
 /**
  * 网络工具类

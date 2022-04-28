@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
-import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.ext.hideLoading
-import com.btpj.lib_base.ext.launch
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.databinding.ActivityLoginBinding
 import com.btpj.wanandroid.ui.ip.ChangeIpActivity
 import com.btpj.wanandroid.ui.login.register.RegisterActivity

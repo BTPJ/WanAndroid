@@ -12,7 +12,7 @@ import okhttp3.Response
  *
  * @author LTP 2022/4/14
  */
-class CacheInterceptor(var day: Int = 7) : Interceptor {
+class CacheInterceptor(private var day: Int = 7) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         if (!NetworkUtil.isNetworkAvailable(appContext)) {

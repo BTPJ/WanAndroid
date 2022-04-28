@@ -19,9 +19,7 @@ class SystemViewModel : BaseViewModel() {
     /** 请求体系列表 */
     fun fetchSystemList(pageNo: Int = 0) {
         launch({
-            DataRepository.getTreeList().let {
-                handleRequest(it, { systemListLiveData.value = it.data })
-            }
+            handleRequest(DataRepository.getTreeList(), { systemListLiveData.value = it.data })
         })
     }
 }

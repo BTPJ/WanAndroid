@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.btpj.lib_base.R
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * 流式布局
@@ -62,10 +63,10 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
 
     @SuppressLint("DrawAllocation", "SwitchIntDef")
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val widthSpecMode = View.MeasureSpec.getMode(widthMeasureSpec)
-        val widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec)
-        val heightSpecMode = View.MeasureSpec.getMode(heightMeasureSpec)
-        val heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec)
+        val widthSpecMode = MeasureSpec.getMode(widthMeasureSpec)
+        val widthSpecSize = MeasureSpec.getSize(widthMeasureSpec)
+        val heightSpecMode = MeasureSpec.getMode(heightMeasureSpec)
+        val heightSpecSize = MeasureSpec.getSize(heightMeasureSpec)
         var maxLineHeight = 0
         var resultWidth: Int
         val resultHeight: Int
@@ -112,7 +113,7 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
                 child.measure(childWidthMeasureSpec, childHeightMeasureSpec)
 
                 val childWidth = child.measuredWidth
-                maxLineHeight = Math.max(maxLineHeight, child.measuredHeight)
+                maxLineHeight = max(maxLineHeight, child.measuredHeight)
                 // 需要换行
                 if (childPositionX + childWidth > childMaxRight) {
                     // 如果换行后超出最大行数，则不再继续
@@ -137,8 +138,8 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
                 mWidthSumInEachLine[lineIndex] -= mChildHorizontalSpacing
             }
             resultHeight = when (heightSpecMode) {
-                View.MeasureSpec.UNSPECIFIED -> childPositionY + maxLineHeight + paddingBottom
-                View.MeasureSpec.AT_MOST -> Math.min(
+                MeasureSpec.UNSPECIFIED -> childPositionY + maxLineHeight + paddingBottom
+                MeasureSpec.AT_MOST -> min(
                     childPositionY + maxLineHeight + paddingBottom,
                     heightSpecSize
                 )
@@ -178,7 +179,7 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
                 )
                 child.measure(childWidthMeasureSpec, childHeightMeasureSpec)
                 resultWidth += child.measuredWidth
-                maxLineHeight = Math.max(maxLineHeight, child.measuredHeight)
+                maxLineHeight = max(maxLineHeight, child.measuredHeight)
                 measuredChildCount++
             }
             if (measuredChildCount > 0) {
@@ -215,7 +216,7 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
         var childPositionY = paddingTop
         var lineHeight = 0
         val childCount = childCount
-        val childCountToLayout = Math.min(childCount, measuredChildCount)
+        val childCountToLayout = min(childCount, measuredChildCount)
         for (i in 0 until childCountToLayout) {
             val child = getChildAt(i)
             if (child.visibility == View.GONE) {
@@ -286,7 +287,7 @@ class FlowLayout(context: Context, attrs: AttributeSet?) : ViewGroup(context, at
                     nextChildPositionX + childWidth,
                     nextChildPositionY + childHeight
                 )
-                lineHeight = Math.max(lineHeight, childHeight)
+                lineHeight = max(lineHeight, childHeight)
                 nextChildPositionX += childWidth + mChildHorizontalSpacing
             }
 

@@ -3,7 +3,6 @@ package com.btpj.wanandroid.base
 import androidx.databinding.ViewDataBinding
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.ui.login.LoginActivity
 
 /**

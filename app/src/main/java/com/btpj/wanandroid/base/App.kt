@@ -3,7 +3,6 @@ package com.btpj.wanandroid.base
 import com.btpj.lib_base.BaseApp
 import com.btpj.wanandroid.BuildConfig
 import com.tencent.bugly.Bugly
-import com.tencent.bugly.beta.Beta
 
 /**
  * Application基类

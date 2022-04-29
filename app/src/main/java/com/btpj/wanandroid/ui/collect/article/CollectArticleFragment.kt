@@ -78,7 +78,7 @@ class CollectArticleFragment :
                 for (position in mAdapter.data.indices) {
                     if (mAdapter.data[position].id == it.id) {
                         // 取消收藏再次收藏会回到第一个,收藏时间也会变为 “刚刚”
-                        // -----不想重新请求刷新的话，这种处理会有问题---start---------
+                        // -----不想重新请求刷新的话，这种处理会有问题---start-------
                         // mAdapter.data[position].niceDate = "刚刚"
                         // mAdapter.notifyItemChanged(position)
                         // mAdapter.notifyItemMoved(position, 0)

@@ -82,7 +82,7 @@ class CollectArticleFragment :
                         // mAdapter.data[position].niceDate = "刚刚"
                         // mAdapter.notifyItemChanged(position)
                         // mAdapter.notifyItemMoved(position, 0)
-                        // --------------------end--------------------------------
+                        // --------------------end-------------------------------
 
                         // 采用直接操作List的方式,分页请求时重新刷新体验不太好
                         val oldList = ArrayList(mAdapter.data)

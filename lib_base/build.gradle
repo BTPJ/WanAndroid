@@ -13,6 +13,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        // ARouter配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -65,4 +72,8 @@ dependencies {
     api rootProject.ext.dependencies.converterGson
     api rootProject.ext.dependencies.loggingInterceptor
     api rootProject.ext.dependencies.PersistentCookieJar
+
+    // ARouter路由
+    api rootProject.ext.dependencies.arouter_api
+    kapt rootProject.ext.dependencies.arouter_compiler
 }

@@ -32,5 +32,5 @@ MVVM版：使用kotlin+协程+liveData+viewModel+dataBinding构造的MVVM架构�
 - [Gitee](https://gitee.com/BTPJ_git/WanAndroid/tree/MVVM)
 
 ## 致谢
-- WanAndroid网站提供的开放Api, 和里面的一些优秀开源项目和文章
+- WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章
 - 参考鸡哥的些许样式和代码：https://github.com/hegaojian/JetpackMvvm

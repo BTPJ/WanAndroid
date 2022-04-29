@@ -84,7 +84,7 @@
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:text="@{article.tags[0].name}"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/_669900"
                 android:textSize="11sp"
                 android:visibility="@{article.tags.size()==0?View.GONE:View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_author"

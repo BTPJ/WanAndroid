@@ -524,7 +524,7 @@ object DateUtil {
      * @param weekOffSet 周偏移，上周为-1，本周为0，下周为1，以此类推
      */
     fun getWeekList(weekOffSet: Int): ArrayList<String> {
-        val dateList: java.util.ArrayList<String> = ArrayList()
+        val dateList: ArrayList<String> = ArrayList()
         // Locale.FRANCE是由于法国第一天是周一最后一天是周日
         val calendar = Calendar.getInstance(Locale.FRANCE)
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())

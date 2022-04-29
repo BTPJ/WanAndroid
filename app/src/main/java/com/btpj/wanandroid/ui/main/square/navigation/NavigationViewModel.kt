@@ -12,9 +12,7 @@ class NavigationViewModel : BaseViewModel() {
     /** 导航列表LiveData */
     val navigationListLiveData = MutableLiveData<List<Navigation>>()
 
-    override fun start() {
-
-    }
+    override fun start() {}
 
     /** 请求导航列表 */
     fun fetchNavigationList() {

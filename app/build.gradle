@@ -19,6 +19,9 @@ android {
             abiFilters 'arm64-v8a'//, 'armeabi'//, 'armeabi-v7a', 'x86', 'x86_64'
         }
 
+        // 只保留汉语资源
+        resConfigs('zh-rCN')
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

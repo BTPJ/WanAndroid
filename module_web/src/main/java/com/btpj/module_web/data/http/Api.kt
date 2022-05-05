@@ -2,7 +2,9 @@ package com.btpj.module_web.data.http
 
 import com.btpj.lib_base.data.bean.ApiResponse
 import com.btpj.lib_base.data.bean.CollectUrl
-import retrofit2.http.*
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Http接口，Retrofit的请求Service

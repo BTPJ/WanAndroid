@@ -11,14 +11,10 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
-import com.btpj.lib_base.data.bean.CollectData
+import com.btpj.lib_base.data.bean.*
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.module_web.R
-import com.btpj.lib_base.data.bean.Article
-import com.btpj.lib_base.data.bean.Banner
-import com.btpj.lib_base.data.bean.CollectArticle
-import com.btpj.lib_base.data.bean.CollectUrl
 import com.btpj.module_web.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient

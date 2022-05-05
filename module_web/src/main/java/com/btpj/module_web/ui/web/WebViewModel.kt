@@ -1,10 +1,10 @@
 package com.btpj.module_web.ui.web
 
 import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.lib_base.data.bean.CollectUrl
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.module_web.data.DataRepository
-import com.btpj.lib_base.data.bean.CollectUrl
 
 /**
  * @author LTP  2022/4/2

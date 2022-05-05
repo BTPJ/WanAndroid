@@ -1,9 +1,9 @@
 package com.btpj.module_web.data
 
 import com.btpj.lib_base.data.bean.ApiResponse
+import com.btpj.lib_base.data.bean.CollectUrl
 import com.btpj.lib_base.http.BaseRepository
 import com.btpj.lib_base.http.RetrofitManager
-import com.btpj.lib_base.data.bean.CollectUrl
 import com.btpj.module_web.data.http.Api
 
 /**

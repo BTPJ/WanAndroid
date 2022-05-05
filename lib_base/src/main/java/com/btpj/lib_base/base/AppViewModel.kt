@@ -1,9 +1,8 @@
-package com.btpj.wanandroid.base
+package com.btpj.lib_base.base
 
 import androidx.lifecycle.MutableLiveData
-import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.wanandroid.data.bean.CollectData
-import com.btpj.wanandroid.data.bean.User
+import com.btpj.lib_base.data.bean.CollectData
+import com.btpj.lib_base.data.bean.User
 
 /**
  * App全局ViewModel可直接替代EventBus

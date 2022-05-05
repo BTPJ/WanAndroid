@@ -1,7 +1,6 @@
 package com.btpj.wanandroid.data
 
-import com.btpj.lib_base.data.bean.ApiResponse
-import com.btpj.lib_base.data.bean.PageResponse
+import com.btpj.lib_base.data.bean.*
 import com.btpj.lib_base.http.BaseRepository
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.wanandroid.data.bean.*

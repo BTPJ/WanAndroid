@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
-import com.btpj.wanandroid.base.App
+import com.btpj.lib_base.base.App
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
 

@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.data.bean
 
+import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.PageResponse
 
 /**

@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.setting
 
 import androidx.databinding.ObservableBoolean
-import com.btpj.lib_base.BaseApp.Companion.appContext
+import com.btpj.lib_base.base.App.Companion.appContext
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.data.local.UserManager

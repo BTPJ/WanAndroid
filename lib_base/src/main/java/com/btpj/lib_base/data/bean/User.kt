@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.data.bean
+package com.btpj.lib_base.data.bean
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

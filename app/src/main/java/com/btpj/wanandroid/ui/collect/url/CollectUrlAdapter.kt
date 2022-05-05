@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.collect.url
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.CollectUrl
+import com.btpj.lib_base.data.bean.CollectUrl
 import com.btpj.wanandroid.databinding.ListItemCollectUrlBinding
 import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter

@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.main.project
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Article
+import com.btpj.lib_base.data.bean.Article
 import com.btpj.wanandroid.databinding.ListItemArticleImageBinding
 import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter

@@ -2,7 +2,7 @@ package com.btpj.wanandroid.ui.share.list
 
 import android.annotation.SuppressLint
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Article
+import com.btpj.lib_base.data.bean.Article
 import com.btpj.wanandroid.databinding.ListItemShareArticleBinding
 import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter

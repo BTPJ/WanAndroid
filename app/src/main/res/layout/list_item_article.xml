@@ -7,7 +7,7 @@
 
         <variable
             name="article"
-            type="com.btpj.wanandroid.data.bean.Article" />
+            type="com.btpj.lib_base.data.bean.Article" />
 
         <import type="android.text.Html" />
 

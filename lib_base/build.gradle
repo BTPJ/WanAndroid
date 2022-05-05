@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -60,6 +61,7 @@ dependencies {
     api rootProject.ext.dependencies.materialDialogsCore
     api rootProject.ext.dependencies.materialDialogsLifecycle
     api rootProject.ext.dependencies.materialDialogsbottomsheets
+    api rootProject.ext.dependencies.AndroidAutoSize
 
     // 存储相关
     api rootProject.ext.dependencies.mmkv
@@ -76,4 +78,11 @@ dependencies {
     // ARouter路由
     api rootProject.ext.dependencies.arouter_api
     kapt rootProject.ext.dependencies.arouter_compiler
+
+    // bugly
+    api rootProject.ext.dependencies.bugly_update
+    api rootProject.ext.dependencies.bugly_nativecrashreport
+
+    // 使用debugApi只在调试时引入
+    debugApi rootProject.ext.dependencies.leakcanary
 }

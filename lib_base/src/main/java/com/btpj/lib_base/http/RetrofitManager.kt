@@ -1,6 +1,6 @@
 package com.btpj.lib_base.http
 
-import com.btpj.lib_base.BaseApp.Companion.appContext
+import com.btpj.lib_base.base.App.Companion.appContext
 import com.btpj.lib_base.data.local.IpManager
 import com.btpj.lib_base.http.interceptor.CacheInterceptor
 import com.btpj.lib_base.http.interceptor.logInterceptor

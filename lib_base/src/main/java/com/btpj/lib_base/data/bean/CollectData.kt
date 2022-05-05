@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.data.bean
+package com.btpj.lib_base.data.bean
 
 /**
  * 收藏实体，主要用于全局收藏事件Event

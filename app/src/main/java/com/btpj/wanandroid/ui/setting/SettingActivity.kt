@@ -8,9 +8,9 @@ import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
+import com.btpj.lib_base.base.App
 import com.btpj.wanandroid.base.BaseActivity
-import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.lib_base.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.ActivitySettingBinding
 import com.btpj.wanandroid.ui.web.WebActivity

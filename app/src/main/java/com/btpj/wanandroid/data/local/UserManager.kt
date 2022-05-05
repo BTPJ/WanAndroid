@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.data.local
 
-import com.btpj.wanandroid.data.bean.User
+import com.btpj.lib_base.data.bean.User
 import com.tencent.mmkv.MMKV
 
 /**

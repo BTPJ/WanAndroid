@@ -7,13 +7,13 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
+import com.btpj.wanandroid.R
+import com.btpj.lib_base.base.App
+import com.btpj.wanandroid.base.BaseActivity
+import com.btpj.lib_base.data.bean.Article
+import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
-import com.btpj.wanandroid.base.BaseActivity
-import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.databinding.ActivityAuthorBinding
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 

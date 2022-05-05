@@ -7,7 +7,7 @@
 
         <variable
             name="collectArticle"
-            type="com.btpj.wanandroid.data.bean.CollectArticle" />
+            type="com.btpj.lib_base.data.bean.CollectArticle" />
 
         <import type="android.text.Html" />
 

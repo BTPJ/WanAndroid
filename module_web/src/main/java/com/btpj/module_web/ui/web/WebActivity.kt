@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.web
+package com.btpj.module_web.ui.web
 
 import android.content.Context
 import android.content.Intent
@@ -9,14 +9,17 @@ import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import com.btpj.lib_base.ext.initClose
-import com.btpj.wanandroid.R
 import com.btpj.lib_base.base.App
-import com.btpj.lib_base.data.bean.*
+import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.lib_base.data.bean.CollectData
+import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
-import com.btpj.wanandroid.base.BaseActivity
-import com.btpj.wanandroid.data.bean.*
-import com.btpj.wanandroid.databinding.ActivityWebBinding
+import com.btpj.module_web.R
+import com.btpj.lib_base.data.bean.Article
+import com.btpj.lib_base.data.bean.Banner
+import com.btpj.lib_base.data.bean.CollectArticle
+import com.btpj.lib_base.data.bean.CollectUrl
+import com.btpj.module_web.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
 
@@ -25,7 +28,7 @@ import com.just.agentweb.WebChromeClient
  *
  * @author LTP 2022/4/2
  */
-class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.activity_web) {
+class WebActivity : BaseVMBActivity<WebViewModel, ActivityWebBinding>(R.layout.activity_web) {
 
     private lateinit var mAgentWeb: AgentWeb
 
@@ -149,7 +152,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebBinding>(R.layout.acti
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         menu?.findItem(R.id.item_collect)?.icon = ContextCompat.getDrawable(
             this,
-            if (mCollect) R.drawable.ic_collect else R.drawable.ic_un_collect
+            if (mCollect) com.btpj.lib_base.R.drawable.ic_collect else com.btpj.lib_base.R.drawable.ic_un_collect
         )
         return super.onPrepareOptionsMenu(menu)
     }

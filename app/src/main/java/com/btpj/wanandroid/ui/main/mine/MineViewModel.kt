@@ -7,7 +7,7 @@ import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
-import com.btpj.wanandroid.data.bean.User
+import com.btpj.lib_base.data.bean.User
 import com.btpj.wanandroid.data.local.UserManager
 
 class MineViewModel : BaseViewModel() {

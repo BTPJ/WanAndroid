@@ -3,11 +3,11 @@ package com.btpj.wanandroid.ui.collect.article
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
-import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
+import com.btpj.lib_base.base.App
 import com.btpj.wanandroid.base.BaseFragment
-import com.btpj.wanandroid.data.bean.CollectArticle
+import com.btpj.lib_base.data.bean.CollectArticle
+import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 import java.util.*
 

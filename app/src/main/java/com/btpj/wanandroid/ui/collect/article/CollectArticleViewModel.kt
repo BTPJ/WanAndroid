@@ -6,7 +6,7 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.CollectArticle
+import com.btpj.lib_base.data.bean.CollectArticle
 
 class CollectArticleViewModel : BaseViewModel() {
 

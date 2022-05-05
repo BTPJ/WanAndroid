@@ -1,6 +1,6 @@
 package com.btpj.lib_base.http.interceptor
 
-import com.btpj.lib_base.BaseApp.Companion.appContext
+import com.btpj.lib_base.base.App.Companion.appContext
 import com.btpj.lib_base.utils.NetworkUtil
 import okhttp3.CacheControl
 import okhttp3.Interceptor

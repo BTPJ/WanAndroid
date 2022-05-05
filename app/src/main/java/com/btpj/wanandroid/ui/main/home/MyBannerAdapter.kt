@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.btpj.lib_base.ext.load
-import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.lib_base.data.bean.Banner
 import com.btpj.wanandroid.ui.web.WebActivity
 import com.youth.banner.adapter.BannerAdapter
 

@@ -1,4 +1,7 @@
 ext {
+    // module是否独立运行
+    isBuildModule = false
+
     android = [
             compileSdk : 31,
             minSdk     : 21,

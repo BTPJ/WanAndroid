@@ -5,12 +5,12 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.System
+import com.btpj.wanandroid.data.bean.MySystem
 
 class SystemViewModel : BaseViewModel() {
 
     /** 体系列表LiveData */
-    val systemListLiveData = MutableLiveData<List<System>>()
+    val systemListLiveData = MutableLiveData<List<MySystem>>()
 
     override fun start() {
 

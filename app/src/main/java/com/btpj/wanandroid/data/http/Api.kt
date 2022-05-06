@@ -83,7 +83,7 @@ interface Api {
 
     /** 获取体系数据 */
     @GET("tree/json")
-    suspend fun getTreeList(): ApiResponse<List<System>>
+    suspend fun getTreeList(): ApiResponse<List<MySystem>>
 
     /** 获取导航数据 */
     @GET("navi/json")

@@ -84,7 +84,7 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.getAskPageList(pageNo) }
     }
 
-    override suspend fun getTreeList(): ApiResponse<List<System>> {
+    override suspend fun getTreeList(): ApiResponse<List<MySystem>> {
         return apiCall { service.getTreeList() }
     }
 

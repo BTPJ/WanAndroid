@@ -20,7 +20,7 @@
             android:background="@color/purple_500"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ToolbarPopTheme" />
+            app:popupTheme="@style/web_toolbarPopTheme" />
 
         <FrameLayout
             android:id="@+id/fl_web"

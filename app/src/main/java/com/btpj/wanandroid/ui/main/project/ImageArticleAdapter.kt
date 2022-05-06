@@ -1,9 +1,10 @@
 package com.btpj.wanandroid.ui.main.project
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.wanandroid.R
 import com.btpj.lib_base.data.bean.Article
+import com.btpj.lib_base.data.local.Constants
 import com.btpj.wanandroid.databinding.ListItemArticleImageBinding
-import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -29,7 +30,11 @@ class ImageArticleAdapter :
             article = item
             executePendingBindings()
 
-            clItem.setOnClickListener { WebActivity.launch(context, item) }
+            clItem.setOnClickListener {
+                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
+                    .withParcelable(Constants.ROUTER_WEB_EXTRA_ARTICLE, item)
+                    .navigation()
+            }
         }
     }
 }

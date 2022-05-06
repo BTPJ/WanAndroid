@@ -1,6 +1,5 @@
 package com.btpj.module_web.ui.web
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,13 +8,17 @@ import android.view.MenuItem
 import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.*
+import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.module_web.R
-import com.btpj.module_web.databinding.ActivityWebBinding
+import com.btpj.module_web.databinding.WebActivityWebBinding
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
 
@@ -24,86 +27,40 @@ import com.just.agentweb.WebChromeClient
  *
  * @author LTP 2022/4/2
  */
-class WebActivity : BaseVMBActivity<WebViewModel, ActivityWebBinding>(R.layout.activity_web) {
+@Route(path = Constants.ROUTER_WEB_WEB_ACTIVITY)
+class WebActivity :
+    BaseVMBActivity<WebViewModel, WebActivityWebBinding>(R.layout.web_activity_web) {
 
     private lateinit var mAgentWeb: AgentWeb
 
-    private var mArticle: Article? = null
-    private var mCollectArticle: CollectArticle? = null
-    private var mCollectUrl: CollectUrl? = null
-    private var mBanner: Banner? = null
+    @Autowired(name = Constants.ROUTER_WEB_EXTRA_ARTICLE)
+    @JvmField
+    var mArticle: Article? = null
+
+    @Autowired(name = Constants.ROUTER_WEB_EXTRA_COLLECT_ARTICLE)
+    @JvmField
+    var mCollectArticle: CollectArticle? = null
+
+    @Autowired(name = Constants.ROUTER_WEB_EXTRA_COLLECT_URL)
+    @JvmField
+    var mCollectUrl: CollectUrl? = null
+
+    @Autowired(name = Constants.ROUTER_WEB_EXTRA_BANNER)
+    @JvmField
+    var mBanner: Banner? = null
 
     private lateinit var mUrl: String
     private var mCollect = false
     private lateinit var mTitle: String
 
-    companion object {
-        private const val EXTRA_ARTICLE = "extra_article"
-        private const val EXTRA_COLLECT_ARTICLE = "extra_collect_article"
-        private const val EXTRA_COLLECT_URL = "extra_collect_url"
-        private const val EXTRA_BANNER = "extra_banner"
-
-        /**
-         * 页面跳转
-         *
-         * @param context Context
-         * @param article Article
-         */
-        fun launch(context: Context, article: Article) {
-            context.startActivity(Intent(context, WebActivity::class.java).apply {
-                putExtra(EXTRA_ARTICLE, article)
-            })
-        }
-
-        /**
-         * 页面跳转
-         *
-         * @param context Context
-         * @param collectArticle CollectArticle
-         */
-        fun launch(context: Context, collectArticle: CollectArticle) {
-            context.startActivity(Intent(context, WebActivity::class.java).apply {
-                putExtra(EXTRA_COLLECT_ARTICLE, collectArticle)
-            })
-        }
-
-        /**
-         * 页面跳转
-         *
-         * @param context Context
-         * @param collectUrl CollectUrl
-         */
-        fun launch(context: Context, collectUrl: CollectUrl) {
-            context.startActivity(Intent(context, WebActivity::class.java).apply {
-                putExtra(EXTRA_COLLECT_URL, collectUrl)
-            })
-        }
-
-        /**
-         * 页面跳转
-         *
-         * @param context Context
-         * @param banner Banner
-         */
-        fun launch(context: Context, banner: Banner) {
-            context.startActivity(Intent(context, WebActivity::class.java).apply {
-                putExtra(EXTRA_BANNER, banner)
-            })
-        }
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
+        // 自动完成参数注入
+        ARouter.getInstance().inject(this)
+
         mBinding.toolbar.apply {
             setSupportActionBar(this)
             initTitle("加载中...")
             initClose { onBackPressed() }
-        }
-
-        intent.apply {
-            mArticle = getParcelableExtra(EXTRA_ARTICLE)
-            mCollectArticle = getParcelableExtra(EXTRA_COLLECT_ARTICLE)
-            mCollectUrl = getParcelableExtra(EXTRA_COLLECT_URL)
-            mBanner = getParcelableExtra(EXTRA_BANNER)
         }
 
         when {
@@ -141,7 +98,7 @@ class WebActivity : BaseVMBActivity<WebViewModel, ActivityWebBinding>(R.layout.a
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_web, menu)
+        menuInflater.inflate(R.menu.web_menu_web, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

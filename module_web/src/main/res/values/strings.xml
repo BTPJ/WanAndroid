@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">module_web</string>
+    <string name="web_app_name">module_web</string>
 
-    <string name="collect">收藏</string>
-    <string name="refresh">刷新</string>
-    <string name="openByBrowser">用浏览器打开</string>
-    <string name="share">分享</string>
+    <string name="web_collect">收藏</string>
+    <string name="web_refresh">刷新</string>
+    <string name="web_openByBrowser">用浏览器打开</string>
+    <string name="web_share">分享</string>
 </resources>

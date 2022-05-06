@@ -52,10 +52,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.web.WebActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.share.add.AddArticleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

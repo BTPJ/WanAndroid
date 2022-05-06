@@ -1,9 +1,10 @@
 package com.btpj.wanandroid.ui.collect.url
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.wanandroid.R
 import com.btpj.lib_base.data.bean.CollectUrl
+import com.btpj.lib_base.data.local.Constants
 import com.btpj.wanandroid.databinding.ListItemCollectUrlBinding
-import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 
@@ -24,7 +25,11 @@ class CollectUrlAdapter :
             collectUrl = item
             executePendingBindings()
 
-            clItem.setOnClickListener { WebActivity.launch(context, item) }
+            clItem.setOnClickListener {
+                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
+                    .withParcelable(Constants.ROUTER_WEB_EXTRA_COLLECT_URL, item)
+                    .navigation()
+            }
         }
     }
 }

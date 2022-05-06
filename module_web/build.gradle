@@ -1,41 +1,16 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+apply from: "../module.build.gradle"
 
 android {
-    compileSdk 32
-
     defaultConfig {
-        applicationId "com.btpj.module_web"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        if (rootProject.ext.isBuildModule) {
+            applicationId "com.btpj.module_web"
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        dataBinding true
-    }
+
+    //统一资源前缀，规范资源引用，会让编译器自动提示你不规范的命名
+     resourcePrefix "web_"
 }
 
 dependencies {
-    implementation project(path: ':lib_base')
-
     implementation rootProject.ext.dependencies.agentWeb
 }

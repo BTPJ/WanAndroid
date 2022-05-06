@@ -3,10 +3,12 @@ package com.btpj.wanandroid.ui.main.home
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.btpj.lib_base.ext.load
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.data.bean.Banner
-import com.btpj.wanandroid.ui.web.WebActivity
+import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.ext.load
 import com.youth.banner.adapter.BannerAdapter
+
 
 /**
  * 图片轮播Banner的Adapter
@@ -30,7 +32,11 @@ class MyBannerAdapter(dataList: ArrayList<Banner>) :
     override fun onBindView(holder: BannerViewHolder, data: Banner, position: Int, size: Int) {
         holder.imageView.apply {
             load(data.imagePath)
-            setOnClickListener { WebActivity.launch(context, data) }
+            setOnClickListener {
+                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
+                    .withParcelable(Constants.ROUTER_WEB_EXTRA_BANNER, data)
+                    .navigation()
+            }
         }
     }
 

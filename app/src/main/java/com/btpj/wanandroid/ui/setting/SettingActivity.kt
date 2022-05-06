@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.setting
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.ext.showDialog
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
@@ -11,9 +12,9 @@ import com.btpj.wanandroid.R
 import com.btpj.lib_base.base.App
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.lib_base.data.bean.Banner
+import com.btpj.lib_base.data.local.Constants
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.databinding.ActivitySettingBinding
-import com.btpj.wanandroid.ui.web.WebActivity
 
 /**
  * 设置
@@ -57,10 +58,12 @@ class SettingActivity :
 
             // 项目源码
             tvSourceCode.setOnClickListener {
-                WebActivity.launch(
-                    this@SettingActivity,
-                    Banner(title = "项目源码", url = "https://gitee.com/BTPJ_git/WanAndroid")
-                )
+                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
+                    .withParcelable(
+                        Constants.ROUTER_WEB_EXTRA_BANNER,
+                        Banner(title = "项目源码", url = "https://gitee.com/BTPJ_git/WanAndroid")
+                    )
+                    .navigation()
             }
 
             // 退出登录

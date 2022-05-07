@@ -32,30 +32,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.btpj.module_mine.ui.integral.record.IntegralRecordActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="layout.IntegralRankActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.btpj.module_mine.ui.setting.SettingActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.btpj.module_mine.ui.share.add.AddArticleActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.btpj.module_mine.ui.share.list.MyArticleActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.btpj.module_mine.ui.ip.ChangeIpActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"

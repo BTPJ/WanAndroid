@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.btpj.lib_base.ext.clearLongClickToast
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.databinding.ActivityMainBinding
-import com.btpj.wanandroid.ext.clearLongClickToast
 import com.btpj.wanandroid.ui.main.home.HomeFragment
 import com.btpj.wanandroid.ui.main.mine.MineFragment
 import com.btpj.wanandroid.ui.main.project.ProjectFragment
@@ -154,7 +154,7 @@ class MainActivity :
         // 重写返回键监听实现双击退出
         if (System.currentTimeMillis() - lastBackMills > 2000) {
             lastBackMills = System.currentTimeMillis()
-            ToastUtil.showShort(this, getString(R.string.toast_double_back_exit))
+            ToastUtil.showShort(this, getString(com.btpj.lib_base.R.string.toast_double_back_exit))
         } else {
             super.onBackPressed()
         }

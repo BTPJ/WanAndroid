@@ -3,10 +3,10 @@ package com.btpj.wanandroid.ui.collect.url
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.R
 import com.btpj.lib_base.base.App
+import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseFragment
-import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 
 /**
  * 收藏的文章
@@ -14,7 +14,7 @@ import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
  * @author LTP 2022/3/10
  */
 class CollectUrlFragment :
-    BaseFragment<CollectUrlViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<CollectUrlViewModel, IncludeSwiperefreshRecyclerviewBinding>(com.btpj.lib_base.R.layout.include_swiperefresh_recyclerview) {
 
     private val mAdapter by lazy { CollectUrlAdapter() }
 

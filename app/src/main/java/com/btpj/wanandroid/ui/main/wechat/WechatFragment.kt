@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseFragment
-import com.btpj.wanandroid.data.bean.Classify
+import com.btpj.lib_base.data.bean.Classify
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

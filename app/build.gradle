@@ -91,6 +91,7 @@ dependencies {
     implementation rootProject.ext.dependencies.flexbox
 
     if(!rootProject.ext.isBuildModule){
+        implementation project(path: ':module_mine')
         implementation project(path: ':module_web')
     }
 }

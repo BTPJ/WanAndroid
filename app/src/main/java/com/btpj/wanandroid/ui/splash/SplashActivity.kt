@@ -21,7 +21,11 @@ class SplashActivity :
     BaseActivity<SplashViewModel, ActivitySplashBinding>(R.layout.activity_splash) {
 
     private val mBannerList =
-        listOf(R.drawable.ic_splash, R.drawable.ic_splash2, R.drawable.ic_splash3)
+        listOf(
+            com.btpj.lib_base.R.drawable.ic_splash,
+            com.btpj.lib_base.R.drawable.ic_splash2,
+            com.btpj.lib_base.R.drawable.ic_splash3
+        )
 
     private val mAdapter by lazy { SplashBannerAdapter(mBannerList) }
 

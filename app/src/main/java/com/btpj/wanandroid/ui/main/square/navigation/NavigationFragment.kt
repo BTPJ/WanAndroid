@@ -3,9 +3,10 @@ package com.btpj.wanandroid.ui.main.square.navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseFragment
-import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.R
+
 
 /**
  * 广场Tab下的体系

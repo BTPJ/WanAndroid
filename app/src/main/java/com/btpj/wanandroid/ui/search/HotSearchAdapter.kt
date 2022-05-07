@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.search
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.HotSearch
+import com.btpj.lib_base.data.bean.HotSearch
 import com.btpj.wanandroid.databinding.ListItemTvBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule

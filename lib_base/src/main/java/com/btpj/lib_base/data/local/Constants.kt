@@ -7,6 +7,9 @@ object Constants {
 
     //------- ARouter相关启动变量 start --------------
 
+    // mine Module
+    const val ROUTER_MINE_LOGIN_ACTIVITY = "/mine/loginActivity"
+
     // Web Module
     const val ROUTER_WEB_WEB_ACTIVITY = "/web/WebActivity"
     const val ROUTER_WEB_EXTRA_BANNER = "extra_banner"

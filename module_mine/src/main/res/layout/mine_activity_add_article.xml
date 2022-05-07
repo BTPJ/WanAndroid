@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.btpj.module_mine.ui.share.add.AddArticleViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.btpj.module_mine.ui.share.add.AddArticleActivity">
+
+        <com.btpj.lib_base.widgets.TitleLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleText="@string/share_article" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/title"
+            android:textColor="@color/_a0a0a0"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="18dp"
+            android:background="@color/_eeeeee"
+            android:hint="@string/article_title"
+            android:inputType="text"
+            android:lines="1"
+            android:padding="12dp"
+            android:text="@={viewModel.title}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:ignore="Autofill" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/link"
+            android:textColor="@color/_a0a0a0"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="18dp"
+            android:background="@color/_eeeeee"
+            android:gravity="top|start"
+            android:hint="@string/article_link"
+            android:inputType="textUri"
+            android:maxLength="100"
+            android:minLines="4"
+            android:padding="12dp"
+            android:text="@={viewModel.articleLink}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:ignore="Autofill" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/share_user"
+            android:textColor="@color/_a0a0a0"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="18dp"
+            android:background="@color/_eeeeee"
+            android:enabled="false"
+            android:inputType="text"
+            android:padding="12dp"
+            android:text="@{viewModel.shareUserName}"
+            android:textColor="@color/_999999"
+            android:textSize="15sp"
+            tools:ignore="Autofill"
+            tools:text="BTPJ" />
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="18dp"
+            android:alpha="@{viewModel.shareBtnEnable?1f:0.5f}"
+            android:backgroundTint="@color/purple_500"
+            android:enabled="@{viewModel.shareBtnEnable}"
+            android:padding="6dp"
+            android:text="@string/share"
+            android:textColor="@color/_ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+</layout>

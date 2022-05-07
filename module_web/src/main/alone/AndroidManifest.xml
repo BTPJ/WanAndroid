@@ -6,7 +6,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/web_app_name"
+        android:label="@string/browser"
         android:supportsRtl="true"
         android:theme="@style/web_Theme">
 

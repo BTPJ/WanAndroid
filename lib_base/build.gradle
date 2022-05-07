@@ -77,7 +77,6 @@ dependencies {
 
     // ARouter路由
     api rootProject.ext.dependencies.arouter_api
-    kapt rootProject.ext.dependencies.arouter_compiler
 
     // bugly
     api rootProject.ext.dependencies.bugly_update

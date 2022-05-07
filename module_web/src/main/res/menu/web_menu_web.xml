@@ -8,14 +8,14 @@
         android:checked="false"
         android:icon="@drawable/ic_un_collect"
         app:showAsAction="always"
-        android:title="@string/web_collect" />
+        android:title="@string/collect" />
     <item
         android:id="@+id/item_share"
-        android:title="@string/web_share" />
+        android:title="@string/share" />
     <item
         android:id="@+id/item_refresh"
-        android:title="@string/web_refresh" />
+        android:title="@string/refresh" />
     <item
         android:id="@+id/item_openByBrowser"
-        android:title="@string/web_openByBrowser" />
+        android:title="@string/openByBrowser" />
 </menu>

@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.main.square.system
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.MySystem
+import com.btpj.lib_base.data.bean.MySystem
 import com.btpj.wanandroid.databinding.ListItemSystemBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule

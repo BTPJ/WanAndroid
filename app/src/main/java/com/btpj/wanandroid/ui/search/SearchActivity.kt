@@ -40,7 +40,7 @@ class SearchActivity :
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.apply {
             // toolbar + SearchView挺麻烦不想用
-            titleLayout.setRightView(R.drawable.ic_search) {
+            titleLayout.setRightView(com.btpj.lib_base.R.drawable.ic_search) {
                 handleSearch()
             }
 

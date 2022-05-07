@@ -8,7 +8,7 @@ import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.lib_base.data.bean.Article
-import com.btpj.wanandroid.data.bean.CoinInfo
+import com.btpj.lib_base.data.bean.CoinInfo
 
 /**
  * @author LTP  2022/3/9

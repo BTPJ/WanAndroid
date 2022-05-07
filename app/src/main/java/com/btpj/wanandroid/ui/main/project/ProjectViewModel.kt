@@ -5,7 +5,7 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.ProjectTitle
+import com.btpj.lib_base.data.bean.ProjectTitle
 
 class ProjectViewModel : BaseViewModel() {
 

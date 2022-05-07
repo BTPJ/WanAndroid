@@ -10,7 +10,7 @@ import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 
@@ -20,7 +20,7 @@ import com.btpj.wanandroid.ui.main.home.ArticleAdapter
  * @author LTP 2022/3/10
  */
 class SquareChildFragment :
-    BaseFragment<SquareChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<SquareChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(com.btpj.lib_base.R.layout.include_swiperefresh_recyclerview) {
 
     /** 页数 */
     private var mPageNo: Int = 0

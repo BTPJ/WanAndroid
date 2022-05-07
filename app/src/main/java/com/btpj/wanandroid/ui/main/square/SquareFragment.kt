@@ -8,12 +8,11 @@ import com.btpj.lib_base.utils.ScreenUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.databinding.FragmentViewpagerBinding
-import com.btpj.wanandroid.ext.launchCheckLogin
+import com.btpj.lib_base.ext.launchCheckLogin
 import com.btpj.wanandroid.ui.main.square.ask.AskFragment
 import com.btpj.wanandroid.ui.main.square.navigation.NavigationFragment
 import com.btpj.wanandroid.ui.main.square.square.SquareChildFragment
 import com.btpj.wanandroid.ui.main.square.system.SystemFragment
-import com.btpj.wanandroid.ui.share.add.AddArticleActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -35,8 +34,8 @@ class SquareFragment :
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             if (position == 0) {
-                mBinding.titleLayout.setRightView(R.drawable.ic_add) {
-                    requireContext().launchCheckLogin { AddArticleActivity.launch(it) }
+                mBinding.titleLayout.setRightView(com.btpj.lib_base.R.drawable.ic_add) {
+//                    requireContext().launchCheckLogin { AddArticleActivity.launch(it) }
                 }
             } else {
                 mBinding.titleLayout.setRightView("")

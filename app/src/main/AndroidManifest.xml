@@ -32,35 +32,27 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.integral.record.IntegralRecordActivity"
+            android:name="com.btpj.module_mine.ui.integral.record.IntegralRecordActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.integral.rank.IntegralRankActivity"
+            android:name="layout.IntegralRankActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.setting.SettingActivity"
+            android:name="com.btpj.module_mine.ui.setting.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.btpj.module_mine.ui.share.add.AddArticleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.login.register.RegisterActivity"
+            android:name="com.btpj.module_mine.ui.share.list.MyArticleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.share.add.AddArticleActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.share.list.MyArticleActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.ip.ChangeIpActivity"
+            android:name="com.btpj.module_mine.ui.ip.ChangeIpActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

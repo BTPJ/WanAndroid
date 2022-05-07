@@ -7,15 +7,11 @@ import com.btpj.lib_base.base.App
 import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.data.bean.Banner
 import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.data.local.UserManager
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.data.local.UserManager
+import com.btpj.lib_base.ext.launchCheckLogin
 import com.btpj.wanandroid.databinding.FragmentMineBinding
-import com.btpj.wanandroid.ext.launchCheckLogin
 import com.btpj.wanandroid.ui.collect.CollectActivity
-import com.btpj.wanandroid.ui.integral.rank.IntegralRankActivity
-import com.btpj.wanandroid.ui.login.LoginActivity
-import com.btpj.wanandroid.ui.setting.SettingActivity
-import com.btpj.wanandroid.ui.share.list.MyArticleActivity
 
 /**
  * 我的Tab
@@ -37,13 +33,13 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             clUser.setOnClickListener {
                 if (!UserManager.isLogin()) {
-                    LoginActivity.launch(requireContext())
+                    ARouter.getInstance().build(Constants.ROUTER_MINE_LOGIN_ACTIVITY).navigation()
                 }
             }
 
             // 我的积分
             tvPoints.setOnClickListener {
-                IntegralRankActivity.launch(requireContext())
+//                IntegralRankActivity.launch(requireContext())
             }
 
             // 我的收藏（需要登录）
@@ -53,7 +49,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             // 我分享的文章（需要登录）
             tvArticle.setOnClickListener {
-                requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
+//                requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
             }
 
             // 开源网站
@@ -67,7 +63,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
             }
 
             // 设置
-            tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
+//            tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
         }
 
         onRefresh()

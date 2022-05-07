@@ -3,9 +3,8 @@ package com.btpj.wanandroid.ui.main.square.system
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseFragment
-import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
 
 /**
  * 广场Tab下的体系
@@ -13,7 +12,7 @@ import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
  * @author LTP 2022/4/7
  */
 class SystemFragment :
-    BaseFragment<SystemViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<SystemViewModel, IncludeSwiperefreshRecyclerviewBinding>(com.btpj.lib_base.R.layout.include_swiperefresh_recyclerview) {
 
     private val mAdapter by lazy { SystemAdapter() }
 

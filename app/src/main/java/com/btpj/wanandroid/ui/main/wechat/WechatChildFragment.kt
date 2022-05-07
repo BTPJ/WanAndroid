@@ -11,7 +11,7 @@ import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.ext.initColors
-import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.main.home.ArticleAdapter
 
@@ -21,7 +21,7 @@ import com.btpj.wanandroid.ui.main.home.ArticleAdapter
  * @author LTP 2022/3/10
  */
 class WechatChildFragment :
-    BaseFragment<WechatChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(R.layout.include_swiperefresh_recyclerview) {
+    BaseFragment<WechatChildViewModel, IncludeSwiperefreshRecyclerviewBinding>(com.btpj.lib_base.R.layout.include_swiperefresh_recyclerview) {
 
     /** 列表总数 */
     private var mTotalCount: Int = 0

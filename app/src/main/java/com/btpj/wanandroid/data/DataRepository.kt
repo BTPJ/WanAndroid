@@ -3,7 +3,6 @@ package com.btpj.wanandroid.data
 import com.btpj.lib_base.data.bean.*
 import com.btpj.lib_base.http.BaseRepository
 import com.btpj.lib_base.http.RetrofitManager
-import com.btpj.wanandroid.data.bean.*
 import com.btpj.wanandroid.data.http.Api
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,18 +15,6 @@ import retrofit2.http.Query
 object DataRepository : BaseRepository(), Api {
 
     private val service by lazy { RetrofitManager.getService(Api::class.java) }
-
-    override suspend fun login(username: String, pwd: String): ApiResponse<User> {
-        return apiCall { service.login(username, pwd) }
-    }
-
-    override suspend fun register(
-        username: String,
-        pwd: String,
-        pwdSure: String
-    ): ApiResponse<Any?> {
-        return apiCall { service.register(username, pwd, pwdSure) }
-    }
 
     override suspend fun getBanner(): ApiResponse<List<Banner>> {
         return apiCall { service.getBanner() }
@@ -104,28 +91,12 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.getAuthorArticlePageList(authorId, pageNo, pageSize) }
     }
 
-    override suspend fun getUserIntegral(): ApiResponse<CoinInfo> {
-        return apiCall { service.getUserIntegral() }
-    }
-
-    override suspend fun getIntegralRankPageList(pageNo: Int): ApiResponse<PageResponse<CoinInfo>> {
-        return apiCall { service.getIntegralRankPageList(pageNo) }
-    }
-
-    override suspend fun getIntegralRecordPageList(pageNo: Int): ApiResponse<PageResponse<IntegralRecord>> {
-        return apiCall { service.getIntegralRecordPageList(pageNo) }
-    }
-
     override suspend fun getCollectArticlePageList(pageNo: Int): ApiResponse<PageResponse<CollectArticle>> {
         return apiCall { service.getCollectArticlePageList(pageNo) }
     }
 
     override suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>> {
         return apiCall { service.getCollectUrlList() }
-    }
-
-    override suspend fun getMyShareArticlePageList(pageNo: Int): ApiResponse<Share> {
-        return apiCall { service.getMyShareArticlePageList(pageNo) }
     }
 
     override suspend fun addArticle(title: String, link: String): ApiResponse<Any?> {

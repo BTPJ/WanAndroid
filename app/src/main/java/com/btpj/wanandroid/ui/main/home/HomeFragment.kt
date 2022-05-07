@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         }
 
         mBinding.apply {
-            titleLayout.setRightView(R.drawable.ic_search) {
+            titleLayout.setRightView(com.btpj.lib_base.R.drawable.ic_search) {
                 SearchActivity.launch(requireContext())
             }
 

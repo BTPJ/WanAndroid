@@ -1,6 +1,7 @@
 package com.btpj.lib_base.ext
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,44 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.btpj.lib_base.R
+import com.btpj.lib_base.data.local.UserManager
 import com.btpj.lib_base.utils.ScreenUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+/**
+ * 一些扩展函数
+ * @author LTP  2022/4/12
+ */
+
+/**
+ * 需要验证登录状态的操作
+ *
+ * @param action 函数参数，已登录状态时的处理
+ */
+fun Context.launchCheckLogin(action: (context: Context) -> Unit) {
+    if (UserManager.isLogin()) {
+        action.invoke(this)
+    } else {
+//        com.btpj.module_user.ui.login.LoginActivity.launch(this)
+    }
+}
+
+/**
+ * 处理BottomNavigationView中的tab长按出现toast的问题
+ *
+ * @param ids tab项的id集
+ */
+fun BottomNavigationView.clearLongClickToast(ids: MutableList<Int>) {
+    val bottomNavigationView: ViewGroup = getChildAt(0) as ViewGroup
+    for (position in 0 until ids.size) {
+        bottomNavigationView.getChildAt(position).findViewById<View>(ids[position])
+            .setOnLongClickListener { true }
+    }
+}
 
 /**
  * ImageView利用Glide加载图片

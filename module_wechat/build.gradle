@@ -1,0 +1,12 @@
+apply from: "../module.build.gradle"
+
+android {
+    defaultConfig {
+        if (rootProject.ext.isBuildModule) {
+            applicationId "com.btpj.module_wechat"
+        }
+    }
+
+    //统一资源前缀，规范资源引用，会让编译器自动提示你不规范的命名
+    resourcePrefix "wechat_"
+}

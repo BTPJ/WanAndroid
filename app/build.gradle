@@ -85,12 +85,12 @@ android {
 dependencies {
     implementation project(path: ':lib_base')
 
-    // 轮播图 https://github.com/youth5201314/banner
-    implementation rootProject.ext.dependencies.banner
-    implementation rootProject.ext.dependencies.agentWeb
-    implementation rootProject.ext.dependencies.flexbox
-
     if(!rootProject.ext.isBuildModule){
+        implementation project(path: ':module_main')
+        implementation project(path: ':module_home')
+        implementation project(path: ':module_project')
+        implementation project(path: ':module_square')
+        implementation project(path: ':module_wechat')
         implementation project(path: ':module_mine')
         implementation project(path: ':module_web')
     }

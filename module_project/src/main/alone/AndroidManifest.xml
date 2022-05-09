@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.btpj.module_web">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/tab_project"
+        android:supportsRtl="true"
+        android:theme="@style/Project.Theme.WanAndroid">
+
+    </application>
+
+</manifest>

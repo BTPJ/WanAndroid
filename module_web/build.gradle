@@ -10,7 +10,3 @@ android {
     //统一资源前缀，规范资源引用，会让编译器自动提示你不规范的命名
      resourcePrefix "web_"
 }
-
-dependencies {
-    implementation rootProject.ext.dependencies.agentWeb
-}

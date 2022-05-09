@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.btpj.module_home">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/tab_home"
+        android:supportsRtl="true"
+        android:theme="@style/Home.Theme.WanAndroid">
+        <!--        <activity-->
+        <!--            android:name=".ui.splash.SplashActivity"-->
+        <!--            android:exported="true"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:theme="@style/main.SplashTheme">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+        <activity
+            android:name=".ui.author.AuthorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.result.SearchResultActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

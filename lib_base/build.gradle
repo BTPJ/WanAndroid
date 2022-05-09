@@ -62,6 +62,10 @@ dependencies {
     api rootProject.ext.dependencies.materialDialogsLifecycle
     api rootProject.ext.dependencies.materialDialogsbottomsheets
     api rootProject.ext.dependencies.AndroidAutoSize
+    api rootProject.ext.dependencies.agentWeb
+    // 轮播图 https://github.com/youth5201314/banner
+    api rootProject.ext.dependencies.banner
+    api rootProject.ext.dependencies.flexbox
 
     // 存储相关
     api rootProject.ext.dependencies.mmkv

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="web_Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Web.Theme.WanAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -15,12 +15,12 @@
     </style>
 
     <!--Toolbar的Theme的设置，都是针对popup的设置-->
-    <style name="web_toolbarPopTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="actionOverflowMenuStyle">@style/web_overflowMenuTheme</item><!--设置弹出位置的主题-->
+    <style name="Web.ToolbarPopTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="actionOverflowMenuStyle">@style/Web.OverflowMenuTheme</item><!--设置弹出位置的主题-->
     </style>
 
     <!--Toolbar弹出popup主题的设置-->
-    <style name="web_overflowMenuTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+    <style name="Web.OverflowMenuTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item><!--这个属性设置为false，就能使得popup在Toolbar的下面显示-->
     </style>
 </resources>

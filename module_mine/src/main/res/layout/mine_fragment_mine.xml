@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.btpj.wanandroid.ui.main.mine.MineViewModel" />
+            type="com.btpj.module_mine.ui.mine.MineViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.collect
+package com.btpj.module_mine.ui.collect
 
 import com.btpj.lib_base.base.BaseViewModel
 

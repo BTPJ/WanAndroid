@@ -9,6 +9,7 @@ object Constants {
 
     // mine Module
     const val ROUTER_MINE_LOGIN_ACTIVITY = "/mine/loginActivity"
+    const val ROUTER_MINE_MINE_FRAGMENT = "/mine/mineFragment"
 
     // Web Module
     const val ROUTER_WEB_WEB_ACTIVITY = "/web/WebActivity"

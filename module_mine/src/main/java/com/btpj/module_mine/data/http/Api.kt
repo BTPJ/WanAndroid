@@ -72,4 +72,12 @@ interface Api {
     /** 取消收藏站内文章 */
     @POST("lg/collect/deletetool/json")
     suspend fun unCollectUrl(@Query("id") id: Int): ApiResponse<Any?>
+
+    /** 获取收藏文章分页列表 */
+    @GET("lg/collect/list/{pageNo}/json")
+    suspend fun getCollectArticlePageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<CollectArticle>>
+
+    /** 取消收藏站内文章 */
+    @POST("lg/uncollect_originId/{id}/json")
+    suspend fun unCollectArticle(@Path("id") id: Int): ApiResponse<Any?>
 }

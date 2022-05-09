@@ -1,12 +1,12 @@
-package com.btpj.wanandroid.ui.collect.article
+package com.btpj.module_mine.ui.collect.article
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
-import com.btpj.wanandroid.data.DataRepository
 import com.btpj.lib_base.data.bean.CollectArticle
+import com.btpj.module_mine.data.DataRepository
 
 class CollectArticleViewModel : BaseViewModel() {
 

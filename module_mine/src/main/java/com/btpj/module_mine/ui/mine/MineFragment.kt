@@ -1,24 +1,31 @@
-package com.btpj.wanandroid.ui.main.mine
+package com.btpj.module_mine.ui.mine
 
 import android.annotation.SuppressLint
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.btpj.wanandroid.R
 import com.btpj.lib_base.base.App
-import com.btpj.wanandroid.base.BaseFragment
+import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.data.bean.Banner
 import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.data.local.UserManager
 import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.launchCheckLogin
-import com.btpj.wanandroid.databinding.FragmentMineBinding
-import com.btpj.wanandroid.ui.collect.CollectActivity
+import com.btpj.module_mine.R
+import com.btpj.module_mine.databinding.MineFragmentMineBinding
+import com.btpj.module_mine.ui.collect.CollectActivity
+import com.btpj.module_mine.ui.integral.rank.IntegralRankActivity
+import com.btpj.module_mine.ui.login.LoginActivity
+import com.btpj.module_mine.ui.setting.SettingActivity
+import com.btpj.module_mine.ui.share.list.MyArticleActivity
 
 /**
  * 我的Tab
  *
  * @author LTP 2022/3/10
  */
-class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.fragment_mine) {
+@Route(path = Constants.ROUTER_MINE_MINE_FRAGMENT)
+class MineFragment :
+    BaseVMBFragment<MineViewModel, MineFragmentMineBinding>(R.layout.mine_fragment_mine) {
 
     companion object {
         fun newInstance() = MineFragment()
@@ -33,13 +40,13 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             clUser.setOnClickListener {
                 if (!UserManager.isLogin()) {
-                    ARouter.getInstance().build(Constants.ROUTER_MINE_LOGIN_ACTIVITY).navigation()
+                    LoginActivity.launch(requireContext())
                 }
             }
 
             // 我的积分
             tvPoints.setOnClickListener {
-//                IntegralRankActivity.launch(requireContext())
+                IntegralRankActivity.launch(requireContext())
             }
 
             // 我的收藏（需要登录）
@@ -49,7 +56,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
 
             // 我分享的文章（需要登录）
             tvArticle.setOnClickListener {
-//                requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
+                requireContext().launchCheckLogin { MyArticleActivity.launch(it) }
             }
 
             // 开源网站
@@ -63,7 +70,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
             }
 
             // 设置
-//            tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
+            tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
         }
 
         onRefresh()

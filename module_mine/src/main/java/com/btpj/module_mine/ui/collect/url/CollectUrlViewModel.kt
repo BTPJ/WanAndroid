@@ -1,11 +1,11 @@
-package com.btpj.wanandroid.ui.collect.url
+package com.btpj.module_mine.ui.collect.url
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
-import com.btpj.wanandroid.data.DataRepository
 import com.btpj.lib_base.data.bean.CollectUrl
+import com.btpj.module_mine.data.DataRepository
 
 class CollectUrlViewModel : BaseViewModel() {
 

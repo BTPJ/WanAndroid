@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.collect.CollectActivity">
+        tools:context="com.btpj.module_mine.ui.collect.CollectActivity">
 
         <com.btpj.lib_base.widgets.TitleLayout
             android:id="@+id/titleLayout"

@@ -1,15 +1,15 @@
-package com.btpj.wanandroid.ui.collect
+package com.btpj.module_mine.ui.collect
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.BaseActivity
-import com.btpj.wanandroid.databinding.ActivityCollectBinding
-import com.btpj.wanandroid.ui.collect.article.CollectArticleFragment
-import com.btpj.wanandroid.ui.collect.url.CollectUrlFragment
+import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.module_mine.R
+import com.btpj.module_mine.databinding.MineActivityCollectBinding
+import com.btpj.module_mine.ui.collect.article.CollectArticleFragment
+import com.btpj.module_mine.ui.collect.url.CollectUrlFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @author LTP 2022/4/13
  */
 class CollectActivity :
-    BaseActivity<CollectViewModel, ActivityCollectBinding>(R.layout.activity_collect) {
+    BaseVMBActivity<CollectViewModel, MineActivityCollectBinding>(R.layout.mine_activity_collect) {
 
     /** 标题 */
     private val mTitleList = arrayListOf("文章", "网址")

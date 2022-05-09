@@ -64,4 +64,12 @@ object DataRepository : BaseRepository(), Api {
     override suspend fun unCollectUrl(id: Int): ApiResponse<Any?> {
         return apiCall { service.unCollectUrl(id) }
     }
+
+    override suspend fun getCollectArticlePageList(pageNo: Int): ApiResponse<PageResponse<CollectArticle>> {
+        return apiCall { service.getCollectArticlePageList(pageNo) }
+    }
+
+    override suspend fun unCollectArticle(id: Int): ApiResponse<Any?> {
+        return apiCall { service.unCollectArticle(id) }
+    }
 }

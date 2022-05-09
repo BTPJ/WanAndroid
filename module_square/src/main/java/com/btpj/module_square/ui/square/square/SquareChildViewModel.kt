@@ -6,6 +6,7 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.lib_base.data.bean.Article
+import com.btpj.module_square.data.DataRepository
 
 class SquareChildViewModel : BaseViewModel() {
 
@@ -23,7 +24,7 @@ class SquareChildViewModel : BaseViewModel() {
     fun fetchSquarePageList(pageNo: Int = 0) {
         launch({
             handleRequest(
-                com.btpj.module_square.data.DataRepository.getSquarePageList(pageNo, PAGE_SIZE),
+                DataRepository.getSquarePageList(pageNo, PAGE_SIZE),
                 { articlePageListLiveData.value = it.data })
         })
     }
@@ -34,7 +35,7 @@ class SquareChildViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(com.btpj.module_square.data.DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id), {
                 successCallBack.invoke()
             })
         })
@@ -46,7 +47,7 @@ class SquareChildViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(com.btpj.module_square.data.DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id), {
                 successCallBack.invoke()
             })
         })

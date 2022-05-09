@@ -5,6 +5,7 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.lib_base.data.bean.MySystem
+import com.btpj.module_square.data.DataRepository
 
 class SystemViewModel : BaseViewModel() {
 
@@ -18,7 +19,7 @@ class SystemViewModel : BaseViewModel() {
     /** 请求体系列表 */
     fun fetchSystemList(pageNo: Int = 0) {
         launch({
-            handleRequest(com.btpj.module_square.data.DataRepository.getTreeList(), { systemListLiveData.value = it.data })
+            handleRequest(DataRepository.getTreeList(), { systemListLiveData.value = it.data })
         })
     }
 }

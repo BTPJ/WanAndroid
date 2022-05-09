@@ -16,20 +16,6 @@ object DataRepository : BaseRepository(), Api {
 
     private val service by lazy { RetrofitManager.getService(Api::class.java) }
 
-    override suspend fun getBanner(): ApiResponse<List<Banner>> {
-        return apiCall { service.getBanner() }
-    }
-
-    override suspend fun getArticleTopList(): ApiResponse<List<Article>> {
-        return apiCall { service.getArticleTopList() }
-    }
-
-    override suspend fun getArticlePageList(
-        pageNo: Int,
-        pageSize: Int
-    ): ApiResponse<PageResponse<Article>> {
-        return apiCall { service.getArticlePageList(pageNo, pageSize) }
-    }
 
     override suspend fun collectArticle(id: Int): ApiResponse<Any?> {
         return apiCall { service.collectArticle(id) }
@@ -56,80 +42,5 @@ object DataRepository : BaseRepository(), Api {
         @Query(value = "cid") categoryId: Int
     ): ApiResponse<PageResponse<Article>> {
         return apiCall { service.getProjectPageList(pageNo, pageSize, categoryId) }
-    }
-
-    override suspend fun getSquarePageList(
-        pageNo: Int,
-        pageSize: Int
-    ): ApiResponse<PageResponse<Article>> {
-        return apiCall { service.getSquarePageList(pageNo, pageSize) }
-    }
-
-    override suspend fun getAskPageList(
-        pageNo: Int
-    ): ApiResponse<PageResponse<Article>> {
-        return apiCall { service.getAskPageList(pageNo) }
-    }
-
-    override suspend fun getTreeList(): ApiResponse<List<MySystem>> {
-        return apiCall { service.getTreeList() }
-    }
-
-    override suspend fun getNavigationList(): ApiResponse<List<Navigation>> {
-        return apiCall { service.getNavigationList() }
-    }
-
-    override suspend fun getAuthorTitleList(): ApiResponse<List<Classify>> {
-        return apiCall { service.getAuthorTitleList() }
-    }
-
-    override suspend fun getAuthorArticlePageList(
-        authorId: Int,
-        pageNo: Int,
-        pageSize: Int
-    ): ApiResponse<PageResponse<Article>> {
-        return apiCall { service.getAuthorArticlePageList(authorId, pageNo, pageSize) }
-    }
-
-    override suspend fun getCollectArticlePageList(pageNo: Int): ApiResponse<PageResponse<CollectArticle>> {
-        return apiCall { service.getCollectArticlePageList(pageNo) }
-    }
-
-    override suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>> {
-        return apiCall { service.getCollectUrlList() }
-    }
-
-    override suspend fun addArticle(title: String, link: String): ApiResponse<Any?> {
-        return apiCall { service.addArticle(title, link) }
-    }
-
-    override suspend fun deleteShareArticle(id: Int): ApiResponse<Any?> {
-        return apiCall { service.deleteShareArticle(id) }
-    }
-
-    override suspend fun collectUrl(name: String, link: String): ApiResponse<CollectUrl?> {
-        return apiCall { service.collectUrl(name, link) }
-    }
-
-    override suspend fun unCollectUrl(id: Int): ApiResponse<Any?> {
-        return apiCall { service.unCollectUrl(id) }
-    }
-
-    override suspend fun getOtherAuthorArticlePageList(
-        id: Int,
-        page: Int
-    ): ApiResponse<OtherAuthor> {
-        return apiCall { service.getOtherAuthorArticlePageList(id, page) }
-    }
-
-    override suspend fun getHotSearchList(): ApiResponse<List<HotSearch>> {
-        return apiCall { service.getHotSearchList() }
-    }
-
-    override suspend fun getSearchDataByKey(
-        pageNo: Int,
-        searchKey: String
-    ): ApiResponse<PageResponse<Article>> {
-        return apiCall { service.getSearchDataByKey(pageNo, searchKey) }
     }
 }

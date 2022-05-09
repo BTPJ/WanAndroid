@@ -57,10 +57,6 @@ object DataRepository : BaseRepository(), Api {
         return apiCall { service.deleteShareArticle(id) }
     }
 
-    override suspend fun collectUrl(name: String, link: String): ApiResponse<CollectUrl?> {
-        return apiCall { service.collectUrl(name, link) }
-    }
-
     override suspend fun unCollectUrl(id: Int): ApiResponse<Any?> {
         return apiCall { service.unCollectUrl(id) }
     }

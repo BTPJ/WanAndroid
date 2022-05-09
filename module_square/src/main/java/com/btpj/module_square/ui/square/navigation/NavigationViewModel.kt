@@ -5,6 +5,7 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.lib_base.data.bean.Navigation
+import com.btpj.module_square.data.DataRepository
 
 class NavigationViewModel : BaseViewModel() {
 
@@ -17,7 +18,7 @@ class NavigationViewModel : BaseViewModel() {
     fun fetchNavigationList() {
         launch({
             handleRequest(
-                com.btpj.module_square.data.DataRepository.getNavigationList(),
+                DataRepository.getNavigationList(),
                 { navigationListLiveData.value = it.data })
         })
     }

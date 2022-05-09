@@ -7,7 +7,7 @@ import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.module_main.R
 import com.btpj.module_main.databinding.MainActivitySplashBinding
 import com.btpj.module_main.ui.main.MainActivity
-import com.btpj.wanandroid.data.local.CacheManager
+import com.btpj.module_main.data.local.CacheManager
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnPageChangeListener
 

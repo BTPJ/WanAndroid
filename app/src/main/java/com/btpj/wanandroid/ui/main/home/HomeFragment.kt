@@ -15,7 +15,6 @@ import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.databinding.FragmentHomeBinding
 import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
-import com.btpj.wanandroid.ui.main.home.HomeViewModel.Companion.PAGE_SIZE
 import com.btpj.wanandroid.ui.search.SearchActivity
 import com.youth.banner.indicator.CircleIndicator
 
@@ -195,7 +194,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             mCurrentCount = data.size
             loadMoreModule.apply {
                 isEnableLoadMore = true
-                if (list.size < PAGE_SIZE || mCurrentCount == mTotalCount) {
+                if (list.size < HomeViewModel.PAGE_SIZE || mCurrentCount == mTotalCount) {
                     // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
                     // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
                     loadMoreEnd()

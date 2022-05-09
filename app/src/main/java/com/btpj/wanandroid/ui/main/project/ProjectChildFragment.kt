@@ -13,7 +13,6 @@ import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
-import com.btpj.wanandroid.ui.main.home.HomeViewModel
 
 /**
  * 项目Tab下的子Fragment
@@ -172,7 +171,7 @@ class ProjectChildFragment :
             mCurrentCount = data.size
             loadMoreModule.apply {
                 isEnableLoadMore = true
-                if (list.size < HomeViewModel.PAGE_SIZE || mCurrentCount == mTotalCount) {
+                if (list.size < ProjectChildViewModel.PAGE_SIZE || mCurrentCount == mTotalCount) {
                     // 如果加载到的数据不够一页或都已加载完,显示没有更多数据布局,
                     // 当然后台接口不同分页方式判断方法不同,这个是比较通用的（通常都有TotalCount）
                     loadMoreEnd()

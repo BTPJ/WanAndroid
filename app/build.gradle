@@ -6,6 +6,8 @@ plugins {
 }
 
 android {
+    namespace 'com.btpj.wanandroid'
+
     compileSdk rootProject.ext.android.compileSdk
 
     defaultConfig {
@@ -19,9 +21,9 @@ android {
             // 设置支持的SO库架构，以微信为基准只支持arm64-v8a即可，可以达到缩包的目的
             abiFilters 'arm64-v8a'//, 'armeabi'//, 'armeabi-v7a', 'x86', 'x86_64'
         }
+        resConfigs 'zh-rCN'
 
         // 只保留汉语资源
-        resConfigs('zh-rCN')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -85,7 +87,7 @@ android {
 dependencies {
     implementation project(path: ':lib_base')
 
-    if(!rootProject.ext.isBuildModule){
+    if (!rootProject.ext.isBuildModule) {
         implementation project(path: ':module_main')
         implementation project(path: ':module_home')
         implementation project(path: ':module_project')

@@ -1,6 +1,8 @@
 apply from: "../module.build.gradle"
 
 android {
+    namespace 'com.btpj.module_main'
+
     defaultConfig {
         if (rootProject.ext.isBuildModule) {
             applicationId "com.btpj.module_main"

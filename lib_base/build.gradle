@@ -39,6 +39,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    namespace 'com.btpj.lib_base'
 }
 
 dependencies {

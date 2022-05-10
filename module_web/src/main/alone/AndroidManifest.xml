@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.btpj.module_web">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/browser"
         android:supportsRtl="true"
-        android:theme="@style/web_Theme">
+        android:theme="@style/Web.Theme.WanAndroid">
 
         <activity
             android:name=".ui.web.WebActivity"

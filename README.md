@@ -30,7 +30,6 @@
 - 屏幕适配：AndroidAutoSize
 - 内存泄漏分析：leakcanary
 - bugly应用升级与错误上传
-- ARouter路由（在组件化中引入）
 
 ## 项目地址
 - [Github MVVM分支](https://github.com/BTPJ/WanAndroid/tree/MVVM)

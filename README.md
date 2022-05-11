@@ -31,9 +31,9 @@
 - ARouter路由（在组件化中引入）
 
 ## 项目地址
-- [Github](https://github.com/BTPJ/WanAndroid/tree/MVVM)
-- [Gitee](https://gitee.com/BTPJ_git/WanAndroid/tree/MVVM)
+- [Github MVVM分支](https://github.com/BTPJ/WanAndroid/tree/MVVM)
+- [Github Component分支](https://github.com/BTPJ/WanAndroid/tree/Component)
 
 ## 致谢
 - WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章
-- 参考鸡哥的些许样式和代码：https://github.com/hegaojian/JetpackMvvm
+- 参考鸡哥的些许样式和代码：https://github.com/BTPJ/WanAndroid/tree/MVVM

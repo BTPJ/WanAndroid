@@ -36,4 +36,4 @@
 
 ## 致谢
 - WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章
-- 参考鸡哥的些许样式和代码：https://github.com/BTPJ/WanAndroid/tree/MVVM
+- 参考[鸡哥](https://github.com/hegaojian/JetpackMvvm.git)的些许样式和代码

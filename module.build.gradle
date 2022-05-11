@@ -62,8 +62,8 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':lib_base')
+    implementation project(path: ':lib_common')
 
-    // kapt无法像api那样穿透（从lib_base带过来），所以还需要引用一次
+    // kapt无法像api那样穿透（从lib_common带过来），所以不能放在lib_common中，而是放在这里让每个组件都引入一份
     kapt rootProject.ext.dependencies.arouter_compiler
 }

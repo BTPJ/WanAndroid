@@ -16,7 +16,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "WanAndroid"
 include ':app'
-include ':lib_base'
+include ':lib_common'
 include ':module_web'
 include ':module_mine'
 include ':module_main'

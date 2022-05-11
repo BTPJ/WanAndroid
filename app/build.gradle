@@ -85,8 +85,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':lib_base')
-
+    implementation project(path: ':lib_common')
     if (!rootProject.ext.isBuildModule) {
         implementation project(path: ':module_main')
         implementation project(path: ':module_home')

@@ -1,8 +1,10 @@
 # WanAndroid
 
 ## 介绍
-- 鸿洋玩Android的APP，准备编写不同的架构版本，每一个分支代表一个版本，目前已开发完单一MVVM版、MVVM+组件化和compose...已在路上
+- 鸿洋玩Android的APP，准备编写不同的架构版本，每一个分支代表一个版本，目前已开发完单一MVVM版、MVVM+组件化版
+- compose版、Flutter、uniApp后续都会进行改造
 MVVM版：使用kotlin+协程+liveData+viewModel+dataBinding构造的MVVM架构的单体项目
+MVVM+组件化版：将MVVM版进行组件划分
 
 ## 功能展示
 - 首页Tab
@@ -26,11 +28,12 @@ MVVM版：使用kotlin+协程+liveData+viewModel+dataBinding构造的MVVM架构�
 - 屏幕适配：AndroidAutoSize
 - 内存泄漏分析：leakcanary
 - bugly应用升级与错误上传
+- ARouter路由（在组件化中引入）
 
 ## 项目地址
 - [Github](https://github.com/BTPJ/WanAndroid/tree/MVVM)
 - [Gitee](https://gitee.com/BTPJ_git/WanAndroid/tree/MVVM)
 
 ## 致谢
-- WanAndroid网站提供的开放Api, 和里面的一些优秀开源项目和文章
+- WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章
 - 参考鸡哥的些许样式和代码：https://github.com/hegaojian/JetpackMvvm

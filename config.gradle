@@ -1,13 +1,13 @@
 ext {
     // module是否独立运行
-    isBuildModule = true
+    isBuildModule = false
 
     android = [
             compileSdk : 31,
             minSdk     : 21,
             targetSdk  : 31,
-            versionCode: 5,
-            versionName: "1.5"
+            versionCode: 1,
+            versionName: "1.0"
     ]
 
     dependencies = [

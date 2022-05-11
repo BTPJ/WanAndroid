@@ -14,7 +14,6 @@ import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineFragmentMineBinding
 import com.btpj.module_mine.ui.collect.CollectActivity
 import com.btpj.module_mine.ui.integral.rank.IntegralRankActivity
-import com.btpj.module_mine.ui.login.LoginActivity
 import com.btpj.module_mine.ui.setting.SettingActivity
 import com.btpj.module_mine.ui.share.list.MyArticleActivity
 
@@ -36,7 +35,7 @@ class MineFragment :
 
             clUser.setOnClickListener {
                 if (!UserManager.isLogin()) {
-                    LoginActivity.launch(requireContext())
+                    ModuleMineApi.navToLoginActivity()
                 }
             }
 

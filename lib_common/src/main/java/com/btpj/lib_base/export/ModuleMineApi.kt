@@ -24,12 +24,12 @@ object ModuleMineApi {
     }
 
     /** 跳转到登录页面 */
-    fun navigateToLoginActivity() {
+    fun navToLoginActivity() {
         ARouter.getInstance().build(ROUTER_MINE_LOGIN_ACTIVITY).navigation()
     }
 
     /** 跳转到添加文章页面 */
-    fun navigateToAddArticleActivity() {
+    fun navToAddArticleActivity() {
         ARouter.getInstance().build(ROUTER_MINE_ADD_ARTICLE_ACTIVITY).navigation()
     }
 }

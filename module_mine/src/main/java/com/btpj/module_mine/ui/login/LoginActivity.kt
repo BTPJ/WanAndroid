@@ -26,17 +26,6 @@ import kotlinx.coroutines.launch
 class LoginActivity :
     BaseVMBActivity<LoginViewModel, MineActivityLoginBinding>(R.layout.mine_activity_login) {
 
-    companion object {
-
-        /**
-         * 页面启动
-         * @param context Context
-         */
-        fun launch(context: Context) {
-            context.startActivity(Intent(context, LoginActivity::class.java))
-        }
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
         // Activity Results需要先注册
         val registerForActivityResult =

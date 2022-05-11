@@ -27,7 +27,7 @@ object ModuleHomeApi {
      * 跳转到作者文章列表页面
      * @param authorId 作者Id
      */
-    fun navigateToAuthorActivity(authorId: Int) {
+    fun navToAuthorActivity(authorId: Int) {
         ARouter.getInstance().build(ROUTER_HOME_AUTHOR_ACTIVITY)
             .withInt(ROUTER_HOME_EXTRA_AUTHOR_ID, authorId).navigation()
     }

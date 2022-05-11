@@ -1,6 +1,6 @@
 ext {
     // module是否独立运行
-    isBuildModule = false
+    isBuildModule = true
 
     android = [
             compileSdk : 31,

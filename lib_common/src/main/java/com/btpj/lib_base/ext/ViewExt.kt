@@ -41,7 +41,7 @@ fun Context.launchCheckLogin(action: (context: Context) -> Unit) {
     if (UserManager.isLogin()) {
         action.invoke(this)
     } else {
-        ModuleMineApi.navigateToLoginActivity()
+        ModuleMineApi.navToLoginActivity()
     }
 }
 

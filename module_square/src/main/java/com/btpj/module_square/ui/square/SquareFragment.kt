@@ -40,7 +40,7 @@ class SquareFragment :
             if (position == 0) {
                 mBinding.titleLayout.setRightView(R.drawable.ic_add) {
                     requireContext().launchCheckLogin {
-                        ModuleMineApi.navigateToAddArticleActivity()
+                        ModuleMineApi.navToAddArticleActivity()
                     }
                 }
             } else {

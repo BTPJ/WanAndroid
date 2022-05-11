@@ -13,7 +13,6 @@ import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.ext.showDialog
-import com.btpj.module_mine.ui.share.add.AddArticleActivity
 import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineActivityIntegralRecordBinding
 
@@ -44,7 +43,7 @@ class MyArticleActivity :
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.apply {
             titleLayout.setTitleText("我分享的文章")
-                .setRightView(com.btpj.lib_base.R.drawable.ic_add) { ModuleMineApi.navigateToAddArticleActivity() }
+                .setRightView(com.btpj.lib_base.R.drawable.ic_add) { ModuleMineApi.navToAddArticleActivity() }
 
             includeList.apply {
                 recyclerView.apply {

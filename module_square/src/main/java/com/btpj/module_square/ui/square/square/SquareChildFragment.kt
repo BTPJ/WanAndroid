@@ -44,7 +44,7 @@ class SquareChildFragment :
                         when (view.id) {
                             // 查看作者文章列表
                             R.id.tv_author ->
-                                ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
+                                ModuleHomeApi.navToAuthorActivity(mAdapter.getItem(position).userId)
                             // 收藏与取消收藏
                             R.id.iv_collect ->
                                 if (mAdapter.getItem(position).collect) {

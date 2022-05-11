@@ -3,22 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="com.btpj.lib_base.base.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/tab_home"
         android:supportsRtl="true"
         android:theme="@style/Home.Theme.WanAndroid">
-        <!--        <activity-->
-        <!--            android:name=".ui.splash.SplashActivity"-->
-        <!--            android:exported="true"-->
-        <!--            android:screenOrientation="portrait"-->
-        <!--            android:theme="@style/main.SplashTheme">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".ui.alone.AloneActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.author.AuthorActivity"
             android:exported="false"

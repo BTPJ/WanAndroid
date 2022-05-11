@@ -63,7 +63,7 @@ class ProjectChildFragment :
                         when (view.id) {
                             // 查看作者文章列表
                             R.id.tv_author ->
-                                ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
+                                ModuleHomeApi.navToAuthorActivity(mAdapter.getItem(position).userId)
                             R.id.iv_collect ->
                                 if (mAdapter.getItem(position).collect) {
                                     mViewModel.unCollectArticle(mAdapter.getItem(position).id) {

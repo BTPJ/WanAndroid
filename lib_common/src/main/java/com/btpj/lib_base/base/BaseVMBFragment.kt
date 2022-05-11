@@ -9,10 +9,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.BR
 import com.btpj.lib_base.R
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.ToastUtil
@@ -117,7 +116,7 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
                 if (it?.errorCode == -1001) {
                     // 需要登录，这里主要是针对收藏操作，不想每个地方都判断一下
                     // 当然你也可以封装一个收藏的组件，在里面统一判断跳转
-                    ARouter.getInstance().build(Constants.ROUTER_MINE_LOGIN_ACTIVITY).navigation()
+                    ModuleMineApi.navigateToLoginActivity()
                 }
             }
         }

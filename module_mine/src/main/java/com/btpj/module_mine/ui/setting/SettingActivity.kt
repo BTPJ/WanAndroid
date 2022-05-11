@@ -3,15 +3,14 @@ package com.btpj.module_mine.ui.setting
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.Banner
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.data.local.UserManager
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.lib_base.ext.showDialog
 import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineActivitySettingBinding
@@ -58,12 +57,12 @@ class SettingActivity :
 
             // 项目源码
             tvSourceCode.setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(
-                        Constants.ROUTER_WEB_EXTRA_BANNER,
-                        Banner(title = "项目源码", url = "https://gitee.com/BTPJ_git/WanAndroid")
+                ModuleWebApi.navToWebActivity(
+                    Banner(
+                        title = "项目源码",
+                        url = "https://gitee.com/BTPJ_git/WanAndroid"
                     )
-                    .navigation()
+                )
             }
 
             // 退出登录

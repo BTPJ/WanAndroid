@@ -12,6 +12,7 @@ import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
 import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.R
+import com.btpj.lib_base.export.ModuleHomeApi
 
 /**
  * 项目Tab下的子Fragment
@@ -61,10 +62,8 @@ class ProjectChildFragment :
                     setOnItemChildClickListener { _, view, position ->
                         when (view.id) {
                             // 查看作者文章列表
-//                            R.id.tv_author -> AuthorActivity.launch(
-//                                requireContext(),
-//                                mAdapter.getItem(position).userId
-//                            )
+                            R.id.tv_author ->
+                                ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
                             R.id.iv_collect ->
                                 if (mAdapter.getItem(position).collect) {
                                     mViewModel.unCollectArticle(mAdapter.getItem(position).id) {

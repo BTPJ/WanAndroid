@@ -1,8 +1,7 @@
 package com.btpj.module_project.ui.project
 
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.data.bean.Article
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.module_project.R
 import com.btpj.module_project.databinding.ProjectListItemArticleImageBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -31,9 +30,7 @@ class ImageArticleAdapter :
             executePendingBindings()
 
             clItem.setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(Constants.ROUTER_WEB_EXTRA_ARTICLE, item)
-                    .navigation()
+                ModuleWebApi.navToWebActivity(item)
             }
         }
     }

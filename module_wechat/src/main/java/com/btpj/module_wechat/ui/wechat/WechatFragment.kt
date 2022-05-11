@@ -7,8 +7,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.R
 import com.btpj.lib_base.data.bean.Classify
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.databinding.CommonFragmentViewpagerBinding
+import com.btpj.lib_base.export.ModuleWechatApi
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  * @author LTP 2022/3/10
  */
-@Route(path = Constants.ROUTER_WECHAT_WECHAT_FRAGMENT)
+@Route(path = ModuleWechatApi.ROUTER_WECHAT_WECHAT_FRAGMENT)
 class WechatFragment :
     BaseVMBFragment<WechatViewModel, CommonFragmentViewpagerBinding>(R.layout.common_fragment_viewpager) {
 
@@ -26,10 +26,6 @@ class WechatFragment :
     private lateinit var mTabLayoutMediator: TabLayoutMediator
 
     private lateinit var mFragmentStateAdapter: FragmentStateAdapter
-
-    companion object {
-        fun newInstance() = WechatFragment()
-    }
 
     override fun initView() {
         mFragmentStateAdapter = object : FragmentStateAdapter(parentFragmentManager, lifecycle) {

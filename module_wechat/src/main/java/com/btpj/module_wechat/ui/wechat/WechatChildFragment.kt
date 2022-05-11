@@ -3,7 +3,6 @@ package com.btpj.module_wechat.ui.wechat
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.adapter.ArticleAdapter
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.R
@@ -11,8 +10,8 @@ import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.CollectData
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
+import com.btpj.lib_base.export.ModuleHomeApi
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 
@@ -62,11 +61,7 @@ class WechatChildFragment :
                         when (view.id) {
                             // 查看作者文章列表
                             R.id.tv_author ->
-                                ARouter.getInstance().build(Constants.ROUTER_HOME_AUTHOR_ACTIVITY)
-                                    .withInt(
-                                        Constants.ROUTER_HOME_EXTRA_AUTHOR_ID,
-                                        mAdapter.getItem(position).userId
-                                    ).navigation()
+                                ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
                             // 收藏与取消收藏
                             R.id.iv_collect ->
                                 if (mAdapter.getItem(position).collect) {

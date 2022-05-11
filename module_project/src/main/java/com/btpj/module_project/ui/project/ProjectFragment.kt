@@ -9,7 +9,7 @@ import com.btpj.lib_base.data.bean.ProjectTitle
 import com.btpj.lib_base.databinding.CommonFragmentViewpagerBinding
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.R
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleProjectApi
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  * @author LTP 2022/3/10
  */
-@Route(path = Constants.ROUTER_PROJECT_PROJECT_FRAGMENT)
+@Route(path = ModuleProjectApi.ROUTER_PROJECT_PROJECT_FRAGMENT)
 class ProjectFragment :
     BaseVMBFragment<ProjectViewModel, CommonFragmentViewpagerBinding>(R.layout.common_fragment_viewpager) {
 
@@ -28,10 +28,6 @@ class ProjectFragment :
     private lateinit var mTabLayoutMediator: TabLayoutMediator
 
     private lateinit var mFragmentStateAdapter: FragmentStateAdapter
-
-    companion object {
-        fun newInstance() = ProjectFragment()
-    }
 
     override fun initView() {
         mFragmentStateAdapter = object : FragmentStateAdapter(parentFragmentManager, lifecycle) {

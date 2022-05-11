@@ -3,9 +3,8 @@ package com.btpj.module_home.ui.home
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.data.bean.Banner
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.lib_base.ext.load
 import com.youth.banner.adapter.BannerAdapter
 
@@ -32,9 +31,7 @@ class MyBannerAdapter(dataList: ArrayList<Banner>) :
         holder.imageView.apply {
             load(data.imagePath)
             setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(Constants.ROUTER_WEB_EXTRA_BANNER, data)
-                    .navigation()
+                ModuleWebApi.navToWebActivity(data)
             }
         }
     }

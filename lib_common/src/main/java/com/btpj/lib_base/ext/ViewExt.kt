@@ -17,10 +17,9 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.R
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.data.local.UserManager
+import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.utils.ScreenUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -42,7 +41,7 @@ fun Context.launchCheckLogin(action: (context: Context) -> Unit) {
     if (UserManager.isLogin()) {
         action.invoke(this)
     } else {
-        ARouter.getInstance().build(Constants.ROUTER_MINE_LOGIN_ACTIVITY).navigation()
+        ModuleMineApi.navigateToLoginActivity()
     }
 }
 

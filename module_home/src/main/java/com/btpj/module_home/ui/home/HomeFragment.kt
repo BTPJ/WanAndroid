@@ -12,12 +12,11 @@ import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.Banner
 import com.btpj.lib_base.data.bean.CollectData
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleHomeApi
 import com.btpj.lib_base.ext.initColors
 import com.btpj.module_home.R
 import com.btpj.module_home.databinding.HomeFragmentHomeBinding
 import com.btpj.module_home.databinding.HomeHeaderBannerBinding
-import com.btpj.module_home.ui.author.AuthorActivity
 import com.btpj.module_home.ui.home.HomeViewModel.Companion.PAGE_SIZE
 import com.btpj.module_home.ui.search.SearchActivity
 import com.youth.banner.indicator.CircleIndicator
@@ -27,7 +26,7 @@ import com.youth.banner.indicator.CircleIndicator
  *
  * @author LTP 2022/3/10
  */
-@Route(path = Constants.ROUTER_HOME_HOME_FRAGMENT)
+@Route(path = ModuleHomeApi.ROUTER_HOME_HOME_FRAGMENT)
 class HomeFragment :
     BaseVMBFragment<HomeViewModel, HomeFragmentHomeBinding>(R.layout.home_fragment_home) {
 
@@ -79,10 +78,7 @@ class HomeFragment :
                             when (view.id) {
                                 // 查看作者文章列表
                                 com.btpj.lib_base.R.id.tv_author ->
-                                    AuthorActivity.launch(
-                                        requireContext(),
-                                        mAdapter.getItem(position).userId
-                                    )
+                                    ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
                                 // 收藏与取消收藏
                                 com.btpj.lib_base.R.id.iv_collect ->
                                     if (mAdapter.getItem(position).collect) {

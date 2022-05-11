@@ -2,12 +2,12 @@ package com.btpj.module_mine.ui.mine
 
 import android.annotation.SuppressLint
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.data.bean.Banner
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.data.local.UserManager
+import com.btpj.lib_base.export.ModuleMineApi
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.launchCheckLogin
 import com.btpj.module_mine.R
@@ -23,13 +23,9 @@ import com.btpj.module_mine.ui.share.list.MyArticleActivity
  *
  * @author LTP 2022/3/10
  */
-@Route(path = Constants.ROUTER_MINE_MINE_FRAGMENT)
+@Route(path = ModuleMineApi.ROUTER_MINE_MINE_FRAGMENT)
 class MineFragment :
     BaseVMBFragment<MineViewModel, MineFragmentMineBinding>(R.layout.mine_fragment_mine) {
-
-    companion object {
-        fun newInstance() = MineFragment()
-    }
 
     override fun initView() {
         mBinding.apply {
@@ -61,12 +57,12 @@ class MineFragment :
 
             // 开源网站
             tvWeb.setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(
-                        Constants.ROUTER_WEB_EXTRA_BANNER,
-                        Banner(title = "玩Android网站", url = "https://www.wanandroid.com/")
+                ModuleWebApi.navToWebActivity(
+                    Banner(
+                        title = "玩Android网站",
+                        url = "https://www.wanandroid.com/"
                     )
-                    .navigation()
+                )
             }
 
             // 设置

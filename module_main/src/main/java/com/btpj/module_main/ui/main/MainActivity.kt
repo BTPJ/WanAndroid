@@ -4,9 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.BaseVMBActivity
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.*
 import com.btpj.lib_base.ext.clearLongClickToast
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.module_main.R
@@ -30,26 +29,11 @@ class MainActivity :
         }
     }
 
-    private val mHomeFragment by lazy {
-        ARouter.getInstance().build(Constants.ROUTER_HOME_HOME_FRAGMENT)
-            .navigation() as Fragment
-    }
-    private val mProjectFragment by lazy {
-        ARouter.getInstance().build(Constants.ROUTER_PROJECT_PROJECT_FRAGMENT)
-            .navigation() as Fragment
-    }
-    private val mSquareFragment by lazy {
-        ARouter.getInstance().build(Constants.ROUTER_SQUARE_SQUARE_FRAGMENT)
-            .navigation() as Fragment
-    }
-    private val mWechatFragment by lazy {
-        ARouter.getInstance().build(Constants.ROUTER_WECHAT_WECHAT_FRAGMENT)
-            .navigation() as Fragment
-    }
-    private val mMineFragment by lazy {
-        ARouter.getInstance().build(Constants.ROUTER_MINE_MINE_FRAGMENT)
-            .navigation() as Fragment
-    }
+    private val mHomeFragment by lazy { ModuleHomeApi.getHomeFragment() }
+    private val mProjectFragment by lazy { ModuleProjectApi.getProjectFragment() }
+    private val mSquareFragment by lazy { ModuleSquareApi.getSquareFragment() }
+    private val mWechatFragment by lazy { ModuleWechatApi.getWechatFragment() }
+    private val mMineFragment by lazy { ModuleMineApi.getMineFragment() }
 
     /** 当前显示的Fragment(默认开始为首页) */
     private var mCurrentFragment: Fragment = mHomeFragment

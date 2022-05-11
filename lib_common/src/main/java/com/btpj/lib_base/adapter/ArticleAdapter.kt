@@ -1,10 +1,9 @@
 package com.btpj.lib_base.adapter
 
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.R
 import com.btpj.lib_base.data.bean.Article
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.databinding.CommonListItemArticleBinding
+import com.btpj.lib_base.export.ModuleWebApi
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -28,9 +27,7 @@ class ArticleAdapter :
             executePendingBindings()
 
             clItem.setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(Constants.ROUTER_WEB_EXTRA_ARTICLE, item)
-                    .navigation()
+                ModuleWebApi.navToWebActivity(item)
             }
         }
     }

@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.databinding.CommonFragmentViewpagerBinding
 import com.btpj.lib_base.utils.ScreenUtil
 import com.btpj.lib_base.R
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleMineApi
+import com.btpj.lib_base.export.ModuleSquareApi
 import com.btpj.lib_base.ext.launchCheckLogin
 import com.btpj.module_square.ui.square.ask.AskFragment
 import com.btpj.module_square.ui.square.navigation.NavigationFragment
@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  * @author LTP 2022/3/10
  */
-@Route(path = Constants.ROUTER_SQUARE_SQUARE_FRAGMENT)
+@Route(path = ModuleSquareApi.ROUTER_SQUARE_SQUARE_FRAGMENT)
 class SquareFragment :
     BaseVMBFragment<SquareViewModel, CommonFragmentViewpagerBinding>(R.layout.common_fragment_viewpager) {
 
@@ -40,8 +40,7 @@ class SquareFragment :
             if (position == 0) {
                 mBinding.titleLayout.setRightView(R.drawable.ic_add) {
                     requireContext().launchCheckLogin {
-                        ARouter.getInstance().build(Constants.ROUTER_MINE_ADD_ARTICLE_ACTIVITY)
-                            .navigation()
+                        ModuleMineApi.navigateToAddArticleActivity()
                     }
                 }
             } else {
@@ -55,10 +54,6 @@ class SquareFragment :
         mFragmentList.add(AskFragment.newInstance())
         mFragmentList.add(SystemFragment.newInstance())
         mFragmentList.add(NavigationFragment.newInstance())
-    }
-
-    companion object {
-        fun newInstance() = SquareFragment()
     }
 
     override fun initView() {

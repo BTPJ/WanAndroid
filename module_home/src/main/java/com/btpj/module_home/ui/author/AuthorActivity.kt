@@ -1,11 +1,11 @@
 package com.btpj.module_home.ui.author
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
@@ -13,7 +13,7 @@ import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.adapter.ArticleAdapter
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleHomeApi
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
 import com.btpj.module_home.R
@@ -24,34 +24,21 @@ import com.btpj.module_home.databinding.HomeActivityAuthorBinding
  *
  * @author LTP 2022/4/18
  */
-@Route(path = Constants.ROUTER_HOME_AUTHOR_ACTIVITY)
+@Route(path = ModuleHomeApi.ROUTER_HOME_AUTHOR_ACTIVITY)
 class AuthorActivity :
     BaseVMBActivity<AuthorViewModel, HomeActivityAuthorBinding>(R.layout.home_activity_author) {
 
     /** 作者Id */
-    private var mAuthorId = 0
+    @Autowired(name = ModuleHomeApi.ROUTER_HOME_EXTRA_AUTHOR_ID)
+    @JvmField
+    var mAuthorId = 0
 
     /** 页数 */
     private var mPageNo: Int = 0
     private val mAdapter by lazy { ArticleAdapter() }
 
-    companion object {
-        private const val EXTRA_AUTHOR_ID: String = "authorId"
-
-        /**
-         * 页面启动
-         * @param context Context
-         * @param authorId 作者Id
-         */
-        fun launch(context: Context, authorId: Int) {
-            context.startActivity(Intent(context, AuthorActivity::class.java).apply {
-                putExtra(EXTRA_AUTHOR_ID, authorId)
-            })
-        }
-    }
-
     override fun initView(savedInstanceState: Bundle?) {
-        mAuthorId = intent.getIntExtra(EXTRA_AUTHOR_ID, 0)
+        ARouter.getInstance().inject(this)
 
         mBinding.apply {
             toolbar.initClose { onBackPressed() }

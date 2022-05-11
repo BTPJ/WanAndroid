@@ -1,8 +1,7 @@
 package com.btpj.module_mine.ui.collect.url
 
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.data.bean.CollectUrl
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineListItemCollectUrlBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -29,9 +28,7 @@ class CollectUrlAdapter :
             executePendingBindings()
 
             clItem.setOnClickListener {
-                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                    .withParcelable(Constants.ROUTER_WEB_EXTRA_COLLECT_URL, item)
-                    .navigation()
+                ModuleWebApi.navToWebActivity(item)
             }
         }
     }

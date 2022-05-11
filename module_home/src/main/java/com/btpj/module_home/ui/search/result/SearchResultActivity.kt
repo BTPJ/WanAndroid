@@ -12,8 +12,8 @@ import com.btpj.lib_base.data.bean.Article
 import com.btpj.lib_base.data.bean.CollectData
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.module_home.R
-import com.btpj.module_home.ui.author.AuthorActivity
 import com.btpj.lib_base.adapter.ArticleAdapter
+import com.btpj.lib_base.export.ModuleHomeApi
 import com.btpj.lib_base.ext.initColors
 import com.btpj.module_home.databinding.HomeActivitySearchResultBinding
 
@@ -65,10 +65,7 @@ class SearchResultActivity :
                             when (view.id) {
                                 // 查看作者文章列表
                                 com.btpj.lib_base.R.id.tv_author ->
-                                    AuthorActivity.launch(
-                                        this@SearchResultActivity,
-                                        mAdapter.getItem(position).userId
-                                    )
+                                    ModuleHomeApi.navigateToAuthorActivity(mAdapter.getItem(position).userId)
                                 // 收藏与取消收藏
                                 com.btpj.lib_base.R.id.iv_collect ->
                                     if (mAdapter.getItem(position).collect) {

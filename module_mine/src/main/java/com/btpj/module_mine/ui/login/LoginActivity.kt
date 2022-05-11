@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.btpj.lib_base.base.BaseVMBActivity
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.module_mine.ui.ip.ChangeIpActivity
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  *
  * @author LTP 2022/4/8
  */
-@Route(path = Constants.ROUTER_MINE_LOGIN_ACTIVITY)
+@Route(path = ModuleMineApi.ROUTER_MINE_LOGIN_ACTIVITY)
 class LoginActivity :
     BaseVMBActivity<LoginViewModel, MineActivityLoginBinding>(R.layout.mine_activity_login) {
 

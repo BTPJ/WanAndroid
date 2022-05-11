@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.*
-import com.btpj.lib_base.data.local.Constants
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.module_web.R
@@ -27,25 +27,25 @@ import com.just.agentweb.WebChromeClient
  *
  * @author LTP 2022/4/2
  */
-@Route(path = Constants.ROUTER_WEB_WEB_ACTIVITY)
+@Route(path = ModuleWebApi.ROUTER_WEB_WEB_ACTIVITY)
 class WebActivity :
     BaseVMBActivity<WebViewModel, WebActivityWebBinding>(R.layout.web_activity_web) {
 
     private lateinit var mAgentWeb: AgentWeb
 
-    @Autowired(name = Constants.ROUTER_WEB_EXTRA_ARTICLE)
+    @Autowired(name = ModuleWebApi.ROUTER_WEB_EXTRA_ARTICLE)
     @JvmField
     var mArticle: Article? = null
 
-    @Autowired(name = Constants.ROUTER_WEB_EXTRA_COLLECT_ARTICLE)
+    @Autowired(name = ModuleWebApi.ROUTER_WEB_EXTRA_COLLECT_ARTICLE)
     @JvmField
     var mCollectArticle: CollectArticle? = null
 
-    @Autowired(name = Constants.ROUTER_WEB_EXTRA_COLLECT_URL)
+    @Autowired(name = ModuleWebApi.ROUTER_WEB_EXTRA_COLLECT_URL)
     @JvmField
     var mCollectUrl: CollectUrl? = null
 
-    @Autowired(name = Constants.ROUTER_WEB_EXTRA_BANNER)
+    @Autowired(name = ModuleWebApi.ROUTER_WEB_EXTRA_BANNER)
     @JvmField
     var mBanner: Banner? = null
 

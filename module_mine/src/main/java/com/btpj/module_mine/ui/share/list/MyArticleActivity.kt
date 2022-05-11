@@ -11,6 +11,7 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.Article
+import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.ext.showDialog
 import com.btpj.module_mine.ui.share.add.AddArticleActivity
 import com.btpj.module_mine.R
@@ -43,7 +44,7 @@ class MyArticleActivity :
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.apply {
             titleLayout.setTitleText("我分享的文章")
-                .setRightView(com.btpj.lib_base.R.drawable.ic_add) { AddArticleActivity.launch(this@MyArticleActivity) }
+                .setRightView(com.btpj.lib_base.R.drawable.ic_add) { ModuleMineApi.navigateToAddArticleActivity() }
 
             includeList.apply {
                 recyclerView.apply {

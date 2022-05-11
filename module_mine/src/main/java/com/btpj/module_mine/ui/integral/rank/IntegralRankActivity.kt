@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.launcher.ARouter
 import com.btpj.lib_base.base.BaseVMBActivity
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
@@ -12,8 +11,8 @@ import com.btpj.lib_base.ext.initColors
 import com.btpj.lib_base.ext.initTitle
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.data.bean.Banner
-import com.btpj.lib_base.data.local.Constants
 import com.btpj.lib_base.data.bean.CoinInfo
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.module_mine.ui.integral.record.IntegralRecordActivity
 import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineActivityIntegralRankBinding
@@ -53,14 +52,12 @@ class IntegralRankActivity :
                         when (it.itemId) {
                             R.id.item_integralRule ->
                                 // 积分规则
-                                ARouter.getInstance().build(Constants.ROUTER_WEB_WEB_ACTIVITY)
-                                    .withParcelable(
-                                        Constants.ROUTER_WEB_EXTRA_BANNER, Banner(
-                                            title = "积分规则",
-                                            url = "https://www.wanandroid.com/blog/show/2653"
-                                        )
+                                ModuleWebApi.navToWebActivity(
+                                    Banner(
+                                        title = "积分规则",
+                                        url = "https://www.wanandroid.com/blog/show/2653"
                                     )
-                                    .navigation()
+                                )
 
                             R.id.item_integralRecord ->
                                 // 积分记录

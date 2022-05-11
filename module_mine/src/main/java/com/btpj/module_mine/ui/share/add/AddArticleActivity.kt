@@ -1,16 +1,16 @@
 package com.btpj.module_mine.ui.share.add
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.btpj.lib_base.ext.hideLoading
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.lib_base.base.App
 import com.btpj.lib_base.base.BaseVMBActivity
+import com.btpj.lib_base.export.ModuleMineApi
 import com.btpj.lib_base.ext.showLoading
 import com.btpj.module_mine.R
 import com.btpj.module_mine.databinding.MineActivityAddArticleBinding
@@ -20,19 +20,9 @@ import com.btpj.module_mine.databinding.MineActivityAddArticleBinding
  *
  * @author LTP 2022/4/12
  */
+@Route(path = ModuleMineApi.ROUTER_MINE_ADD_ARTICLE_ACTIVITY)
 class AddArticleActivity :
     BaseVMBActivity<AddArticleViewModel, MineActivityAddArticleBinding>(R.layout.mine_activity_add_article) {
-
-    companion object {
-
-        /**
-         * 页面启动
-         * @param context Context
-         */
-        fun launch(context: Context) {
-            context.startActivity(Intent(context, AddArticleActivity::class.java))
-        }
-    }
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.apply {

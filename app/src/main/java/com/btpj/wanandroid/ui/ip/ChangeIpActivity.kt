@@ -22,7 +22,7 @@ class ChangeIpActivity :
 
     companion object {
 
-        /** 提供跳转的Intent */
+        /** 页面跳转 */
         fun launch(context: Context) {
             context.startActivity(Intent(context, ChangeIpActivity::class.java))
         }

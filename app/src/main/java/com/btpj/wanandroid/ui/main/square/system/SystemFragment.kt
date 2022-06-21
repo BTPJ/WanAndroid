@@ -42,7 +42,7 @@ class SystemFragment :
 
     override fun createObserve() {
         super.createObserve()
-        mViewModel.systemListLiveData.observe(viewLifecycleOwner) {
+        mViewModel.structureListLiveData.observe(viewLifecycleOwner) {
             mBinding.swipeRefreshLayout.isRefreshing = false
             mAdapter.apply {
                 if (it.isEmpty()) {

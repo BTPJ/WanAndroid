@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.main.square.system
 
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.System
+import com.btpj.wanandroid.data.bean.Structure
 import com.btpj.wanandroid.databinding.ListItemSystemBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
@@ -14,14 +14,14 @@ import com.google.android.flexbox.FlexboxLayoutManager
  * @author LTP  2022/3/23
  */
 class SystemAdapter :
-    BaseQuickAdapter<System, BaseDataBindingHolder<ListItemSystemBinding>>(layoutResId = R.layout.list_item_system),
+    BaseQuickAdapter<Structure, BaseDataBindingHolder<ListItemSystemBinding>>(layoutResId = R.layout.list_item_system),
     LoadMoreModule {
 
     init {
         setAnimationWithDefault(AnimationType.ScaleIn)
     }
 
-    override fun convert(holder: BaseDataBindingHolder<ListItemSystemBinding>, item: System) {
+    override fun convert(holder: BaseDataBindingHolder<ListItemSystemBinding>, item: Structure) {
         holder.dataBinding?.apply {
             text = item.name
             executePendingBindings()

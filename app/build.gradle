@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk rootProject.ext.android.compileSdk
@@ -16,7 +18,7 @@ android {
 
         ndk {
             // 设置支持的SO库架构，以微信为基准只支持arm64-v8a即可，可以达到缩包的目的
-            abiFilters 'arm64-v8a'//, 'armeabi'//, 'armeabi-v7a', 'x86', 'x86_64'
+            abiFilters 'arm64-v8a'//, 'armeabi', 'armeabi-v7a', 'x86', 'x86_64'
         }
         resConfigs 'zh-rCN'
 

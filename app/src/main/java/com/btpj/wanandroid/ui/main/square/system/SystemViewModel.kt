@@ -5,12 +5,12 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.System
+import com.btpj.wanandroid.data.bean.Structure
 
 class SystemViewModel : BaseViewModel() {
 
     /** 体系列表LiveData */
-    val systemListLiveData = MutableLiveData<List<System>>()
+    val structureListLiveData = MutableLiveData<List<Structure>>()
 
     override fun start() {
 
@@ -19,7 +19,7 @@ class SystemViewModel : BaseViewModel() {
     /** 请求体系列表 */
     fun fetchSystemList(pageNo: Int = 0) {
         launch({
-            handleRequest(DataRepository.getTreeList(), { systemListLiveData.value = it.data })
+            handleRequest(DataRepository.getTreeList(), { structureListLiveData.value = it.data })
         })
     }
 }

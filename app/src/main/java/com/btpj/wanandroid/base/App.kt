@@ -20,6 +20,6 @@ class App : BaseApp() {
         appViewModel = getAppViewModelProvider().get(AppViewModel::class.java)
 
         // bugly初始化
-        Bugly.init(applicationContext, "99ff7c64d9", BuildConfig.DEBUG)
+        Bugly.init(applicationContext, "99ff7c64d9", false)
     }
 }

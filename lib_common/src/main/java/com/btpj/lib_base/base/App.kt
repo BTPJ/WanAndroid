@@ -37,7 +37,7 @@ class App : Application(), ViewModelStoreOwner {
         MMKV.initialize(this)
 
         // bugly初始化
-        Bugly.init(applicationContext, "99ff7c64d9", BuildConfig.DEBUG)
+        Bugly.init(applicationContext, "99ff7c64d9", false)
 
         // ARouter初始化
         if (BuildConfig.DEBUG) {   // 这两行必须写在init之前，否则这些配置在init过程中将无效

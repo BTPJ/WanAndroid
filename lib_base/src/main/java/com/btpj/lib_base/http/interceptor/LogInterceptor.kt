@@ -1,7 +1,7 @@
 package com.btpj.lib_base.http.interceptor
 
-import com.btpj.lib_base.BuildConfig
 import com.btpj.lib_base.utils.LogUtil
+import com.franmontiel.persistentcookiejar.BuildConfig
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**

@@ -55,7 +55,7 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
         // 这里利用反射获取泛型中第一个参数ViewModel
         val type: Class<VM> =
             (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VM>
-        mViewModel = ViewModelProvider(this).get(type)
+        mViewModel = ViewModelProvider(this)[type]
         mViewModel.start()
     }
 

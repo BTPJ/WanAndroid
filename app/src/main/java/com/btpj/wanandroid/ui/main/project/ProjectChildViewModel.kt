@@ -11,7 +11,7 @@ import com.btpj.wanandroid.data.bean.Article
 class ProjectChildViewModel : BaseViewModel() {
 
     /** 项目分页列表LiveData */
-    val articlePageListLiveData = MutableLiveData<PageResponse<Article>>()
+    val articlePageListLiveData = MutableLiveData<PageResponse<Article>?>()
 
     companion object {
         /** 每页显示的条目大小 */

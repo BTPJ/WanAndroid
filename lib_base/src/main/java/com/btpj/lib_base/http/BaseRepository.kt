@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
 open class BaseRepository {
 
     suspend fun <T> apiCall(api: suspend () -> ApiResponse<T>): ApiResponse<T> {
+        // 使网络请求在IO线程上执行，实际上Retrofit内部默认处理了，这里也可以无需处理
         return withContext(Dispatchers.IO) { api.invoke() }
     }
 }

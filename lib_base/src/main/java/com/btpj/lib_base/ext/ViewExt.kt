@@ -199,9 +199,10 @@ fun AppCompatActivity.showLoading(message: String = "请求网络中") {
                 .customView(R.layout.dialog_loading)
                 .maxWidth(literal = ScreenUtil.dp2px(this, 120f))
                 .lifecycleOwner(this)
-            mLoadingDialog?.getCustomView()?.run {
-                this.findViewById<TextView>(R.id.tv_loadingMsg).text = message
-            }
+                .apply {
+                    getCustomView().findViewById<TextView>(R.id.tv_loadingMsg).text = message
+                }
+
         }
         mLoadingDialog?.show()
     }
@@ -218,9 +219,9 @@ fun Fragment.showLoading(message: String = "请求网络中") {
                 .customView(R.layout.dialog_loading)
                 .maxWidth(literal = ScreenUtil.dp2px(requireContext(), 120f))
                 .lifecycleOwner(this)
-            mLoadingDialog?.getCustomView()?.run {
-                this.findViewById<TextView>(R.id.tv_loadingMsg).text = message
-            }
+                .apply {
+                    getCustomView().findViewById<TextView>(R.id.tv_loadingMsg).text = message
+                }
         }
         mLoadingDialog?.show()
     }

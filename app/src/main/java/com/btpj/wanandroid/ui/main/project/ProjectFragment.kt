@@ -69,14 +69,14 @@ class ProjectFragment :
                 mBinding.showLoading = false
                 mProjectTitleList.apply {
                     clear()
-                    addAll(list)
+                    list?.let { addAll(it) }
                 }
 
                 mTitleList.apply {
                     clear()
                     mTitleList.add("最新项目")
                 }
-                list.forEach { projectTitle ->
+                list?.forEach { projectTitle ->
                     mTitleList.add(projectTitle.name.toHtml().toString())
                 }
                 mFragmentStateAdapter.notifyDataSetChanged()

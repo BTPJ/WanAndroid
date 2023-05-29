@@ -5,11 +5,15 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * 首页ViewModel
@@ -24,7 +28,8 @@ class HomeViewModel : BaseViewModel() {
     }
 
     /** Banner列表 */
-    val bannerListLiveData = MutableLiveData<List<Banner>?>()
+    private val _bannerListStateFlow = MutableStateFlow<List<Banner>>(emptyList())
+    val bannerListStateFlow = _bannerListStateFlow
 
     /** 文章列表 */
     val articlePageListLiveData = MutableLiveData<PageResponse<Article>?>()
@@ -35,7 +40,7 @@ class HomeViewModel : BaseViewModel() {
     fun fetchBanners() {
         launch({
             handleRequest(DataRepository.getBanner(), {
-                bannerListLiveData.value = it.data
+                _bannerListStateFlow.value = it.data
             })
         })
     }
@@ -66,7 +71,9 @@ class HomeViewModel : BaseViewModel() {
             } else {
                 handleRequest(
                     DataRepository.getArticlePageList(pageNo, PAGE_SIZE),
-                    { articlePageListLiveData.value = it.data })
+                    {
+                        articlePageListLiveData.value = it.data
+                    })
             }
         })
     }

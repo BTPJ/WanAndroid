@@ -2,10 +2,17 @@ package com.btpj.wanandroid.ui.main.home
 
 import android.annotation.SuppressLint
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.whenCreated
+import androidx.lifecycle.whenStarted
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.App
 import com.btpj.wanandroid.base.BaseFragment
@@ -17,6 +24,11 @@ import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.search.SearchActivity
 import com.youth.banner.indicator.CircleIndicator
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
 
 /**
  * 首页Tab
@@ -125,14 +137,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     override fun createObserve() {
         super.createObserve()
         mViewModel.apply {
-            bannerListLiveData.observe(viewLifecycleOwner) {
-                it?.let {
-                    mBannerList.apply {
-                        clear()
-                        addAll(it)
+            lifecycleScope.launch {
+                bannerListStateFlow.flowWithLifecycle(lifecycle).drop(1).collect {
+                    it.let {
+                        mBannerList.apply {
+                            clear()
+                            addAll(it)
+                        }
                     }
+                    mBannerAdapter.notifyDataSetChanged()
                 }
-                mBannerAdapter.notifyDataSetChanged()
             }
 
             articlePageListLiveData.observe(viewLifecycleOwner) {
@@ -140,34 +154,37 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             }
         }
 
-        // 全局收藏监听
-        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
-            for (position in mAdapter.data.indices) {
-                if (mAdapter.data[position].id == it.id) {
-                    mAdapter.data[position].collect = it.collect
-                    mAdapter.notifyItemChanged(position + 1)
-                    break
-                }
-            }
-        }
-
-        // 用户退出时，收藏应全为false，登录时获取collectIds
-        App.appViewModel.userEvent.observe(this) {
-            if (it != null) {
-                it.collectIds.forEach { id ->
-                    for (item in mAdapter.data) {
-                        if (id.toInt() == item.id) {
-                            item.collect = true
-                            break
-                        }
+        // 全局监听
+        App.appViewModel.apply {
+            // 收藏监听
+            collectEvent.observe(viewLifecycleOwner) {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].id == it.id) {
+                        mAdapter.data[position].collect = it.collect
+                        mAdapter.notifyItemChanged(position + 1)
+                        break
                     }
                 }
-            } else {
-                for (item in mAdapter.data) {
-                    item.collect = false
-                }
             }
-            mAdapter.notifyDataSetChanged()
+
+            // 用户退出时，收藏应全为false，登录时获取collectIds
+            userEvent.observe(this@HomeFragment) {
+                if (it != null) {
+                    it.collectIds.forEach { id ->
+                        for (item in mAdapter.data) {
+                            if (id.toInt() == item.id) {
+                                item.collect = true
+                                break
+                            }
+                        }
+                    }
+                } else {
+                    for (item in mAdapter.data) {
+                        item.collect = false
+                    }
+                }
+                mAdapter.notifyDataSetChanged()
+            }
         }
     }
 

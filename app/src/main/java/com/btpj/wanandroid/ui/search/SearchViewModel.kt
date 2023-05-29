@@ -7,6 +7,7 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
 import com.btpj.wanandroid.data.local.CacheManager
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * @author LTP  2022/4/19
@@ -14,13 +15,13 @@ import com.btpj.wanandroid.data.local.CacheManager
 class SearchViewModel : BaseViewModel() {
 
     /** 搜索关键词 */
-    val searchKeyStr = MutableLiveData<String>()
+    val searchKeyFlow = MutableStateFlow("")
 
     /** 搜索历史数据 */
     val searchHistoryData = MutableLiveData<ArrayDeque<String>>()
 
     /** 热门搜索 */
-    val hotSearchList = MutableLiveData<List<HotSearch>>()
+    val hotSearchList = MutableLiveData<List<HotSearch>?>()
 
     override fun start() {
         fetchHotSearchList()

@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
@@ -11,6 +12,8 @@ import com.btpj.wanandroid.data.local.CacheManager
 import com.btpj.wanandroid.databinding.ActivitySearchBinding
 import com.btpj.wanandroid.ui.search.result.SearchResultActivity
 import com.google.android.flexbox.FlexboxLayoutManager
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * 搜索
@@ -79,8 +82,8 @@ class SearchActivity :
 
     /** 搜索事件处理 */
     private fun handleSearch() {
-        mViewModel.searchKeyStr.value.let {
-            if (it?.trim()?.isNotEmpty() == true) {
+        mViewModel.searchKeyFlow.value.let {
+            if (it.trim().isNotEmpty()) {
                 updateKey(it)
                 SearchResultActivity.launch(this@SearchActivity, it)
             } else {

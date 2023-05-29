@@ -34,7 +34,7 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:lines="1"
-            android:text="@={viewModel.searchKeyStr}"
+            android:text="@={viewModel.searchKeyFlow}"
             android:textColor="@color/_ffffff"
             android:textColorHint="@color/_cccccc"
             app:layout_constraintBottom_toBottomOf="@+id/titleLayout"

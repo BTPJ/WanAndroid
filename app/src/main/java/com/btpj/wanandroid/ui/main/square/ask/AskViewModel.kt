@@ -11,7 +11,7 @@ import com.btpj.wanandroid.data.bean.Article
 class AskViewModel : BaseViewModel() {
 
     /** 每日一问分页列表LiveData */
-    val articlePageListLiveData = MutableLiveData<PageResponse<Article>>()
+    val articlePageListLiveData = MutableLiveData<PageResponse<Article>?>()
 
     override fun start() {}
 

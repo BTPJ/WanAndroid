@@ -10,7 +10,7 @@ import com.btpj.wanandroid.data.bean.ProjectTitle
 class ProjectViewModel : BaseViewModel() {
 
     /** 项目标题列表LiveData */
-    val projectTitleListLiveData = MutableLiveData<List<ProjectTitle>>()
+    val projectTitleListLiveData = MutableLiveData<List<ProjectTitle>?>()
 
     override fun start() {
         fetchProjectTitleList()

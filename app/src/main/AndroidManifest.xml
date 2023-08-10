@@ -14,7 +14,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.search.result.SearchResultActivity"
             android:exported="false"
@@ -77,9 +77,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- 屏幕适配配置 -->
+        </activity> <!-- 屏幕适配配置 -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />

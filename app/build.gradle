@@ -86,6 +86,9 @@ dependencies {
     implementation rootProject.ext.dependencies.AndroidAutoSize
     implementation rootProject.ext.dependencies.bugly_update
     implementation rootProject.ext.dependencies.bugly_nativecrashreport
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     // 使用debugImplementation只在调试时引入
     debugImplementation rootProject.ext.dependencies.leakcanary
 }

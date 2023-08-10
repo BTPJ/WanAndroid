@@ -48,6 +48,7 @@ dependencies {
     // jetpack
     api rootProject.ext.dependencies.viewModelKtx
     api rootProject.ext.dependencies.liveDataKtx
+    api rootProject.ext.dependencies.activityKtx
 
     // UI相关
     api rootProject.ext.dependencies.swiperefreshlayout

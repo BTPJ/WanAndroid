@@ -29,14 +29,14 @@ open class BaseApp : Application(), ViewModelStoreOwner {
 
         // MMKV初始化
         MMKV.initialize(this)
+
     }
 
-    /** 获取一个全局的ViewModel */
     fun getAppViewModelProvider(): ViewModelProvider {
-        return ViewModelProvider(this, getAppFactory())
+        return ViewModelProvider(this, getAppViewModelFactory())
     }
 
-    private fun getAppFactory(): ViewModelProvider.Factory {
+    private fun getAppViewModelFactory(): ViewModelProvider.Factory {
         if (mFactory == null) {
             mFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
         }

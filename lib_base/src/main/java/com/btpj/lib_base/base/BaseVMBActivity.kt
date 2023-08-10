@@ -84,10 +84,12 @@ abstract class BaseVMBActivity<VM : BaseViewModel, B : ViewDataBinding>(private 
                         this@BaseVMBActivity,
                         getString(R.string.request_time_out)
                     )
+
                     is ConnectException, is UnknownHostException -> ToastUtil.showShort(
                         this@BaseVMBActivity,
                         getString(R.string.network_error)
                     )
+
                     else -> ToastUtil.showShort(
                         this@BaseVMBActivity, it.message ?: getString(R.string.response_error)
                     )

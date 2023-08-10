@@ -93,21 +93,25 @@ class MainActivity :
                 switchFragment(mHomeFragment)
                 return true
             }
+
             R.id.menu_project -> {
                 mCurrentNavPosition = 1
                 switchFragment(mProjectFragment)
                 return true
             }
+
             R.id.menu_square -> {
                 mCurrentNavPosition = 2
                 switchFragment(mSquareFragment)
                 return true
             }
+
             R.id.menu_wechat -> {
                 mCurrentNavPosition = 3
                 switchFragment(mWechatFragment)
                 return true
             }
+
             else -> {
                 mCurrentNavPosition = 4
                 switchFragment(mMineFragment)

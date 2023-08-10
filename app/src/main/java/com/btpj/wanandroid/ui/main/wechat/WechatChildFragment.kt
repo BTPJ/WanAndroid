@@ -118,33 +118,35 @@ class WechatChildFragment :
             }
         }
 
-        App.appViewModel.collectEvent.observe(viewLifecycleOwner) {
-            for (position in mAdapter.data.indices) {
-                if (mAdapter.data[position].id == it.id) {
-                    mAdapter.data[position].collect = it.collect
-                    mAdapter.notifyItemChanged(position)
-                    break
-                }
-            }
-        }
-
-        // 用户退出时，收藏应全为false，登录时获取collectIds
-        App.appViewModel.userEvent.observe(this) {
-            if (it != null) {
-                it.collectIds.forEach { id ->
-                    for (item in mAdapter.data) {
-                        if (id.toInt() == item.id) {
-                            item.collect = true
-                            break
-                        }
+        App.appViewModel.apply {
+            collectEvent.observe(viewLifecycleOwner) {
+                for (position in mAdapter.data.indices) {
+                    if (mAdapter.data[position].id == it.id) {
+                        mAdapter.data[position].collect = it.collect
+                        mAdapter.notifyItemChanged(position)
+                        break
                     }
                 }
-            } else {
-                for (item in mAdapter.data) {
-                    item.collect = false
-                }
             }
-            mAdapter.notifyDataSetChanged()
+
+            // 用户退出时，收藏应全为false，登录时获取collectIds
+            userEvent.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    it.collectIds.forEach { id ->
+                        for (item in mAdapter.data) {
+                            if (id.toInt() == item.id) {
+                                item.collect = true
+                                break
+                            }
+                        }
+                    }
+                } else {
+                    for (item in mAdapter.data) {
+                        item.collect = false
+                    }
+                }
+                mAdapter.notifyDataSetChanged()
+            }
         }
     }
 

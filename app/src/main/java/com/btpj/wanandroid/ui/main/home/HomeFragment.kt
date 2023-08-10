@@ -19,7 +19,6 @@ import com.btpj.wanandroid.databinding.HeaderBannerBinding
 import com.btpj.wanandroid.ui.author.AuthorActivity
 import com.btpj.wanandroid.ui.search.SearchActivity
 import com.youth.banner.indicator.CircleIndicator
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 

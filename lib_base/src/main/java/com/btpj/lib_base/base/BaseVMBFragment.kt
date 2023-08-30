@@ -75,7 +75,7 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
 
     override fun onResume() {
         super.onResume()
-        if (lifecycle.currentState == Lifecycle.State.STARTED && mIsFirstLoading) {
+        if (mIsFirstLoading) {
             lazyLoadData()
             mIsFirstLoading = false
         }
@@ -95,10 +95,12 @@ abstract class BaseVMBFragment<VM : BaseViewModel, B : ViewDataBinding>(private 
                         requireContext(),
                         getString(R.string.request_time_out)
                     )
+
                     is ConnectException, is UnknownHostException -> ToastUtil.showShort(
                         requireContext(),
                         getString(R.string.network_error)
                     )
+
                     else -> ToastUtil.showShort(
                         requireContext(), it.message ?: getString(R.string.response_error)
                     )

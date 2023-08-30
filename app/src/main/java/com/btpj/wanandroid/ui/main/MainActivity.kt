@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
@@ -79,6 +80,9 @@ class MainActivity :
                 return@setOnItemSelectedListener onNavBarItemSelected(it.itemId)
             }
         }
+
+        // 返回处理
+        onBackPressedDispatcher.addCallback(this, mBackPressedCallback)
     }
 
     /**
@@ -154,13 +158,18 @@ class MainActivity :
     /** 上一次点击返回键的时间 */
     private var lastBackMills: Long = 0
 
-    override fun onBackPressed() {
-        // 重写返回键监听实现双击退出
-        if (System.currentTimeMillis() - lastBackMills > 2000) {
-            lastBackMills = System.currentTimeMillis()
-            ToastUtil.showShort(this, getString(R.string.toast_double_back_exit))
-        } else {
-            super.onBackPressed()
+    /** 返回监听回调 */
+    private val mBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (System.currentTimeMillis() - lastBackMills > 2000) {
+                lastBackMills = System.currentTimeMillis()
+                ToastUtil.showShort(
+                    this@MainActivity,
+                    getString(R.string.toast_double_back_exit)
+                )
+            } else {
+                finish()
+            }
         }
     }
 }

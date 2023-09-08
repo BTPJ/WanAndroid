@@ -12,8 +12,6 @@ import com.btpj.wanandroid.data.bean.Banner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * 首页ViewModel
@@ -54,18 +52,25 @@ class HomeViewModel : BaseViewModel() {
         launch({
             if (pageNo == 0) {
                 // 第一页会同时请求置顶文章列表接口和分页文章列表的接口，使用async进行并行请求速度更快（默认是串行的）
-                val response1 =
-                    async(Dispatchers.IO) { DataRepository.getArticlePageList(pageNo, PAGE_SIZE) }
-                val response2 = async(Dispatchers.IO) { DataRepository.getArticleTopList() }
-
-                handleRequest(response1.await(), {
-                    val list = response1.await()
-                    handleRequest(response2.await(), {
-                        (list.data.datas as ArrayList<Article>).addAll(
-                            0,
-                            response2.await().data
+                val job1 =
+                    async(Dispatchers.IO) {
+                        DataRepository.getArticlePageList(
+                            pageNo,
+                            PAGE_SIZE
                         )
-                        articlePageListLiveData.value = list.data
+                    }
+                val job2 = async(Dispatchers.IO) { DataRepository.getArticleTopList() }
+
+                val response1 = job1.await()
+                val response2 = job2.await()
+
+                handleRequest(response1, {
+                    handleRequest(response2, {
+                        (response1.data.datas as ArrayList<Article>).addAll(
+                            0,
+                            response2.data
+                        )
+                        articlePageListLiveData.value = response1.data
                     })
                 })
             } else {

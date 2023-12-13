@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -50,9 +51,9 @@ fun TitleBar(
         Icon(
             Icons.Default.ArrowBack,
             modifier = Modifier
-                .width(100.dp)
+                .width(80.dp)
                 .fillMaxHeight()
-                .padding(end = 40.dp)
+                .padding(end = 20.dp)
                 .clickable { onBackClick?.invoke() }
                 .padding(vertical = 15.dp),
             contentDescription = "back",
@@ -63,10 +64,12 @@ fun TitleBar(
             color = Color.White,
             modifier = Modifier
                 .weight(1f),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            softWrap = false,
+            overflow = TextOverflow.Ellipsis
         )
         Box(modifier = Modifier
-            .width(100.dp)
+            .width(80.dp)
             .fillMaxHeight()
             .padding(start = 20.dp)
             .clickable(enabled = menu != null) {

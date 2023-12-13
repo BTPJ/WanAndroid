@@ -28,7 +28,6 @@ open class BaseApp(override val viewModelStore: ViewModelStore = ViewModelStore(
 
         // MMKV初始化
         MMKV.initialize(this)
-
     }
 
     fun getAppViewModelProvider(): ViewModelProvider {

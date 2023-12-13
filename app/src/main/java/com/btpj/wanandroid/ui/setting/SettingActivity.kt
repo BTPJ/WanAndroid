@@ -47,8 +47,11 @@ import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
 import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.ui.theme.WanAndroidTheme
+import com.btpj.wanandroid.ui.web.WebActivity
+import com.btpj.wanandroid.ui.web.WebActivity2
 
 /**
  * 设置
@@ -89,15 +92,13 @@ fun SettingPage(
     viewModel: SettingViewModel = viewModel(),
     onBackClick: (() -> Unit)? = null
 ) {
+    val showLogoutBtn by viewModel.showLogoutBtn.observeAsState()
     val haveNewVersion by viewModel.haveNewVersion.observeAsState()
+    val cacheSize by viewModel.cacheSize.observeAsState()
+    val appVersionName by viewModel.appVersionName.observeAsState()
 
     LaunchedEffect(true) {
         viewModel.start()
-    }
-
-    val context = LocalContext.current
-    var cacheSize by remember {
-        mutableStateOf(CacheUtil.getTotalCacheSize(context))
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -107,13 +108,12 @@ fun SettingPage(
                 "确定清理缓存吗?",
                 positiveButtonText = "清理",
                 positiveAction = {
-                    CacheUtil.clearAllCache(componentActivity)
-                    cacheSize = CacheUtil.getTotalCacheSize(context)
+                    viewModel.clearAllCache()
                 })
         }
         ListItem(
             label = "版本",
-            value = AppUtil.getAppVersionName(context),
+            value = appVersionName,
             showRedCircle = haveNewVersion
         ) {
             viewModel.checkAppUpdate(true)
@@ -125,8 +125,14 @@ fun SettingPage(
             )
         }
         ListItem(label = "项目源码") {
+            componentActivity?.let {
+                WebActivity2.launch(
+                    it,
+                    "https://gitee.com/BTPJ_git/WanAndroid"
+                )
+            }
         }
-        if (UserManager.isLogin()) {
+        if (showLogoutBtn == true) {
             Button(modifier = Modifier
                 .padding(top = 50.dp)
                 .width(200.dp),

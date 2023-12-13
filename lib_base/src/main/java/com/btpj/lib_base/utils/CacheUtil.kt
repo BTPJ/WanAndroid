@@ -23,23 +23,20 @@ object CacheUtil {
     /**
      * 清除缓存
      */
-    fun clearAllCache(activity: ComponentActivity?) {
-        activity?.let {
-            deleteDir(it.cacheDir)
-            if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                if (it.externalCacheDir == null) {
-                    ToastUtil.showLong(activity, "清理缓存失败")
-                }
-                return
+    fun clearAllCache(context: Context) {
+        deleteDir(context.cacheDir)
+        if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+            if (context.externalCacheDir == null) {
+                ToastUtil.showLong(context, "清理缓存失败")
             }
-            it.externalCacheDir?.let { file ->
-                if (deleteDir(file)) {
-                    ToastUtil.showLong(activity, "清理缓存成功")
-                }
+            return
+        }
+        context.externalCacheDir?.let { file ->
+            if (deleteDir(file)) {
+                ToastUtil.showLong(context, "清理缓存成功")
             }
         }
     }
-
 }
 
 /**

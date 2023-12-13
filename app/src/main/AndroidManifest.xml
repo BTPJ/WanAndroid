@@ -12,6 +12,17 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity,UnusedAttribute">
         <activity
+            android:name=".ui.web.WebActivity"
+            android:exported="false"
+            android:label="@string/title_activity_web"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.web.WebActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_web"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.WanAndroid" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -49,10 +60,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.register.RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.web.WebActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

@@ -13,7 +13,7 @@
         android:orientation="vertical"
         tools:context=".ui.main.home.HomeFragment">
 
-        <com.btpj.lib_base.widgets.TitleLayout
+        <com.btpj.lib_base.ui.widgets.TitleLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

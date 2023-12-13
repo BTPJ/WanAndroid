@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.ui.setting
 
-import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.BaseApp.Companion.appContext
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.utils.ToastUtil
@@ -12,11 +12,10 @@ import com.tencent.bugly.beta.Beta
  * @author LTP  2022/4/11
  */
 class SettingViewModel : BaseViewModel() {
-    val showLogoutBtn = ObservableBoolean(false)
-    val haveNewVersion = ObservableBoolean(false)
+    private val _haveNewVersion: MutableLiveData<Boolean> = MutableLiveData()
+    val haveNewVersion = _haveNewVersion
 
     override fun start() {
-        showLogoutBtn.set(UserManager.isLogin())
         checkAppUpdate()
     }
 
@@ -29,12 +28,12 @@ class SettingViewModel : BaseViewModel() {
         // 获取升级信息
         val upgradeInfo = Beta.getUpgradeInfo()
         if (upgradeInfo == null) {
-            haveNewVersion.set(false)
+            haveNewVersion.value = false
             if (isManual) {
                 ToastUtil.showShort(appContext, "你已经是最新版本")
             }
         } else {
-            haveNewVersion.set(true)
+            haveNewVersion.value = true
         }
     }
 }

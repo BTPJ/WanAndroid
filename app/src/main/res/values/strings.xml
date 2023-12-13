@@ -51,4 +51,5 @@
     <string name="please_input_ip_and_port">请输入IP和端口</string>
     <string name="sure">确认</string>
     <string name="history_ip_and_port">历史IP与端口(可选择)</string>
+    <string name="title_activity_setting2">SettingActivity2</string>
 </resources>

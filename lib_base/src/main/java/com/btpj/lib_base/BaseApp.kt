@@ -13,9 +13,9 @@ import kotlin.properties.Delegates
  *
  * @author LTP  2022/3/21
  */
-open class BaseApp : Application(), ViewModelStoreOwner {
+open class BaseApp(override val viewModelStore: ViewModelStore = ViewModelStore()) :
+    Application(), ViewModelStoreOwner {
 
-    private lateinit var mAppViewModelStore: ViewModelStore
     private var mFactory: ViewModelProvider.Factory? = null
 
     companion object {
@@ -25,7 +25,6 @@ open class BaseApp : Application(), ViewModelStoreOwner {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        mAppViewModelStore = ViewModelStore()
 
         // MMKV初始化
         MMKV.initialize(this)
@@ -41,9 +40,5 @@ open class BaseApp : Application(), ViewModelStoreOwner {
             mFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
         }
         return mFactory as ViewModelProvider.Factory
-    }
-
-    override fun getViewModelStore(): ViewModelStore {
-        return mAppViewModelStore
     }
 }

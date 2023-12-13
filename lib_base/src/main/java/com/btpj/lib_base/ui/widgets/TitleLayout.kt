@@ -1,4 +1,4 @@
-package com.btpj.lib_base.widgets
+package com.btpj.lib_base.ui.widgets
 
 import android.app.Activity
 import android.content.Context

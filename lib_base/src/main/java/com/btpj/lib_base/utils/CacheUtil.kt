@@ -3,6 +3,7 @@ package com.btpj.lib_base.utils
 
 import android.content.Context
 import android.os.Environment
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import java.math.BigDecimal
@@ -22,7 +23,7 @@ object CacheUtil {
     /**
      * 清除缓存
      */
-    fun clearAllCache(activity: AppCompatActivity?) {
+    fun clearAllCache(activity: ComponentActivity?) {
         activity?.let {
             deleteDir(it.cacheDir)
             if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {

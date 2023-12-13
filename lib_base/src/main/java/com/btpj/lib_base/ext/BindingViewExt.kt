@@ -2,7 +2,7 @@ package com.btpj.lib_base.ext
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.btpj.lib_base.widgets.TitleLayout
+import com.btpj.lib_base.ui.widgets.TitleLayout
 
 /**
  * DataBinding的自定义属性

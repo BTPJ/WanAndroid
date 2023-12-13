@@ -1,11 +1,14 @@
 package com.btpj.lib_base.ext
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.ComponentActivity
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -136,7 +139,7 @@ fun Toolbar.initClose(
  * @param negativeButtonText AlertDialog左侧按键内容 默认为 "取消"
  * @param negativeAction AlertDialog点击左侧按键的行为 默认是空方法
  */
-fun AppCompatActivity.showDialog(
+fun ComponentActivity.showDialog(
     message: String,
     title: String = "温馨提示",
     positiveButtonText: String = "确定",

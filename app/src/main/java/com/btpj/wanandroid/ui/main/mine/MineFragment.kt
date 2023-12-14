@@ -3,7 +3,7 @@ package com.btpj.wanandroid.ui.main.mine
 import android.annotation.SuppressLint
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.App
 import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.data.local.UserManager
@@ -12,7 +12,6 @@ import com.btpj.wanandroid.ext.launchCheckLogin
 import com.btpj.wanandroid.ui.collect.CollectActivity
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankActivity
 import com.btpj.wanandroid.ui.login.LoginActivity
-import com.btpj.wanandroid.ui.setting.SettingActivity
 import com.btpj.wanandroid.ui.share.list.MyArticleActivity
 import com.btpj.wanandroid.ui.web.WebActivity
 
@@ -64,7 +63,7 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>(R.layout.f
             }
 
             // 设置
-            tvSettings.setOnClickListener { SettingActivity.launch(requireContext()) }
+            tvSettings.setOnClickListener {  }
         }
 
         onRefresh()

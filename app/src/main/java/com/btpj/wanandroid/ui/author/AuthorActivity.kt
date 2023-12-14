@@ -10,7 +10,7 @@ import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initClose
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.App
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.CollectData

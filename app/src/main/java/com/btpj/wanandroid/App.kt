@@ -1,6 +1,7 @@
-package com.btpj.wanandroid.base
+package com.btpj.wanandroid
 
 import com.btpj.lib_base.BaseApp
+import com.btpj.wanandroid.base.AppViewModel
 import com.tencent.bugly.Bugly
 
 /**

@@ -5,7 +5,7 @@ import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.ext.getEmptyView
 import com.btpj.lib_base.ext.initColors
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.App
+import com.btpj.wanandroid.App
 import com.btpj.wanandroid.base.BaseFragment
 import com.btpj.wanandroid.data.bean.CollectArticle
 import com.btpj.wanandroid.databinding.IncludeSwiperefreshRecyclerviewBinding

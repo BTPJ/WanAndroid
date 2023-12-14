@@ -1,17 +1,15 @@
 package com.btpj.lib_base.ui.widgets
 
-import android.app.Activity
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.btpj.lib_base.utils.LogUtil
 
@@ -36,10 +33,9 @@ import com.btpj.lib_base.utils.LogUtil
 @Composable
 fun TitleBar(
     title: String,
+    menu: (@Composable RowScope.() -> Unit)? = null,
     showBackBtn: Boolean = true,
     onBackClick: (() -> Unit)? = null,
-    menu: String? = null,
-    onMenuClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
@@ -51,9 +47,8 @@ fun TitleBar(
         Icon(
             Icons.Default.ArrowBack,
             modifier = Modifier
-                .width(80.dp)
+                .width(50.dp)
                 .fillMaxHeight()
-                .padding(end = 20.dp)
                 .clickable { onBackClick?.invoke() }
                 .padding(vertical = 15.dp),
             contentDescription = "back",
@@ -68,21 +63,14 @@ fun TitleBar(
             softWrap = false,
             overflow = TextOverflow.Ellipsis
         )
-        Box(modifier = Modifier
-            .width(80.dp)
-            .fillMaxHeight()
-            .padding(start = 20.dp)
-            .clickable(enabled = menu != null) {
-                onMenuClick?.invoke()
-            }
-            .padding(end = 20.dp),
-            contentAlignment = Alignment.CenterEnd) {
-            Text(
-                text = menu ?: "",
-                color = Color.White,
-                textAlign = TextAlign.Center
+        menu?.let {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                content = it
             )
-        }
+        } ?: Box(modifier = Modifier.width(50.dp))
     }
 }
 
@@ -91,11 +79,13 @@ fun TitleBar(
 fun TitleBarPreview() {
     Column {
         TitleBar(
-            title = "标题", true,
-            onBackClick = { LogUtil.d("点击返回") },
-            menu = "菜单"
+            title = "标题", showBackBtn = true,
+//            menu = {
+//                Text(text = "菜单")
+//                Text(text = "菜单2")
+//            }
         ) {
-            LogUtil.d("点击菜单")
+            LogUtil.d("点击返回")
         }
     }
 }

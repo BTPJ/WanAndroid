@@ -44,16 +44,20 @@ fun TitleBar(
             .background(color = MaterialTheme.colorScheme.primary),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            Icons.Default.ArrowBack,
-            modifier = Modifier
-                .width(50.dp)
-                .fillMaxHeight()
-                .clickable { onBackClick?.invoke() }
-                .padding(vertical = 15.dp),
-            contentDescription = "back",
-            tint = Color.White
-        )
+        if (showBackBtn) {
+            Icon(
+                Icons.Default.ArrowBack,
+                modifier = Modifier
+                    .width(50.dp)
+                    .fillMaxHeight()
+                    .clickable { onBackClick?.invoke() }
+                    .padding(vertical = 15.dp),
+                contentDescription = "back",
+                tint = Color.White
+            )
+        } else {
+            Box(modifier = Modifier.width(50.dp))
+        }
         Text(
             text = title,
             color = Color.White,

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -34,9 +35,18 @@ import com.btpj.wanandroid.navigation.Route
 @Composable
 fun MainPage() {
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val hierarchy = navBackStackEntry?.destination?.hierarchy
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { BottomBar(navController) }
+        bottomBar = {
+            if (hierarchy?.any {
+                    navBarItems.map { navBarItem -> navBarItem.route }
+                        .contains(it.route)
+                } == true) {
+                BottomBar(navController, hierarchy)
+            }
+        }
     ) {
         NavGraph(navController)
     }
@@ -51,17 +61,14 @@ val navBarItems = listOf(
 )
 
 @Composable
-fun BottomBar(navController: NavController) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentNavDestination = navBackStackEntry?.destination
-
+fun BottomBar(navController: NavController, hierarchy: Sequence<NavDestination>?) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.primary
     ) {
         navBarItems.forEach { item ->
             NavigationBarItem(
-                selected = currentNavDestination?.hierarchy?.any { it.route == item.route } == true,
+                selected = hierarchy?.any { it.route == item.route } == true,
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),

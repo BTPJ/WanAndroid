@@ -139,7 +139,7 @@ fun Toolbar.initClose(
  * @param negativeButtonText AlertDialog左侧按键内容 默认为 "取消"
  * @param negativeAction AlertDialog点击左侧按键的行为 默认是空方法
  */
-fun ComponentActivity.showDialog(
+fun Context.showDialog(
     message: String,
     title: String = "温馨提示",
     positiveButtonText: String = "确定",
@@ -149,7 +149,6 @@ fun ComponentActivity.showDialog(
 ) {
     MaterialDialog(this)
         .cancelable(true)
-        .lifecycleOwner(this)
         .show {
             title(text = title)
             message(text = message)

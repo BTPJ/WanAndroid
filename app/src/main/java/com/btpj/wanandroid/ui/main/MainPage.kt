@@ -39,6 +39,7 @@ fun MainPage() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
+            // 除去几个navBarItems其他页面不展示BottomBar
             if (destination?.hierarchy?.any {
                     navBarItems.map { navBarItem -> navBarItem.route }
                         .contains(it.route)

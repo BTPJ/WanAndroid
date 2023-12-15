@@ -19,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.btpj.wanandroid.R
@@ -36,15 +35,15 @@ import com.btpj.wanandroid.navigation.Route
 fun MainPage() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val hierarchy = navBackStackEntry?.destination?.hierarchy
+    val destination = navBackStackEntry?.destination
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            if (hierarchy?.any {
+            if (destination?.hierarchy?.any {
                     navBarItems.map { navBarItem -> navBarItem.route }
                         .contains(it.route)
                 } == true) {
-                BottomBar(navController, hierarchy)
+                BottomBar(navController, destination)
             }
         }
     ) {
@@ -61,14 +60,14 @@ val navBarItems = listOf(
 )
 
 @Composable
-fun BottomBar(navController: NavController, hierarchy: Sequence<NavDestination>?) {
+fun BottomBar(navController: NavController, navDestination: NavDestination?) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.primary
     ) {
         navBarItems.forEach { item ->
             NavigationBarItem(
-                selected = hierarchy?.any { it.route == item.route } == true,
+                selected = navDestination?.hierarchy?.any { it.route == item.route } == true,
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),
@@ -85,16 +84,23 @@ fun BottomBar(navController: NavController, hierarchy: Sequence<NavDestination>?
                 label = { Text(text = stringResource(id = item.label)) },
                 onClick = {
                     navController.navigate(item.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                        // 这里让多个Tab下返回时，不是回到首页，而是直接退出
+                        navDestination?.id?.let {
+                            popUpTo(it) {
+                                // 跳转时保存页面状态
+                                saveState = false
+                                // 回退到栈顶时，栈顶页面是否也关闭
+                                inclusive = true
+                            }
                         }
+                        // 栈顶复用，避免重复点击同一个导航按钮，回退栈中多次创建实例
                         launchSingleTop = true
+                        // 回退时恢复页面状态
                         restoreState = true
                     }
                 })
         }
     }
-
 }
 
 sealed class NavBarItem(val label: Int, val icon: Int, val route: String) {

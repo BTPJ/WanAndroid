@@ -20,7 +20,7 @@ import com.btpj.wanandroid.ui.web.WebPage
 fun NavGraph(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = NavBarItem.Home.route
+        startDestination = Route.HOME
     ) {
         composable(Route.HOME) {
             HomePage(navHostController = navHostController)

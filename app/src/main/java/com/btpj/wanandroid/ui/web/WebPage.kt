@@ -96,7 +96,7 @@ fun WebPage(
             LinearProgressIndicator(
                 progress = progress,
                 modifier = Modifier.fillMaxWidth(),
-                color = MyColor.DarkGreen
+                color = MyColor.Green_19791D
             )
         }
 

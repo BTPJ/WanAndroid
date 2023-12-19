@@ -1,6 +1,5 @@
 package com.btpj.wanandroid.ui.main
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,7 +28,6 @@ import com.btpj.wanandroid.navigation.Route
  * 主页面
  * @author LTP  2023/12/14
  */
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainPage() {
@@ -48,7 +46,7 @@ fun MainPage() {
             }
         }
     ) {
-        NavGraph(navController)
+        NavGraph(navController, it)
     }
 }
 

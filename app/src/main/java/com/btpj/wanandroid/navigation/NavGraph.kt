@@ -1,11 +1,13 @@
 package com.btpj.wanandroid.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.btpj.wanandroid.ui.main.NavBarItem
-import com.btpj.wanandroid.ui.main.home.HomePage
+import com.btpj.wanandroid.ui.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
@@ -17,13 +19,14 @@ import com.btpj.wanandroid.ui.web.WebPage
  * @author LTP  2023/12/14
  */
 @Composable
-fun NavGraph(navHostController: NavHostController) {
+fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues) {
     NavHost(
         navController = navHostController,
-        startDestination = Route.HOME
+        startDestination = Route.HOME,
+        modifier = Modifier.padding(paddingValues)
     ) {
         composable(Route.HOME) {
-            HomePage(navHostController = navHostController)
+            HomePage {}
         }
         composable(Route.PROJECT) {
             ProjectPage(navHostController = navHostController)

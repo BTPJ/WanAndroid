@@ -11,5 +11,7 @@ object MyColor {
     val PurpleGrey40 = Color(0xFF625b71)
     val Pink40 = Color(0xFF7D5260)
 
-    val DarkGreen = Color(0xFF19791D)
+    val Green_19791D = Color(0xFF19791D)
+    val Red_FF4A57 = Color(0XFFFF4A57)
+    val Green_669900 = Color(0XFF669900)
 }

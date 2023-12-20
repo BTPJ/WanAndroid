@@ -1,4 +1,4 @@
-package com.btpj.lib_base.theme
+package com.btpj.lib_base.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

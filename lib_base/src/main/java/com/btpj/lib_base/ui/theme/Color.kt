@@ -1,4 +1,4 @@
-package com.btpj.lib_base.theme
+package com.btpj.lib_base.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

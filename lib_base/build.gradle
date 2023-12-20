@@ -81,15 +81,16 @@ dependencies {
     api rootProject.ext.dependencies.converterGson
     api rootProject.ext.dependencies.loggingInterceptor
     api rootProject.ext.dependencies.PersistentCookieJar
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.7.0'
-    implementation platform('androidx.compose:compose-bom:2023.03.00')
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
-    implementation 'androidx.compose.material3:material3'
-    androidTestImplementation platform('androidx.compose:compose-bom:2023.03.00')
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    api 'androidx.activity:activity-compose:1.7.1'
+    api platform('androidx.compose:compose-bom:2023.03.00')
+    api 'androidx.compose.ui:ui'
+    api 'androidx.compose.ui:ui-graphics'
+    api 'androidx.compose.ui:ui-tooling-preview'
+    api 'androidx.compose.material3:material3'
+    api 'androidx.compose.material:material:1.4.3'
+    androidTestApi platform('androidx.compose:compose-bom:2023.03.00')
+    androidTestApi 'androidx.compose.ui:ui-test-junit4'
+    debugApi 'androidx.compose.ui:ui-tooling'
+    debugApi 'androidx.compose.ui:ui-test-manifest'
 }

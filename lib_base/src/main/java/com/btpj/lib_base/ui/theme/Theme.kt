@@ -1,4 +1,4 @@
-package com.btpj.lib_base.theme
+package com.btpj.lib_base.ui.theme
 
 import android.app.Activity
 import android.os.Build

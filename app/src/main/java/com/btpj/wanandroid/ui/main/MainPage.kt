@@ -1,20 +1,23 @@
 package com.btpj.wanandroid.ui.main
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -60,27 +63,30 @@ val navBarItems = listOf(
 
 @Composable
 fun BottomBar(navController: NavController, navDestination: NavDestination?) {
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.primary
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colorScheme.primary
     ) {
         navBarItems.forEach { item ->
-            NavigationBarItem(
+            BottomNavigationItem(
                 selected = navDestination?.hierarchy?.any { it.route == item.route } == true,
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),
-                        contentDescription = item.route
+                        contentDescription = item.route,
+                        modifier = Modifier
+                            .size(22.dp)
+                            .padding(bottom = 4.dp)
                     )
                 },
-                colors = NavigationBarItemDefaults.colors(
-                    unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray,
-                    selectedIconColor = Color.White,
-                    selectedTextColor = Color.White,
-                    indicatorColor = MaterialTheme.colorScheme.primary,
-                ),
-                label = { Text(text = stringResource(id = item.label)) },
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.White.copy(0.5f),
+
+                label = {
+                    Text(
+                        text = stringResource(id = item.label),
+                        fontSize = 12.sp
+                    )
+                },
                 onClick = {
                     navController.navigate(item.route) {
                         // 这里让多个Tab下返回时，不是回到首页，而是直接退出

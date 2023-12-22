@@ -24,8 +24,9 @@ class SquareChildViewModel : BaseViewModel() {
     fun fetchSquarePageList(pageNo: Int = 0) {
         launch({
             handleRequest(
-                DataRepository.getSquarePageList(pageNo, PAGE_SIZE),
-                { articlePageListLiveData.value = it.data })
+                DataRepository.getSquarePageList(pageNo, PAGE_SIZE)
+            )
+            { articlePageListLiveData.value = it.data!! }
         })
     }
 
@@ -35,9 +36,9 @@ class SquareChildViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -47,9 +48,9 @@ class SquareChildViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

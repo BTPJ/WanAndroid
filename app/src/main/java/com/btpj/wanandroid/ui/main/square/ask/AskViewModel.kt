@@ -19,8 +19,9 @@ class AskViewModel : BaseViewModel() {
     fun fetchAskPageList(pageNo: Int = 1) {
         launch({
             handleRequest(
-                DataRepository.getAskPageList(pageNo),
-                { articlePageListLiveData.value = it.data })
+                DataRepository.getAskPageList(pageNo)
+            )
+            { articlePageListLiveData.value = it.data }
         })
     }
 
@@ -30,9 +31,9 @@ class AskViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -42,9 +43,9 @@ class AskViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

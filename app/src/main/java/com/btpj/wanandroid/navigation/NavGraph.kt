@@ -7,11 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.btpj.wanandroid.ui.home.HomePage
+import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
-import com.btpj.wanandroid.ui.main.wechat.WechatPage
+import com.btpj.wanandroid.ui.wechat.WechatPage
 import com.btpj.wanandroid.ui.setting.SettingPage
 import com.btpj.wanandroid.ui.web.WebPage
 
@@ -29,13 +29,13 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             HomePage {}
         }
         composable(Route.PROJECT) {
-            ProjectPage(navHostController = navHostController)
+            ProjectPage {}
         }
         composable(Route.SQUARE) {
             SquarePage(navHostController = navHostController)
         }
         composable(Route.WECHAT) {
-            WechatPage(navHostController = navHostController)
+            WechatPage()
         }
         composable(Route.MINE) {
             MinePage(navHostController = navHostController)

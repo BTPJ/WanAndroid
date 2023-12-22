@@ -17,16 +17,16 @@ class CollectUrlViewModel : BaseViewModel() {
     /** 请求收藏网址列表 */
     fun fetchCollectUrlList() {
         launch({
-            handleRequest(DataRepository.getCollectUrlList(), { collectUrlList.value = it.data })
+            handleRequest(DataRepository.getCollectUrlList()) { collectUrlList.value = it.data!! }
         })
     }
 
     /** 取消收藏网址*/
     fun unCollectUrl(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectUrl(id), {
+            handleRequest(DataRepository.unCollectUrl(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

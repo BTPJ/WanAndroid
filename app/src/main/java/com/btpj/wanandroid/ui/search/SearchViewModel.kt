@@ -38,9 +38,9 @@ class SearchViewModel : BaseViewModel() {
     /** 获取热门搜索 */
     private fun fetchHotSearchList() {
         launch({
-            handleRequest(DataRepository.getHotSearchList(), {
+            handleRequest(DataRepository.getHotSearchList()) {
                 hotSearchList.value = it.data
-            })
+            }
         })
     }
 

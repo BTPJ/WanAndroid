@@ -20,9 +20,9 @@ class IntegralRecordViewModel : BaseViewModel() {
      */
     fun fetchIntegralRecordPageList(pageNo: Int = 1) {
         launch({
-            handleRequest(DataRepository.getIntegralRecordPageList(pageNo), {
+            handleRequest(DataRepository.getIntegralRecordPageList(pageNo)) {
                 integralRecordPageList.value = it.data!!
-            })
+            }
         })
     }
 }

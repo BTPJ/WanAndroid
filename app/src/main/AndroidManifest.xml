@@ -12,52 +12,11 @@
         android:theme="@style/Theme.WanAndroid"
         tools:ignore="LockedOrientationActivity,UnusedAttribute">
         <activity
-            android:name=".ui.web.WebActivity"
-            android:exported="false"
-            android:label="@string/title_activity_web"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.search.result.SearchResultActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.search.SearchActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.author.AuthorActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.collect.CollectActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.integral.record.IntegralRecordActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.integral.rank.IntegralRankActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.register.RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.share.add.AddArticleActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.share.list.MyArticleActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

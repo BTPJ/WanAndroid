@@ -23,9 +23,9 @@ class SearchResultViewModel : BaseViewModel() {
      */
     fun fetchSearchResultPageList(searchKeyStr: String, pageNo: Int = 0) {
         launch({
-            handleRequest(DataRepository.getSearchDataByKey(pageNo, searchKeyStr), {
+            handleRequest(DataRepository.getSearchDataByKey(pageNo, searchKeyStr)){
                 articlePageList.value = it.data
-            })
+            }
         })
     }
 
@@ -35,9 +35,9 @@ class SearchResultViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -47,9 +47,9 @@ class SearchResultViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

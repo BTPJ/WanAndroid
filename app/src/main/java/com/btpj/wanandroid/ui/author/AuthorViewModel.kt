@@ -47,14 +47,14 @@ class AuthorViewModel : BaseViewModel() {
         launch({
             handleRequest(
                 DataRepository.getOtherAuthorArticlePageList(id, pageNo),
-                {
-                    if (pageNo == 1) {
-                        // 反正信息都一样，没必要每次上拉加载都更新一遍
-                        coinInfo.set(it.data.coinInfo)
-                    }
-                    articlePageList.value = it.data.shareArticles
-                }, { errorCallback.invoke() }
-            )
+                { errorCallback.invoke() })
+            {
+                if (pageNo == 1) {
+                    // 反正信息都一样，没必要每次上拉加载都更新一遍
+                    coinInfo.set(it.data.coinInfo)
+                }
+                articlePageList.value = it.data.shareArticles
+            }
         })
     }
 
@@ -64,9 +64,9 @@ class AuthorViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -76,9 +76,9 @@ class AuthorViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

@@ -36,9 +36,9 @@ class AddArticleViewModel : BaseViewModel() {
     fun addArticle(title: String, link: String, successAction: () -> Any? = {}) {
         launch({
             val response = DataRepository.addArticle(title, link)
-            handleRequest(response, {
+            handleRequest(response) {
                 successAction.invoke()
-            })
+            }
         })
     }
 }

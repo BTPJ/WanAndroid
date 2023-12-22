@@ -28,18 +28,18 @@ class IntegralRankViewModel : BaseViewModel() {
      */
     fun fetchIntegralRankList(pageNo: Int = 1) {
         launch({
-            handleRequest(DataRepository.getIntegralRankPageList(pageNo), {
+            handleRequest(DataRepository.getIntegralRankPageList(pageNo)) {
                 integralPageList.value = it.data!!
-            })
+            }
         })
     }
 
     /** 获取个人积分 */
     private fun fetchPoints() {
         launch({
-            handleRequest(DataRepository.getUserIntegral(), {
+            handleRequest(DataRepository.getUserIntegral()) {
                 myIntegral.set(it.data)
-            })
+            }
         })
     }
 }

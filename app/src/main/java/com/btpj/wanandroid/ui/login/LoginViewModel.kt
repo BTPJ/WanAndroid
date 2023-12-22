@@ -35,12 +35,12 @@ class LoginViewModel : BaseViewModel() {
      */
     fun login(userName: String, pwd: String, successCall: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.login(userName, pwd), successBlock = {
+            handleRequest(DataRepository.login(userName, pwd)) {
                 UserManager.saveLastUserName(userName)
                 UserManager.saveUser(it.data)
                 App.appViewModel.userEvent.value = it.data
                 successCall.invoke()
-            })
+            }
         })
     }
 }

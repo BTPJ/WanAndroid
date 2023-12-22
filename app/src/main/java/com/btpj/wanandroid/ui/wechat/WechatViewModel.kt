@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.home
+package com.btpj.wanandroid.ui.wechat
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
@@ -6,14 +6,14 @@ import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.home.HomeViewModel
+import com.btpj.wanandroid.ui.main.ArticleUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 /**
  * @author LTP  2023/12/19
  */
-class HomeViewModel : BaseViewModel() {
+class WechatViewModel : BaseViewModel() {
 
     companion object {
         /** 每页显示的条目大小 */
@@ -37,7 +37,6 @@ class HomeViewModel : BaseViewModel() {
      */
     fun fetchArticlePageList(isRefresh: Boolean = true) {
         launch({
-            emitArticleUiState(isRefresh, list = articleList, isLoadMore = false)
             if (isRefresh) {
                 articleList.clear()
                 currentPage = 0
@@ -49,7 +48,7 @@ class HomeViewModel : BaseViewModel() {
                     async(Dispatchers.IO) {
                         DataRepository.getArticlePageList(
                             currentPage++,
-                            HomeViewModel.PAGE_SIZE
+                            PAGE_SIZE
                         )
                     }
                 val job2 = async(Dispatchers.IO) { DataRepository.getArticleTopList() }
@@ -57,29 +56,21 @@ class HomeViewModel : BaseViewModel() {
                 val response1 = job1.await()
                 val response2 = job2.await()
 
-                handleRequest(response1, {
-                    handleRequest(response2, {
+                handleRequest(response1) {
+                    handleRequest(response2) {
                         (response1.data.datas as ArrayList<Article>).addAll(
                             0,
                             response2.data
                         )
-                        emitArticleUiState(
-                            false,
-                            list = articleList.apply { addAll(response1.data.datas) },
-                            isLoadMore = true
-                        )
-                    })
-                })
+
+                    }
+                }
             } else {
                 handleRequest(
-                    DataRepository.getArticlePageList(currentPage++, PAGE_SIZE),
+                    DataRepository.getArticlePageList(currentPage++, PAGE_SIZE))
                     {
-                        emitArticleUiState(
-                            false,
-                            list = articleList.apply { addAll(it.data.datas) },
-                            isLoadMore = true
-                        )
-                    })
+
+                    }
             }
         })
     }
@@ -87,20 +78,9 @@ class HomeViewModel : BaseViewModel() {
     /** 请求首页轮播图 */
     fun fetchBanners() {
         launch({
-            handleRequest(DataRepository.getBanner(), {
+            handleRequest(DataRepository.getBanner()) {
 //                _bannerListStateFlow.value = it.data
-            })
+            }
         })
-    }
-
-    private fun emitArticleUiState(
-        showLoading: Boolean = false,
-        showError: String? = null,
-        list: List<Article>? = null,
-        isLoadMore: Boolean = false
-    ) {
-        val articleUiState =
-            ArticleUiState(showLoading, showError, list, isLoadMore)
-        _articleUiState.value = articleUiState
     }
 }

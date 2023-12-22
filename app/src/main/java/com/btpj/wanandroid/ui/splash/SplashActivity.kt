@@ -7,7 +7,6 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.base.BaseActivity
 import com.btpj.wanandroid.data.local.CacheManager
 import com.btpj.wanandroid.databinding.ActivitySplashBinding
-import com.btpj.wanandroid.ui.main.MainActivity
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnPageChangeListener
 
@@ -54,12 +53,12 @@ class SplashActivity :
 
                 btnEnter.setOnClickListener {
                     CacheManager.saveFirstUse(false)
-                    MainActivity.launch(this@SplashActivity)
+//                    MainActivity.launch(this@SplashActivity)
                     finish()
                 }
 
             } else {
-                MainActivity.launch(this@SplashActivity)
+//                MainActivity.launch(this@SplashActivity)
                 finish()
             }
         }

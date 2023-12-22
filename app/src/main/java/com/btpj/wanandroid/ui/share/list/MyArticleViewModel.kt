@@ -21,9 +21,9 @@ class MyArticleViewModel : BaseViewModel() {
     fun fetchMyShareArticlePageList(pageNo: Int = 1) {
         launch({
             val response = DataRepository.getMyShareArticlePageList(pageNo)
-            handleRequest(response, {
+            handleRequest(response){
                 articlePageList.value = response.data.shareArticles
-            })
+            }
         })
     }
 
@@ -35,9 +35,8 @@ class MyArticleViewModel : BaseViewModel() {
     fun deleteMyShareArticle(id: Int, deleteSuccess: () -> Any = {}) {
         launch({
             val response = DataRepository.deleteShareArticle(id)
-            handleRequest(response, {
-                deleteSuccess.invoke()
-            })
+            handleRequest(response) { deleteSuccess.invoke()
+            }
         })
     }
 }

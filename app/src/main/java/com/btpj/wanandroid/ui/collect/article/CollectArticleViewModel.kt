@@ -19,8 +19,9 @@ class CollectArticleViewModel : BaseViewModel() {
     fun fetchCollectArticlePageList(pageNo: Int = 0) {
         launch({
             handleRequest(
-                DataRepository.getCollectArticlePageList(pageNo),
-                { collectArticlePageList.value = it.data })
+                DataRepository.getCollectArticlePageList(pageNo)
+            )
+            { collectArticlePageList.value = it.data!! }
         })
     }
 
@@ -30,9 +31,9 @@ class CollectArticleViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

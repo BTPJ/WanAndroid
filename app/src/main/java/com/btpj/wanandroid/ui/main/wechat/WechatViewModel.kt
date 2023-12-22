@@ -20,8 +20,9 @@ class WechatViewModel : BaseViewModel() {
     private fun fetchAuthorTitleList() {
         launch({
             handleRequest(
-                DataRepository.getAuthorTitleList(),
-                { authorTitleListLiveData.value = it.data })
+                DataRepository.getAuthorTitleList()
+            )
+            { authorTitleListLiveData.value = it.data!! }
         })
     }
 }

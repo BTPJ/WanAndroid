@@ -24,8 +24,9 @@ class WechatChildViewModel : BaseViewModel() {
     fun fetchAuthorArticlePageList(authorId: Int, pageNo: Int = 1) {
         launch({
             handleRequest(
-                DataRepository.getAuthorArticlePageList(authorId, pageNo, PAGE_SIZE),
-                { articlePageListLiveData.value = it.data })
+                DataRepository.getAuthorArticlePageList(authorId, pageNo, PAGE_SIZE)
+            )
+            { articlePageListLiveData.value = it.data!! }
         })
     }
 
@@ -35,9 +36,9 @@ class WechatChildViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -47,9 +48,9 @@ class WechatChildViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

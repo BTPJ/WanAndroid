@@ -7,21 +7,47 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.ProjectTitle
 
+/**
+ * @author LTP  2023/12/19
+ */
 class ProjectViewModel : BaseViewModel() {
 
     /** 项目标题列表LiveData */
-    val projectTitleListLiveData = MutableLiveData<List<ProjectTitle>?>()
+    private val _projectTitleListLiveData = MutableLiveData<List<ProjectTitle>?>()
+    val projectTitleListLiveData = _projectTitleListLiveData
 
     override fun start() {
-        fetchProjectTitleList()
+
     }
 
     /** 请求项目标题列表 */
-    private fun fetchProjectTitleList() {
+    fun fetchProjectTitleList() {
         launch({
             handleRequest(
-                DataRepository.getProjectTitleList(),
-                { projectTitleListLiveData.value = it.data })
+                DataRepository.getProjectTitleList()
+            )
+            {
+                val list = ArrayList<ProjectTitle>()
+                list.add(
+                    ProjectTitle(
+                        author = "",
+                        children = ArrayList(),
+                        courseId = 0,
+                        cover = "",
+                        desc = "",
+                        id = -1,
+                        lisense = "",
+                        lisenseLink = "",
+                        name = "最新项目",
+                        order = 0,
+                        parentChapterId = 0,
+                        userControlSetTop = true,
+                        visible = 0
+                    )
+                )
+                list.addAll(it.data)
+                projectTitleListLiveData.value = list
+            }
         })
     }
 }

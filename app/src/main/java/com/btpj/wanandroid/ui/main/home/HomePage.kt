@@ -1,14 +1,13 @@
-package com.btpj.wanandroid.ui.home
+package com.btpj.wanandroid.ui.main.home
 
-import android.text.Html
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -43,11 +42,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Tag
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
+import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.wanandroid.ui.theme.MyColor
 import kotlinx.coroutines.delay
 
@@ -57,69 +59,26 @@ import kotlinx.coroutines.delay
  */
 @Composable
 fun HomePage(
-    homeViewModel: HomeViewModel = viewModel(),
+    articleViewModel: ArticleViewModel = viewModel(),
     onArticleClick: (Article) -> Unit
 ) {
     Column {
         TitleBar(title = stringResource(id = R.string.tab_home), showBackBtn = false)
         ArticleRefreshList(
-            homeViewModel = homeViewModel,
-            onRefresh = { homeViewModel.fetchArticlePageList() },
-            onLoadMore = { homeViewModel.fetchArticlePageList(false) }) {
-            ArticleItem(article = it, onArticleClick = onArticleClick)
+            articleViewModel = articleViewModel,
+            onRefresh = { articleViewModel.fetchHomeArticlePageList() },
+            onLoadMore = { articleViewModel.fetchHomeArticlePageList(false) }) {
+            HomeArticleItem(article = it, onArticleClick = onArticleClick)
         }
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ArticleRefreshList(
-    homeViewModel: HomeViewModel,
-    onRefresh: () -> Unit,
-    onLoadMore: () -> Unit,
-    itemContent: @Composable (Article) -> Unit
-) {
-    val articleUiState by homeViewModel.articleUiState.observeAsState()
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = articleUiState?.showLoading ?: false,
-        onRefresh = onRefresh
-    )
-    LaunchedEffect(true) { onRefresh() }
-    Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            articleUiState?.list?.let {
-                items(it, key = { item -> item.id }) { article ->
-                    Spacer(modifier = Modifier.height(6.dp))
-                    itemContent(article)
-                    Spacer(modifier = Modifier.height(6.dp))
-                }
-                item {
-                    if (articleUiState?.isLoadMore == true) {
-                        LogUtil.d("LTP", articleUiState.toString())
-                        LoadingView()
-                        LaunchedEffect(Unit) {
-                            delay(500)
-                            onLoadMore()
-                        }
-                    }
-                }
-            }
-        }
-        PullRefreshIndicator(
-            refreshing = articleUiState?.showLoading ?: false,
-            state = pullRefreshState,
-            modifier = Modifier.align(Alignment.TopCenter)
-        )
-    }
-}
-
-@Composable
-fun ArticleItem(article: Article, onArticleClick: ((Article) -> Unit)? = null) {
+fun HomeArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp)
-            .clickable { onArticleClick?.invoke(article) },
+            .clickable { onArticleClick.invoke(article) },
         colors = CardDefaults.cardColors(containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.surface else Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -173,7 +132,7 @@ fun ArticleItem(article: Article, onArticleClick: ((Article) -> Unit)? = null) {
                 )
             }
             Text(
-                text = Html.fromHtml(article.title).toString(),
+                text = article.title.toHtml().toString(),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = LocalContentColor.current.copy(alpha = 0.9f),
@@ -187,8 +146,7 @@ fun ArticleItem(article: Article, onArticleClick: ((Article) -> Unit)? = null) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = Html.fromHtml(article.superChapterName + "." + article.chapterName)
-                        .toString(),
+                    text = "${article.superChapterName}.${article.chapterName}".toHtml().toString(),
                     fontSize = 13.sp,
                     color = LocalContentColor.current.copy(alpha = 0.8f)
                 )
@@ -217,7 +175,7 @@ fun LoadingView() {
 @Preview()
 @Composable
 fun ArticleItemPreview() {
-    ArticleItem(
+    HomeArticleItem(
         Article(
             apkLink = "",
             audit = 1,
@@ -253,5 +211,5 @@ fun ArticleItemPreview() {
             visible = 1,
             zan = 0
         )
-    )
+    ) {}
 }

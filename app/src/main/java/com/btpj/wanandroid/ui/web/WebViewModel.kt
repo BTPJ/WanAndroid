@@ -18,9 +18,9 @@ class WebViewModel : BaseViewModel() {
      */
     fun collectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.collectArticle(id), {
+            handleRequest(DataRepository.collectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -30,9 +30,9 @@ class WebViewModel : BaseViewModel() {
      */
     fun unCollectArticle(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectArticle(id), {
+            handleRequest(DataRepository.unCollectArticle(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 
@@ -47,18 +47,18 @@ class WebViewModel : BaseViewModel() {
         successCallBack: (CollectUrl: CollectUrl?) -> Any? = {}
     ) {
         launch({
-            handleRequest(DataRepository.collectUrl(name, link), {
+            handleRequest(DataRepository.collectUrl(name, link)) {
                 successCallBack.invoke(it.data)
-            })
+            }
         })
     }
 
     /** 取消收藏网址*/
     fun unCollectUrl(id: Int, successCallBack: () -> Any? = {}) {
         launch({
-            handleRequest(DataRepository.unCollectUrl(id), {
+            handleRequest(DataRepository.unCollectUrl(id)) {
                 successCallBack.invoke()
-            })
+            }
         })
     }
 }

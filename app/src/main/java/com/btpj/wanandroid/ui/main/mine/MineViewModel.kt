@@ -30,9 +30,9 @@ class MineViewModel : BaseViewModel() {
     fun fetchPoints() {
         launch({
             val response = DataRepository.getUserIntegral()
-            handleRequest(response, {
+            handleRequest(response) {
                 integral.value = response.data
-            })
+            }
         })
     }
 }

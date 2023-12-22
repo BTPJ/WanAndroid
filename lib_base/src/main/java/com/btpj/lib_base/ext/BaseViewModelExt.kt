@@ -47,8 +47,8 @@ fun BaseViewModel.launch(
  */
 suspend fun <T> BaseViewModel.handleRequest(
     response: ApiResponse<T>,
-    successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {},
-    errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Boolean = { false }
+    errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Boolean = { false },
+    successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {}
 ) {
     coroutineScope {
         when (response.errorCode) {

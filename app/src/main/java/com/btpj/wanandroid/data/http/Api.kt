@@ -80,7 +80,10 @@ interface Api {
 
     /** 获取每日一问列表分页数据 */
     @GET("wenda/list/{pageNo}/json")
-    suspend fun getAskPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Article>>
+    suspend fun getAskPageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
 
     /** 获取体系数据 */
     @GET("tree/json")

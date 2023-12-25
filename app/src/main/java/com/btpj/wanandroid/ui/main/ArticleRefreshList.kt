@@ -20,6 +20,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.btpj.lib_base.utils.LogUtil
@@ -67,7 +68,10 @@ fun ArticleRefreshList(
                 }
                 item {
                     if (articleUiState?.noMoreData == true) {
-                        Box(contentAlignment = Alignment.Center) {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
                             Text(
                                 text = stringResource(id = R.string.noMoreData),
                                 color = LocalContentColor.current.copy(alpha = 0.6f),

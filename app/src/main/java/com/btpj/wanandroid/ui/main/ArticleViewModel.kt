@@ -104,6 +104,16 @@ class ArticleViewModel : BaseViewModel() {
         getArticlePageList(ArticleType.Project, isRefresh, categoryId)
     }
 
+    /** 请求每日一问分页列表 */
+    fun fetchAskPageList(isRefresh: Boolean = true) {
+        getArticlePageList(ArticleType.Ask, isRefresh)
+    }
+
+    /** 请求广场分页列表 */
+    fun fetchSquarePageList(isRefresh: Boolean = true) {
+        getArticlePageList(ArticleType.Square, isRefresh)
+    }
+
     private fun getArticlePageList(
         articleType: ArticleType,
         isRefresh: Boolean = true,
@@ -121,11 +131,18 @@ class ArticleViewModel : BaseViewModel() {
                     currentPage,
                     PAGE_SIZE
                 )
-
                 ArticleType.Project -> DataRepository.getProjectPageList(
                     currentPage,
                     PAGE_SIZE,
                     categoryId
+                )
+                ArticleType.Square -> DataRepository.getSquarePageList(
+                    currentPage,
+                    PAGE_SIZE
+                )
+                ArticleType.Ask -> DataRepository.getAskPageList(
+                    currentPage,
+                    PAGE_SIZE
                 )
             }
 
@@ -165,5 +182,7 @@ class ArticleViewModel : BaseViewModel() {
     sealed class ArticleType {
         object LatestProject : ArticleType()        // 最新项目
         object Project : ArticleType()    // 项目列表
+        object Square : ArticleType()    // 广场 —— 广场
+        object Ask : ArticleType()    // 广场 —— 每日一问
     }
 }

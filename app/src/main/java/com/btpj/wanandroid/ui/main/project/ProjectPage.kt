@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.main.project
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -94,6 +95,7 @@ fun ProjectPage(
                 CircularProgressIndicator()
             } else {
                 HorizontalPager(
+                    modifier = Modifier.fillMaxHeight(),
                     verticalAlignment = Alignment.Top,
                     state = pagerState,
                     key = { index -> index }

@@ -98,7 +98,7 @@ fun HomeArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
                         color = LocalContentColor.current.copy(alpha = 0.8f)
                     )
                     if (article.type == 1) Text(
-                        text = "置顶",
+                        text = stringResource(id = R.string.isTop),
                         color = MyColor.Red_FF4A57,
                         fontSize = 11.sp,
                         modifier = Modifier
@@ -107,7 +107,7 @@ fun HomeArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
                             .padding(horizontal = 4.dp)
                     )
                     if (article.fresh) Text(
-                        text = "新",
+                        text = stringResource(id = R.string.isNew),
                         color = MyColor.Red_FF4A57,
                         fontSize = 11.sp,
                         modifier = Modifier

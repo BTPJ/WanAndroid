@@ -32,7 +32,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             ProjectPage {}
         }
         composable(Route.SQUARE) {
-            SquarePage(navHostController = navHostController)
+            SquarePage {}
         }
         composable(Route.WECHAT) {
             WechatPage()

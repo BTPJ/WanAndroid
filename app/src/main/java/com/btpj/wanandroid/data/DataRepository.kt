@@ -80,9 +80,10 @@ object DataRepository : Api {
     }
 
     override suspend fun getAskPageList(
-        pageNo: Int
+        pageNo: Int,
+        pageSize: Int
     ): ApiResponse<PageResponse<Article>> {
-        return service.getAskPageList(pageNo)
+        return service.getAskPageList(pageNo, pageSize)
     }
 
     override suspend fun getTreeList(): ApiResponse<List<Structure>> {

@@ -29,7 +29,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ProvideViewModels
 import kotlinx.coroutines.launch
 
 /**
@@ -100,12 +99,10 @@ fun ProjectPage(
                     state = pagerState,
                     key = { index -> index }
                 ) {
-                    ProvideViewModels {
-                        ProjectChildPage(
-                            categoryId = projectTitleList!![it].id,
-                            onArticleClick = onArticleClick
-                        )
-                    }
+                    ProjectChildPage(
+                        categoryId = projectTitleList!![it].id,
+                        onArticleClick = onArticleClick
+                    )
                 }
             }
         }

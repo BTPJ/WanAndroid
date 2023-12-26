@@ -11,7 +11,6 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,10 +19,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.home.LoadingView
@@ -57,7 +54,7 @@ fun ArticleRefreshList(
                     itemContent(article)
                 }
                 item {
-                    if (uiState?.showLoadMoreLoading == true) {
+                    if (uiState?.showLoadingMore == true) {
                         LoadingView()
                         LaunchedEffect(Unit) {
                             delay(500)

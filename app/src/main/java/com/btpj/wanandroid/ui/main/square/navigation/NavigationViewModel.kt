@@ -1,6 +1,8 @@
 package com.btpj.wanandroid.ui.main.square.navigation
 
 import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.lib_base.base.UiState
+import com.btpj.lib_base.base.UiStatus
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
@@ -10,11 +12,11 @@ class NavigationViewModel : BaseViewModel<List<Navigation>>() {
 
     /** 请求导航列表 */
     fun fetchNavigationList() {
-        emitUiState(true)
+        emitUiState(UiStatus.Loading)
         launch({
             handleRequest(DataRepository.getNavigationList())
             {
-                emitUiState(false, data = it.data)
+                emitUiState(UiStatus.Success(it.data))
             }
         })
     }

@@ -61,8 +61,8 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             SettingPage(navHostController = navHostController)
         }
         composable(Route.WEB) {
-            val url = it.arguments?.getString("url")
-            url?.let { url2 -> WebPage(url2, navHostController = navHostController) {} }
+            it.arguments?.getString("url")
+                ?.let { url -> WebPage(url, navHostController = navHostController) {} }
         }
     }
 }

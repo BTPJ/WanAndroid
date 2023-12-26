@@ -22,13 +22,13 @@ abstract class BaseViewModel<T> : ViewModel() {
 
     protected fun emitUiState(
         showLoading: Boolean = false,
-        showError: String? = null,
+        error: String? = null,
         data: T? = null,
         showLoadMoreLoading: Boolean = false,
         noMoreData: Boolean = false
     ) {
         val uiState =
-            CommonUiState(showLoading, showError, data, showLoadMoreLoading, noMoreData)
+            CommonUiState(showLoading, error, data, showLoadMoreLoading, noMoreData)
         _uiState.value = uiState
     }
 }

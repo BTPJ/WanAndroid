@@ -10,11 +10,10 @@ class SystemViewModel : BaseViewModel<List<Structure>>() {
 
     /** 请求体系列表 */
     fun fetchSystemList() {
-        val list = ArrayList<Structure>()
-        emitUiState(true, data = list)
+        emitUiState(true)
         launch({
             handleRequest(DataRepository.getTreeList()) {
-                emitUiState(false, data = list.apply { addAll(it.data) })
+                emitUiState(false, data = it.data)
             }
         })
     }

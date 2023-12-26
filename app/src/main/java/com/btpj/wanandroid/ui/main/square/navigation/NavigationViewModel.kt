@@ -10,12 +10,11 @@ class NavigationViewModel : BaseViewModel<List<Navigation>>() {
 
     /** 请求导航列表 */
     fun fetchNavigationList() {
-        val list = ArrayList<Navigation>()
-        emitUiState(true, data = list)
+        emitUiState(true)
         launch({
             handleRequest(DataRepository.getNavigationList())
             {
-                emitUiState(false, data = list.apply { addAll(it.data) })
+                emitUiState(false, data = it.data)
             }
         })
     }

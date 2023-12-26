@@ -10,12 +10,12 @@ import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.data.local.UserManager
 
-class IntegralRankViewModel : BaseViewModel() {
+class IntegralRankViewModel : BaseViewModel<CoinInfo>() {
     /** 我的积分信息 */
     val myIntegral = ObservableField<CoinInfo>()
     val integralPageList = MutableLiveData<PageResponse<CoinInfo>>()
 
-    override fun start() {
+    fun start() {
         if (UserManager.isLogin()) {
             fetchPoints()
         }

@@ -11,7 +11,7 @@ import com.btpj.wanandroid.data.local.UserManager
 /**
  * @author LTP  2022/3/9
  */
-class RegisterViewModel : BaseViewModel() {
+class RegisterViewModel : BaseViewModel<String>() {
 
     val userName = ObservableField("")
     val userPwd = ObservableField("")
@@ -24,8 +24,6 @@ class RegisterViewModel : BaseViewModel() {
                 .isNullOrEmpty() && !userPwdSure.get().isNullOrEmpty()
         }
     }
-
-    override fun start() {}
 
     /**
      * 注册

@@ -40,9 +40,9 @@ fun ArticleRefreshList(
     onLoadMore: () -> Unit,
     itemContent: @Composable (Article) -> Unit
 ) {
-    val articleUiState by articleViewModel.uiState.observeAsState()
+    val uiState by articleViewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
-        refreshing = articleUiState?.showLoading ?: false,
+        refreshing = uiState?.showLoading ?: false,
         onRefresh = onRefresh
     )
     LaunchedEffect(true) { onRefresh() }
@@ -52,12 +52,12 @@ fun ArticleRefreshList(
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            articleUiState?.list?.let {
+            uiState?.list?.let {
                 items(it, key = { item -> item.id }) { article ->
                     itemContent(article)
                 }
                 item {
-                    if (articleUiState?.showLoadMoreLoading == true) {
+                    if (uiState?.showLoadMoreLoading == true) {
                         LoadingView()
                         LaunchedEffect(Unit) {
                             delay(500)
@@ -66,7 +66,7 @@ fun ArticleRefreshList(
                     }
                 }
                 item {
-                    if (articleUiState?.noMoreData == true) {
+                    if (uiState?.noMoreData == true) {
                         Box(
                             modifier = Modifier.fillMaxWidth(),
                             contentAlignment = Alignment.Center
@@ -82,7 +82,7 @@ fun ArticleRefreshList(
             }
         }
         PullRefreshIndicator(
-            refreshing = articleUiState?.showLoading ?: false,
+            refreshing = uiState?.showLoading ?: false,
             state = pullRefreshState,
             modifier = Modifier.align(Alignment.TopCenter)
         )

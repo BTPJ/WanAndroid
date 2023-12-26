@@ -8,7 +8,7 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
 
-class AddArticleViewModel : BaseViewModel() {
+class AddArticleViewModel : BaseViewModel<Nothing>() {
 
     val title = ObservableField("")
     val articleLink = ObservableField("")
@@ -23,7 +23,7 @@ class AddArticleViewModel : BaseViewModel() {
         }
     }
 
-    override fun start() {
+    fun start() {
         shareUserName.set(UserManager.getUser()?.nickname ?: "")
     }
 

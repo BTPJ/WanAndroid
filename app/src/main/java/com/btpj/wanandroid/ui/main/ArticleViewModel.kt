@@ -12,22 +12,15 @@ import kotlinx.coroutines.async
 /**
  * @author LTP  2023/12/19
  */
-class ArticleViewModel : BaseViewModel() {
+class ArticleViewModel : BaseViewModel<Article>() {
 
     companion object {
         /** 每页显示的条目大小 */
         const val PAGE_SIZE = 10
     }
 
-    private val _uiState = MutableLiveData<ListUiState<Article>>()
-    val uiState = _uiState
-
     private val articleList = arrayListOf<Article>()
     private var currentPage = 0
-
-    override fun start() {
-
-    }
 
     /**
      * 请求文章列表，第一页包括一个请求置顶的接口和一个文章分页列表的接口
@@ -35,8 +28,8 @@ class ArticleViewModel : BaseViewModel() {
      * @param isRefresh 是否是下拉刷新
      */
     fun fetchHomeArticlePageList(isRefresh: Boolean = true) {
+        emitUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
         launch({
-            emitArticleUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
             if (isRefresh) {
                 articleList.clear()
                 currentPage = 0
@@ -62,7 +55,7 @@ class ArticleViewModel : BaseViewModel() {
                             0,
                             response2.data
                         )
-                        emitArticleUiState(
+                        emitUiState(
                             false,
                             list = articleList.apply { addAll(response1.data.datas) },
                             showLoadMoreLoading = true
@@ -74,7 +67,7 @@ class ArticleViewModel : BaseViewModel() {
                 {
                     articleList.addAll(it.data.datas)
                     if (articleList.size == it.data.total) {
-                        emitArticleUiState(
+                        emitUiState(
                             false,
                             list = articleList,
                             showLoadMoreLoading = false,
@@ -84,7 +77,7 @@ class ArticleViewModel : BaseViewModel() {
                     }
                     currentPage++
 
-                    emitArticleUiState(
+                    emitUiState(
                         false,
                         list = articleList,
                         showLoadMoreLoading = true
@@ -119,8 +112,8 @@ class ArticleViewModel : BaseViewModel() {
         isRefresh: Boolean = true,
         categoryId: Int = 0
     ) {
+        emitUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
         launch({
-            emitArticleUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
             if (isRefresh) {
                 articleList.clear()
                 currentPage = 0
@@ -152,7 +145,7 @@ class ArticleViewModel : BaseViewModel() {
             handleRequest(response) {
                 articleList.addAll(it.data.datas)
                 if (articleList.size == it.data.total) {
-                    emitArticleUiState(
+                    emitUiState(
                         false,
                         list = articleList,
                         showLoadMoreLoading = false,
@@ -161,25 +154,13 @@ class ArticleViewModel : BaseViewModel() {
                     return@handleRequest
                 }
                 currentPage++
-                emitArticleUiState(
+                emitUiState(
                     false,
                     list = articleList,
                     showLoadMoreLoading = true
                 )
             }
         })
-    }
-
-    private fun emitArticleUiState(
-        showLoading: Boolean = false,
-        showError: String? = null,
-        list: List<Article>? = null,
-        showLoadMoreLoading: Boolean = false,
-        noMoreData: Boolean = false
-    ) {
-        val articleUiState =
-            ListUiState(showLoading, showError, list, showLoadMoreLoading, noMoreData)
-        _uiState.value = articleUiState
     }
 
     sealed class ArticleType {

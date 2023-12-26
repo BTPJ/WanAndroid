@@ -8,10 +8,8 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 
-class MyArticleViewModel : BaseViewModel() {
+class MyArticleViewModel : BaseViewModel<Article>() {
     val articlePageList = MutableLiveData<PageResponse<Article>>()
-
-    override fun start() {}
 
     /**
      * 获取我分享的文章分页列表

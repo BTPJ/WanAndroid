@@ -8,10 +8,8 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.IntegralRecord
 
-class IntegralRecordViewModel : BaseViewModel() {
+class IntegralRecordViewModel : BaseViewModel<IntegralRecord>() {
     val integralRecordPageList = MutableLiveData<PageResponse<IntegralRecord>>()
-
-    override fun start() {}
 
     /**
      * 获取积分记录分页列表

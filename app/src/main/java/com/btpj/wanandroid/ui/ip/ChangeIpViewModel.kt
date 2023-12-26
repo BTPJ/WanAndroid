@@ -5,12 +5,12 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.data.local.IpManager
 import com.btpj.lib_base.ext.launch
 import kotlinx.coroutines.delay
-import java.util.*
+import java.util.TreeSet
 
 /**
  * @author LTP  2019/8/5
  */
-class ChangeIpViewModel : BaseViewModel() {
+class ChangeIpViewModel : BaseViewModel<String>() {
 
     /** 输入的IP和端口 */
     val ipAndPort: MutableLiveData<String> = MutableLiveData("")
@@ -18,7 +18,7 @@ class ChangeIpViewModel : BaseViewModel() {
     /** 历史IP列表 */
     val ipSet: MutableLiveData<MutableSet<String>> = MutableLiveData(TreeSet())
 
-    override fun start() {
+    fun start() {
         initIpList()
     }
 

@@ -7,12 +7,12 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Classify
 
-class WechatViewModel : BaseViewModel() {
+class WechatViewModel : BaseViewModel<Nothing>() {
 
     /** 项目标题列表LiveData */
     val authorTitleListLiveData = MutableLiveData<List<Classify>>()
 
-    override fun start() {
+    fun start() {
         fetchAuthorTitleList()
     }
 

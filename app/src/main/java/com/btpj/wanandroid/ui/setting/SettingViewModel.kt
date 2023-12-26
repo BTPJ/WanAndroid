@@ -13,7 +13,7 @@ import com.tencent.bugly.beta.Beta
 /**
  * @author LTP  2022/4/11
  */
-class SettingViewModel : BaseViewModel() {
+class SettingViewModel : BaseViewModel<Nothing>() {
     private val _showLogoutBtn = MutableLiveData<Boolean>()
     val showLogoutBtn = _showLogoutBtn
 
@@ -26,7 +26,7 @@ class SettingViewModel : BaseViewModel() {
     private val _appVersionName = MutableLiveData<String>()
     val appVersionName = _appVersionName
 
-    override fun start() {
+    fun start() {
         _showLogoutBtn.value = UserManager.isLogin()
         _cacheSize.value = CacheUtil.getTotalCacheSize(appContext)
         _appVersionName.value = AppUtil.getAppVersionName(appContext)

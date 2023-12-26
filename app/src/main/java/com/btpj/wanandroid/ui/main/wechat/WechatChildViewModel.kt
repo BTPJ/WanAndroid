@@ -8,7 +8,7 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 
-class WechatChildViewModel : BaseViewModel() {
+class WechatChildViewModel : BaseViewModel<Article>() {
 
     /** 项目分页列表LiveData */
     val articlePageListLiveData = MutableLiveData<PageResponse<Article>>()
@@ -17,8 +17,6 @@ class WechatChildViewModel : BaseViewModel() {
         /** 每页显示的条目大小 */
         const val PAGE_SIZE = 10
     }
-
-    override fun start() {}
 
     /** 请求公众号作者文章分页列表 */
     fun fetchAuthorArticlePageList(authorId: Int, pageNo: Int = 1) {

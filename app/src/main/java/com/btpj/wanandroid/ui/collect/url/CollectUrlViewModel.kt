@@ -7,12 +7,10 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
 
-class CollectUrlViewModel : BaseViewModel() {
+class CollectUrlViewModel : BaseViewModel<CollectUrl>() {
 
     /** 收藏网址列表LiveData */
     val collectUrlList = MutableLiveData<List<CollectUrl>>()
-
-    override fun start() {}
 
     /** 请求收藏网址列表 */
     fun fetchCollectUrlList() {

@@ -13,7 +13,7 @@ import com.btpj.wanandroid.data.bean.CoinInfo
 /**
  * @author LTP  2022/3/9
  */
-class AuthorViewModel : BaseViewModel() {
+class AuthorViewModel : BaseViewModel<Article>() {
 
     val coinInfo = ObservableField<CoinInfo>()
     val articlePageList = MutableLiveData<PageResponse<Article>>()
@@ -29,8 +29,6 @@ class AuthorViewModel : BaseViewModel() {
             return "积分：${coinInfo.get()?.coinCount ?: "——"}\t\t排名：${coinInfo.get()?.rank ?: "——"}"
         }
     }
-
-    override fun start() {}
 
     /**
      * 分页获取其他作者分享的文章分页列表

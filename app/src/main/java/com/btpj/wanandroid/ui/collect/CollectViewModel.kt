@@ -2,9 +2,6 @@ package com.btpj.wanandroid.ui.collect
 
 import com.btpj.lib_base.base.BaseViewModel
 
-class CollectViewModel : BaseViewModel() {
+class CollectViewModel : BaseViewModel<Nothing>() {
 
-    override fun start() {
-
-    }
 }

@@ -9,8 +9,7 @@ import com.btpj.wanandroid.data.bean.CollectUrl
 /**
  * @author LTP  2022/4/2
  */
-class WebViewModel : BaseViewModel() {
-    override fun start() {}
+class WebViewModel : BaseViewModel<Any>() {
 
     /**
      * 收藏文章

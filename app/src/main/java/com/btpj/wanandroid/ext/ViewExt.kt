@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.wanandroid.ui.login.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
@@ -21,7 +20,7 @@ fun Context.launchCheckLogin(action: (context: Context) -> Unit) {
     if (UserManager.isLogin()) {
         action.invoke(this)
     } else {
-        LoginActivity.launch(this)
+//        LoginActivity.launch(this)
     }
 }
 

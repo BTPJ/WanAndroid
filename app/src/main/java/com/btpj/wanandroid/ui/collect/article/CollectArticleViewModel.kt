@@ -8,12 +8,10 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectArticle
 
-class CollectArticleViewModel : BaseViewModel() {
+class CollectArticleViewModel : BaseViewModel<CollectArticle>() {
 
     /** 收藏文章分页列表LiveData */
     val collectArticlePageList = MutableLiveData<PageResponse<CollectArticle>>()
-
-    override fun start() {}
 
     /** 请求收藏文章分页列表 */
     fun fetchCollectArticlePageList(pageNo: Int = 0) {

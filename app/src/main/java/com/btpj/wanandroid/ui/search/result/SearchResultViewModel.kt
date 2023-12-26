@@ -11,10 +11,8 @@ import com.btpj.wanandroid.data.bean.Article
 /**
  * @author LTP  2022/4/19
  */
-class SearchResultViewModel : BaseViewModel() {
+class SearchResultViewModel : BaseViewModel<Article>() {
     val articlePageList = MutableLiveData<PageResponse<Article>?>()
-
-    override fun start() {}
 
     /**
      * 请求搜索结果分页列表
@@ -23,7 +21,7 @@ class SearchResultViewModel : BaseViewModel() {
      */
     fun fetchSearchResultPageList(searchKeyStr: String, pageNo: Int = 0) {
         launch({
-            handleRequest(DataRepository.getSearchDataByKey(pageNo, searchKeyStr)){
+            handleRequest(DataRepository.getSearchDataByKey(pageNo, searchKeyStr)) {
                 articlePageList.value = it.data
             }
         })

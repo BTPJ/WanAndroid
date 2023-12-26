@@ -4,15 +4,12 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
+import com.btpj.wanandroid.data.bean.Banner
 
 /**
  * @author LTP  2023/12/19
  */
-class HomeViewModel : BaseViewModel() {
-
-    override fun start() {
-
-    }
+class HomeViewModel : BaseViewModel<Banner>() {
 
     /** 请求首页轮播图 */
     fun fetchBanners() {

@@ -10,8 +10,7 @@ import com.btpj.wanandroid.data.bean.User
  *
  * @author LTP  2022/4/13
  */
-class AppViewModel : BaseViewModel() {
-    override fun start() {}
+class AppViewModel : BaseViewModel<Nothing>() {
 
     /** 全局用户 */
     val userEvent = MutableLiveData<User?>()

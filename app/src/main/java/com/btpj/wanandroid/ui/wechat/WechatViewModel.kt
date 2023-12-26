@@ -1,34 +1,25 @@
 package com.btpj.wanandroid.ui.wechat
 
-import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ListUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 /**
  * @author LTP  2023/12/19
  */
-class WechatViewModel : BaseViewModel() {
+class WechatViewModel : BaseViewModel<Article>() {
 
     companion object {
         /** 每页显示的条目大小 */
         const val PAGE_SIZE = 10
     }
 
-    private val _uiState = MutableLiveData<ListUiState<Article>>()
-    val uiState = _uiState
-
     private val articleList = arrayListOf<Article>()
     private var currentPage = 0
-
-    override fun start() {
-
-    }
 
     /**
      * 请求文章列表，第一页包括一个请求置顶的接口和一个文章分页列表的接口

@@ -53,7 +53,7 @@ fun SquarePage(
             TitleBar(title = "", showBackBtn = false)
             ScrollableTabRow(containerColor = MaterialTheme.colorScheme.primary,
                 selectedTabIndex = pagerState.currentPage,
-                edgePadding = 20.dp,
+                edgePadding = 10.dp,
                 divider = {},
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(

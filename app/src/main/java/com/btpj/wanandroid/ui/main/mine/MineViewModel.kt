@@ -10,7 +10,7 @@ import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.data.bean.User
 import com.btpj.wanandroid.data.local.UserManager
 
-class MineViewModel : BaseViewModel() {
+class MineViewModel : BaseViewModel<User>() {
     val user = ObservableField<User?>()
     val integral = MutableLiveData<CoinInfo?>()
 
@@ -20,7 +20,7 @@ class MineViewModel : BaseViewModel() {
         }
     }
 
-    override fun start() {
+    fun start() {
         if (UserManager.isLogin()) {
             user.set(UserManager.getUser())
         }

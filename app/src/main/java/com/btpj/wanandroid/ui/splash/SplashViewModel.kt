@@ -7,11 +7,11 @@ import com.btpj.wanandroid.data.local.CacheManager
 /**
  * @author LTP  2022/4/21
  */
-class SplashViewModel : BaseViewModel() {
+class SplashViewModel : BaseViewModel<Nothing>() {
 
     val isFirstUse = ObservableBoolean(false)
 
-    override fun start() {
+    fun start() {
         isFirstUse.set(CacheManager.isFirstUse())
     }
 }

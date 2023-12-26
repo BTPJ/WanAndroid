@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 /**
  * @author LTP  2022/4/19
  */
-class SearchViewModel : BaseViewModel() {
+class SearchViewModel : BaseViewModel<HotSearch>() {
 
     /** 搜索关键词 */
     val searchKeyFlow = MutableStateFlow("")
@@ -23,7 +23,7 @@ class SearchViewModel : BaseViewModel() {
     /** 热门搜索 */
     val hotSearchList = MutableLiveData<List<HotSearch>?>()
 
-    override fun start() {
+    fun start() {
         fetchHotSearchList()
         fetchSearchHistoryData()
     }

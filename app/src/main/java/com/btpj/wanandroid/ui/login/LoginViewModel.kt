@@ -12,7 +12,7 @@ import com.btpj.wanandroid.data.local.UserManager
 /**
  * @author LTP  2022/3/9
  */
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel : BaseViewModel<String>() {
 
     val userName = ObservableField("")
     val userPwd = ObservableField("")
@@ -24,7 +24,7 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    override fun start() {
+    fun start() {
         userName.set(UserManager.getLastUserName())
     }
 

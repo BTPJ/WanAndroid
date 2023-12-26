@@ -1,6 +1,6 @@
 package com.btpj.lib_base.utils
 
-import android.graphics.Color
+import androidx.compose.ui.graphics.Color
 import java.util.*
 
 /**
@@ -17,14 +17,14 @@ object CommonUtil {
     }
 
     /** 获取随机rgb颜色值 */
-    fun randomColor(): Int {
+    fun randomColor(): Color {
         Random().run {
             //0-190, 如果颜色值过大,就越接近白色,就看不清了,所以需要限定范围
             val red = nextInt(190)
             val green = nextInt(190)
             val blue = nextInt(190)
             //使用rgb混合生成一种新的颜色,Color.rgb生成的是一个int数
-            return Color.rgb(red, green, blue)
+            return Color(red = red / 255f, green = green / 255f, blue = blue / 255f)
         }
     }
 }

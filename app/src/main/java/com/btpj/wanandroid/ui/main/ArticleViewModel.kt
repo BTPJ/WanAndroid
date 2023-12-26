@@ -1,6 +1,5 @@
 package com.btpj.wanandroid.ui.main
 
-import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
@@ -12,7 +11,7 @@ import kotlinx.coroutines.async
 /**
  * @author LTP  2023/12/19
  */
-class ArticleViewModel : BaseViewModel<Article>() {
+class ArticleViewModel : BaseViewModel<List<Article>>() {
 
     companion object {
         /** 每页显示的条目大小 */
@@ -28,7 +27,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
      * @param isRefresh 是否是下拉刷新
      */
     fun fetchHomeArticlePageList(isRefresh: Boolean = true) {
-        emitUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
+        emitUiState(isRefresh, data = articleList, showLoadMoreLoading = false)
         launch({
             if (isRefresh) {
                 articleList.clear()
@@ -57,7 +56,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
                         )
                         emitUiState(
                             false,
-                            list = articleList.apply { addAll(response1.data.datas) },
+                            data = articleList.apply { addAll(response1.data.datas) },
                             showLoadMoreLoading = true
                         )
                     }
@@ -69,7 +68,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
                     if (articleList.size == it.data.total) {
                         emitUiState(
                             false,
-                            list = articleList,
+                            data = articleList,
                             showLoadMoreLoading = false,
                             noMoreData = true
                         )
@@ -79,7 +78,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
 
                     emitUiState(
                         false,
-                        list = articleList,
+                        data = articleList,
                         showLoadMoreLoading = true
                     )
                 }
@@ -112,7 +111,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
         isRefresh: Boolean = true,
         categoryId: Int = 0
     ) {
-        emitUiState(isRefresh, list = articleList, showLoadMoreLoading = false)
+        emitUiState(isRefresh, data = articleList, showLoadMoreLoading = false)
         launch({
             if (isRefresh) {
                 articleList.clear()
@@ -147,7 +146,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
                 if (articleList.size == it.data.total) {
                     emitUiState(
                         false,
-                        list = articleList,
+                        data = articleList,
                         showLoadMoreLoading = false,
                         noMoreData = true
                     )
@@ -156,7 +155,7 @@ class ArticleViewModel : BaseViewModel<Article>() {
                 currentPage++
                 emitUiState(
                     false,
-                    list = articleList,
+                    data = articleList,
                     showLoadMoreLoading = true
                 )
             }

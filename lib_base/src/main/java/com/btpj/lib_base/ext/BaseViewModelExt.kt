@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  * @param catchBlock catch语句运行的函数，可以用来做一些网络异常等的处理，默认空实现
  * @param finallyBlock finally语句运行的函数，可以用来做一些资源回收等，默认空实现
  */
-fun BaseViewModel.launch(
+fun <T> BaseViewModel<T>.launch(
     tryBlock: suspend CoroutineScope.() -> Unit,
     catchBlock: suspend CoroutineScope.() -> Unit = {},
     finallyBlock: suspend CoroutineScope.() -> Unit = {}
@@ -45,7 +45,7 @@ fun BaseViewModel.launch(
  * @param successBlock 服务器请求成功返回成功码的执行回调，默认空实现
  * @param errorBlock 服务器请求成功返回错误码的执行回调，默认返回false的空实现，函数返回值true:拦截统一错误处理，false:不拦截
  */
-suspend fun <T> BaseViewModel.handleRequest(
+suspend fun <T, R> BaseViewModel<R>.handleRequest(
     response: ApiResponse<T>,
     errorBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Boolean = { false },
     successBlock: suspend CoroutineScope.(response: ApiResponse<T>) -> Unit = {}

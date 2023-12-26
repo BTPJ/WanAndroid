@@ -6,16 +6,16 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Navigation
 
-class NavigationViewModel : BaseViewModel<Navigation>() {
+class NavigationViewModel : BaseViewModel<List<Navigation>>() {
 
     /** 请求导航列表 */
     fun fetchNavigationList() {
         val list = ArrayList<Navigation>()
-        emitUiState(true, list = list)
+        emitUiState(true, data = list)
         launch({
             handleRequest(DataRepository.getNavigationList())
             {
-                emitUiState(false, list = list.apply { addAll(it.data) })
+                emitUiState(false, data = list.apply { addAll(it.data) })
             }
         })
     }

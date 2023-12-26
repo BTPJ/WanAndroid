@@ -6,15 +6,15 @@ import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Structure
 
-class SystemViewModel : BaseViewModel<Structure>() {
+class SystemViewModel : BaseViewModel<List<Structure>>() {
 
     /** 请求体系列表 */
     fun fetchSystemList() {
         val list = ArrayList<Structure>()
-        emitUiState(true, list = list)
+        emitUiState(true, data = list)
         launch({
             handleRequest(DataRepository.getTreeList()) {
-                emitUiState(false, list = list.apply { addAll(it.data) })
+                emitUiState(false, data = list.apply { addAll(it.data) })
             }
         })
     }

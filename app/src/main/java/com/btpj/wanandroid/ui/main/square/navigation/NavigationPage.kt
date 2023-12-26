@@ -67,7 +67,7 @@ fun NavigationPage(
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            uiState?.list?.let {
+            uiState?.data?.let {
                 items(it, key = { item -> item.cid }) { navigation ->
                     NavigationItem(navigation, onNavigationClick)
                 }

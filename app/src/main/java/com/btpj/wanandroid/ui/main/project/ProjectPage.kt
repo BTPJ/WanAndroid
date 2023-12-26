@@ -20,7 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -99,10 +102,13 @@ fun ProjectPage(
                     state = pagerState,
                     key = { index -> index }
                 ) {
-                    ProjectChildPage(
-                        categoryId = projectTitleList!![it].id,
-                        onArticleClick = onArticleClick
-                    )
+                    // 这个回调很闹眼子
+                    if (it == pagerState.currentPage) {
+                        ProjectChildPage(
+                            categoryId = projectTitleList!![it].id,
+                            onArticleClick = onArticleClick
+                        )
+                    }
                 }
             }
         }

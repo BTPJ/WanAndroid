@@ -88,7 +88,7 @@ class ArticleViewModel : BaseViewModel<List<Article>>() {
 
     /** 请求项目分页列表 */
     fun fetchProjectPageList(categoryId: Int, isRefresh: Boolean = true) {
-        getArticlePageList(ArticleType.Project, isRefresh, categoryId)
+        getArticlePageList(ArticleType.Project, isRefresh, categoryId = categoryId)
     }
 
     /** 请求每日一问分页列表 */
@@ -101,8 +101,13 @@ class ArticleViewModel : BaseViewModel<List<Article>>() {
         getArticlePageList(ArticleType.Square, isRefresh)
     }
 
+    /** 请求公众号作者文章分页列表 */
+    fun fetchAuthorPageList(authorId: Int, isRefresh: Boolean = true) {
+        getArticlePageList(ArticleType.Wechat, isRefresh, authorId = authorId)
+    }
+
     private fun getArticlePageList(
-        articleType: ArticleType, isRefresh: Boolean = true, categoryId: Int = 0
+        articleType: ArticleType, isRefresh: Boolean = true, categoryId: Int = 0, authorId: Int = 0
     ) {
         emitUiState(UiStatus.Loading)
         launch({
@@ -127,6 +132,10 @@ class ArticleViewModel : BaseViewModel<List<Article>>() {
                 ArticleType.Ask -> DataRepository.getAskPageList(
                     currentPage, PAGE_SIZE
                 )
+
+                ArticleType.Wechat -> DataRepository.getAuthorArticlePageList(
+                    authorId, currentPage, PAGE_SIZE
+                )
             }
 
             handleRequest(response) {
@@ -146,7 +155,8 @@ class ArticleViewModel : BaseViewModel<List<Article>>() {
     sealed class ArticleType {
         object LatestProject : ArticleType()        // 最新项目
         object Project : ArticleType()    // 项目列表
-        object Square : ArticleType()    // 广场 —— 广场
-        object Ask : ArticleType()    // 广场 —— 每日一问
+        object Square : ArticleType()    // 广场 - 广场
+        object Ask : ArticleType()    // 广场 - 每日一问
+        object Wechat : ArticleType()    // 公众号
     }
 }

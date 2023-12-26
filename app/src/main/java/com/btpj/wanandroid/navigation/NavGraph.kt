@@ -12,8 +12,8 @@ import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
+import com.btpj.wanandroid.ui.main.project.WechatPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
-import com.btpj.wanandroid.ui.wechat.WechatPage
 import com.btpj.wanandroid.ui.setting.SettingPage
 import com.btpj.wanandroid.ui.web.WebPage
 
@@ -52,7 +52,12 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             }
         }
         composable(Route.WECHAT) {
-            WechatPage()
+            WechatPage {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
         }
         composable(Route.MINE) {
             MinePage(navHostController = navHostController)

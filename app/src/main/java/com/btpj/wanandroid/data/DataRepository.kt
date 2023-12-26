@@ -3,6 +3,7 @@ package com.btpj.wanandroid.data
 import com.btpj.lib_base.data.bean.ApiResponse
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.http.RetrofitManager
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.bean.*
 import com.btpj.wanandroid.data.http.Api
 import kotlinx.coroutines.delay
@@ -101,7 +102,7 @@ object DataRepository : Api {
     override suspend fun getAuthorArticlePageList(
         authorId: Int,
         pageNo: Int,
-        pageSize: Int
+        pageSize: Int,
     ): ApiResponse<PageResponse<Article>> {
         return service.getAuthorArticlePageList(authorId, pageNo, pageSize)
     }

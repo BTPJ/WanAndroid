@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.main.wechat
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
@@ -10,19 +11,17 @@ import com.btpj.wanandroid.data.bean.Classify
 class WechatViewModel : BaseViewModel<Nothing>() {
 
     /** 项目标题列表LiveData */
-    val authorTitleListLiveData = MutableLiveData<List<Classify>>()
-
-    fun start() {
-        fetchAuthorTitleList()
-    }
+    private val _authorTitleListLiveData = MutableLiveData<List<Classify>>()
+    val authorTitleListLiveData: LiveData<List<Classify>>
+        get() = _authorTitleListLiveData
 
     /** 请求公众号作者标题列表 */
-    private fun fetchAuthorTitleList() {
+    fun fetchAuthorTitleList() {
         launch({
             handleRequest(
                 DataRepository.getAuthorTitleList()
             )
-            { authorTitleListLiveData.value = it.data!! }
+            { _authorTitleListLiveData.value = it.data!! }
         })
     }
 }

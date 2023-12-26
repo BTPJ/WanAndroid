@@ -6,7 +6,7 @@ import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ArticleUiState
+import com.btpj.wanandroid.ui.main.ListUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
@@ -20,8 +20,8 @@ class WechatViewModel : BaseViewModel() {
         const val PAGE_SIZE = 10
     }
 
-    private val _articleUiState = MutableLiveData<ArticleUiState>()
-    val articleUiState = _articleUiState
+    private val _uiState = MutableLiveData<ListUiState<Article>>()
+    val uiState = _uiState
 
     private val articleList = arrayListOf<Article>()
     private var currentPage = 0

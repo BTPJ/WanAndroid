@@ -6,19 +6,34 @@ import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Navigation
+import com.btpj.wanandroid.ui.main.ListUiState
 
 class NavigationViewModel : BaseViewModel() {
 
-    /** 导航列表LiveData */
-    val navigationListLiveData = MutableLiveData<List<Navigation>>()
+    private val _uiState = MutableLiveData<ListUiState<Navigation>>()
+    val uiState = _uiState
 
     override fun start() {}
 
     /** 请求导航列表 */
     fun fetchNavigationList() {
+        val list = ArrayList<Navigation>()
+        emitUiState(true, list = list)
         launch({
             handleRequest(DataRepository.getNavigationList())
-            { navigationListLiveData.value = it.data!! }
+            {
+                emitUiState(false, list = list.apply { addAll(it.data) })
+            }
         })
+    }
+
+    private fun emitUiState(
+        showLoading: Boolean = false,
+        showError: String? = null,
+        list: List<Navigation>? = null
+    ) {
+        val uiState =
+            ListUiState(showLoading, showError, list)
+        _uiState.value = uiState
     }
 }

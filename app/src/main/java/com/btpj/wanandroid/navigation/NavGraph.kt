@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
@@ -26,13 +28,28 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(Route.HOME) {
-            HomePage {}
+            HomePage {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
         }
         composable(Route.PROJECT) {
-            ProjectPage {}
+            ProjectPage {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
         }
         composable(Route.SQUARE) {
-            SquarePage {}
+            SquarePage {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
         }
         composable(Route.WECHAT) {
             WechatPage()
@@ -45,7 +62,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         }
         composable(Route.WEB) {
             val url = it.arguments?.getString("url")
-            url?.let { url -> WebPage(url, navHostController = navHostController) {} }
+            url?.let { url2 -> WebPage(url2, navHostController = navHostController) {} }
         }
     }
 }

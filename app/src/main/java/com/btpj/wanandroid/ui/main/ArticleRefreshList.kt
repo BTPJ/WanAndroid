@@ -40,7 +40,7 @@ fun ArticleRefreshList(
     onLoadMore: () -> Unit,
     itemContent: @Composable (Article) -> Unit
 ) {
-    val articleUiState by articleViewModel.articleUiState.observeAsState()
+    val articleUiState by articleViewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
         refreshing = articleUiState?.showLoading ?: false,
         onRefresh = onRefresh
@@ -58,7 +58,6 @@ fun ArticleRefreshList(
                 }
                 item {
                     if (articleUiState?.showLoadMoreLoading == true) {
-                        LogUtil.d("LTP", articleUiState.toString())
                         LoadingView()
                         LaunchedEffect(Unit) {
                             delay(500)

@@ -19,8 +19,8 @@ class ArticleViewModel : BaseViewModel() {
         const val PAGE_SIZE = 10
     }
 
-    private val _articleUiState = MutableLiveData<ArticleUiState>()
-    val articleUiState = _articleUiState
+    private val _uiState = MutableLiveData<ListUiState<Article>>()
+    val uiState = _uiState
 
     private val articleList = arrayListOf<Article>()
     private var currentPage = 0
@@ -131,15 +131,18 @@ class ArticleViewModel : BaseViewModel() {
                     currentPage,
                     PAGE_SIZE
                 )
+
                 ArticleType.Project -> DataRepository.getProjectPageList(
                     currentPage,
                     PAGE_SIZE,
                     categoryId
                 )
+
                 ArticleType.Square -> DataRepository.getSquarePageList(
                     currentPage,
                     PAGE_SIZE
                 )
+
                 ArticleType.Ask -> DataRepository.getAskPageList(
                     currentPage,
                     PAGE_SIZE
@@ -175,8 +178,8 @@ class ArticleViewModel : BaseViewModel() {
         noMoreData: Boolean = false
     ) {
         val articleUiState =
-            ArticleUiState(showLoading, showError, list, showLoadMoreLoading, noMoreData)
-        _articleUiState.value = articleUiState
+            ListUiState(showLoading, showError, list, showLoadMoreLoading, noMoreData)
+        _uiState.value = articleUiState
     }
 
     sealed class ArticleType {

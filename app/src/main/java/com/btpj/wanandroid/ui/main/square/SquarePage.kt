@@ -23,10 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.ui.main.ProvideViewModels
 import com.btpj.wanandroid.ui.main.project.ProjectChildPage
 import com.btpj.wanandroid.ui.main.square.ask.AskPage
+import com.btpj.wanandroid.ui.main.square.navigation.NavigationPage
 import com.btpj.wanandroid.ui.main.square.square.SquareChildPage
+import com.btpj.wanandroid.ui.main.square.system.SystemPage
 import kotlinx.coroutines.launch
 
 /**
@@ -35,7 +38,11 @@ import kotlinx.coroutines.launch
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SquarePage(onArticleClick: (Article) -> Unit) {
+fun SquarePage(
+    onStructureClick: ((Classify) -> Unit)? = null,
+    onNavigationClick: ((Article) -> Unit)? = null,
+    onArticleClick: (Article) -> Unit
+) {
     val titleList = listOf("广场", "每日一问", "体系", "导航")
 
     val pagerState = rememberPagerState { titleList.size }
@@ -83,6 +90,13 @@ fun SquarePage(onArticleClick: (Article) -> Unit) {
                 when (it) {
                     0 -> SquareChildPage(onArticleClick = onArticleClick)
                     1 -> AskPage(onArticleClick = onArticleClick)
+                    2 -> SystemPage(onStructureClick = { structure ->
+                        onStructureClick?.invoke(structure)
+                    })
+
+                    3 -> NavigationPage(onNavigationClick = { article ->
+                        onNavigationClick?.invoke(article)
+                    })
                 }
             }
         }

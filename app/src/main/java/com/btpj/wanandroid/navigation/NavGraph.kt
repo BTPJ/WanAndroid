@@ -60,7 +60,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             }
         }
         composable(Route.MINE) {
-            MinePage(navHostController = navHostController)
+            MinePage()
         }
         composable(Route.SETTING) {
             SettingPage(navHostController = navHostController)

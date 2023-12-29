@@ -123,7 +123,7 @@ fun ArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun ArticleItemPreview() {
     ArticleItem(

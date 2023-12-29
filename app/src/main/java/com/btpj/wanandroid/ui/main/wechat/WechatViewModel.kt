@@ -12,8 +12,7 @@ class WechatViewModel : BaseViewModel<Nothing>() {
 
     /** 项目标题列表LiveData */
     private val _authorTitleListLiveData = MutableLiveData<List<Classify>>()
-    val authorTitleListLiveData: LiveData<List<Classify>>
-        get() = _authorTitleListLiveData
+    val authorTitleListLiveData: LiveData<List<Classify>> = _authorTitleListLiveData
 
     /** 请求公众号作者标题列表 */
     fun fetchAuthorTitleList() {

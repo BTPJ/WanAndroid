@@ -44,6 +44,7 @@ import com.btpj.wanandroid.ui.theme.MyColor
 fun ProjectChildPage(
     categoryId: Int,
     lazyListState: LazyListState,
+    // 因为categoryId是动态的，所以需要添加key来确保每个categoryId对应一个ViewModel
     projectChildViewModel: ProjectChildViewModel = viewModel(key = "$categoryId"),
     onArticleClick: (Article) -> Unit
 ) {

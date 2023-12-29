@@ -17,6 +17,7 @@ import com.btpj.wanandroid.ui.main.ArticleViewModel
 fun WechatChildPage(
     authorId: Int,
     lazyListState: LazyListState,
+    // authorId作为key，确保每个作者的页面使用不同的ViewModel
     wechatChildViewModel: WechatChildViewModel = viewModel(key = "$authorId"),
     onArticleClick: (Article) -> Unit
 ) {

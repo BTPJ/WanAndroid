@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -34,7 +35,6 @@ import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Tag
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
-import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -43,23 +43,25 @@ import com.btpj.wanandroid.ui.theme.MyColor
 @Composable
 fun ProjectChildPage(
     categoryId: Int,
-    articleViewModel: ArticleViewModel = viewModel(),
+    lazyListState: LazyListState,
+    projectChildViewModel: ProjectChildViewModel = viewModel(key = "$categoryId"),
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(
-        articleViewModel = articleViewModel,
+        viewModel = projectChildViewModel,
+        lazyListState = lazyListState,
         onRefresh = {
             if (categoryId == -1) {
-                articleViewModel.fetchNewProjectPageList()
+                projectChildViewModel.fetchNewProjectPageList()
             } else {
-                articleViewModel.fetchProjectPageList(categoryId)
+                projectChildViewModel.fetchProjectPageList(categoryId)
             }
         },
         onLoadMore = {
             if (categoryId == -1) {
-                articleViewModel.fetchNewProjectPageList(false)
+                projectChildViewModel.fetchNewProjectPageList(false)
             } else {
-                articleViewModel.fetchProjectPageList(categoryId, false)
+                projectChildViewModel.fetchProjectPageList(categoryId, false)
             }
         }) {
         ProjectArticleItem(article = it, onArticleClick = onArticleClick)

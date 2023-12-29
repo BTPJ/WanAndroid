@@ -1,8 +1,6 @@
 package com.btpj.wanandroid.ui.main.square.system
 
 import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.base.UiState
-import com.btpj.lib_base.base.UiStatus
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
@@ -12,10 +10,10 @@ class SystemViewModel : BaseViewModel<List<Structure>>() {
 
     /** 请求体系列表 */
     fun fetchSystemList() {
-        emitUiState(UiStatus.Loading)
+        emitUiState(true)
         launch({
             handleRequest(DataRepository.getTreeList()) {
-                emitUiState(UiStatus.Success(it.data))
+                emitUiState(data = it.data)
             }
         })
     }

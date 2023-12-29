@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.btpj.wanandroid.R
@@ -80,7 +81,6 @@ fun BottomBar(navController: NavController, navDestination: NavDestination?) {
                 },
                 selectedContentColor = Color.White,
                 unselectedContentColor = Color.White.copy(0.5f),
-
                 label = {
                     Text(
                         text = stringResource(id = item.label),
@@ -93,7 +93,7 @@ fun BottomBar(navController: NavController, navDestination: NavDestination?) {
                         navDestination?.id?.let {
                             popUpTo(it) {
                                 // 跳转时保存页面状态
-                                saveState = false
+                                saveState = true
                                 // 回退到栈顶时，栈顶页面是否也关闭
                                 inclusive = true
                             }

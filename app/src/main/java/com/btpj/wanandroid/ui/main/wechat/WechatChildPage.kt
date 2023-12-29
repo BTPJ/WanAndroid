@@ -1,5 +1,7 @@
 package com.btpj.wanandroid.ui.main.wechat
 
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.utils.LogUtil
@@ -14,16 +16,18 @@ import com.btpj.wanandroid.ui.main.ArticleViewModel
 @Composable
 fun WechatChildPage(
     authorId: Int,
-    articleViewModel: ArticleViewModel = viewModel(),
+    lazyListState: LazyListState,
+    wechatChildViewModel: WechatChildViewModel = viewModel(key = "$authorId"),
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(
-        articleViewModel = articleViewModel,
+        viewModel = wechatChildViewModel,
+        lazyListState = lazyListState,
         onRefresh = {
-            articleViewModel.fetchAuthorPageList(authorId)
+            wechatChildViewModel.fetchAuthorPageList(authorId)
         },
         onLoadMore = {
-            articleViewModel.fetchAuthorPageList(authorId, false)
+            wechatChildViewModel.fetchAuthorPageList(authorId, false)
         }) {
         ArticleItem(article = it, onArticleClick = onArticleClick)
     }

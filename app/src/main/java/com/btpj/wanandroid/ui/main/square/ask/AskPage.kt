@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.main.square.ask
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.wanandroid.data.bean.Article
@@ -12,16 +13,18 @@ import com.btpj.wanandroid.ui.main.ArticleViewModel
  */
 @Composable
 fun AskPage(
-    articleViewModel: ArticleViewModel = viewModel(),
+    askViewModel: AskViewModel = viewModel(),
+    lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(
-        articleViewModel = articleViewModel,
+        viewModel = askViewModel,
+        lazyListState = lazyListState,
         onRefresh = {
-            articleViewModel.fetchAskPageList()
+            askViewModel.fetchAskPageList()
         },
         onLoadMore = {
-            articleViewModel.fetchAskPageList(false)
+            askViewModel.fetchAskPageList(false)
         }) {
         ArticleItem(article = it, onArticleClick = onArticleClick)
     }

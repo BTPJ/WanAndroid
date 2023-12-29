@@ -6,7 +6,6 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.data.DataRepository
-import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.data.bean.ProjectTitle
 
 /**
@@ -16,8 +15,7 @@ class ProjectViewModel : BaseViewModel<Nothing>() {
 
     /** 项目标题列表LiveData */
     private val _projectTitleListLiveData = MutableLiveData<List<ProjectTitle>?>()
-    val projectTitleListLiveData: LiveData<List<ProjectTitle>?>
-        get() = _projectTitleListLiveData
+    val projectTitleListLiveData: LiveData<List<ProjectTitle>?> = _projectTitleListLiveData
 
     /** 请求项目标题列表 */
     fun fetchProjectTitleList() {

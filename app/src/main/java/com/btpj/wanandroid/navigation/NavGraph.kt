@@ -12,7 +12,7 @@ import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
-import com.btpj.wanandroid.ui.main.project.WechatPage
+import com.btpj.wanandroid.ui.main.wechat.WechatPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
 import com.btpj.wanandroid.ui.setting.SettingPage
 import com.btpj.wanandroid.ui.web.WebPage

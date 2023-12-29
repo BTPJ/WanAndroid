@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -44,6 +45,7 @@ import com.btpj.wanandroid.data.bean.Navigation
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NavigationPage(
+    lazyListState: LazyListState,
     navigationViewModel: NavigationViewModel = viewModel(),
     onNavigationClick: (Article) -> Unit
 ) {
@@ -54,7 +56,11 @@ fun NavigationPage(
             navigationViewModel.fetchNavigationList()
         })
 
-    LaunchedEffect(key1 = true) { navigationViewModel.fetchNavigationList() }
+    LaunchedEffect(key1 = true) {
+        if (uiState?.data == null) {
+            navigationViewModel.fetchNavigationList()
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -62,6 +68,7 @@ fun NavigationPage(
             .pullRefresh(pullRefreshState)
     ) {
         LazyColumn(
+            state = lazyListState,
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)

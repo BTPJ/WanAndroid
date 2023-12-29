@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
@@ -20,9 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,7 +30,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -45,6 +43,8 @@ fun ProjectPage(
 ) {
 
     val projectTitleList by projectViewModel.projectTitleListLiveData.observeAsState()
+    val lazyListStates =
+        if (projectTitleList.isNullOrEmpty()) emptyList() else (1..projectTitleList!!.size).map { rememberLazyListState() }
 
     LaunchedEffect(key1 = true) {
         projectViewModel.fetchProjectTitleList()
@@ -102,9 +102,9 @@ fun ProjectPage(
                     state = pagerState,
                     key = { index -> index }
                 ) {
-                    // 这个回调很闹眼子
                     if (it == pagerState.currentPage) {
                         ProjectChildPage(
+                            lazyListState = lazyListStates[it],
                             categoryId = projectTitleList!![it].id,
                             onArticleClick = onArticleClick
                         )

@@ -1,6 +1,5 @@
 package com.btpj.lib_base.base
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.btpj.lib_base.data.bean.ApiResponse
@@ -19,20 +18,15 @@ abstract class BaseViewModel<T> : ViewModel() {
 
     /** ui状态 */
     private val _uiState = MutableLiveData<UiState<T>>()
-    val uiState: LiveData<UiState<T>> = _uiState
+    val uiState: MutableLiveData<UiState<T>> = _uiState
 
-    protected fun emitUiState(uiStatus: UiStatus<T>) {
-        when (uiStatus) {
-            is UiStatus.Loading -> _uiState.value = UiState(true)
-            is UiStatus.Success -> _uiState.value =
-                UiState(
-                    false,
-                    uiStatus.data,
-                    showLoadingMore = uiStatus.showLoadingMore,
-                    noMoreData = uiStatus.noMoreData
-                )
-
-            is UiStatus.Error -> _uiState.value = UiState(false, error = uiStatus.error)
-        }
+    protected fun emitUiState(
+        showLoading: Boolean = false,
+        data: T? = null,
+        error: String? = null,
+        showLoadingMore: Boolean = false,
+        noMoreData: Boolean = false
+    ) {
+        _uiState.value = UiState(showLoading, data, error, showLoadingMore, noMoreData)
     }
 }

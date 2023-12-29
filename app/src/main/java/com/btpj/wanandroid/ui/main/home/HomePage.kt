@@ -1,6 +1,7 @@
 package com.btpj.wanandroid.ui.main.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -9,7 +10,6 @@ import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
-import com.btpj.wanandroid.ui.main.ArticleViewModel
 
 /**
  * 首页Tab
@@ -17,15 +17,16 @@ import com.btpj.wanandroid.ui.main.ArticleViewModel
  */
 @Composable
 fun HomePage(
-    articleViewModel: ArticleViewModel = viewModel(),
+    homeViewModel: HomeViewModel = viewModel(),
     onArticleClick: (Article) -> Unit
 ) {
     Column {
         TitleBar(title = stringResource(id = R.string.tab_home), showBackBtn = false)
         ArticleRefreshList(
-            articleViewModel = articleViewModel,
-            onRefresh = { articleViewModel.fetchHomeArticlePageList() },
-            onLoadMore = { articleViewModel.fetchHomeArticlePageList(false) }) {
+            viewModel = homeViewModel,
+            lazyListState = rememberLazyListState(),
+            onRefresh = { homeViewModel.fetchHomeArticlePageList() },
+            onLoadMore = { homeViewModel.fetchHomeArticlePageList(false) }) {
             ArticleItem(article = it, onArticleClick = onArticleClick)
         }
     }

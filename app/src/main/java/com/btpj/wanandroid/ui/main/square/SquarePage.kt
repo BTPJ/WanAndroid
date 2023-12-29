@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
@@ -16,12 +17,19 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ui.widgets.TitleBar
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.ui.main.square.ask.AskPage
@@ -41,10 +49,14 @@ fun SquarePage(
     onNavigationClick: ((Article) -> Unit)? = null,
     onArticleClick: (Article) -> Unit
 ) {
-    val titleList = listOf("广场", "每日一问", "体系", "导航")
+    val titleList = remember {
+        listOf("广场", "每日一问", "体系", "导航")
+    }
 
     val pagerState = rememberPagerState { titleList.size }
     val coroutineScope = rememberCoroutineScope()
+
+    val lazyListStates = (1..titleList.size).map { rememberLazyListState() }
 
     Column {
         Box {
@@ -85,16 +97,30 @@ fun SquarePage(
                 verticalAlignment = Alignment.Top,
                 state = pagerState,
                 key = { index -> index }) {
-                when (it) {
-                    0 -> SquareChildPage(onArticleClick = onArticleClick)
-                    1 -> AskPage(onArticleClick = onArticleClick)
-                    2 -> SystemPage(onStructureClick = { structure ->
-                        onStructureClick?.invoke(structure)
-                    })
+                if (it == pagerState.currentPage) {
+                    when (it) {
+                        0 -> SquareChildPage(
+                            lazyListState = lazyListStates[0],
+                            onArticleClick = onArticleClick
+                        )
 
-                    3 -> NavigationPage(onNavigationClick = { article ->
-                        onNavigationClick?.invoke(article)
-                    })
+                        1 -> AskPage(
+                            lazyListState = lazyListStates[1],
+                            onArticleClick = onArticleClick
+                        )
+
+                        2 -> SystemPage(
+                            lazyListState = lazyListStates[2],
+                            onStructureClick = { structure ->
+                                onStructureClick?.invoke(structure)
+                            })
+
+                        3 -> NavigationPage(
+                            lazyListState = lazyListStates[3],
+                            onNavigationClick = { article ->
+                                onNavigationClick?.invoke(article)
+                            })
+                    }
                 }
             }
         }

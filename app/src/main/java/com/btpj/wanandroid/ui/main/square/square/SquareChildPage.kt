@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.main.square.square
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.wanandroid.data.bean.Article
@@ -12,16 +13,18 @@ import com.btpj.wanandroid.ui.main.ArticleViewModel
  */
 @Composable
 fun SquareChildPage(
-    articleViewModel: ArticleViewModel = viewModel(),
+    squareChildViewModel: SquareChildViewModel = viewModel(),
+    lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(
-        articleViewModel = articleViewModel,
+        viewModel = squareChildViewModel,
+        lazyListState = lazyListState,
         onRefresh = {
-            articleViewModel.fetchSquarePageList()
+            squareChildViewModel.fetchSquarePageList()
         },
         onLoadMore = {
-            articleViewModel.fetchSquarePageList(false)
+            squareChildViewModel.fetchSquarePageList(false)
         }) {
         ArticleItem(article = it, onArticleClick = onArticleClick)
     }

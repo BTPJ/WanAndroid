@@ -3,11 +3,14 @@ package com.btpj.wanandroid.ui.main
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -34,20 +37,33 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticleRefreshList(
-    articleViewModel: ArticleViewModel,
+    viewModel: ArticleViewModel,
+    lazyListState: LazyListState,
     onRefresh: () -> Unit,
     onLoadMore: () -> Unit,
     itemContent: @Composable (Article) -> Unit
 ) {
-    val uiState by articleViewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
         refreshing = uiState?.showLoading ?: false,
         onRefresh = onRefresh
     )
-    LaunchedEffect(true) { onRefresh() }
-    Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
+    LaunchedEffect(true) {
+        if (uiState?.data == null) {
+            onRefresh()
+        }
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .pullRefresh(pullRefreshState)
+    ) {
         LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            state = lazyListState,
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {

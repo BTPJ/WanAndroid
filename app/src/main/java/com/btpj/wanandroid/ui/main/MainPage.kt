@@ -80,7 +80,7 @@ fun BottomBar(navController: NavController, navDestination: NavDestination?) {
                     )
                 },
                 selectedContentColor = MaterialTheme.colorScheme.onPrimary,
-                unselectedContentColor = MaterialTheme.colorScheme.onPrimary.copy(0.5f),
+                unselectedContentColor = MaterialTheme.colorScheme.onPrimary.copy(0.3f),
                 label = {
                     Text(
                         text = stringResource(id = item.label),

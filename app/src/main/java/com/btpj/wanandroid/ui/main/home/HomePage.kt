@@ -34,14 +34,6 @@ fun HomePage(
     Column {
         TitleBar(title = stringResource(id = R.string.tab_home), showBackBtn = false)
 
-        if (banners.isNotEmpty()) {
-            Banner(
-                modifier = Modifier
-                    .height(200.dp)
-                    .fillMaxWidth(),
-                images = banners.map { it.imagePath }) {}
-        }
-
         ArticleRefreshList(
             viewModel = homeViewModel,
             lazyListState = rememberLazyListState(),
@@ -49,7 +41,17 @@ fun HomePage(
                 homeViewModel.fetchBanners()
                 homeViewModel.fetchHomeArticlePageList()
             },
-            onLoadMore = { homeViewModel.fetchHomeArticlePageList(false) }) {
+            onLoadMore = { homeViewModel.fetchHomeArticlePageList(false) },
+            headerContent = {
+                // 轮播图
+                if (banners.isNotEmpty()) {
+                    Banner(
+                        modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth(),
+                        images = banners.map { it.imagePath }) {}
+                }
+            }) {
             ArticleItem(article = it, onArticleClick = onArticleClick)
         }
     }

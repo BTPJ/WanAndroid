@@ -89,6 +89,8 @@ dependencies {
     api 'androidx.compose.ui:ui-tooling-preview'
     api 'androidx.compose.material3:material3'
     api 'androidx.compose.material:material:1.4.3'
+    api 'io.coil-kt:coil-compose:2.5.0'
+
     androidTestApi platform('androidx.compose:compose-bom:2023.03.00')
     androidTestApi 'androidx.compose.ui:ui-test-junit4'
     debugApi 'androidx.compose.ui:ui-tooling'

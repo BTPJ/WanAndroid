@@ -62,6 +62,8 @@ val navBarItems = listOf(
 
 @Composable
 fun BottomBar(navController: NavController, navDestination: NavDestination?) {
+    // 不喜欢material3的NavigationBar效果，故使用的是material的BottomNavigation
+    // 注意内部的Text等组件也得搭配material的，不然效果出不来
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.primary
     ) {

@@ -12,6 +12,9 @@ object MyColor {
     val Pink40 = Color(0xFF7D5260)
 
     val Green_19791D = Color(0xFF19791D)
-    val Red_FF4A57 = Color(0XFFFF4A57)
     val Green_669900 = Color(0XFF669900)
+
+    val Red_FF4A57 = Color(0XFFFF4A57)
+
+    val Blue_4cd2f5 =  Color(0XFF4cd2f5)
 }

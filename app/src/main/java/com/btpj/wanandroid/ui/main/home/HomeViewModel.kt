@@ -1,23 +1,30 @@
 package com.btpj.wanandroid.ui.main.home
 
+import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.ext.handleRequest
 import com.btpj.lib_base.ext.launch
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.ui.main.ArticleViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * @author LTP  2023/12/19
  */
 class HomeViewModel : ArticleViewModel() {
 
+    private val _bannerList = MutableStateFlow<List<Banner>>(emptyList())
+    val bannerList = _bannerList
+
     /** 请求首页轮播图 */
     fun fetchBanners() {
         launch({
             handleRequest(DataRepository.getBanner()) {
-//                _bannerListStateFlow.value = it.data
+                _bannerList.value = it.data
             }
         })
     }

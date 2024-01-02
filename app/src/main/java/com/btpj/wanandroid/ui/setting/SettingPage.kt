@@ -122,7 +122,6 @@ fun ListItem(
     showRedCircle: Boolean? = false,
     onItemClick: (() -> Unit)? = null
 ) {
-    val color = LocalContentColor.current.copy(alpha = 0.7f)
 
     Column(Modifier.clickable(enabled = onItemClick != null) { onItemClick?.invoke() }) {
         Row(
@@ -131,10 +130,10 @@ fun ListItem(
                 .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = label, color = color)
+            Text(text = label)
             Spacer(modifier = Modifier.weight(1f))
             if (value != null) {
-                Text(text = value, color = color)
+                Text(text = value)
             }
             if (showRedCircle == true) {
                 Box(

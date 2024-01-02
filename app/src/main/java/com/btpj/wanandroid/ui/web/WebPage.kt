@@ -14,14 +14,15 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,7 @@ fun WebPage(
     var pageTitle by remember { mutableStateOf(url) }
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    var progress by remember { mutableStateOf(0.1f) }
+    var progress by remember { mutableFloatStateOf(0.1f) }
     val webViewState = rememberWebViewState(url = url)
     val webViewNavigator = rememberWebViewNavigator()
     Column {
@@ -56,7 +57,7 @@ fun WebPage(
             Icon(
                 imageVector = Icons.Default.FavoriteBorder,
                 contentDescription = "Collect",
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.clickable {
                     onCollectClick?.invoke()
                 }
@@ -64,7 +65,7 @@ fun WebPage(
             Icon(
                 imageVector = Icons.Default.MoreVert,
                 contentDescription = "MoreVert",
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(start = 4.dp)
                     .clickable { expanded = true })

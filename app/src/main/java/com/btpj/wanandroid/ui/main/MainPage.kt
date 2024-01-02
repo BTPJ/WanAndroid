@@ -78,8 +78,8 @@ fun BottomBar(navController: NavController, navDestination: NavDestination?) {
                             .padding(bottom = 4.dp)
                     )
                 },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.White.copy(0.5f),
+                selectedContentColor = MaterialTheme.colorScheme.onPrimary,
+                unselectedContentColor = MaterialTheme.colorScheme.onPrimary.copy(0.5f),
                 label = {
                     Text(
                         text = stringResource(id = item.label),

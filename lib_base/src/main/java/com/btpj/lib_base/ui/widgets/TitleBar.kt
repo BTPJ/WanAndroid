@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,14 +52,14 @@ fun TitleBar(
                     .clickable { onBackClick?.invoke() }
                     .padding(vertical = 15.dp),
                 contentDescription = "back",
-                tint = Color.White
+                tint = MaterialTheme.colorScheme.onPrimary
             )
         } else {
             Box(modifier = Modifier.width(50.dp))
         }
         Text(
             text = title,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center,

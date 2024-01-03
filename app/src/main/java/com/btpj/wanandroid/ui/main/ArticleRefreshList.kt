@@ -64,14 +64,13 @@ fun ArticleRefreshList(
                 .fillMaxWidth()
                 .fillMaxHeight(),
             state = lazyListState,
-            contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
+            // contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             item {
                 headerContent?.invoke()
             }
             uiState?.data?.let {
-
                 items(it, key = { item -> item.id }) { article ->
                     itemContent(article)
                 }

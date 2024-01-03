@@ -41,6 +41,7 @@ fun ArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 10.dp)
             .clickable { onArticleClick.invoke(article) },
         colors = CardDefaults.cardColors(containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.surface else Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)

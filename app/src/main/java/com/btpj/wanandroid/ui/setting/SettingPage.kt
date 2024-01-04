@@ -12,17 +12,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.btpj.lib_base.ext.showDialog
 import com.btpj.lib_base.http.RetrofitManager
+import com.btpj.lib_base.ui.widgets.CusAlertDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.local.UserManager
@@ -49,14 +52,16 @@ import com.btpj.wanandroid.ui.theme.WanAndroidTheme
  */
 @Composable
 fun SettingPage(
-    navHostController: NavHostController,
-    viewModel: SettingViewModel = viewModel()
+    navHostController: NavHostController, viewModel: SettingViewModel = viewModel()
 ) {
     val showLogoutBtn by viewModel.showLogoutBtn.observeAsState()
     val haveNewVersion by viewModel.haveNewVersion.observeAsState()
     val cacheSize by viewModel.cacheSize.observeAsState()
     val appVersionName by viewModel.appVersionName.observeAsState()
-    val context = LocalContext.current
+
+    var showClearCacheDialog by remember { mutableStateOf(false) }
+    var showIntroDialog by remember { mutableStateOf(false) }
+    var showLogoutDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(true) {
         viewModel.start()
@@ -65,30 +70,19 @@ fun SettingPage(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TitleBar(title = "设置") { navHostController.popBackStack() }
         ListItem(label = "清除缓存", value = cacheSize) {
-            context.showDialog(
-                "确定清理缓存吗?",
-                positiveButtonText = "清理",
-                positiveAction = {
-                    viewModel.clearAllCache()
-                })
+            showClearCacheDialog = true
         }
         ListItem(
-            label = "版本",
-            value = appVersionName,
-            showRedCircle = haveNewVersion
+            label = "版本", value = appVersionName, showRedCircle = haveNewVersion
         ) {
             viewModel.checkAppUpdate(true)
         }
         ListItem(label = "作者", value = "BTPJ") {
-            context.showDialog(
-                "Q\tQ：1069113473\n\n微信：BTPJ1314\n\n邮箱：1069113473@qq.com",
-                "联系作者", negativeButtonText = ""
-            )
+            showIntroDialog = true
         }
         ListItem(label = "项目源码") {
             navHostController.navigate(
-                Route.WEB,
-                bundleOf("url" to "https://gitee.com/BTPJ_git/WanAndroid")
+                Route.WEB, bundleOf("url" to "https://gitee.com/BTPJ_git/WanAndroid")
             )
         }
         if (showLogoutBtn == true) {
@@ -96,20 +90,35 @@ fun SettingPage(
                 .padding(top = 50.dp)
                 .width(200.dp),
                 shape = RoundedCornerShape(4.dp),
-                onClick = {
-                    context.showDialog(
-                        "确定退出登录吗?",
-                        positiveButtonText = "退出",
-                        positiveAction = {
-                            // 手动清除cookie
-                            RetrofitManager.cookieJar.clear()
-                            UserManager.logout()
-                            App.appViewModel.userEvent.value = null
-                            navHostController.popBackStack()
-                        })
-                }) {
+                onClick = { showLogoutDialog = true }) {
                 Text(text = "退出登录")
             }
+        }
+
+        if (showClearCacheDialog) {
+            CusAlertDialog(content = { Text(text = "确定清理缓存吗") },
+                confirmText = "清理",
+                onConfirm = { viewModel.clearAllCache() }) {
+                showClearCacheDialog = false
+            }
+        }
+
+        if (showIntroDialog) {
+            CusAlertDialog(
+                titleText = "联系作者",
+                content = { Text("Q\tQ：1069113473\n\n微信：BTPJ1314\n\n邮箱：1069113473@qq.com") },
+                showCancel = false
+            ) { showIntroDialog = false }
+        }
+
+        if (showLogoutDialog) {
+            CusAlertDialog(content = { Text("确定退出登录吗?") }, onConfirm = {
+                // 手动清除cookie
+                RetrofitManager.cookieJar.clear()
+                UserManager.logout()
+                App.appViewModel.updateUser(null)
+                navHostController.popBackStack()
+            }) { showLogoutDialog = false }
         }
     }
 }

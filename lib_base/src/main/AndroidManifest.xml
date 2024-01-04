@@ -5,12 +5,4 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
-    <application>
-        <activity
-            android:name=".widgets.Title"
-            android:exported="false"
-            android:label="@string/title_activity_title"
-            android:theme="@style/Theme.WanAndroid" />
-    </application>
-
 </manifest>

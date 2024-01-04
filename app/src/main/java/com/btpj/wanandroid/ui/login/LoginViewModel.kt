@@ -14,6 +14,7 @@ import com.btpj.wanandroid.data.local.UserManager
  */
 class LoginViewModel : BaseViewModel<String>() {
 
+
     val userName = ObservableField("")
     val userPwd = ObservableField("")
 
@@ -38,7 +39,7 @@ class LoginViewModel : BaseViewModel<String>() {
             handleRequest(DataRepository.login(userName, pwd)) {
                 UserManager.saveLastUserName(userName)
                 UserManager.saveUser(it.data)
-                App.appViewModel.userEvent.value = it.data
+                App.appViewModel.updateUser(it.data)
                 successCall.invoke()
             }
         })

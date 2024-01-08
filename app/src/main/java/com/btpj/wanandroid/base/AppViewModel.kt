@@ -22,12 +22,12 @@ class AppViewModel : BaseViewModel<Unit>() {
     val user: StateFlow<User?> = _user
 
     /** 请求异常（服务器请求失败，譬如：服务器连接超时等） */
-    private val _exception = MutableStateFlow<Exception?>(null)
-    val exception: StateFlow<Exception?> = _exception
+    private val _exception = MutableLiveData<Exception?>()
+    val exception: LiveData<Exception?> = _exception
 
     /** 请求服务器返回错误（服务器请求成功但status错误，譬如：登录过期等） */
-    private val _errorResponse = MutableStateFlow<ApiResponse<*>?>(null)
-    val errorResponse: StateFlow<ApiResponse<*>?> = _errorResponse
+    private val _errorResponse = MutableLiveData<ApiResponse<*>?>()
+    val errorResponse: LiveData<ApiResponse<*>?> = _errorResponse
 
     /** 分享添加文章 */
     val shareArticleEvent = MutableLiveData<Boolean>()

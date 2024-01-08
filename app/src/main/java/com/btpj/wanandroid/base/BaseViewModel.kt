@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.btpj.lib_base.data.bean.ApiResponse
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -79,7 +78,6 @@ abstract class BaseViewModel<T> : ViewModel() {
                 else -> { // 服务器返回的其他错误码
                     if (!errorBlock(response)) {
                         // 只有errorBlock返回false不拦截处理时，才去统一提醒错误提示
-                        LogUtil.d("LTP", response.toString())
                         App.appViewModel.emitErrorResponse(response)
                     }
                 }

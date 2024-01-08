@@ -40,11 +40,9 @@ class MainActivity : ComponentActivity() {
 
     /** 全局错误处理 */
     private fun startObserver() {
-        lifecycleScope.launch {
-            App.appViewModel.exception.collectLatest {
-                if (it == null) return@collectLatest
-
-                LogUtil.e("网络请求错误：${it.message}")
+        App.appViewModel.apply {
+            exception.observe(this@MainActivity) {
+                LogUtil.e("网络请求错误：${it?.message}")
                 when (it) {
                     is SocketTimeoutException -> ToastUtil.showShort(
                         this@MainActivity,
@@ -58,17 +56,14 @@ class MainActivity : ComponentActivity() {
 
                     else -> ToastUtil.showShort(
                         this@MainActivity,
-                        it.message ?: getString(com.btpj.lib_base.R.string.response_error)
+                        it?.message ?: getString(com.btpj.lib_base.R.string.response_error)
                     )
                 }
-            }
-        }
 
-        lifecycleScope.launch {
-            // 全局服务器返回的错误信息监听
-            App.appViewModel.errorResponse.collectLatest {
-                if (it == null) return@collectLatest
-                ToastUtil.showShort(this@MainActivity, it.errorMsg)
+                // 全局服务器返回的错误信息监听
+                errorResponse.observe(this@MainActivity) { response ->
+                    response?.let { it1 -> ToastUtil.showShort(this@MainActivity, it1.errorMsg) }
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.btpj.wanandroid.ui.collect
 
-import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.wanandroid.base.BaseViewModel
+
 
 class CollectViewModel : BaseViewModel<Nothing>() {
 

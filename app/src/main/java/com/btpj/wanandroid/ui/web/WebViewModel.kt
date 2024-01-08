@@ -1,15 +1,13 @@
 package com.btpj.wanandroid.ui.web
 
-import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.ext.handleRequest
-import com.btpj.lib_base.ext.launch
+import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
 
 /**
  * @author LTP  2022/4/2
  */
-class WebViewModel : BaseViewModel<Any>() {
+class WebViewModel : BaseViewModel<Unit>() {
 
     /**
      * 收藏文章

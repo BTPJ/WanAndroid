@@ -1,10 +1,8 @@
 package com.btpj.wanandroid.ui.share.list
 
 import androidx.lifecycle.MutableLiveData
-import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.lib_base.data.bean.PageResponse
-import com.btpj.lib_base.ext.handleRequest
-import com.btpj.lib_base.ext.launch
+import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 

@@ -1,9 +1,5 @@
 package com.btpj.wanandroid.ui.main.home
 
-import androidx.lifecycle.MutableLiveData
-import com.btpj.lib_base.ext.handleRequest
-import com.btpj.lib_base.ext.launch
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner

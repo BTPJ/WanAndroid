@@ -1,10 +1,7 @@
 package com.btpj.wanandroid.ui.main.mine
 
-import com.btpj.lib_base.base.BaseViewModel
-import com.btpj.lib_base.ext.handleRequest
-import com.btpj.lib_base.ext.launch
 import com.btpj.wanandroid.App
-import com.btpj.wanandroid.base.AppViewModel
+import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
 

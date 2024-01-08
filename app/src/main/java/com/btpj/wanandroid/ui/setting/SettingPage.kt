@@ -30,8 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,7 +41,6 @@ import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.navigation.Route
-import com.btpj.wanandroid.ui.theme.WanAndroidTheme
 
 /**
  * 设置
@@ -116,7 +113,7 @@ fun SettingPage(
                 // 手动清除cookie
                 RetrofitManager.cookieJar.clear()
                 UserManager.logout()
-                App.appViewModel.updateUser(null)
+                App.appViewModel.emitUser(null)
                 navHostController.popBackStack()
             }) { showLogoutDialog = false }
         }
@@ -162,13 +159,5 @@ fun ListItem(
         if (showBottomLine) {
             Divider(modifier = Modifier.height(0.2.dp))
         }
-    }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    WanAndroidTheme {
-        SettingPage(NavHostController(LocalContext.current))
     }
 }

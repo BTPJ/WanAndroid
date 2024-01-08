@@ -4,12 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
+import androidx.lifecycle.lifecycleScope
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.ui.main.MainPage
 import com.btpj.wanandroid.ui.theme.WanAndroidTheme
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * 主页
@@ -26,8 +32,45 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        startObserver()
+
         // 返回处理
         onBackPressedDispatcher.addCallback(this, mBackPressedCallback)
+    }
+
+    /** 全局错误处理 */
+    private fun startObserver() {
+        lifecycleScope.launch {
+            App.appViewModel.exception.collectLatest {
+                if (it == null) return@collectLatest
+
+                LogUtil.e("网络请求错误：${it.message}")
+                when (it) {
+                    is SocketTimeoutException -> ToastUtil.showShort(
+                        this@MainActivity,
+                        getString(com.btpj.lib_base.R.string.request_time_out)
+                    )
+
+                    is ConnectException, is UnknownHostException -> ToastUtil.showShort(
+                        this@MainActivity,
+                        getString(com.btpj.lib_base.R.string.network_error)
+                    )
+
+                    else -> ToastUtil.showShort(
+                        this@MainActivity,
+                        it.message ?: getString(com.btpj.lib_base.R.string.response_error)
+                    )
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            // 全局服务器返回的错误信息监听
+            App.appViewModel.errorResponse.collectLatest {
+                if (it == null) return@collectLatest
+                ToastUtil.showShort(this@MainActivity, it.errorMsg)
+            }
+        }
     }
 
     /** 上一次点击返回键的时间 */

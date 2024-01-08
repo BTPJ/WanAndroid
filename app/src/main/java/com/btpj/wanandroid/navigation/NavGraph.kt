@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.ui.login.LoginPage
+import com.btpj.wanandroid.ui.login.register.RegisterPage
 import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
@@ -66,6 +67,9 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         composable(Route.LOGIN) {
             LoginPage(navHostController = navHostController)
         }
+        composable(Route.REGISTER) {
+            RegisterPage(navHostController = navHostController)
+        }
         composable(Route.SETTING) {
             SettingPage(navHostController = navHostController)
         }
@@ -85,5 +89,6 @@ object Route {
     const val SETTING = "setting"
     const val WEB = "web"
     const val LOGIN = "login"
+    const val REGISTER = "register"
 }
 

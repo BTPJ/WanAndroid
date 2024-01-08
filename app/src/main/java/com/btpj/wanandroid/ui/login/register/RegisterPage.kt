@@ -1,7 +1,5 @@
-package com.btpj.wanandroid.ui.login
+package com.btpj.wanandroid.ui.login.register
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +21,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -34,32 +32,35 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.btpj.lib_base.ui.widgets.LoadingDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
+import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.wanandroid.navigation.Route
 
 /**
  * @author LTP  2024/1/4
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(navHostController: NavHostController, loginViewModel: LoginViewModel = viewModel()) {
+fun RegisterPage(
+    navHostController: NavHostController,
+    registerViewModel: RegisterViewModel = viewModel()
+) {
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var passwordSure by rememberSaveable { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
+    var passwordSureVisibility by remember { mutableStateOf(false) }
     var showLoadingDialog by remember { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = Unit, block = {
-        username = UserManager.getLastUserName()
-    })
+    val context = LocalContext.current
 
     if (showLoadingDialog) {
-        LoadingDialog(loadingText = "登录中...") { showLoadingDialog = false }
+        LoadingDialog(loadingText = "注册中...") { showLoadingDialog = false }
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TitleBar(title = stringResource(id = R.string.login)) { navHostController.popBackStack() }
+        TitleBar(title = stringResource(id = R.string.register)) { navHostController.popBackStack() }
         AsyncImage(
             model = R.drawable.ic_user_round,
             contentDescription = null,
@@ -103,6 +104,29 @@ fun LoginPage(navHostController: NavHostController, loginViewModel: LoginViewMod
                 }
             },
             onValueChange = { password = it })
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            value = passwordSure,
+            label = { Text(text = stringResource(id = R.string.password_sure)) },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(
+                    0.4f
+                )
+            ),
+            visualTransformation = if (passwordSureVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            trailingIcon = {
+                IconButton(onClick = { passwordSureVisibility = !passwordSureVisibility }) {
+                    Icon(
+                        painter = if (passwordSureVisibility) painterResource(id = R.drawable.ic_pwd_show)
+                        else painterResource(id = R.drawable.ic_pwd_hide),
+                        modifier = Modifier.size(25.dp),
+                        contentDescription = null
+                    )
+                }
+            },
+            onValueChange = { passwordSure = it })
         Button(
             modifier = Modifier
                 .fillMaxWidth()
@@ -113,32 +137,29 @@ fun LoginPage(navHostController: NavHostController, loginViewModel: LoginViewMod
                 disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(0.8f)
             ),
             onClick = {
-                // 执行登录操作
+                if (password.length < 6) {
+                    ToastUtil.showShort(context, "密码长度不能小于6位")
+                    return@Button
+                }
+                if (password != passwordSure) {
+                    ToastUtil.showShort(context, "两次输入的密码不一致")
+                    return@Button
+                }
+
+                // 执行注册操作
                 showLoadingDialog = true
-                loginViewModel.login(
+                registerViewModel.register(
                     username,
                     password,
+                    passwordSure,
                     errorBlock = { showLoadingDialog = false }) {
-                    // 登录成功后的操作
+                    // 注册成功后的操作
                     showLoadingDialog = false
+                    UserManager.saveLastUserName(username)
                     navHostController.popBackStack()
                 }
             }) {
-            Text(text = stringResource(id = R.string.login))
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 20.dp, top = 10.dp),
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            Text(
-                text = stringResource(id = R.string.register),
-                modifier = Modifier.clickable {
-                    navHostController.navigate(Route.REGISTER)
-                },
-                color = MaterialTheme.colorScheme.primary
-            )
+            Text(text = stringResource(id = R.string.register))
         }
     }
 }

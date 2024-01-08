@@ -59,11 +59,11 @@ class MainActivity : ComponentActivity() {
                         it?.message ?: getString(com.btpj.lib_base.R.string.response_error)
                     )
                 }
+            }
 
-                // 全局服务器返回的错误信息监听
-                errorResponse.observe(this@MainActivity) { response ->
-                    response?.let { it1 -> ToastUtil.showShort(this@MainActivity, it1.errorMsg) }
-                }
+            // 全局服务器返回的错误信息监听
+            errorResponse.observe(this@MainActivity) { response ->
+                response?.let { it1 -> ToastUtil.showShort(this@MainActivity, it1.errorMsg) }
             }
         }
     }

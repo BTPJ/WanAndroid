@@ -64,6 +64,18 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         })
     }
 
+    /** 操作文章的收藏与取消收藏 */
+    fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
+        launch({
+            val response =
+                if (article.collect) DataRepository.unCollectArticle(article.id) else
+                    DataRepository.collectArticle(article.id)
+            handleRequest(response) {
+                successCallBack.invoke()
+            }
+        })
+    }
+
     sealed class ArticleType {
         object LatestProject : ArticleType()        // 最新项目
         object Project : ArticleType()    // 项目列表

@@ -18,6 +18,10 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
@@ -37,7 +42,13 @@ import com.btpj.wanandroid.ui.theme.MyColor
  * @author LTP  2023/12/26
  */
 @Composable
-fun ArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
+fun ArticleItem(
+    article: Article,
+    articleViewModel: ArticleViewModel = viewModel(),
+    onArticleClick: (Article) -> Unit
+) {
+    var articleCollected by remember { mutableStateOf(article.collect) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -115,9 +126,14 @@ fun ArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
                     color = LocalContentColor.current.copy(alpha = 0.8f)
                 )
                 Icon(
-                    imageVector = if (article.collect) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    imageVector = if (articleCollected) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = MyColor.Red_FF4A57
+                    tint = MyColor.Red_FF4A57,
+                    modifier = Modifier.clickable {
+                        articleViewModel.handleCollect(article) {
+                            articleCollected = !articleCollected
+                        }
+                    }
                 )
             }
         }

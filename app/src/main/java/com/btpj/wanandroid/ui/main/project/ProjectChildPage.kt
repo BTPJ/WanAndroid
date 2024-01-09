@@ -20,6 +20,10 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +39,7 @@ import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Tag
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
+import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -70,7 +75,13 @@ fun ProjectChildPage(
 }
 
 @Composable
-fun ProjectArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
+fun ProjectArticleItem(
+    article: Article,
+    articleViewModel: ArticleViewModel = viewModel(),
+    onArticleClick: (Article) -> Unit
+) {
+    var articleCollected by remember { mutableStateOf(article.collect) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -145,9 +156,14 @@ fun ProjectArticleItem(article: Article, onArticleClick: (Article) -> Unit) {
                     fontSize = 13.sp
                 )
                 Icon(
-                    imageVector = if (article.collect) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    imageVector = if (articleCollected) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite",
-                    tint = MyColor.Red_FF4A57
+                    tint = MyColor.Red_FF4A57,
+                    modifier = Modifier.clickable {
+                        articleViewModel.handleCollect(article) {
+                            articleCollected = !articleCollected
+                        }
+                    }
                 )
             }
         }

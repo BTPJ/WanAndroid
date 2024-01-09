@@ -8,6 +8,7 @@ import com.btpj.wanandroid.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import java.util.Arrays
 
 /**
  * ViewModel基类

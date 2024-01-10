@@ -31,10 +31,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ArticleRefreshList
 import com.btpj.wanandroid.ui.main.ArticleViewModel
+import com.btpj.wanandroid.ui.main.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -48,7 +47,7 @@ fun ProjectChildPage(
     projectChildViewModel: ProjectChildViewModel = viewModel(key = "$categoryId"),
     onArticleClick: (Article) -> Unit
 ) {
-    ArticleRefreshList(
+    RefreshList(
         viewModel = projectChildViewModel,
         lazyListState = lazyListState,
         onRefresh = {

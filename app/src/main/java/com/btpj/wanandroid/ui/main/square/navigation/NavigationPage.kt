@@ -39,55 +39,26 @@ import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.utils.CommonUtil
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Navigation
+import com.btpj.wanandroid.ui.main.ArticleItem
+import com.btpj.wanandroid.ui.main.RefreshList
+import com.tencent.bugly.proguard.A
 
 /**
  * @author LTP  2023/12/25
  */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NavigationPage(
     lazyListState: LazyListState,
     navigationViewModel: NavigationViewModel = viewModel(),
     onNavigationClick: (Article) -> Unit
 ) {
-    val uiState by navigationViewModel.uiState.observeAsState()
-
-    val pullRefreshState =
-        rememberPullRefreshState(refreshing = uiState?.showLoading ?: false, onRefresh = {
-            navigationViewModel.fetchNavigationList()
-        })
-
-    LaunchedEffect(key1 = true) {
-        if (uiState?.data == null) {
-            navigationViewModel.fetchNavigationList()
-        }
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .pullRefresh(pullRefreshState)
-    ) {
-        LazyColumn(
-            state = lazyListState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            uiState?.data?.let {
-                items(it, key = { item -> item.cid }) { navigation ->
-                    NavigationItem(navigation, onNavigationClick)
-                }
-            }
-        }
-        PullRefreshIndicator(
-            refreshing = uiState?.showLoading ?: false,
-            state = pullRefreshState,
-            modifier = Modifier.align(Alignment.TopCenter)
-        )
-    }
+    RefreshList(
+        contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
+        viewModel = navigationViewModel,
+        lazyListState = lazyListState,
+        onRefresh = { navigationViewModel.fetchNavigationList() },
+        itemContent = { NavigationItem(it, onNavigationClick) }
+    )
 }
 
 @OptIn(ExperimentalLayoutApi::class)

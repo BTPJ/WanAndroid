@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -27,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.base.BaseViewModel
 import kotlinx.coroutines.delay
 
 /**
@@ -35,13 +36,15 @@ import kotlinx.coroutines.delay
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ArticleRefreshList(
-    viewModel: ArticleViewModel,
+fun <T : ProvideItemKey> RefreshList(
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    viewModel: BaseViewModel<List<T>>,
     lazyListState: LazyListState,
     onRefresh: () -> Unit,
-    onLoadMore: () -> Unit,
+    onLoadMore: (() -> Unit)? = null,
     headerContent: @Composable (() -> Unit)? = null,
-    itemContent: @Composable (Article) -> Unit
+    itemContent: @Composable (T) -> Unit
 ) {
     val uiState by viewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
@@ -54,9 +57,8 @@ fun ArticleRefreshList(
         }
     }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight()
             .pullRefresh(pullRefreshState)
     ) {
         LazyColumn(
@@ -64,36 +66,40 @@ fun ArticleRefreshList(
                 .fillMaxWidth()
                 .fillMaxHeight(),
             state = lazyListState,
-            // contentPadding = PaddingValues(vertical = 12.dp, horizontal = 10.dp),
+            contentPadding = contentPadding,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             item {
                 headerContent?.invoke()
             }
             uiState?.data?.let {
-                items(it, key = { item -> item.id }) { article ->
-                    itemContent(article)
+                items(it, key = { item -> item.provideKey() }) { t ->
+                    itemContent(t)
                 }
-                item {
-                    if (uiState?.showLoadingMore == true) {
-                        LoadingView()
-                        LaunchedEffect(Unit) {
-                            delay(500)
-                            onLoadMore()
+                if (onLoadMore != null) {
+                    item {
+                        if (uiState?.showLoadingMore == true) {
+                            LoadingView()
+                            LaunchedEffect(Unit) {
+                                delay(500)
+                                onLoadMore()
+                            }
                         }
                     }
-                }
-                item {
-                    if (uiState?.noMoreData == true) {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.noMoreData),
-                                color = LocalContentColor.current.copy(alpha = 0.6f),
-                                fontSize = 14.sp
-                            )
+                    item {
+                        if (uiState?.noMoreData == true) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 20.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.noMoreData),
+                                    color = LocalContentColor.current.copy(alpha = 0.6f),
+                                    fontSize = 14.sp
+                                )
+                            }
                         }
                     }
                 }
@@ -118,4 +124,8 @@ fun LoadingView() {
     ) {
         CircularProgressIndicator(modifier = Modifier.size(30.dp))
     }
+}
+
+interface ProvideItemKey {
+    fun provideKey(): Int
 }

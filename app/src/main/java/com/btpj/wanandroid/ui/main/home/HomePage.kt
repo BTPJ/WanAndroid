@@ -17,7 +17,7 @@ import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.wanandroid.ui.main.ArticleRefreshList
+import com.btpj.wanandroid.ui.main.RefreshList
 
 /**
  * 首页Tab
@@ -34,7 +34,7 @@ fun HomePage(
     Column {
         TitleBar(title = stringResource(id = R.string.tab_home), showBackBtn = false)
 
-        ArticleRefreshList(
+        RefreshList(
             viewModel = homeViewModel,
             lazyListState = rememberLazyListState(),
             onRefresh = {

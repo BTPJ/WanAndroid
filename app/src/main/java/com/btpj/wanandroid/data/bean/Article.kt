@@ -1,6 +1,7 @@
 package com.btpj.wanandroid.data.bean
 
 import android.os.Parcelable
+import com.btpj.wanandroid.ui.main.ProvideItemKey
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -42,4 +43,10 @@ data class Article(
     var userId: Int,
     var visible: Int,
     var zan: Int
-) : Parcelable
+) : Parcelable, ProvideItemKey {
+    override fun provideKey(): Int {
+        return id
+    }
+}
+
+

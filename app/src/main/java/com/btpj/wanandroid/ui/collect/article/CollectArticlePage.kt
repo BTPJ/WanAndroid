@@ -1,6 +1,5 @@
 package com.btpj.wanandroid.ui.collect.article
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -22,18 +21,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.wanandroid.ui.main.ArticleRefreshList
 import com.btpj.wanandroid.ui.main.ArticleViewModel
+import com.btpj.wanandroid.ui.main.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -45,7 +41,7 @@ fun CollectArticlePage(
     lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {
-    ArticleRefreshList(
+    RefreshList(
         viewModel = collectArticleViewModel,
         lazyListState = lazyListState,
         onRefresh = {

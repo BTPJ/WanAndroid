@@ -91,6 +91,6 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         object Square : ArticleType()    // 广场 - 广场
         object Ask : ArticleType()    // 广场 - 每日一问
         object Wechat : ArticleType()    // 公众号
-        object Collect : ArticleType()    // 公众号
+        object Collect : ArticleType()    // 我收藏的文章
     }
 }

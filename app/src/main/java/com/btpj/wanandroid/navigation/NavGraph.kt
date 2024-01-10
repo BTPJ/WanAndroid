@@ -18,6 +18,7 @@ import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.wechat.WechatPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
 import com.btpj.wanandroid.ui.setting.SettingPage
+import com.btpj.wanandroid.ui.share.list.MyArticlePage
 import com.btpj.wanandroid.ui.web.WebPage
 
 /**
@@ -87,6 +88,14 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         composable(Route.SETTING) {
             SettingPage(navHostController = navHostController)
         }
+        composable(Route.SHARE_LIST) {
+            MyArticlePage(navHostController = navHostController) {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
+        }
         composable(Route.WEB) {
             it.arguments?.getString("url")
                 ?.let { url ->
@@ -109,5 +118,6 @@ object Route {
     const val WEB = "web"
     const val LOGIN = "login"
     const val REGISTER = "register"
+    const val SHARE_LIST = "share_list"
 }
 

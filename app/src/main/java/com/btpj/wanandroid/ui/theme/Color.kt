@@ -17,4 +17,6 @@ object MyColor {
     val Red_FF4A57 = Color(0XFFFF4A57)
 
     val Blue_4cd2f5 =  Color(0XFF4cd2f5)
+
+    val Gray_d8d8d8 =  Color(0XFFd8d8d8)
 }

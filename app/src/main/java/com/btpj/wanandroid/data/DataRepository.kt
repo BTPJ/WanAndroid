@@ -131,8 +131,8 @@ object DataRepository : Api {
         return service.getCollectUrlList()
     }
 
-    override suspend fun getMyShareArticlePageList(pageNo: Int): ApiResponse<Share> {
-        return service.getMyShareArticlePageList(pageNo)
+    override suspend fun getMyShareArticlePageList(pageNo: Int, pageSize: Int): ApiResponse<Share> {
+        return service.getMyShareArticlePageList(pageNo, pageSize)
     }
 
     override suspend fun addArticle(title: String, link: String): ApiResponse<Any?> {

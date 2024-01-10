@@ -130,7 +130,10 @@ interface Api {
 
     /** 获取我分享的文章分页列表 */
     @GET("user/lg/private_articles/{pageNo}/json")
-    suspend fun getMyShareArticlePageList(@Path("pageNo") pageNo: Int): ApiResponse<Share>
+    suspend fun getMyShareArticlePageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<Share>
 
     /** 添加要分享的文章 */
     @POST("lg/user_article/add/json")

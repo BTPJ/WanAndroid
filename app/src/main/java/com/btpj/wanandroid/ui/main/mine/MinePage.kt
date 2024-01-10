@@ -154,7 +154,9 @@ fun MinePage(
                             contentDescription = "",
                             tint = MyColor.Blue_4cd2f5
                         )
-                    }, title = stringResource(id = R.string.my_share_article)) {}
+                    }, title = stringResource(id = R.string.my_share_article)) {
+                        navHostController.navigate(Route.SHARE_LIST)
+                    }
 
                     Divider(
                         Modifier.height(5.dp),

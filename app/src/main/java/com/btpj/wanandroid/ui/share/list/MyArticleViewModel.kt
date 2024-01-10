@@ -1,26 +1,48 @@
 package com.btpj.wanandroid.ui.share.list
 
-import androidx.lifecycle.MutableLiveData
-import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 
-class MyArticleViewModel : BaseViewModel<Article>() {
-    val articlePageList = MutableLiveData<PageResponse<Article>>()
+class MyArticleViewModel : BaseViewModel<List<Article>>() {
+
+    companion object {
+        /** 每页显示的条目大小 */
+        const val PAGE_SIZE = 10
+    }
+
+    private val articleList = ArrayList<Article>()
+    private var currentPage = 0
 
     /**
      * 获取我分享的文章分页列表
      *
-     * @param pageNo 页码
+     * @param isRefresh 是否是下拉刷新
      */
-    fun fetchMyShareArticlePageList(pageNo: Int = 1) {
+    fun fetchMyShareArticlePageList(isRefresh: Boolean = true) {
         launch({
-            val response = DataRepository.getMyShareArticlePageList(pageNo)
-            handleRequest(response){
-                articlePageList.value = response.data.shareArticles
+            emitUiState(isRefresh, articleList)
+            if (isRefresh) {
+                articleList.clear()
+                currentPage = 0
+            }
+            handleRequest(
+                DataRepository.getMyShareArticlePageList(currentPage, PAGE_SIZE)
+            ) {
+                articleList.addAll(it.data.shareArticles.datas)
+                if (articleList.size == it.data.shareArticles.total) {
+                    emitUiState(
+                        data =
+                        articleList, showLoadingMore = true, noMoreData = true
+                    )
+                    return@handleRequest
+                }
+                currentPage++
+
+                emitUiState(data = articleList, showLoadingMore = true)
             }
         })
+
     }
 
     /**
@@ -31,7 +53,10 @@ class MyArticleViewModel : BaseViewModel<Article>() {
     fun deleteMyShareArticle(id: Int, deleteSuccess: () -> Any = {}) {
         launch({
             val response = DataRepository.deleteShareArticle(id)
-            handleRequest(response) { deleteSuccess.invoke()
+            handleRequest(response) {
+                // 删除成功
+                emitUiState(data = uiState.value?.data?.filter { it.id != id })
+                deleteSuccess.invoke()
             }
         })
     }

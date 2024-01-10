@@ -1,19 +1,18 @@
 package com.btpj.wanandroid.ui.collect.url
 
-import androidx.lifecycle.MutableLiveData
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
 
-class CollectUrlViewModel : BaseViewModel<CollectUrl>() {
-
-    /** 收藏网址列表LiveData */
-    val collectUrlList = MutableLiveData<List<CollectUrl>>()
+class CollectUrlViewModel : BaseViewModel<List<CollectUrl>>() {
 
     /** 请求收藏网址列表 */
     fun fetchCollectUrlList() {
+        emitUiState(true)
         launch({
-            handleRequest(DataRepository.getCollectUrlList()) { collectUrlList.value = it.data!! }
+            handleRequest(DataRepository.getCollectUrlList()) {
+                emitUiState(data = it.data)
+            }
         })
     }
 
@@ -21,6 +20,7 @@ class CollectUrlViewModel : BaseViewModel<CollectUrl>() {
     fun unCollectUrl(id: Int, successCallBack: () -> Any? = {}) {
         launch({
             handleRequest(DataRepository.unCollectUrl(id)) {
+                emitUiState(data = uiState.value?.data?.filter { it.id != id })
                 successCallBack.invoke()
             }
         })

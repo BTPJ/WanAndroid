@@ -6,6 +6,7 @@ import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.bean.*
 import com.btpj.wanandroid.data.http.Api
+import com.tencent.bugly.proguard.A
 import kotlinx.coroutines.delay
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -102,7 +103,7 @@ object DataRepository : Api {
     override suspend fun getAuthorArticlePageList(
         authorId: Int,
         pageNo: Int,
-        pageSize: Int,
+        pageSize: Int
     ): ApiResponse<PageResponse<Article>> {
         return service.getAuthorArticlePageList(authorId, pageNo, pageSize)
     }
@@ -119,8 +120,11 @@ object DataRepository : Api {
         return service.getIntegralRecordPageList(pageNo)
     }
 
-    override suspend fun getCollectArticlePageList(pageNo: Int): ApiResponse<PageResponse<CollectArticle>> {
-        return service.getCollectArticlePageList(pageNo)
+    override suspend fun getCollectArticlePageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return service.getCollectArticlePageList(pageNo, pageSize)
     }
 
     override suspend fun getCollectUrlList(): ApiResponse<List<CollectUrl>> {

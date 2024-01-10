@@ -50,6 +50,10 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
                 ArticleType.Wechat -> DataRepository.getAuthorArticlePageList(
                     authorId!!, currentPage, PAGE_SIZE
                 )
+
+                ArticleType.Collect -> DataRepository.getCollectArticlePageList(
+                    currentPage, PAGE_SIZE
+                )
             }
 
             handleRequest(response) {
@@ -65,7 +69,7 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
     }
 
     /** 操作文章的收藏与取消收藏 */
-   fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
+    fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
         launch({
             val response =
                 if (article.collect) DataRepository.unCollectArticle(article.id) else
@@ -87,5 +91,6 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         object Square : ArticleType()    // 广场 - 广场
         object Ask : ArticleType()    // 广场 - 每日一问
         object Wechat : ArticleType()    // 公众号
+        object Collect : ArticleType()    // 公众号
     }
 }

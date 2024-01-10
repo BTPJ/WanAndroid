@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.ui.web
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.webkit.WebView
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.google.accompanist.web.AccompanistWebChromeClient
 import com.google.accompanist.web.AccompanistWebViewClient
@@ -40,13 +42,14 @@ import com.google.accompanist.web.rememberWebViewState
  *
  * @author LTP 2023/12/14
  */
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun WebPage(
     url: String,
     navHostController: NavHostController,
     onCollectClick: (() -> Unit)? = null
 ) {
-    var pageTitle by remember { mutableStateOf(url) }
+    var pageTitle by remember { mutableStateOf("加载中...") }
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
     var progress by remember { mutableFloatStateOf(0.1f) }
@@ -94,6 +97,7 @@ fun WebPage(
         }) { navHostController.popBackStack() }
 
         if (progress != 1.0f) {
+            LogUtil.d("LTP", url)
             LinearProgressIndicator(
                 progress = progress,
                 modifier = Modifier.fillMaxWidth(),
@@ -121,6 +125,5 @@ fun WebPage(
                 }
             }
         )
-
     }
 }

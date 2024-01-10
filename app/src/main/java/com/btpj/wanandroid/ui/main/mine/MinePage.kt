@@ -144,7 +144,9 @@ fun MinePage(
                             contentDescription = "Favorite",
                             tint = MyColor.Red_FF4A57
                         )
-                    }, title = stringResource(id = R.string.my_collect)) {}
+                    }, title = stringResource(id = R.string.my_collect)) {
+                        navHostController.navigate(Route.MY_COLLECT)
+                    }
 
                     ListItemWithIcon(icon = {
                         Icon(

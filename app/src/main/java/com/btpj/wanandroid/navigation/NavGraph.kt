@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.btpj.wanandroid.ext.navigate
+import com.btpj.wanandroid.ui.collect.CollectPage
 import com.btpj.wanandroid.ui.login.LoginPage
 import com.btpj.wanandroid.ui.login.register.RegisterPage
 import com.btpj.wanandroid.ui.main.home.HomePage
@@ -70,12 +71,29 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         composable(Route.REGISTER) {
             RegisterPage(navHostController = navHostController)
         }
+        composable(Route.MY_COLLECT) {
+            CollectPage(navHostController = navHostController, onCollectUrlClick = {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }) {
+                navHostController.navigate(
+                    Route.WEB,
+                    bundleOf("url" to it.link)
+                )
+            }
+        }
         composable(Route.SETTING) {
             SettingPage(navHostController = navHostController)
         }
         composable(Route.WEB) {
             it.arguments?.getString("url")
-                ?.let { url -> WebPage(url, navHostController = navHostController) {} }
+                ?.let { url ->
+                    WebPage(url, navHostController = navHostController) {
+
+                    }
+                }
         }
     }
 }
@@ -86,6 +104,7 @@ object Route {
     const val SQUARE = "square"
     const val WECHAT = "wechat"
     const val MINE = "mine"
+    const val MY_COLLECT = "myCollect"
     const val SETTING = "setting"
     const val WEB = "web"
     const val LOGIN = "login"

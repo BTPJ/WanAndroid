@@ -119,7 +119,10 @@ interface Api {
 
     /** 获取收藏文章分页列表 */
     @GET("lg/collect/list/{pageNo}/json")
-    suspend fun getCollectArticlePageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<CollectArticle>>
+    suspend fun getCollectArticlePageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
 
     /** 获取收藏网址列表 */
     @GET("lg/collect/usertools/json")

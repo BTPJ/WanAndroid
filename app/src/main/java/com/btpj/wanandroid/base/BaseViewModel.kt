@@ -1,5 +1,6 @@
 package com.btpj.wanandroid.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +19,7 @@ abstract class BaseViewModel<T> : ViewModel() {
 
     /** ui状态 */
     private val _uiState = MutableLiveData<UiState<T>>()
-    val uiState: MutableLiveData<UiState<T>> = _uiState
+    val uiState: LiveData<UiState<T>> = _uiState
 
     protected fun emitUiState(
         showLoading: Boolean = false,

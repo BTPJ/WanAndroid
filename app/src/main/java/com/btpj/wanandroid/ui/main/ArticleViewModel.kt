@@ -65,12 +65,17 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
     }
 
     /** 操作文章的收藏与取消收藏 */
-    fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
+   fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
         launch({
             val response =
                 if (article.collect) DataRepository.unCollectArticle(article.id) else
                     DataRepository.collectArticle(article.id)
             handleRequest(response) {
+                // 刷新article收藏状态
+                uiState.value?.data?.forEach {
+                    if (article.id == it.id) it.collect = !it.collect
+                }
+                emitUiState(false, uiState.value?.data)
                 successCallBack.invoke()
             }
         })

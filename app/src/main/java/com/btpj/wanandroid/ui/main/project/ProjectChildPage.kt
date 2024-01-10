@@ -20,24 +20,19 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.btpj.lib_base.ext.toHtml
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Tag
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
 import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.wanandroid.ui.theme.MyColor
@@ -70,18 +65,16 @@ fun ProjectChildPage(
                 projectChildViewModel.fetchProjectPageList(categoryId, false)
             }
         }) {
-        ProjectArticleItem(article = it, onArticleClick = onArticleClick)
+        ProjectArticleItem(article = it, projectChildViewModel, onArticleClick = onArticleClick)
     }
 }
 
 @Composable
 fun ProjectArticleItem(
     article: Article,
-    articleViewModel: ArticleViewModel = viewModel(),
+    articleViewModel: ArticleViewModel,
     onArticleClick: (Article) -> Unit
 ) {
-    var articleCollected by remember { mutableStateOf(article.collect) }
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -156,13 +149,11 @@ fun ProjectArticleItem(
                     fontSize = 13.sp
                 )
                 Icon(
-                    imageVector = if (articleCollected) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    imageVector = if (article.collect) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite",
                     tint = MyColor.Red_FF4A57,
                     modifier = Modifier.clickable {
-                        articleViewModel.handleCollect(article) {
-                            articleCollected = !articleCollected
-                        }
+                        articleViewModel.handleCollect(article)
                     }
                 )
             }
@@ -170,44 +161,44 @@ fun ProjectArticleItem(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ProjectPagePreview() {
-    ProjectArticleItem(
-        Article(
-            apkLink = "",
-            audit = 1,
-            author = "",
-            canEdit = false,
-            chapterId = 502,
-            chapterName = "自助",
-            collect = true,
-            courseId = 13,
-            desc = "",
-            descMd = "",
-            envelopePic = "https://www.wanandroid.com/resources/image/pc/default_project_img.jpg",
-            fresh = true,
-            host = "",
-            id = 27688,
-            link = "https://juejin.cn/post/7309443151688892468",
-            niceDate = "2023-12-10 21:38",
-            niceShareDate = "2023-12-10 21:36",
-            origin = "",
-            prefix = "",
-            projectLink = "",
-            publishTime = 1702215488000,
-            realSuperChapterId = 493,
-            selfVisible = 0,
-            shareDate = 1702215402000,
-            shareUser = "鸿洋",
-            superChapterId = 494,
-            superChapterName = "广场Tab",
-            tags = listOf(Tag("本站发布", "")),
-            title = "ANR的类型分类以及关于输入事件/按键响应分发超时原因原理按键响应分发超时原因原理分析按键响应分发超时原因原理分析按键响应分发超时原因原理分析分析",
-            type = 1,
-            userId = 2,
-            visible = 1,
-            zan = 0
-        )
-    ) {}
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ProjectPagePreview() {
+//    ProjectArticleItem(
+//        Article(
+//            apkLink = "",
+//            audit = 1,
+//            author = "",
+//            canEdit = false,
+//            chapterId = 502,
+//            chapterName = "自助",
+//            collect = true,
+//            courseId = 13,
+//            desc = "",
+//            descMd = "",
+//            envelopePic = "https://www.wanandroid.com/resources/image/pc/default_project_img.jpg",
+//            fresh = true,
+//            host = "",
+//            id = 27688,
+//            link = "https://juejin.cn/post/7309443151688892468",
+//            niceDate = "2023-12-10 21:38",
+//            niceShareDate = "2023-12-10 21:36",
+//            origin = "",
+//            prefix = "",
+//            projectLink = "",
+//            publishTime = 1702215488000,
+//            realSuperChapterId = 493,
+//            selfVisible = 0,
+//            shareDate = 1702215402000,
+//            shareUser = "鸿洋",
+//            superChapterId = 494,
+//            superChapterName = "广场Tab",
+//            tags = listOf(Tag("本站发布", "")),
+//            title = "ANR的类型分类以及关于输入事件/按键响应分发超时原因原理按键响应分发超时原因原理分析按键响应分发超时原因原理分析按键响应分发超时原因原理分析分析",
+//            type = 1,
+//            userId = 2,
+//            visible = 1,
+//            zan = 0
+//        )
+//    ) {}
+//}

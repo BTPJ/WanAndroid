@@ -25,6 +25,6 @@ fun SquareChildPage(
         onLoadMore = {
             squareChildViewModel.fetchSquarePageList(false)
         }) {
-        ArticleItem(article = it, onArticleClick = onArticleClick)
+        ArticleItem(article = it, squareChildViewModel, onArticleClick = onArticleClick)
     }
 }

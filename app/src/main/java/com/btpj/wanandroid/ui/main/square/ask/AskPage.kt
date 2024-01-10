@@ -25,6 +25,6 @@ fun AskPage(
         onLoadMore = {
             askViewModel.fetchAskPageList(false)
         }) {
-        ArticleItem(article = it, onArticleClick = onArticleClick)
+        ArticleItem(article = it, askViewModel, onArticleClick = onArticleClick)
     }
 }

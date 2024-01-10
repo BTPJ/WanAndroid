@@ -54,6 +54,7 @@ fun HomePage(
             }) {
             ArticleItem(
                 article = it,
+                homeViewModel,
                 onArticleClick = onArticleClick
             )
         }

@@ -27,6 +27,6 @@ fun WechatChildPage(
         onLoadMore = {
             wechatChildViewModel.fetchAuthorPageList(authorId, false)
         }) {
-        ArticleItem(article = it, onArticleClick = onArticleClick)
+        ArticleItem(article = it, wechatChildViewModel, onArticleClick = onArticleClick)
     }
 }

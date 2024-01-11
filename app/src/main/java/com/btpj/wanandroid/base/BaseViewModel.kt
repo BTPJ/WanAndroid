@@ -17,6 +17,8 @@ import java.util.Arrays
  */
 abstract class BaseViewModel<T> : ViewModel() {
 
+
+
     /** ui状态 */
     private val _uiState = MutableLiveData<UiState<T>>()
     val uiState: LiveData<UiState<T>> = _uiState

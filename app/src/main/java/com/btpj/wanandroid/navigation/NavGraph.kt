@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.btpj.wanandroid.ext.navigate
 import com.btpj.wanandroid.ui.collect.CollectPage
+import com.btpj.wanandroid.ui.integral.rank.IntegralRankPage
+import com.btpj.wanandroid.ui.integral.record.IntegralRecordPage
 import com.btpj.wanandroid.ui.login.LoginPage
 import com.btpj.wanandroid.ui.login.register.RegisterPage
 import com.btpj.wanandroid.ui.main.home.HomePage
@@ -88,6 +90,12 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         composable(Route.SETTING) {
             SettingPage(navHostController = navHostController)
         }
+        composable(Route.INTEGRAL_RANK) {
+            IntegralRankPage(navHostController = navHostController)
+        }
+        composable(Route.INTEGRAL_RANK_RECORD) {
+            IntegralRecordPage(navHostController = navHostController)
+        }
         composable(Route.SHARE_LIST) {
             MyArticlePage(navHostController = navHostController) {
                 navHostController.navigate(
@@ -119,5 +127,7 @@ object Route {
     const val LOGIN = "login"
     const val REGISTER = "register"
     const val SHARE_LIST = "share_list"
+    const val INTEGRAL_RANK = "integral_rank"
+    const val INTEGRAL_RANK_RECORD = "integral_rank_record"
 }
 

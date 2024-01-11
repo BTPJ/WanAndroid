@@ -55,7 +55,7 @@ fun ProjectPage(
 
     Column {
         Box {
-            TitleBar(title = "", showBackBtn = false)
+            TitleBar()
             if (!projectTitleList.isNullOrEmpty()) {
                 ScrollableTabRow(
                     containerColor = MaterialTheme.colorScheme.primary,

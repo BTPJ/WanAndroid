@@ -68,7 +68,7 @@ class HomeViewModel : ArticleViewModel() {
                     if (articleList.size == it.data.total) {
                         emitUiState(
                             data =
-                            articleList, showLoadingMore = true, noMoreData = true
+                            articleList, showLoadingMore = false, noMoreData = true
                         )
                         return@handleRequest
                     }

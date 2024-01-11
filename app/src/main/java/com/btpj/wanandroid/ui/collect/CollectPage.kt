@@ -54,9 +54,11 @@ fun CollectPage(
 
     Column {
         Box {
-            TitleBar(title = "", showBackBtn = true) { navHostController.popBackStack() }
+            TitleBar { navHostController.popBackStack() }
             TabRow(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 100.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 100.dp),
                 containerColor = MaterialTheme.colorScheme.primary,
                 selectedTabIndex = pagerState.currentPage,
                 divider = {},

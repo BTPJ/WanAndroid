@@ -3,11 +3,20 @@ package com.btpj.wanandroid.data
 import com.btpj.lib_base.data.bean.ApiResponse
 import com.btpj.lib_base.data.bean.PageResponse
 import com.btpj.lib_base.http.RetrofitManager
-import com.btpj.lib_base.utils.LogUtil
-import com.btpj.wanandroid.data.bean.*
+import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Banner
+import com.btpj.wanandroid.data.bean.Classify
+import com.btpj.wanandroid.data.bean.CoinInfo
+import com.btpj.wanandroid.data.bean.CollectUrl
+import com.btpj.wanandroid.data.bean.HotSearch
+import com.btpj.wanandroid.data.bean.IntegralRecord
+import com.btpj.wanandroid.data.bean.Navigation
+import com.btpj.wanandroid.data.bean.OtherAuthor
+import com.btpj.wanandroid.data.bean.ProjectTitle
+import com.btpj.wanandroid.data.bean.Share
+import com.btpj.wanandroid.data.bean.Structure
+import com.btpj.wanandroid.data.bean.User
 import com.btpj.wanandroid.data.http.Api
-import com.tencent.bugly.proguard.A
-import kotlinx.coroutines.delay
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -112,12 +121,18 @@ object DataRepository : Api {
         return service.getUserIntegral()
     }
 
-    override suspend fun getIntegralRankPageList(pageNo: Int): ApiResponse<PageResponse<CoinInfo>> {
-        return service.getIntegralRankPageList(pageNo)
+    override suspend fun getIntegralRankPageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<CoinInfo>> {
+        return service.getIntegralRankPageList(pageNo, pageSize)
     }
 
-    override suspend fun getIntegralRecordPageList(pageNo: Int): ApiResponse<PageResponse<IntegralRecord>> {
-        return service.getIntegralRecordPageList(pageNo)
+    override suspend fun getIntegralRecordPageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PageResponse<IntegralRecord>> {
+        return service.getIntegralRecordPageList(pageNo, pageSize)
     }
 
     override suspend fun getCollectArticlePageList(

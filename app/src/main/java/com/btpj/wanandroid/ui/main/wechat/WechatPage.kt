@@ -55,7 +55,7 @@ fun WechatPage(
 
     Column {
         Box {
-            TitleBar(title = "", showBackBtn = false)
+            TitleBar()
             if (!authorTitleList.isNullOrEmpty()) {
                 ScrollableTabRow(
                     containerColor = MaterialTheme.colorScheme.primary,

@@ -54,7 +54,7 @@ fun SquarePage(
 
     Column {
         Box {
-            TitleBar(title = "", showBackBtn = false)
+            TitleBar()
             ScrollableTabRow(containerColor = MaterialTheme.colorScheme.primary,
                 selectedTabIndex = pagerState.currentPage,
                 edgePadding = 10.dp,

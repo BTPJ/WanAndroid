@@ -31,9 +31,8 @@ import com.btpj.lib_base.utils.LogUtil
  */
 @Composable
 fun TitleBar(
-    title: String,
+    title: String = "",
     menu: (@Composable RowScope.() -> Unit)? = null,
-    showBackBtn: Boolean = true,
     onBackClick: (() -> Unit)? = null,
 ) {
     Row(
@@ -43,13 +42,13 @@ fun TitleBar(
             .background(color = MaterialTheme.colorScheme.primary),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (showBackBtn) {
+        if (onBackClick != null) {
             Icon(
                 Icons.Default.ArrowBack,
                 modifier = Modifier
                     .width(50.dp)
                     .fillMaxHeight()
-                    .clickable { onBackClick?.invoke() }
+                    .clickable { onBackClick.invoke() }
                     .padding(vertical = 15.dp),
                 contentDescription = "back",
                 tint = MaterialTheme.colorScheme.onPrimary
@@ -82,7 +81,7 @@ fun TitleBar(
 fun TitleBarPreview() {
     Column {
         TitleBar(
-            title = "标题", showBackBtn = true,
+            title = "标题",
 //            menu = {
 //                Text(text = "菜单")
 //                Text(text = "菜单2")

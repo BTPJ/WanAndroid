@@ -49,7 +49,7 @@ fun MyArticlePage(
     onArticleClick: (Article) -> Unit
 ) {
     Column {
-        TitleBar(title = "我分享的文章", showBackBtn = true) { navHostController.popBackStack() }
+        TitleBar(title = "我分享的文章") { navHostController.popBackStack() }
         RefreshList(
             viewModel = myArticleViewModel,
             onRefresh = { myArticleViewModel.fetchMyShareArticlePageList() },

@@ -32,7 +32,7 @@ fun HomePage(
     val banners by homeViewModel.bannerList.collectAsState()
 
     Column {
-        TitleBar(title = stringResource(id = R.string.tab_home), showBackBtn = false)
+        TitleBar(title = stringResource(id = R.string.tab_home))
 
         RefreshList(
             viewModel = homeViewModel,

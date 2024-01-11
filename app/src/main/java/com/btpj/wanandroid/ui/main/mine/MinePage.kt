@@ -136,7 +136,7 @@ fun MinePage(
                                 color = MaterialTheme.colorScheme.primary,
                                 fontSize = 15.sp
                             )
-                        }) {}
+                        }) { navHostController.navigate(Route.INTEGRAL_RANK) }
 
                     ListItemWithIcon(icon = {
                         Icon(

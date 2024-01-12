@@ -19,6 +19,8 @@ import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.wechat.WechatPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
+import com.btpj.wanandroid.ui.search.SearchPage
+import com.btpj.wanandroid.ui.search.result.SearchResultPage
 import com.btpj.wanandroid.ui.setting.SettingPage
 import com.btpj.wanandroid.ui.share.add.AddArticlePage
 import com.btpj.wanandroid.ui.share.list.MyArticlePage
@@ -35,7 +37,9 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(Route.HOME) {
-            HomePage {
+            HomePage(onSearch = {
+                navHostController.navigate(Route.Search)
+            }) {
                 navHostController.navigate(
                     Route.WEB,
                     bundleOf("url" to it.link)
@@ -116,6 +120,25 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                     }
                 }
         }
+        composable(Route.Search) {
+            SearchPage(navHostController = navHostController) {
+                navHostController.navigate(
+                    Route.SEARCH_RECORD,
+                    bundleOf("searchKey" to it)
+                )
+            }
+        }
+        composable(Route.SEARCH_RECORD) {
+            it.arguments?.getString("searchKey")
+                ?.let { searchKey ->
+                    SearchResultPage(
+                        navHostController = navHostController,
+                        searchKey
+                    ) { article ->
+                        navHostController.navigate(Route.WEB, bundleOf("url" to article.link))
+                    }
+                }
+        }
     }
 }
 
@@ -134,5 +157,7 @@ object Route {
     const val ADD_ARTICLE = "add_article"
     const val INTEGRAL_RANK = "integral_rank"
     const val INTEGRAL_RANK_RECORD = "integral_rank_record"
+    const val Search = "search"
+    const val SEARCH_RECORD = "search_record"
 }
 

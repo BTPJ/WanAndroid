@@ -179,6 +179,7 @@ interface Api {
     @POST("article/query/{pageNo}/json")
     suspend fun getSearchDataByKey(
         @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int,
         @Query("k") searchKey: String
     ): ApiResponse<PageResponse<Article>>
 }

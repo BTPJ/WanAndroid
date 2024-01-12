@@ -1,25 +1,27 @@
 package com.btpj.wanandroid.ui.search
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
 import com.btpj.wanandroid.data.local.CacheManager
+import com.btpj.wanandroid.ui.main.ProvideItemKey
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author LTP  2022/4/19
  */
-class SearchViewModel : BaseViewModel<HotSearch>() {
-
-    /** 搜索关键词 */
-    val searchKeyFlow = MutableStateFlow("")
+class SearchViewModel : BaseViewModel<Unit>() {
 
     /** 搜索历史数据 */
-    val searchHistoryData = MutableLiveData<ArrayDeque<String>>()
+    private val _searchHistoryData = MutableLiveData<ArrayDeque<String>>()
+    val searchHistoryData: LiveData<ArrayDeque<String>> = _searchHistoryData
 
     /** 热门搜索 */
-    val hotSearchList = MutableLiveData<List<HotSearch>?>()
+    private val _hotSearchList = MutableLiveData<List<HotSearch>?>()
+    val hotSearchList: LiveData<List<HotSearch>?> = _hotSearchList
 
     fun start() {
         fetchHotSearchList()
@@ -29,7 +31,7 @@ class SearchViewModel : BaseViewModel<HotSearch>() {
     /** 获取历史搜索记录 */
     private fun fetchSearchHistoryData() {
         launch({
-            searchHistoryData.value = CacheManager.getSearchHistoryData()
+            _searchHistoryData.value = CacheManager.getSearchHistoryData()
         })
     }
 
@@ -37,13 +39,40 @@ class SearchViewModel : BaseViewModel<HotSearch>() {
     private fun fetchHotSearchList() {
         launch({
             handleRequest(DataRepository.getHotSearchList()) {
-                hotSearchList.value = it.data
+                _hotSearchList.value = it.data
             }
         })
     }
 
     /** 清空历史 */
     fun clearHistory() {
-        searchHistoryData.value = ArrayDeque()
+        _searchHistoryData.value = ArrayDeque()
+    }
+
+    /** 处理搜索框点击 */
+    fun handleSearchClick(searchText: String) {
+        _searchHistoryData.value?.apply {
+            if (contains(searchText)) {
+                //当搜索历史中包含该数据时 删除
+                remove(searchText)
+            } else if (size >= 10) {
+                //如果集合的size 有10个以上了，删除最后一个
+                removeLast()
+            }
+            //添加新数据到第一条
+            addFirst(searchText)
+            _searchHistoryData.value = this
+        }
+    }
+
+    /** 处理搜索历史删除 */
+    fun handleDeleteHistoryItem(item: String) {
+        _searchHistoryData.value?.remove(item)
+    }
+
+    /** 处理搜索历史点击（主要是将点击的移到第一个） */
+    fun handleHistoryItemClick(item: String) {
+        _searchHistoryData.value?.remove(item)
+        _searchHistoryData.value?.addFirst(item)
     }
 }

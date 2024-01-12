@@ -1,10 +1,16 @@
 package com.btpj.wanandroid.ui.main.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,12 +33,22 @@ import com.btpj.wanandroid.ui.main.RefreshList
 @Composable
 fun HomePage(
     homeViewModel: HomeViewModel = viewModel(),
+    onSearch: () -> Unit,
     onArticleClick: (Article) -> Unit
 ) {
     val banners by homeViewModel.bannerList.collectAsState()
 
     Column {
-        TitleBar(title = stringResource(id = R.string.tab_home))
+        TitleBar(title = stringResource(id = R.string.tab_home), menu = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier
+                    .size(30.dp)
+                    .clickable { onSearch() }
+            )
+        })
 
         RefreshList(
             viewModel = homeViewModel,

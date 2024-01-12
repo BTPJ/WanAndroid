@@ -42,7 +42,7 @@ fun <T : ProvideItemKey> RefreshList(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     viewModel: BaseViewModel<List<T>>,
     lazyListState: LazyListState = rememberLazyListState(),
-    onRefresh: () -> Unit,
+    onRefresh: (() -> Unit)?,
     onLoadMore: (() -> Unit)? = null,
     headerContent: @Composable (() -> Unit)? = null,
     itemContent: @Composable (T) -> Unit
@@ -50,11 +50,11 @@ fun <T : ProvideItemKey> RefreshList(
     val uiState by viewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
         refreshing = uiState?.showLoading ?: false,
-        onRefresh = onRefresh
+        onRefresh = { onRefresh?.invoke() }
     )
     LaunchedEffect(true) {
         if (uiState?.data == null) {
-            onRefresh()
+            onRefresh?.invoke()
         }
     }
     Box(
@@ -107,11 +107,13 @@ fun <T : ProvideItemKey> RefreshList(
             }
         }
 
-        PullRefreshIndicator(
-            refreshing = uiState?.showLoading ?: false,
-            state = pullRefreshState,
-            modifier = Modifier.align(Alignment.TopCenter)
-        )
+        if (onRefresh != null) {
+            PullRefreshIndicator(
+                refreshing = uiState?.showLoading ?: false,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
+        }
     }
 }
 

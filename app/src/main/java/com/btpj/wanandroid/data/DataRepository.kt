@@ -179,8 +179,9 @@ object DataRepository : Api {
 
     override suspend fun getSearchDataByKey(
         pageNo: Int,
+        pageSize: Int,
         searchKey: String
     ): ApiResponse<PageResponse<Article>> {
-        return service.getSearchDataByKey(pageNo, searchKey)
+        return service.getSearchDataByKey(pageNo, pageSize, searchKey)
     }
 }

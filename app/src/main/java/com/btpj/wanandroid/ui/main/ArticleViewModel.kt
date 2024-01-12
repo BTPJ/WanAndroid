@@ -21,7 +21,8 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         articleType: ArticleType,
         isRefresh: Boolean = true,
         categoryId: Int? = null,
-        authorId: Int? = null
+        authorId: Int? = null,
+        searchKey: String? = null
     ) {
         emitUiState(isRefresh, articleList)
         launch({
@@ -53,6 +54,10 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
 
                 ArticleType.Collect -> DataRepository.getCollectArticlePageList(
                     currentPage, PAGE_SIZE
+                )
+
+                ArticleType.Search -> DataRepository.getSearchDataByKey(
+                    currentPage, PAGE_SIZE, searchKey ?: ""
                 )
             }
 
@@ -92,5 +97,6 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         object Ask : ArticleType()    // 广场 - 每日一问
         object Wechat : ArticleType()    // 公众号
         object Collect : ArticleType()    // 我收藏的文章
+        object Search : ArticleType()    // 搜索到的文章
     }
 }

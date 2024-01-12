@@ -46,7 +46,7 @@ fun ProjectPage(
     val lazyListStates =
         if (projectTitleList.isNullOrEmpty()) emptyList() else (1..projectTitleList!!.size).map { rememberLazyListState() }
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = Unit) {
         projectViewModel.fetchProjectTitleList()
     }
 
@@ -65,7 +65,7 @@ fun ProjectPage(
                     indicator = { tabPositions ->
                         TabRowDefaults.Indicator(
                             Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 ) {
@@ -75,13 +75,15 @@ fun ProjectPage(
                                 .height(52.dp)
                                 .padding(horizontal = 10.dp),
                             selected = pagerState.currentPage == index,
-                            unselectedContentColor = Color.Red,
                             onClick = {
                                 coroutineScope.launch {
                                     pagerState.animateScrollToPage(page = index)
                                 }
                             }) {
-                            Text(text = title.name.toHtml().toString(), color = Color.White)
+                            Text(
+                                text = title.name.toHtml().toString(),
+                                color = MaterialTheme.colorScheme.onPrimary
+                            )
                         }
                     }
                 }

@@ -62,7 +62,7 @@ fun SquarePage(
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(
                         Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }) {
                 titleList.forEachIndexed { index, title ->
@@ -70,13 +70,12 @@ fun SquarePage(
                         .height(52.dp)
                         .padding(horizontal = 10.dp),
                         selected = pagerState.currentPage == index,
-                        unselectedContentColor = Color.Red,
                         onClick = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(page = index)
                             }
                         }) {
-                        Text(text = title, color = Color.White)
+                        Text(text = title, color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }

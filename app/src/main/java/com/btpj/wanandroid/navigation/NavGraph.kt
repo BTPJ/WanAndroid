@@ -20,6 +20,7 @@ import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.wechat.WechatPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
 import com.btpj.wanandroid.ui.setting.SettingPage
+import com.btpj.wanandroid.ui.share.add.AddArticlePage
 import com.btpj.wanandroid.ui.share.list.MyArticlePage
 import com.btpj.wanandroid.ui.web.WebPage
 
@@ -50,7 +51,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             }
         }
         composable(Route.SQUARE) {
-            SquarePage {
+            SquarePage(navHostController) {
                 navHostController.navigate(
                     Route.WEB,
                     bundleOf("url" to it.link)
@@ -104,6 +105,9 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                 )
             }
         }
+        composable(Route.ADD_ARTICLE) {
+            AddArticlePage(navHostController = navHostController)
+        }
         composable(Route.WEB) {
             it.arguments?.getString("url")
                 ?.let { url ->
@@ -127,6 +131,7 @@ object Route {
     const val LOGIN = "login"
     const val REGISTER = "register"
     const val SHARE_LIST = "share_list"
+    const val ADD_ARTICLE = "add_article"
     const val INTEGRAL_RANK = "integral_rank"
     const val INTEGRAL_RANK_RECORD = "integral_rank_record"
 }

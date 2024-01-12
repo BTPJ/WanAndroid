@@ -30,7 +30,8 @@ class AppViewModel : BaseViewModel<Unit>() {
     val errorResponse: LiveData<ApiResponse<*>?> = _errorResponse
 
     /** 分享添加文章 */
-    val shareArticleEvent = MutableLiveData<Boolean>()
+    private val _shareArticleEvent = MutableLiveData<Boolean>()
+    val shareArticleEvent: LiveData<Boolean> = _shareArticleEvent
 
     /** 文章收藏 */
     val collectEvent = MutableLiveData<CollectData>()
@@ -38,6 +39,11 @@ class AppViewModel : BaseViewModel<Unit>() {
     /** emit全局用户 */
     fun emitUser(user: User?) {
         _user.value = user
+    }
+
+    /** 发送分享文章成功的消息 */
+    fun emitShareArticleSuccess() {
+        _shareArticleEvent.value = true
     }
 
     /** emit请求出错 */

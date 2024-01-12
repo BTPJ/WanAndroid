@@ -1,6 +1,7 @@
 package com.btpj.wanandroid.ui.main.square
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -10,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
@@ -21,11 +25,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Classify
+import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.main.square.ask.AskPage
 import com.btpj.wanandroid.ui.main.square.navigation.NavigationPage
 import com.btpj.wanandroid.ui.main.square.square.SquareChildPage
@@ -39,6 +44,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SquarePage(
+    navHostController: NavHostController,
     onStructureClick: ((Classify) -> Unit)? = null,
     onNavigationClick: ((Article) -> Unit)? = null,
     onArticleClick: (Article) -> Unit
@@ -54,8 +60,18 @@ fun SquarePage(
 
     Column {
         Box {
-            TitleBar()
-            ScrollableTabRow(containerColor = MaterialTheme.colorScheme.primary,
+            TitleBar(menu = {
+                if (pagerState.currentPage == 0) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.clickable { navHostController.navigate(Route.ADD_ARTICLE) })
+                }
+            })
+            ScrollableTabRow(
+                modifier = Modifier.padding(horizontal = 40.dp),
+                containerColor = MaterialTheme.colorScheme.primary,
                 selectedTabIndex = pagerState.currentPage,
                 edgePadding = 10.dp,
                 divider = {},
@@ -66,9 +82,7 @@ fun SquarePage(
                     )
                 }) {
                 titleList.forEachIndexed { index, title ->
-                    Tab(modifier = Modifier
-                        .height(52.dp)
-                        .padding(horizontal = 10.dp),
+                    Tab(modifier = Modifier.height(52.dp),
                         selected = pagerState.currentPage == index,
                         onClick = {
                             coroutineScope.launch {

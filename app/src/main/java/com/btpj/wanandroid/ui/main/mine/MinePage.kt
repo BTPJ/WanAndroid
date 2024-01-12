@@ -41,7 +41,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager

@@ -2,6 +2,7 @@ package com.btpj.wanandroid.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
@@ -23,20 +24,15 @@ class SearchViewModel : BaseViewModel<Unit>() {
     private val _hotSearchList = MutableLiveData<List<HotSearch>?>()
     val hotSearchList: LiveData<List<HotSearch>?> = _hotSearchList
 
-    fun start() {
-        fetchHotSearchList()
-        fetchSearchHistoryData()
-    }
-
     /** 获取历史搜索记录 */
-    private fun fetchSearchHistoryData() {
+    fun fetchSearchHistoryData() {
         launch({
             _searchHistoryData.value = CacheManager.getSearchHistoryData()
         })
     }
 
     /** 获取热门搜索 */
-    private fun fetchHotSearchList() {
+    fun fetchHotSearchList() {
         launch({
             handleRequest(DataRepository.getHotSearchList()) {
                 _hotSearchList.value = it.data
@@ -68,6 +64,7 @@ class SearchViewModel : BaseViewModel<Unit>() {
     /** 处理搜索历史删除 */
     fun handleDeleteHistoryItem(item: String) {
         _searchHistoryData.value?.remove(item)
+        _searchHistoryData.value = _searchHistoryData.value
     }
 
     /** 处理搜索历史点击（主要是将点击的移到第一个） */

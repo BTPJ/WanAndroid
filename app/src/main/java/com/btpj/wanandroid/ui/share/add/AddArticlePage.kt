@@ -1,14 +1,17 @@
 package com.btpj.wanandroid.ui.share.add
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -24,19 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
 import com.btpj.lib_base.ui.widgets.LoadingDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
-import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.local.UserManager
 
 /**
  * @author LTP  2024/1/4
@@ -59,7 +56,15 @@ fun AddArticlePage(
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TitleBar(title = stringResource(id = R.string.share_article)) { navHostController.popBackStack() }
+        TitleBar(title = stringResource(id = R.string.share_article), menu = {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_integral_rule),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.clickable {
+                }
+            )
+        }) { navHostController.popBackStack() }
         TextField(
             modifier = Modifier
                 .fillMaxWidth()

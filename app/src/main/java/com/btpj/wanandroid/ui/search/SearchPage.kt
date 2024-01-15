@@ -10,7 +10,8 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -26,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +41,7 @@ import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.CommonUtil
 import com.btpj.wanandroid.R
-import com.btpj.wanandroid.data.bean.HotSearch
+import com.btpj.wanandroid.data.local.CacheManager
 
 /**
  * @author LTP  2023/12/25
@@ -50,41 +52,10 @@ fun SearchPage(
     searchViewModel: SearchViewModel = viewModel(),
     toSearchResultPage: (String) -> Unit
 ) {
-    val hotSearchList by searchViewModel.hotSearchList.observeAsState()
-    val searchHistoryList by searchViewModel.searchHistoryData.observeAsState()
-
-    LaunchedEffect(key1 = Unit, block = {
-        searchViewModel.start()
-    })
-
     Column {
         TitleContent(navHostController, searchViewModel) { toSearchResultPage(it) }
-        HotSearchContent(hotSearchList) { toSearchResultPage(it) }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 10.dp)
-        ) {
-            Text(
-                text = "历史搜索",
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp)
-            )
-            Text(
-                text = "清空",
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.clickable { searchViewModel.clearHistory() })
-        }
-        searchHistoryList?.forEach {
-            SearchHistoryItem(
-                it,
-                onDeleteClick = { hisItem -> searchViewModel.handleDeleteHistoryItem(hisItem) }) { hisItem ->
-                searchViewModel.handleHistoryItemClick(hisItem)
-                toSearchResultPage(it)
-            }
-        }
+        HotSearchContent(searchViewModel) { toSearchResultPage(it) }
+        SearchHistoryContent(searchViewModel) { toSearchResultPage(it) }
     }
 }
 
@@ -95,7 +66,7 @@ fun TitleContent(
     searchViewModel: SearchViewModel,
     onSearchClick: (String) -> Unit
 ) {
-    var searchText by remember { mutableStateOf("") }
+    var searchText by rememberSaveable { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(key1 = Unit, block = {
@@ -103,15 +74,18 @@ fun TitleContent(
     })
 
     Box(contentAlignment = Alignment.Center) {
+        val searchAble = searchText.trim().isNotEmpty()
         TitleBar(menu = {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.clickable(enabled = searchText.trim().isNotEmpty()) {
-                    searchViewModel.handleSearchClick(searchText)
-                    onSearchClick(searchText)
-                }
+                tint = MaterialTheme.colorScheme.onPrimary.copy(if (searchAble) 1f else 0.4f),
+                modifier = Modifier
+                    .size(30.dp)
+                    .clickable(enabled = searchAble) {
+                        searchViewModel.handleSearchClick(searchText)
+                        onSearchClick(searchText)
+                    }
             )
         }) {
             navHostController.popBackStack()
@@ -139,13 +113,19 @@ fun TitleContent(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun HotSearchContent(hotSearchList: List<HotSearch>?, onHotSearchClick: (String) -> Unit) {
+fun HotSearchContent(searchViewModel: SearchViewModel, onHotSearchClick: (String) -> Unit) {
+    val hotSearchList by searchViewModel.hotSearchList.observeAsState()
+
+    LaunchedEffect(key1 = Unit, block = {
+        searchViewModel.fetchHotSearchList()
+    })
+
     Text(
         text = "热门搜索",
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp)
     )
-    FlowRow(modifier = Modifier.padding(10.dp)) {
+    FlowRow(modifier = Modifier.padding(horizontal = 10.dp)) {
         hotSearchList?.forEach {
             Text(
                 modifier = Modifier
@@ -164,6 +144,47 @@ fun HotSearchContent(hotSearchList: List<HotSearch>?, onHotSearchClick: (String)
 }
 
 @Composable
+fun SearchHistoryContent(
+    searchViewModel: SearchViewModel,
+    onHistoryClick: (String) -> Unit
+) {
+    val searchHistoryList by searchViewModel.searchHistoryData.observeAsState()
+
+    LaunchedEffect(key1 = Unit, block = {
+        searchViewModel.fetchSearchHistoryData()
+    })
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp)
+    ) {
+        Text(
+            text = "历史搜索",
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(vertical = 12.dp)
+        )
+        Text(
+            text = "清空",
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.clickable { searchViewModel.clearHistory() })
+    }
+    searchHistoryList?.apply {
+        CacheManager.saveSearchHistoryData(this)
+        forEach {
+            SearchHistoryItem(
+                it,
+                onDeleteClick = { hisItem -> searchViewModel.handleDeleteHistoryItem(hisItem) }) { hisItem ->
+                searchViewModel.handleHistoryItemClick(hisItem)
+                onHistoryClick(it)
+            }
+        }
+    }
+}
+
+@Composable
 fun SearchHistoryItem(
     item: String,
     onDeleteClick: (String) -> Unit,
@@ -174,13 +195,12 @@ fun SearchHistoryItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 10.dp)
             .clickable { onItemClick(item) }
+            .padding(12.dp)
     ) {
         Text(
             text = item,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp)
+            color = MaterialTheme.colorScheme.onSurface
         )
         Icon(
             imageVector = Icons.Default.Close,

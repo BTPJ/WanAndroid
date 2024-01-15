@@ -131,7 +131,6 @@ fun ShareArticleItem(
 
     if (showDeleteDialog) {
         CusAlertDialog(content = { Text(text = "确定删除该文章吗?") },
-            confirmText = "清理",
             onConfirm = { onDeleteClick.invoke(article) }) {
             showDeleteDialog = false
         }

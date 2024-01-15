@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.data.bean.CollectUrl
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**

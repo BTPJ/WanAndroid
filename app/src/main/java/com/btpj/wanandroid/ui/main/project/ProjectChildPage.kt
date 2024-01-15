@@ -33,7 +33,7 @@ import coil.compose.AsyncImage
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleViewModel
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**

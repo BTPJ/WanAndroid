@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LocalContentColor
@@ -19,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +26,7 @@ import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.utils.CommonUtil
 import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.data.bean.Structure
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  * @author LTP  2023/12/25

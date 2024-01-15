@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
+import com.btpj.lib_base.BaseApp
 import com.btpj.lib_base.utils.LogUtil
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.App
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
     /** 全局错误处理 */
     private fun startObserver() {
-        App.appViewModel.apply {
+        BaseApp.baseAppViewModel.apply {
             exception.observe(this@MainActivity) {
                 LogUtil.e("网络请求错误：${it?.message}")
                 when (it) {

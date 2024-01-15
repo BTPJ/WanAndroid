@@ -2,7 +2,7 @@ package com.btpj.wanandroid.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
 import com.btpj.wanandroid.data.local.CacheManager

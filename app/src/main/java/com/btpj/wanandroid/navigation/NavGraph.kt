@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.btpj.wanandroid.ext.navigate
+import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.ui.collect.CollectPage
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankPage
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordPage

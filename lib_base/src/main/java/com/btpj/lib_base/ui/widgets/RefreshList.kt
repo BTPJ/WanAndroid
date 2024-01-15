@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ui.main
+package com.btpj.lib_base.ui.widgets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -28,9 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.btpj.wanandroid.R
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.R
+import com.btpj.lib_base.base.BaseViewModel
 import kotlinx.coroutines.delay
+import androidx.compose.foundation.lazy.items
 
 /**
  * @author LTP  2023/12/22

@@ -1,23 +1,22 @@
-package com.btpj.wanandroid.base
+package com.btpj.lib_base.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.btpj.lib_base.BaseApp
 import com.btpj.lib_base.data.bean.ApiResponse
-import com.btpj.wanandroid.App
+import com.btpj.lib_base.data.bean.UiState
+import com.btpj.lib_base.utils.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import java.util.Arrays
 
 /**
  * ViewModel基类
  * @author LTP  2021/11/23
  */
 abstract class BaseViewModel<T> : ViewModel() {
-
-
 
     /** ui状态 */
     private val _uiState = MutableLiveData<UiState<T>>()
@@ -56,7 +55,8 @@ abstract class BaseViewModel<T> : ViewModel() {
             try {
                 tryBlock()
             } catch (e: Exception) {
-                App.appViewModel.emitException(e)
+                LogUtil.e("BaseViewModel", "launch exception: ${e.message}")
+                BaseApp.baseAppViewModel.emitException(e)
                 catchBlock()
             } finally {
                 finallyBlock()
@@ -82,7 +82,7 @@ abstract class BaseViewModel<T> : ViewModel() {
                 else -> { // 服务器返回的其他错误码
                     if (!errorBlock(response)) {
                         // 只有errorBlock返回false不拦截处理时，才去统一提醒错误提示
-                        App.appViewModel.emitErrorResponse(response)
+                        BaseApp.baseAppViewModel.emitErrorResponse(response)
                     }
                 }
             }

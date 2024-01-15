@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.ui.main.square.navigation
 
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Navigation
 

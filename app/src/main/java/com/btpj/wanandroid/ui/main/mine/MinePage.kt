@@ -44,7 +44,7 @@ import coil.compose.AsyncImage
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.wanandroid.ext.navigate
+import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.theme.MyColor
 

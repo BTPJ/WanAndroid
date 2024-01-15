@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.base
+package com.btpj.lib_base.data.bean
 
 /**
  * @author LTP  2023/12/19

@@ -2,7 +2,7 @@ package com.btpj.wanandroid.ui.ip
 
 import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.data.local.IpManager
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import kotlinx.coroutines.delay
 import java.util.TreeSet
 

@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.DateUtil
 import com.btpj.wanandroid.data.bean.IntegralRecord
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  *  积分排名

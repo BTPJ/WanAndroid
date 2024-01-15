@@ -23,7 +23,7 @@ import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  * 首页Tab

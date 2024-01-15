@@ -5,7 +5,7 @@ import com.btpj.lib_base.BaseApp.Companion.appContext
 import com.btpj.lib_base.utils.AppUtil
 import com.btpj.lib_base.utils.CacheUtil
 import com.btpj.lib_base.utils.ToastUtil
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.local.UserManager
 import com.tencent.bugly.beta.Beta
 

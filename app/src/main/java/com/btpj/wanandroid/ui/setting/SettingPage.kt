@@ -39,7 +39,7 @@ import com.btpj.lib_base.ui.widgets.CusAlertDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.wanandroid.ext.navigate
+import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
 
 /**

@@ -108,8 +108,6 @@ dependencies {
     implementation(project(":lib_base"))
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.bugly.update)
     implementation(libs.bugly.nativecrashreport)
     implementation(libs.accompanist.webview)

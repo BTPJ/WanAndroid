@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.share.add
 
 import com.btpj.lib_base.data.bean.ApiResponse
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 
 class AddArticleViewModel : BaseViewModel<Unit>() {

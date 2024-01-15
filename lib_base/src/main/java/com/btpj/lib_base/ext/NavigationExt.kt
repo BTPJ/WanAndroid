@@ -1,4 +1,4 @@
-package com.btpj.wanandroid.ext
+package com.btpj.lib_base.ext
 
 import android.os.Bundle
 import androidx.navigation.NavController

@@ -4,5 +4,6 @@
     <string name="network_error">网络连接失败，请稍后重试</string>
     <string name="request_time_out">网络请求超时，请稍后重试</string>
     <string name="request_web">请求网络中…</string>
+    <string name="noMoreData">没有更多数据</string>
     <string name="title_activity_title">Title</string>
 </resources>

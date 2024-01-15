@@ -1,7 +1,7 @@
 package com.btpj.wanandroid.ui.login
 
 import com.btpj.wanandroid.App
-import com.btpj.wanandroid.base.BaseViewModel
+import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
 

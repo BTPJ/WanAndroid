@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.data.bean
 
-import com.btpj.wanandroid.ui.main.ProvideItemKey
+import com.btpj.lib_base.ui.widgets.ProvideItemKey
 
 /**
  * 积分

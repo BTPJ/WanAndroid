@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -29,9 +28,9 @@ import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.CoinInfo
-import com.btpj.wanandroid.ext.navigate
+import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
-import com.btpj.wanandroid.ui.main.RefreshList
+import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  *  积分排名

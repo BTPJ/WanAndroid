@@ -19,9 +19,28 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        ndk {
+            // 设置支持的SO库架构，以微信为基准只支持arm64-v8a即可，可以达到缩包的目的
+            abiFilters.addAll(listOf("arm64-v8a"))
+        }
+        // 只保留汉语资源
+        resourceConfigurations.add("zh-rCN")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+
+    // 调试版设置统一的Key，多人开发时更方便，
+    // 譬如一些地图配置调试的key时，每个开发者都能正常显示（不配置时默认签名每个人都不一样）
+    signingConfigs {
+        create("debug_sign") {
+            // 设置签名信息，这里需要替换成你自己的签名信息
+            storeFile = file("./sign/debug.jks")
+            storePassword = "19910901"
+            keyAlias = "LTP"
+            keyPassword = "19910901"
         }
     }
 
@@ -38,6 +57,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug_sign")
         }
 
         release {

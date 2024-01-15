@@ -40,6 +40,8 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material = { group = "androidx.compose.material", name = "material", version.ref = "material" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
+
+#---------------MMKV------------------
 mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
 
 #---------------网络相关------------------

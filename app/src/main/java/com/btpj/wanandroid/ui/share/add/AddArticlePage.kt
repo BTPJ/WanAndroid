@@ -1,15 +1,18 @@
 package com.btpj.wanandroid.ui.share.add
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,25 +23,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.LoadingDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * @author LTP  2024/1/4
  */
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun AddArticlePage(
     navHostController: NavHostController,
@@ -49,7 +56,9 @@ fun AddArticlePage(
     var link by rememberSaveable { mutableStateOf("") }
     var showLoadingDialog by remember { mutableStateOf(false) }
 
-    val context = LocalContext.current
+    val bottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val coroutineScope = rememberCoroutineScope()
 
     if (showLoadingDialog) {
         LoadingDialog(loadingText = "提交中...") { showLoadingDialog = false }
@@ -62,6 +71,9 @@ fun AddArticlePage(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.clickable {
+                    coroutineScope.launch {
+                        bottomSheetState.show()
+                    }
                 }
             )
         }) { navHostController.popBackStack() }
@@ -114,4 +126,34 @@ fun AddArticlePage(
             Text(text = stringResource(id = R.string.share))
         }
     }
+
+    BottomSheetTip(bottomSheetState = bottomSheetState)
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun BottomSheetTip(bottomSheetState: ModalBottomSheetState) {
+    ModalBottomSheetLayout(
+        sheetBackgroundColor = MaterialTheme.colorScheme.surface,
+        sheetState = bottomSheetState,
+        sheetContent = {
+            // 底部弹窗的内容
+            Column(modifier = Modifier.padding(20.dp)) {
+                Text(
+                    text = "温馨提示",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+                Text(
+                    modifier = Modifier.padding(top = 20.dp),
+                    text = "1. 只要是任何好文都可以分享哈，并不一定要是原创！投递的文章会进入广场 tab;\n " +
+                            "2. CSDN，掘金，简书等官方博客站点会直接通过，不需要审核;\n " +
+                            "3. 其他个人站点会进入审核阶段，不要投递任何无效链接，测试的请尽快删除，否则可能会对你的账号产生一定影响;\n " +
+                            "4. 目前处于测试阶段，如果你发现500等错误，可以向我提交日志，让我们一起使网站变得更好。\n " +
+                            "5. 由于本站只有我一个人开发与维护，会尽力保证24小时内审核，当然有可能哪天太累，会延期，请保持佛系...",
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(0.7f)
+                )
+            }
+        }) {}
 }

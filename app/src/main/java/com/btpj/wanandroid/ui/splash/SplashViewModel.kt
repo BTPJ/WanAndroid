@@ -1,6 +1,6 @@
 package com.btpj.wanandroid.ui.splash
 
-import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.MutableLiveData
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.local.CacheManager
 
@@ -9,9 +9,9 @@ import com.btpj.wanandroid.data.local.CacheManager
  */
 class SplashViewModel : BaseViewModel<Nothing>() {
 
-    val isFirstUse = ObservableBoolean(false)
+    val isFirstUse = MutableLiveData(false)
 
     fun start() {
-        isFirstUse.set(CacheManager.isFirstUse())
+        isFirstUse.value = CacheManager.isFirstUse()
     }
 }

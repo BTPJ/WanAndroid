@@ -1,0 +1,71 @@
+[versions]
+agp = "8.1.3"
+kotlin = "1.8.10"
+core-ktx = "1.12.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+lifecycle-runtime-ktx = "2.6.2"
+activity-compose = "1.7.1"
+compose-bom = "2023.03.00"
+navigation-compose = "2.5.3"
+runtime-livedata = "1.5.4"
+material = "1.4.3"
+mmkv = "1.2.13"
+retrofit = "2.9.0"
+logging-interceptor = "4.10.0"
+persistentCookieJar = "v1.0.1"
+coil-compose = "2.5.0"
+crashreport_upgrade = "1.5.23"
+nativecrashreport = "3.7.1"
+leakcanary = "2.9.1"
+accompanist = "0.31.1-alpha"
+
+[libraries]
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime-ktx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtime-livedata" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+ui = { group = "androidx.compose.ui", name = "ui" }
+ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+material = { group = "androidx.compose.material", name = "material", version.ref = "material" }
+material3 = { group = "androidx.compose.material3", name = "material3" }
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+
+#---------------网络相关------------------
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+# okhttp3 日志拦截器
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
+# okhttp3 缓存
+persistentCookieJar = { group = "com.github.franmontiel", name = "PersistentCookieJar", version.ref = "persistentCookieJar" }
+
+#---------------图片------------------
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-compose" }
+
+#------------应用优化升级----------------
+bugly_update = { group = "com.tencent.bugly", name = "crashreport_upgrade", version.ref = "crashreport_upgrade" }
+bugly_nativecrashreport = { group = "com.tencent.bugly", name = "nativecrashreport", version.ref = "nativecrashreport" }
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+#---------------accompanist------------------
+accompanist_webview = { group = "com.google.accompanist", name = "accompanist-webview", version.ref = "accompanist" }
+accompanist_systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+[bundles]
+

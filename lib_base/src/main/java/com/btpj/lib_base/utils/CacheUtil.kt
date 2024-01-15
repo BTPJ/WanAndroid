@@ -3,8 +3,6 @@ package com.btpj.lib_base.utils
 
 import android.content.Context
 import android.os.Environment
-import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import java.math.BigDecimal
 

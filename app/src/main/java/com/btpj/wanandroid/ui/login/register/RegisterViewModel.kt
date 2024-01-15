@@ -1,7 +1,5 @@
 package com.btpj.wanandroid.ui.login.register
 
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager

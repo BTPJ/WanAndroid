@@ -2,14 +2,10 @@ package com.btpj.wanandroid.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
 import com.btpj.wanandroid.data.local.CacheManager
-import com.btpj.wanandroid.ui.main.ProvideItemKey
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author LTP  2022/4/19

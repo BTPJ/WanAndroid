@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -10,10 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-        maven { url "https://s01.oss.sonatype.org/content/groups/public" }
+        maven("https://jitpack.io")
     }
 }
+
 rootProject.name = "WanAndroid"
-include ':app'
-include ':lib_base'
+include(":app")
+include(":lib_base")

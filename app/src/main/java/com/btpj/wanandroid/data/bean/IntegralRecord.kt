@@ -15,7 +15,7 @@ data class IntegralRecord(
     var reason: String,
     var userId: Int,
     var userName: String
-):ProvideItemKey{
+) : ProvideItemKey {
 
     override fun provideKey(): Int {
         return id

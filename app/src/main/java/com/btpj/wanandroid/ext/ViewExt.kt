@@ -1,10 +1,7 @@
 package com.btpj.wanandroid.ext
 
 import android.content.Context
-import android.view.View
-import android.view.ViewGroup
 import com.btpj.wanandroid.data.local.UserManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
  * 一些扩展函数
@@ -21,18 +18,5 @@ fun Context.launchCheckLogin(action: (context: Context) -> Unit) {
         action.invoke(this)
     } else {
 //        LoginActivity.launch(this)
-    }
-}
-
-/**
- * 处理BottomNavigationView中的tab长按出现toast的问题
- *
- * @param ids tab项的id集
- */
-fun BottomNavigationView.clearLongClickToast(ids: MutableList<Int>) {
-    val bottomNavigationView: ViewGroup = getChildAt(0) as ViewGroup
-    for (position in 0 until ids.size) {
-        bottomNavigationView.getChildAt(position).findViewById<View>(ids[position])
-            .setOnLongClickListener { true }
     }
 }

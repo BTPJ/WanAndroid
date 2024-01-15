@@ -67,8 +67,8 @@ dependencies {
     api(libs.persistentCookieJar)
     api(libs.logging.interceptor)
     api(libs.coil)
-//    implementation(libs.androidx.lifecycle.viewmodel.compose)
-//    implementation(libs.androidx.runtime.livedata)
+    api(libs.androidx.runtime.livedata)
+    api(libs.androidx.navigation.compose)
 
     testApi(libs.junit)
     androidTestApi(libs.androidx.test.ext.junit)

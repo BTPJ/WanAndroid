@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.btpj.lib_base.base.BaseAppViewModel
 import com.tencent.mmkv.MMKV
 import kotlin.properties.Delegates
 
@@ -20,11 +21,13 @@ open class BaseApp(override val viewModelStore: ViewModelStore = ViewModelStore(
 
     companion object {
         var appContext: Context by Delegates.notNull()
+        lateinit var baseAppViewModel: BaseAppViewModel
     }
 
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
+        baseAppViewModel = getAppViewModelProvider()[BaseAppViewModel::class.java]
 
         // MMKV初始化
         MMKV.initialize(this)

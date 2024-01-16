@@ -158,6 +158,14 @@ object DataRepository : Api {
         return service.deleteShareArticle(id)
     }
 
+    override suspend fun collectOutSiteArticle(
+        title: String,
+        author: String,
+        link: String
+    ): ApiResponse<Any?> {
+        return service.collectOutSiteArticle(title, author, link)
+    }
+
     override suspend fun collectUrl(name: String, link: String): ApiResponse<CollectUrl?> {
         return service.collectUrl(name, link)
     }

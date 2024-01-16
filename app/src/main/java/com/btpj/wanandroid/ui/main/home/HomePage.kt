@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,11 +19,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ui.widgets.Banner
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
 /**
  * 首页Tab
@@ -50,7 +51,7 @@ fun HomePage(
             )
         })
 
-        RefreshList(
+        ArticleRefreshList(
             viewModel = homeViewModel,
             lazyListState = rememberLazyListState(),
             onRefresh = {

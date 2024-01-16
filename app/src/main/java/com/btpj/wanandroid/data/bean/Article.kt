@@ -40,7 +40,7 @@ data class Article(
     var userId: Int,
     var visible: Int,
     var zan: Int
-) : ProvideItemKey {
+) : ProvideItemKey, com.btpj.wanandroid.ui.main.ProvideItemKey {
     override fun provideKey(): Int {
         return id
     }

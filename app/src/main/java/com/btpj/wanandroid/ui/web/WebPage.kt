@@ -3,12 +3,14 @@ package com.btpj.wanandroid.ui.web
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Parcelable
 import android.webkit.WebView
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
@@ -27,15 +29,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.LogUtil
+import com.btpj.wanandroid.App
+import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.google.accompanist.web.AccompanistWebChromeClient
 import com.google.accompanist.web.AccompanistWebViewClient
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewNavigator
 import com.google.accompanist.web.rememberWebViewState
+import kotlinx.parcelize.Parcelize
 
 /**
  * WebView
@@ -45,42 +51,89 @@ import com.google.accompanist.web.rememberWebViewState
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun WebPage(
-    url: String,
-    navHostController: NavHostController,
-    onCollectClick: (() -> Unit)? = null
+    webViewModel: WebViewModel = viewModel(),
+    webType: WebType,
+    isCollected: Boolean,
+    navHostController: NavHostController
 ) {
     var pageTitle by remember { mutableStateOf("加载中...") }
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
     var progress by remember { mutableFloatStateOf(0.1f) }
-    val webViewState = rememberWebViewState(url = url)
+    val webViewState = rememberWebViewState(url = webType.link)
     val webViewNavigator = rememberWebViewNavigator()
+    var collected by remember { mutableStateOf(isCollected) }
+
     Column {
         TitleBar(title = pageTitle, menu = {
-            Icon(
-                imageVector = Icons.Default.FavoriteBorder,
+            Icon(imageVector = if (collected) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                 contentDescription = "Collect",
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.clickable {
-                    onCollectClick?.invoke()
-                }
-            )
-            Icon(
-                imageVector = Icons.Default.MoreVert,
+                    when (webType) {
+                        is WebType.OnSiteArticle -> {
+                            if (collected) {
+                                webViewModel.unCollectArticle(webType.articleId) {
+                                    collected = false
+                                    App.appViewModel.emitCollectEvent(
+                                        CollectData(
+                                            webType.articleId,
+                                            webType.link,
+                                            false
+                                        )
+                                    )
+                                }
+                            } else {
+                                webViewModel.collectArticle(webType.articleId) {
+                                    collected = true
+                                    App.appViewModel.emitCollectEvent(
+                                        CollectData(
+                                            webType.articleId,
+                                            webType.link,
+                                            true
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
+                        is WebType.OutSiteArticle -> {
+                            if (collected) {
+                                webViewModel.unCollectArticle(webType.articleId) {
+                                    collected = false
+                                }
+                            } else {
+                                webViewModel.collectOutSiteArticle(
+                                    webType.title, webType.author, webType.link
+                                ) { collected = true }
+                            }
+                        }
+
+                        is WebType.Url -> {
+                            if (isCollected) {
+                                webViewModel.unCollectUrl(webType.id) { collected = false }
+                            } else {
+                                webViewModel.collectUrl(webType.name, webType.link) {
+                                    collected = true
+                                }
+                            }
+                        }
+                    }
+                })
+            Icon(imageVector = Icons.Default.MoreVert,
                 contentDescription = "MoreVert",
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
                     .padding(start = 4.dp)
                     .clickable { expanded = true })
 
-            DropdownMenu(
-                expanded = expanded,
+            DropdownMenu(expanded = expanded,
                 offset = DpOffset(0.dp, 16.dp),
                 onDismissRequest = { expanded = false }) {
                 DropdownMenuItem(text = { Text(text = "分享") }, onClick = {
                     context.startActivity(Intent.createChooser(Intent().apply {
                         action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, "${pageTitle}:$url")
+                        putExtra(Intent.EXTRA_TEXT, "${pageTitle}:${webType.link}")
                         type = "text/plain"
                     }, "分享到"))
                     expanded = false
@@ -90,14 +143,14 @@ fun WebPage(
                     expanded = false
                 })
                 DropdownMenuItem(text = { Text(text = "用浏览器打开") }, onClick = {
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webType.link)))
                     expanded = false
                 })
             }
         }) { navHostController.popBackStack() }
 
         if (progress != 1.0f) {
-            LogUtil.d("LTP", url)
+            LogUtil.d("LTP", webType.link)
             LinearProgressIndicator(
                 progress = progress,
                 modifier = Modifier.fillMaxWidth(),
@@ -123,7 +176,16 @@ fun WebPage(
                         progress = newProgress / 100.0f
                     }
                 }
-            }
-        )
+            })
     }
+}
+
+@Parcelize
+sealed class WebType(open var link: String) : Parcelable {
+    data class OnSiteArticle(val articleId: Int, override var link: String) : WebType(link)
+    data class OutSiteArticle(
+        val articleId: Int, val title: String, val author: String, override var link: String
+    ) : WebType(link)
+
+    data class Url(val id: Int, val name: String, override var link: String) : WebType(link)
 }

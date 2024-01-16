@@ -153,6 +153,14 @@ interface Api {
     @POST("lg/user_article/delete/{id}/json")
     suspend fun deleteShareArticle(@Path("id") id: Int): ApiResponse<Any?>
 
+    /** 收藏站外文章 */
+    @POST("lg/collect/add/json")
+    suspend fun collectOutSiteArticle(
+        title: String,
+        author: String,
+        link: String
+    ): ApiResponse<Any?>
+
     /** 收藏网址 */
     @POST("lg/collect/addtool/json")
     suspend fun collectUrl(

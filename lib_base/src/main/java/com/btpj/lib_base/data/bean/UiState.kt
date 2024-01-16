@@ -5,7 +5,7 @@ package com.btpj.lib_base.data.bean
  */
 open class UiState<T>(
     val showLoading: Boolean = false,
-    val data: T? = null,
+    var data: T? = null,
     val error: String? = null,
     val showLoadingMore: Boolean = false,
     val noMoreData: Boolean = false

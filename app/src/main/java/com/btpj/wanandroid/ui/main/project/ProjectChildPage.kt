@@ -31,9 +31,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
+import com.btpj.wanandroid.ui.main.ArticleViewModel
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -47,7 +48,7 @@ fun ProjectChildPage(
     projectChildViewModel: ProjectChildViewModel = viewModel(key = "$categoryId"),
     onArticleClick: (Article) -> Unit
 ) {
-    RefreshList(
+    ArticleRefreshList(
         viewModel = projectChildViewModel,
         lazyListState = lazyListState,
         onRefresh = {
@@ -159,45 +160,3 @@ fun ProjectArticleItem(
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ProjectPagePreview() {
-//    ProjectArticleItem(
-//        Article(
-//            apkLink = "",
-//            audit = 1,
-//            author = "",
-//            canEdit = false,
-//            chapterId = 502,
-//            chapterName = "自助",
-//            collect = true,
-//            courseId = 13,
-//            desc = "",
-//            descMd = "",
-//            envelopePic = "https://www.wanandroid.com/resources/image/pc/default_project_img.jpg",
-//            fresh = true,
-//            host = "",
-//            id = 27688,
-//            link = "https://juejin.cn/post/7309443151688892468",
-//            niceDate = "2023-12-10 21:38",
-//            niceShareDate = "2023-12-10 21:36",
-//            origin = "",
-//            prefix = "",
-//            projectLink = "",
-//            publishTime = 1702215488000,
-//            realSuperChapterId = 493,
-//            selfVisible = 0,
-//            shareDate = 1702215402000,
-//            shareUser = "鸿洋",
-//            superChapterId = 494,
-//            superChapterName = "广场Tab",
-//            tags = listOf(Tag("本站发布", "")),
-//            title = "ANR的类型分类以及关于输入事件/按键响应分发超时原因原理按键响应分发超时原因原理分析按键响应分发超时原因原理分析按键响应分发超时原因原理分析分析",
-//            type = 1,
-//            userId = 2,
-//            visible = 1,
-//            zan = 0
-//        )
-//    ) {}
-//}

@@ -1,8 +1,10 @@
 package com.btpj.wanandroid.ui.main
 
 import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.CollectData
 
 /**
  * @author LTP  2023/12/19
@@ -81,10 +83,13 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
                     DataRepository.collectArticle(article.id)
             handleRequest(response) {
                 // 刷新article收藏状态
-                uiState.value?.data?.forEach {
-                    if (article.id == it.id) it.collect = !it.collect
-                }
-                emitUiState(false, uiState.value?.data)
+                App.appViewModel.emitCollectEvent(
+                    CollectData(
+                        article.id,
+                        article.link,
+                        !article.collect
+                    )
+                )
                 successCallBack.invoke()
             }
         })

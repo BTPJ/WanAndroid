@@ -27,7 +27,8 @@ class AppViewModel : BaseAppViewModel() {
     val shareArticleEvent: LiveData<Boolean> = _shareArticleEvent
 
     /** 文章收藏 */
-    val collectEvent = MutableLiveData<CollectData>()
+    private val _collectEvent = MutableLiveData<CollectData>()
+    val collectEvent: LiveData<CollectData> = _collectEvent
 
     /** emit全局用户 */
     fun emitUser(user: User?) {
@@ -37,5 +38,10 @@ class AppViewModel : BaseAppViewModel() {
     /** 发送分享文章成功的消息 */
     fun emitShareArticleSuccess() {
         _shareArticleEvent.value = true
+    }
+
+    /** 发送收藏/取消收藏成功的消息 */
+    fun emitCollectEvent(collectData: CollectData) {
+        _collectEvent.value = collectData
     }
 }

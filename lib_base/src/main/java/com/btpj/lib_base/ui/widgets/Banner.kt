@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 
 /**
@@ -67,7 +66,7 @@ fun Banner(
     Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
         HorizontalPager(state = pagerState) {
             val index = it % images.size // 取模运算获取实际的索引
-            AsyncImage(
+            CoilImage(
                 model = images[index],
                 contentScale = ContentScale.Crop,
                 contentDescription = null,

@@ -24,14 +24,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
 import com.btpj.wanandroid.ui.main.ArticleViewModel
@@ -109,9 +109,10 @@ fun ProjectArticleItem(
                     .fillMaxWidth()
                     .padding(vertical = 12.dp)
             ) {
-                AsyncImage(
+                CoilImage(
                     model = article.envelopePic,
-                    contentDescription = "",
+                    contentDescription = null,
+                    placeholder = painterResource(id = com.btpj.lib_base.R.drawable.ic_default_img),
                     modifier = Modifier
                         .width(100.dp)
                         .height(100.dp),

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.lib_base.ui.widgets.LoadingDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.lib_base.utils.ToastUtil
@@ -61,7 +61,7 @@ fun RegisterPage(
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TitleBar(title = stringResource(id = R.string.register)) { navHostController.popBackStack() }
-        AsyncImage(
+        CoilImage(
             model = R.drawable.ic_user_round,
             contentDescription = null,
             modifier = Modifier

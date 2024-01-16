@@ -31,7 +31,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.lib_base.ui.widgets.LoadingDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
@@ -60,7 +60,7 @@ fun LoginPage(navHostController: NavHostController, loginViewModel: LoginViewMod
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TitleBar(title = stringResource(id = R.string.login)) { navHostController.popBackStack() }
-        AsyncImage(
+        CoilImage(
             model = R.drawable.ic_user_round,
             contentDescription = null,
             modifier = Modifier

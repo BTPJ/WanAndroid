@@ -40,11 +40,11 @@ import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.lib_base.ext.navigate
+import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.btpj.wanandroid.ui.web.WebType
@@ -98,9 +98,8 @@ fun MinePage(
                             .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        AsyncImage(
+                        CoilImage(
                             model = R.drawable.ic_user_round,
-                            contentDescription = null,
                             modifier = Modifier.size(72.dp)
                         )
                         Column(modifier = Modifier.padding(horizontal = 10.dp)) {

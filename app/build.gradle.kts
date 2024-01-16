@@ -111,7 +111,6 @@ dependencies {
     implementation(libs.bugly.update)
     implementation(libs.bugly.nativecrashreport)
     implementation(libs.accompanist.webview)
-    implementation(libs.accompanist.systemuicontroller)
 
     debugImplementation(libs.leakcanary)
 }

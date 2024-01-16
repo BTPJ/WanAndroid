@@ -1,6 +1,7 @@
 package com.btpj.wanandroid.ui.main.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
  * 首页Tab
  * @author LTP  2023/12/14
  */
+@OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomePage(

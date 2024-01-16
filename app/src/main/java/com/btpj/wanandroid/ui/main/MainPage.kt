@@ -34,7 +34,7 @@ import com.btpj.wanandroid.navigation.Route
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainPage(navHostController:NavHostController) {
+fun MainPage(navHostController: NavHostController) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
 

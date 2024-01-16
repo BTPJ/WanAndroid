@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
@@ -35,14 +37,17 @@ import kotlinx.coroutines.delay
 @Composable
 fun Banner(
     modifier: Modifier,
-    images: List<String>,
+    images: List<Any>,
     autoScroll: Boolean = true,
     autoScrollInterval: Long = 3000L,
+    indicatorModifier: Modifier = Modifier,
+    indicatorSize: Int = 6,
+    pagerState: PagerState? = null,
     onBannerItemClick: ((index: Int) -> Unit)? = null
 ) {
     val loopingCount = Int.MAX_VALUE
     val startIndex = loopingCount / 2
-    val pagerState = rememberPagerState(initialPage = startIndex) { loopingCount }
+    val curPagerState = pagerState ?: rememberPagerState(initialPage = startIndex) { loopingCount }
 
     /** 计算实际索引 */
     fun pageMapper(index: Int): Int {
@@ -50,21 +55,21 @@ fun Banner(
     }
 
     val currentIndex: State<Int> = remember {
-        derivedStateOf { pageMapper(pagerState.currentPage) }
+        derivedStateOf { pageMapper(curPagerState.currentPage) }
     }
 
     LaunchedEffect(true) {
         while (autoScroll && images.isNotEmpty()) {
             delay(autoScrollInterval)
             // 手指滑动时不轮播
-            if (!pagerState.isScrollInProgress) {
-                pagerState.animateScrollToPage(currentIndex.value + 1)
+            if (!curPagerState.isScrollInProgress) {
+                curPagerState.animateScrollToPage(currentIndex.value + 1)
             }
         }
     }
 
     Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
-        HorizontalPager(state = pagerState) {
+        HorizontalPager(state = curPagerState) {
             val index = it % images.size // 取模运算获取实际的索引
             CoilImage(
                 model = images[index],
@@ -78,12 +83,15 @@ fun Banner(
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
+            modifier = indicatorModifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
         ) {
             images.forEachIndexed { index, _ ->
-                PagerIndicator(selected = index == currentIndex.value)
+                PagerIndicator(
+                    selected = index == currentIndex.value,
+                    indicatorSize = indicatorSize
+                )
                 Spacer(modifier = Modifier.width(4.dp)) // 间隔
             }
         }
@@ -97,9 +105,9 @@ fun Int.floorMod(other: Int): Int = when (other) {
 }
 
 @Composable
-fun PagerIndicator(selected: Boolean = false) {
+fun PagerIndicator(selected: Boolean = false, indicatorSize: Int = 6) {
     val color = if (selected) Color.Red else Color.Gray
-    val size = if (selected) 8.dp else 6.dp
+    val size = if (selected) (indicatorSize + 2).dp else indicatorSize.dp
     Box(
         modifier = Modifier
             .size(size)

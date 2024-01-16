@@ -3,15 +3,15 @@ package com.btpj.wanandroid.ui
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.btpj.lib_base.BaseApp
 import com.btpj.lib_base.base.BaseActivity
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.navigation.AppScreen
 import com.btpj.wanandroid.navigation.Route
-import com.btpj.wanandroid.ui.main.MainPage
-import com.btpj.wanandroid.ui.theme.WanAndroidTheme
 
 /**
  * 主页
@@ -25,10 +25,10 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WanAndroidTheme {
-                navHostController = rememberNavController()
-                MainPage(navHostController)
-            }
+            navHostController = rememberNavController()
+            // 沉浸式状态栏
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            AppScreen(navHostController)
         }
 
         // 返回处理

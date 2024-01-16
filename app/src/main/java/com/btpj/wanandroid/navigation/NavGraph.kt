@@ -16,6 +16,7 @@ import com.btpj.wanandroid.ui.integral.rank.IntegralRankPage
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordPage
 import com.btpj.wanandroid.ui.login.LoginPage
 import com.btpj.wanandroid.ui.login.register.RegisterPage
+import com.btpj.wanandroid.ui.main.MainPage
 import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
@@ -39,6 +40,9 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         startDestination = Route.HOME,
         modifier = Modifier.padding(paddingValues)
     ) {
+        composable(Route.MAIN) {
+            MainPage(navHostController)
+        }
         composable(Route.HOME) {
             HomePage(onSearch = {
                 navHostController.navigate(Route.Search)
@@ -174,6 +178,7 @@ private fun navToWeb(
 }
 
 object Route {
+    const val MAIN = "main"
     const val HOME = "home"
     const val PROJECT = "project"
     const val SQUARE = "square"

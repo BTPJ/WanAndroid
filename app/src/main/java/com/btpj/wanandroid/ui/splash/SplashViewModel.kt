@@ -1,17 +1,22 @@
 package com.btpj.wanandroid.ui.splash
 
-import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.local.CacheManager
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author LTP  2022/4/21
  */
-class SplashViewModel : BaseViewModel<Nothing>() {
+class SplashViewModel : BaseViewModel<Unit>() {
 
-    val isFirstUse = MutableLiveData(false)
+    private val _isFirstUse = MutableStateFlow(CacheManager.isFirstUse())
+    val isFirstUse: StateFlow<Boolean> = _isFirstUse
 
-    fun start() {
-        isFirstUse.value = CacheManager.isFirstUse()
+    fun emitFirstUse(firstUse: Boolean) {
+        _isFirstUse.value = firstUse
+        CacheManager.saveFirstUse(firstUse)
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -20,17 +21,14 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.btpj.lib_base.R
-import com.btpj.lib_base.base.BaseViewModel
+import com.btpj.lib_base.data.bean.UiState
 import kotlinx.coroutines.delay
-import androidx.compose.foundation.lazy.items
 
 /**
  * @author LTP  2023/12/22
@@ -40,14 +38,13 @@ import androidx.compose.foundation.lazy.items
 fun <T : ProvideItemKey> RefreshList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    viewModel: BaseViewModel<List<T>>,
+    uiState: UiState<List<T>>?,
     lazyListState: LazyListState = rememberLazyListState(),
     onRefresh: (() -> Unit)?,
     onLoadMore: (() -> Unit)? = null,
     headerContent: @Composable (() -> Unit)? = null,
     itemContent: @Composable (T) -> Unit
 ) {
-    val uiState by viewModel.uiState.observeAsState()
     val pullRefreshState = rememberPullRefreshState(
         refreshing = uiState?.showLoading ?: false,
         onRefresh = { onRefresh?.invoke() }
@@ -79,7 +76,7 @@ fun <T : ProvideItemKey> RefreshList(
                 }
                 if (onLoadMore != null) {
                     item {
-                        if (uiState?.showLoadingMore == true) {
+                        if (uiState.showLoadingMore) {
                             LoadingView()
                             LaunchedEffect(Unit) {
                                 delay(500)
@@ -88,7 +85,7 @@ fun <T : ProvideItemKey> RefreshList(
                         }
                     }
                     item {
-                        if (uiState?.noMoreData == true) {
+                        if (uiState.noMoreData) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()

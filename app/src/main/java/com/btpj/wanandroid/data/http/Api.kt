@@ -52,6 +52,13 @@ interface Api {
     @POST("lg/uncollect_originId/{id}/json")
     suspend fun unCollectArticle(@Path("id") id: Int): ApiResponse<Any?>
 
+    /** 取消收藏站内文章(我的收藏页面) */
+    @POST("lg/uncollect/{id}/json")
+    suspend fun unCollectArticleInCollectPage(
+        @Path("id") id: Int,
+        @Query("originId") originId: Int
+    ): ApiResponse<Any?>
+
     /** 获取项目分类数据 */
     @GET("project/tree/json")
     suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>>

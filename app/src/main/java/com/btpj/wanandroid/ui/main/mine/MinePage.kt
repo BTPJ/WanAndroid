@@ -47,6 +47,7 @@ import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.theme.MyColor
+import com.btpj.wanandroid.ui.web.WebType
 
 /**
  * 我的Tab
@@ -171,7 +172,12 @@ fun MinePage(
                     }, title = stringResource(id = R.string.open_web)) {
                         navHostController.navigate(
                             Route.WEB,
-                            bundleOf("url" to "https://www.wanandroid.com/")
+                            bundleOf(
+                                "webType" to WebType.Url(
+                                    name = "开源网站",
+                                    link = "https://www.wanandroid.com/"
+                                )
+                            )
                         )
                     }
 

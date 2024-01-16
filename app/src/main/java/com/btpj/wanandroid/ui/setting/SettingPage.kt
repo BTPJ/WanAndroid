@@ -41,6 +41,7 @@ import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
+import com.btpj.wanandroid.ui.web.WebType
 
 /**
  * 设置
@@ -79,7 +80,13 @@ fun SettingPage(
         }
         ListItem(label = "项目源码") {
             navHostController.navigate(
-                Route.WEB, bundleOf("url" to "https://gitee.com/BTPJ_git/WanAndroid")
+                Route.WEB,
+                bundleOf(
+                    "webType" to WebType.Url(
+                        name = "项目源码",
+                        link = "https://gitee.com/BTPJ_git/WanAndroid"
+                    )
+                )
             )
         }
         if (showLogoutBtn == true) {

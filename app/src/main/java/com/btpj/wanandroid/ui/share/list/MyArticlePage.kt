@@ -66,7 +66,7 @@ fun MyArticlePage(
                 modifier = Modifier.clickable { navHostController.navigate(Route.ADD_ARTICLE) })
         }) { navHostController.popBackStack() }
         RefreshList(
-            viewModel = myArticleViewModel,
+            uiState = myArticleViewModel.uiState.observeAsState().value,
             onRefresh = { myArticleViewModel.fetchMyShareArticlePageList() },
             itemContent = { article ->
                 ShareArticleItem(

@@ -1,13 +1,29 @@
 package com.btpj.wanandroid.ui.web
 
+import androidx.compose.runtime.mutableStateOf
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author LTP  2022/4/2
  */
 class WebViewModel : BaseViewModel<Unit>() {
+
+    private val _collectUrlList = MutableStateFlow<List<CollectUrl>>(emptyList())
+    val collectUrlList: StateFlow<List<CollectUrl>> = _collectUrlList
+
+    /** 请求收藏网址列表 */
+    fun fetchCollectUrlList() {
+        emitUiState(true)
+        launch({
+            handleRequest(DataRepository.getCollectUrlList()) {
+                _collectUrlList.value = it.data
+            }
+        })
+    }
 
     /**
      * 收藏站内文章

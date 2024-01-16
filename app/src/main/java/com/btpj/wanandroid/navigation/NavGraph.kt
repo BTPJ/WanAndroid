@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.btpj.lib_base.ext.navigate
+import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.collect.CollectPage
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankPage
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordPage
@@ -41,47 +42,30 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
         composable(Route.HOME) {
             HomePage(onSearch = {
                 navHostController.navigate(Route.Search)
-            }) {
+            }, onBannerClick = {
                 navHostController.navigate(
                     Route.WEB,
                     bundleOf(
-                        "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to it.collect
+                        "webType" to WebType.Url(name = it.title, link = it.url)
                     )
                 )
+            }) {
+                navToWeb(navHostController, it)
             }
         }
         composable(Route.PROJECT) {
             ProjectPage {
-                navHostController.navigate(
-                    Route.WEB,
-                    bundleOf(
-                        "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to it.collect
-                    )
-                )
+                navToWeb(navHostController, it)
             }
         }
         composable(Route.SQUARE) {
             SquarePage(navHostController) {
-                navHostController.navigate(
-                    Route.WEB,
-                    bundleOf(
-                        "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to it.collect
-                    )
-                )
+                navToWeb(navHostController, it)
             }
         }
         composable(Route.WECHAT) {
             WechatPage {
-                navHostController.navigate(
-                    Route.WEB,
-                    bundleOf(
-                        "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to it.collect
-                    )
-                )
+                navToWeb(navHostController, it)
             }
         }
         composable(Route.MINE) {
@@ -99,7 +83,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                     Route.WEB,
                     bundleOf(
                         "webType" to WebType.Url(it.id, it.name, it.link),
-                        "isCollected" to true
+                        "collectedFlag" to "1"
                     )
                 )
             }) {
@@ -107,7 +91,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                     Route.WEB,
                     bundleOf(
                         "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to true
+                        "collectedFlag" to "1"
                     )
                 )
             }
@@ -127,7 +111,7 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                     Route.WEB,
                     bundleOf(
                         "webType" to WebType.OnSiteArticle(it.id, it.link),
-                        "isCollected" to true
+                        "collectedFlag" to "1"
                     )
                 )
             }
@@ -142,11 +126,11 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                 it.arguments?.getParcelable("webType")
             }
 
-            val isCollected: Boolean = it.arguments?.getBoolean("isCollected", false) ?: false
+            val collectedFlag: String? = it.arguments?.getString("collectedFlag")
             webType?.let { it1 ->
                 WebPage(
                     webType = it1,
-                    isCollected = isCollected,
+                    collectedFlag = collectedFlag,
                     navHostController = navHostController
                 )
             }
@@ -171,6 +155,22 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                 }
         }
     }
+}
+
+/**
+ * 跳转到网页
+ */
+private fun navToWeb(
+    navHostController: NavHostController,
+    it: Article
+) {
+    navHostController.navigate(
+        Route.WEB,
+        bundleOf(
+            "webType" to WebType.OnSiteArticle(it.id, it.link),
+            "collectedFlag" to if (it.collect) "1" else "0"
+        )
+    )
 }
 
 object Route {

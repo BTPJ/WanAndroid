@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.btpj.lib_base.BaseApp
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.navigation.NavGraph
 import com.btpj.wanandroid.navigation.Route
@@ -32,10 +34,10 @@ import com.btpj.wanandroid.navigation.Route
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainPage() {
-    val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
+fun MainPage(navHostController:NavHostController) {
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -44,11 +46,11 @@ fun MainPage() {
                     navBarItems.map { navBarItem -> navBarItem.route }
                         .contains(it.route)
                 } == true) {
-                BottomBar(navController, destination)
+                BottomBar(navHostController, destination)
             }
         }
     ) {
-        NavGraph(navController, it)
+        NavGraph(navHostController, it)
     }
 }
 

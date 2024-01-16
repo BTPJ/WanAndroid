@@ -16,6 +16,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -39,7 +40,7 @@ fun SystemPage(
 ) {
     RefreshList(
         contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
-        viewModel = systemViewModel,
+        uiState = systemViewModel.uiState.observeAsState().value,
         lazyListState = lazyListState,
         onRefresh = { systemViewModel.fetchSystemList() },
         itemContent = { StructureItem(it, onStructureClick) }

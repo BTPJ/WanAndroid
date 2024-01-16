@@ -10,6 +10,7 @@ import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
 import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
 /**
  * 首页Tab
@@ -26,7 +27,7 @@ fun SearchResultPage(
     Column {
         TitleBar(title = searchKey) { navHostController.popBackStack() }
 
-        RefreshList(
+        ArticleRefreshList(
             viewModel = searchResultViewModel,
             lazyListState = rememberLazyListState(),
             onRefresh = {

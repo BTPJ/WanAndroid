@@ -17,6 +17,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,7 +41,7 @@ fun CollectUrlPage(
     onUrlClick: (CollectUrl) -> Unit
 ) {
     RefreshList(
-        viewModel = collectUrlViewModel,
+        uiState = collectUrlViewModel.uiState.observeAsState().value,
         lazyListState = lazyListState,
         onRefresh = { collectUrlViewModel.fetchCollectUrlList() },
         itemContent = { collectUrl ->

@@ -23,7 +23,7 @@ open class BaseActivity : ComponentActivity() {
     }
 
     /** 全局错误处理 */
-    private fun startObserver() {
+    protected open fun startObserver() {
         BaseApp.baseAppViewModel.apply {
             exception.observe(this@BaseActivity) {
                 LogUtil.e("网络请求错误：${it?.message}")

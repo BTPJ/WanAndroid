@@ -1,5 +1,7 @@
 package com.btpj.wanandroid.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.DataRepository
@@ -10,6 +12,10 @@ import com.btpj.wanandroid.data.bean.CollectData
  * @author LTP  2023/12/19
  */
 open class ArticleViewModel : BaseViewModel<List<Article>>() {
+
+    /** 我收藏的文章列表中取消收藏 */
+    private val _unCollectEvent = MutableLiveData<Int>()
+    val unCollectEvent: LiveData<Int> = _unCollectEvent
 
     companion object {
         /** 每页显示的条目大小 */
@@ -76,20 +82,28 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
     }
 
     /** 操作文章的收藏与取消收藏 */
-    fun handleCollect(article: Article, successCallBack: () -> Unit = {}) {
+    fun handleCollect(
+        article: Article,
+        isInCollectPage: Boolean = false, // 是否是我的收藏页面
+        successCallBack: () -> Unit = {}
+    ) {
         launch({
-            val response =
+            val response = if (isInCollectPage) {
+                DataRepository.unCollectArticleInCollectPage(article.id, article.originId)
+            } else {
                 if (article.collect) DataRepository.unCollectArticle(article.id) else
                     DataRepository.collectArticle(article.id)
+            }
             handleRequest(response) {
                 // 刷新article收藏状态
                 App.appViewModel.emitCollectEvent(
                     CollectData(
                         article.id,
                         article.link,
-                        !article.collect
+                        if (isInCollectPage) false else !article.collect
                     )
                 )
+                _unCollectEvent.value = article.id
                 successCallBack.invoke()
             }
         })

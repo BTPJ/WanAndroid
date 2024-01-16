@@ -18,6 +18,8 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,8 +30,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
 import com.btpj.wanandroid.ui.main.ArticleViewModel
-import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -41,7 +43,7 @@ fun CollectArticlePage(
     lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {
-    RefreshList(
+    ArticleRefreshList(
         viewModel = collectArticleViewModel,
         lazyListState = lazyListState,
         onRefresh = {
@@ -108,11 +110,11 @@ fun CollectArticleItem(
                     color = LocalContentColor.current.copy(alpha = 0.8f)
                 )
                 Icon(
-                    imageVector = if (article.collect) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    imageVector = Icons.Default.Favorite,
                     contentDescription = "Favorite",
                     tint = MyColor.Red_FF4A57,
                     modifier = Modifier.clickable {
-                        articleViewModel.handleCollect(article)
+                        articleViewModel.handleCollect(article, true)
                     }
                 )
             }

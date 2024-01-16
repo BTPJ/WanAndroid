@@ -64,6 +64,10 @@ object DataRepository : Api {
         return service.unCollectArticle(id)
     }
 
+    override suspend fun unCollectArticleInCollectPage(id: Int, originId: Int): ApiResponse<Any?> {
+        return service.unCollectArticleInCollectPage(id, originId)
+    }
+
     override suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>> {
         return service.getProjectTitleList()
     }

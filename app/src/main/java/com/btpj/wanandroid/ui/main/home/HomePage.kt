@@ -19,10 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ui.widgets.Banner
-import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.ui.main.ArticleItem
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
@@ -35,6 +35,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
 fun HomePage(
     homeViewModel: HomeViewModel = viewModel(),
     onSearch: () -> Unit,
+    onBannerClick: (Banner) -> Unit = {},
     onArticleClick: (Article) -> Unit
 ) {
     val banners by homeViewModel.bannerList.collectAsState()
@@ -66,7 +67,9 @@ fun HomePage(
                         modifier = Modifier
                             .height(200.dp)
                             .fillMaxWidth(),
-                        images = banners.map { it.imagePath }) {}
+                        images = banners.map { it.imagePath }) {
+                        onBannerClick(banners[it])
+                    }
                 }
             }) {
             ArticleItem(

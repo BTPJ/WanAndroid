@@ -3,9 +3,13 @@ package com.btpj.wanandroid.ui
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.btpj.lib_base.BaseApp
 import com.btpj.lib_base.base.BaseActivity
 import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
+import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.main.MainPage
 import com.btpj.wanandroid.ui.theme.WanAndroidTheme
 
@@ -16,16 +20,30 @@ import com.btpj.wanandroid.ui.theme.WanAndroidTheme
  */
 class MainActivity : BaseActivity() {
 
+    private lateinit var navHostController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             WanAndroidTheme {
-                MainPage()
+                navHostController = rememberNavController()
+                MainPage(navHostController)
             }
         }
 
         // 返回处理
         onBackPressedDispatcher.addCallback(this, mBackPressedCallback)
+    }
+
+    override fun startObserver() {
+        super.startObserver()
+        BaseApp.baseAppViewModel.errorResponse.observe(this) {
+            if (it?.errorCode == -1001) {
+                // 需要登录，这里主要是针对收藏操作，不想每个地方都判断一下
+                // 当然你也可以封装一个收藏的组件，在里面统一判断跳转
+                navHostController.navigate(Route.LOGIN)
+            }
+        }
     }
 
     /** 上一次点击返回键的时间 */

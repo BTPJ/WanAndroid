@@ -11,6 +11,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,7 +38,7 @@ fun IntegralRecordPage(
     Column {
         TitleBar(title = "积分记录") { navHostController.popBackStack() }
         RefreshList(
-            viewModel = integralRecordViewModel,
+            uiState = integralRecordViewModel.uiState.observeAsState().value,
             onRefresh = { integralRecordViewModel.fetchIntegralRecordPageList() },
             onLoadMore = { integralRecordViewModel.fetchIntegralRecordPageList(false) }) {
             CoinRecordItem(it)

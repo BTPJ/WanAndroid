@@ -10,6 +10,7 @@ import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
 import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
 /**
  * @author LTP  2023/12/25
@@ -28,7 +29,7 @@ fun SquareChildPage(
         }
     })
 
-    RefreshList(
+    ArticleRefreshList(
         viewModel = squareChildViewModel,
         lazyListState = lazyListState,
         onRefresh = {

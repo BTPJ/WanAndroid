@@ -20,6 +20,8 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +55,7 @@ import kotlinx.parcelize.Parcelize
 fun WebPage(
     webViewModel: WebViewModel = viewModel(),
     webType: WebType,
-    isCollected: Boolean,
+    collectedFlag: String? = null, // null表示未知，"0"表示未收藏，"1"表示已收藏
     navHostController: NavHostController
 ) {
     var pageTitle by remember { mutableStateOf("加载中...") }
@@ -62,10 +64,24 @@ fun WebPage(
     var progress by remember { mutableFloatStateOf(0.1f) }
     val webViewState = rememberWebViewState(url = webType.link)
     val webViewNavigator = rememberWebViewNavigator()
-    var collected by remember { mutableStateOf(isCollected) }
+    var collected by remember { mutableStateOf(collectedFlag == "1") }
+    val collectUrlList by webViewModel.collectUrlList.collectAsState()
+
+    LaunchedEffect(webType.link) {
+        if (collectedFlag == null) {
+            webViewModel.fetchCollectUrlList()
+        }
+    }
 
     Column {
         TitleBar(title = pageTitle, menu = {
+            if (collectedFlag == null) {
+                // 遍历用户收藏的网址，手动设置为已收藏
+                collectUrlList.find { it.link == webType.link }?.let {
+                    collected = true
+                }
+            }
+
             Icon(imageVector = if (collected) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                 contentDescription = "Collect",
                 tint = MaterialTheme.colorScheme.onPrimary,
@@ -110,8 +126,12 @@ fun WebPage(
                         }
 
                         is WebType.Url -> {
-                            if (isCollected) {
-                                webViewModel.unCollectUrl(webType.id) { collected = false }
+                            if (collected) {
+                                webType.id?.let {
+                                    webViewModel.unCollectUrl(it) {
+                                        collected = false
+                                    }
+                                }
                             } else {
                                 webViewModel.collectUrl(webType.name, webType.link) {
                                     collected = true
@@ -150,7 +170,6 @@ fun WebPage(
         }) { navHostController.popBackStack() }
 
         if (progress != 1.0f) {
-            LogUtil.d("LTP", webType.link)
             LinearProgressIndicator(
                 progress = progress,
                 modifier = Modifier.fillMaxWidth(),
@@ -187,5 +206,5 @@ sealed class WebType(open var link: String) : Parcelable {
         val articleId: Int, val title: String, val author: String, override var link: String
     ) : WebType(link)
 
-    data class Url(val id: Int, val name: String, override var link: String) : WebType(link)
+    data class Url(val id: Int? = null, val name: String, override var link: String) : WebType(link)
 }

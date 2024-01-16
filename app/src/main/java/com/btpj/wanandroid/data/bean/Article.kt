@@ -38,9 +38,10 @@ data class Article(
     var title: String,
     var type: Int,
     var userId: Int,
+    var originId: Int,
     var visible: Int,
     var zan: Int
-) : ProvideItemKey, com.btpj.wanandroid.ui.main.ProvideItemKey {
+) : ProvideItemKey {
     override fun provideKey(): Int {
         return id
     }

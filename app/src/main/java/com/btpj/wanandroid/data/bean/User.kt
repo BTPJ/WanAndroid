@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val admin: Boolean = false,
     val chapterTops: List<String> = listOf(),
-    val collectIds: MutableList<String> = mutableListOf(),
+    val collectIds: MutableList<Int> = mutableListOf(),
     val email: String = "",
     val icon: String = "",
     val id: String = "",

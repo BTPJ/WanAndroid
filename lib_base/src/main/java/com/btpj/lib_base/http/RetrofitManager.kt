@@ -33,7 +33,7 @@ object RetrofitManager {
     }
 
     /** 请求根地址 */
-    val BASE_URL = IpManager.getDefaultIP()
+    private val BASE_URL = IpManager.getDefaultIP()
 
     /** OkHttpClient相关配置 */
     private val client: OkHttpClient

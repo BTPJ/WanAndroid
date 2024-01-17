@@ -55,7 +55,6 @@ abstract class BaseViewModel<T> : ViewModel() {
             try {
                 tryBlock()
             } catch (e: Exception) {
-                LogUtil.e("BaseViewModel", "launch exception: ${e.message}")
                 BaseApp.baseAppViewModel.emitException(e)
                 catchBlock()
             } finally {

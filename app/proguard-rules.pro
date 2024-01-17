@@ -120,29 +120,6 @@
 
 
 ############### 第三方库中的混淆规则start ##############################
-#  BaseRecyclerViewAdapterHelper混淆
--keep public class * extends com.chad.library.adapter.base.viewholder.BaseViewHolder
--keep public class * extends com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
--keepclassmembers class com.chad.library.adapter.base.viewholder.BaseDataBindingHolder {
-public <init>(android.view.View);
-}
--keepclassmembers class * extends com.chad.library.adapter.base.viewholder.BaseDataBindingHolder {
-public <init>(android.view.View);
-}
-
-# Glide混淆
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep class * extends com.bumptech.glide.module.AppGlideModule {
- <init>(...);
-}
--keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
--keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
-  *** rewind();
-}
-
 # bugly混淆
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}

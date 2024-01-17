@@ -61,6 +61,7 @@ android {
         }
 
         release {
+            applicationIdSuffix = ".compose"
             isMinifyEnabled = true // 开启混淆
             isShrinkResources = true // 启动资源压缩
             isZipAlignEnabled = true // 开启zipalign优化

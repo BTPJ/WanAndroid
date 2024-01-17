@@ -62,7 +62,6 @@ leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", v
 
 #---------------accompanist------------------
 accompanist_webview = { group = "com.google.accompanist", name = "accompanist-webview", version.ref = "accompanist" }
-accompanist_systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

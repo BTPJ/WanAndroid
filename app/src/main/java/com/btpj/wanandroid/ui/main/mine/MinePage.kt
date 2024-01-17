@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -40,11 +39,11 @@ import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.btpj.lib_base.ext.navigate
+import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.lib_base.ext.navigate
-import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.btpj.wanandroid.ui.web.WebType
@@ -59,7 +58,7 @@ fun MinePage(
     mineViewModel: MineViewModel = viewModel(),
     navHostController: NavHostController
 ) {
-    val uiState by mineViewModel.uiState.observeAsState()
+    val uiState by mineViewModel.uiState.collectAsState()
     val user by App.appViewModel.user.collectAsState()
 
     fun onRefresh() {

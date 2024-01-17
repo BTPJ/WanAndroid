@@ -16,7 +16,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -24,10 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.utils.CommonUtil
 import com.btpj.wanandroid.data.bean.Classify
 import com.btpj.wanandroid.data.bean.Structure
-import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  * @author LTP  2023/12/25
@@ -40,7 +40,7 @@ fun SystemPage(
 ) {
     RefreshList(
         contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
-        uiState = systemViewModel.uiState.observeAsState().value,
+        uiState = systemViewModel.uiState.collectAsState().value,
         lazyListState = lazyListState,
         onRefresh = { systemViewModel.fetchSystemList() },
         itemContent = { StructureItem(it, onStructureClick) }

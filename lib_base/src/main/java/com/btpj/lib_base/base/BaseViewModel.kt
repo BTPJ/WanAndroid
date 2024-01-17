@@ -10,6 +10,8 @@ import com.btpj.lib_base.data.bean.UiState
 import com.btpj.lib_base.utils.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -19,8 +21,8 @@ import kotlinx.coroutines.launch
 abstract class BaseViewModel<T> : ViewModel() {
 
     /** ui状态 */
-    private val _uiState = MutableLiveData<UiState<T>>()
-    val uiState: LiveData<UiState<T>> = _uiState
+    private val _uiState = MutableStateFlow<UiState<T>>(UiState(true))
+    val uiState: StateFlow<UiState<T>> = _uiState
 
     protected fun emitUiState(
         showLoading: Boolean = false,

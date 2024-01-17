@@ -55,7 +55,7 @@ class MyArticleViewModel : BaseViewModel<List<Article>>() {
             val response = DataRepository.deleteShareArticle(id)
             handleRequest(response) {
                 // 删除成功
-                emitUiState(data = uiState.value?.data?.filter { it.id != id })
+                emitUiState(data = uiState.value.data?.filter { it.id != id })
                 deleteSuccess.invoke()
             }
         })

@@ -20,7 +20,7 @@ class CollectUrlViewModel : BaseViewModel<List<CollectUrl>>() {
     fun unCollectUrl(id: Int, successCallBack: () -> Any? = {}) {
         launch({
             handleRequest(DataRepository.unCollectUrl(id)) {
-                emitUiState(data = uiState.value?.data?.filter { it.id != id })
+                emitUiState(data = uiState.value.data?.filter { it.id != id })
                 successCallBack.invoke()
             }
         })

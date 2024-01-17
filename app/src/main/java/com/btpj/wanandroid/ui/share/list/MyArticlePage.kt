@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -33,11 +34,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.CusAlertDialog
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.navigation.Route
-import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -66,7 +67,7 @@ fun MyArticlePage(
                 modifier = Modifier.clickable { navHostController.navigate(Route.ADD_ARTICLE) })
         }) { navHostController.popBackStack() }
         RefreshList(
-            uiState = myArticleViewModel.uiState.observeAsState().value,
+            uiState = myArticleViewModel.uiState.collectAsState().value,
             onRefresh = { myArticleViewModel.fetchMyShareArticlePageList() },
             itemContent = { article ->
                 ShareArticleItem(

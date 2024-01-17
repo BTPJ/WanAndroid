@@ -17,7 +17,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
-import com.btpj.wanandroid.data.bean.CollectUrl
 import com.btpj.lib_base.ui.widgets.RefreshList
+import com.btpj.wanandroid.data.bean.CollectUrl
 import com.btpj.wanandroid.ui.theme.MyColor
 
 /**
@@ -41,7 +41,7 @@ fun CollectUrlPage(
     onUrlClick: (CollectUrl) -> Unit
 ) {
     RefreshList(
-        uiState = collectUrlViewModel.uiState.observeAsState().value,
+        uiState = collectUrlViewModel.uiState.collectAsState().value,
         lazyListState = lazyListState,
         onRefresh = { collectUrlViewModel.fetchCollectUrlList() },
         itemContent = { collectUrl ->

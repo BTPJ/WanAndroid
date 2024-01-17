@@ -1,12 +1,12 @@
 package com.btpj.wanandroid.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.CollectData
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * @author LTP  2023/12/19
@@ -14,8 +14,8 @@ import com.btpj.wanandroid.data.bean.CollectData
 open class ArticleViewModel : BaseViewModel<List<Article>>() {
 
     /** 我收藏的文章列表中取消收藏 */
-    private val _unCollectEvent = MutableLiveData<Int>()
-    val unCollectEvent: LiveData<Int> = _unCollectEvent
+    private val _unCollectEvent = MutableStateFlow<Int?>(null)
+    val unCollectEvent: StateFlow<Int?> = _unCollectEvent
 
     companion object {
         /** 每页显示的条目大小 */
@@ -103,7 +103,9 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
                         if (isInCollectPage) false else !article.collect
                     )
                 )
-                _unCollectEvent.value = article.id
+                if (isInCollectPage) {
+                    _unCollectEvent.value = article.id
+                }
                 successCallBack.invoke()
             }
         })

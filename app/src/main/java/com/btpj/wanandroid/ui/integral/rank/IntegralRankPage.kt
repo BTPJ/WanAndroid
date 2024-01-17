@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -26,12 +25,12 @@ import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.btpj.lib_base.ext.navigate
+import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.CoinInfo
-import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
-import com.btpj.lib_base.ui.widgets.RefreshList
 
 /**
  *  积分排名
@@ -73,7 +72,7 @@ fun IntegralRankPage(
         }) { navHostController.popBackStack() }
         RefreshList(
             modifier = Modifier.weight(1f),
-            uiState = integralRankViewModel.uiState.observeAsState().value,
+            uiState = integralRankViewModel.uiState.collectAsState().value,
             onRefresh = { integralRankViewModel.fetchIntegralRankList() },
             onLoadMore = { integralRankViewModel.fetchIntegralRankList(false) }) {
             CoinInfoItem(it)

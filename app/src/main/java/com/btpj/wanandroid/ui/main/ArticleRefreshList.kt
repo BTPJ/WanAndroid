@@ -27,14 +27,14 @@ fun ArticleRefreshList(
     headerContent: @Composable (() -> Unit)? = null,
     itemContent: @Composable (Article) -> Unit
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsState()
     val collectData by App.appViewModel.collectEvent.observeAsState()
     val user by App.appViewModel.user.collectAsState()
-    val unCollectEvent by viewModel.unCollectEvent.observeAsState()
+    val unCollectEvent by viewModel.unCollectEvent.collectAsState()
 
     // 收藏事件监听
     if (collectData != null) {
-        uiState?.data?.forEach {
+        uiState.data?.forEach {
             if (it.id == collectData!!.id) {
                 it.collect = collectData!!.collect
             }
@@ -43,18 +43,18 @@ fun ArticleRefreshList(
 
     // 我收藏的文章列表中取消收藏
     if (unCollectEvent != null) {
-        uiState?.data = uiState?.data?.filter {
+        uiState.data = uiState.data?.filter {
             it.id != unCollectEvent
         }
     }
 
     // 用户退出时，收藏应全为false，登录时获取collectIds
     if (user == null) {
-        uiState?.data?.forEach {
+        uiState.data?.forEach {
             it.collect = false
         }
     } else {
-        uiState?.data?.forEach {
+        uiState.data?.forEach {
             user!!.collectIds.forEach { id ->
                 if (id == it.id) {
                     it.collect = true

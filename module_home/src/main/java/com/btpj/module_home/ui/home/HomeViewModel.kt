@@ -50,34 +50,31 @@ class HomeViewModel : BaseViewModel() {
     fun fetchArticlePageList(pageNo: Int = 0) {
         launch({
             if (pageNo == 0) {
-                // 使用async需要单独加作用域,不然没网时会崩溃
-                withContext(Dispatchers.IO) {
-                    // 第一页会同时请求置顶文章列表接口和分页文章列表的接口，使用async进行并行请求速度更快（默认是串行的）
-                    // 需要加SupervisorJob()来自行处理协程（https://juejin.cn/post/7130132604568731655）
-                    val response1 = async(Dispatchers.IO + SupervisorJob()) {
-                        DataRepository.getArticlePageList(
-                            pageNo,
-                            PAGE_SIZE
-                        )
-                    }
-                    val response2 =
-                        async(Dispatchers.IO + SupervisorJob()) { DataRepository.getArticleTopList() }
+                // 第一页会同时请求置顶文章列表接口和分页文章列表的接口，使用async进行并行请求速度更快（默认是串行的）
+                // 需要加SupervisorJob()来自行处理协程（https://juejin.cn/post/7130132604568731655）
+                val response1 = async(Dispatchers.IO + SupervisorJob()) {
+                    DataRepository.getArticlePageList(
+                        pageNo,
+                        PAGE_SIZE
+                    )
+                }
+                val response2 =
+                    async(Dispatchers.IO + SupervisorJob()) { DataRepository.getArticleTopList() }
 
-                    try {
-                        handleRequest(response1.await(), {
-                            val list = response1.await()
-                            handleRequest(response2.await(), {
-                                (list.data.datas as ArrayList<Article>).addAll(
-                                    0,
-                                    response2.await().data
-                                )
-                                // 加了Dispatchers.IO现在是子线程,需要使用postValue的方式
-                                articlePageListLiveData.postValue(list.data)
-                            })
+                try {
+                    handleRequest(response1.await(), {
+                        val list = response1.await()
+                        handleRequest(response2.await(), {
+                            (list.data.datas as ArrayList<Article>).addAll(
+                                0,
+                                response2.await().data
+                            )
+                            // 加了Dispatchers.IO现在是子线程,需要使用postValue的方式
+                            articlePageListLiveData.postValue(list.data)
                         })
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                    })
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             } else {
                 handleRequest(

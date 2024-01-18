@@ -20,7 +20,7 @@
 
 ## APK下载
 - https://raw.githubusercontent.com/BTPJ/WanAndroid/MVVM/app/release/WanAndroid_V1.5.apk
-- Compose：https://raw.githubusercontent.com/BTPJ/WanAndroid/MVVM/app/release/WanAndroid_V1.0.apk
+- Compose：https://raw.githubusercontent.com/BTPJ/WanAndroid/Compose/app/release/WanAndroid_V1.0.apk
 
 ## 开源库
 - 图片处理：Glide

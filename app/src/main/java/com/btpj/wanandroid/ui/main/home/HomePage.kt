@@ -35,6 +35,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomePage(
+    // 其实一个DataRepository，也没必要引入hilt
     homeViewModel: HomeViewModel = hiltViewModel(),
     onSearch: () -> Unit,
     onBannerClick: (Banner) -> Unit = {},

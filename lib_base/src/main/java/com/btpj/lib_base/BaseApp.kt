@@ -14,8 +14,7 @@ import kotlin.properties.Delegates
  *
  * @author LTP  2022/3/21
  */
-open class BaseApp(override val viewModelStore: ViewModelStore = ViewModelStore()) :
-    Application(), ViewModelStoreOwner {
+open class BaseApp : Application(), ViewModelStoreOwner {
 
     private var mFactory: ViewModelProvider.Factory? = null
 
@@ -43,4 +42,7 @@ open class BaseApp(override val viewModelStore: ViewModelStore = ViewModelStore(
         }
         return mFactory as ViewModelProvider.Factory
     }
+
+    override val viewModelStore: ViewModelStore
+        get() = ViewModelStore()
 }

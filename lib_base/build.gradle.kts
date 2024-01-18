@@ -74,7 +74,7 @@ dependencies {
     androidTestApi(libs.androidx.test.ext.junit)
     androidTestApi(libs.espresso.core)
     androidTestApi(platform(libs.compose.bom))
-    androidTestApi(libs.ui.test.junit4)
+    androidTestImplementation(libs.ui.test.junit4)
     androidTestApi(platform(libs.compose.bom))
     debugApi(libs.ui.tooling)
     debugApi(libs.ui.test.manifest)

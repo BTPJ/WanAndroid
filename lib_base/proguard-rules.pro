@@ -76,41 +76,41 @@
 -keep class **.R$* {*;}
 # 保留本地native方法不被混淆
 -keepclasseswithmembernames class * { native <methods>;}
-# 保留在Activity中的方法参数是view的方法，
-# 这样以来我们在layout中写的onClick就不会被影响
--keepclassmembers class * extends android.app.Activity{ public void *(android.view.View);}
-# 保留枚举类不被混淆
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-# 保留我们自定义控件（继承自View）不被混淆
--keep public class * extends android.view.View{
-    *** get*();
-    void set*(***);
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-# 保留Parcelable序列化类不被混淆
--keep class * implements android.os.Parcelable { public static final android.os.Parcelable$Creator *;}
-# 保留Serializable序列化的类不被混淆
--keepnames class * implements java.io.Serializable
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    !static !transient <fields>;
-    !private <fields>;
-    !private <methods>;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
-# 对于带有回调函数的onXXEvent、**On*Listener的，不能被混淆
+
+# 保留compose库的类和方法
+-keep class androidx.compose.** { *; }
+-keep class androidx.ui.** { *; }
+-keep class androidx.ui.foundation.** { *; }
+-keep class androidx.ui.layout.** { *; }
+-keep class androidx.ui.material.** { *; }
+-keep class androidx.ui.tooling.** { *; }
+
+# 保留ViewModel类和相关注解
+-keep class * implements androidx.lifecycle.ViewModel
+
+# 保留Hilt相关的类和注解：
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
 -keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
+    @dagger.hilt.* <fields>;
+    @dagger.hilt.* <init>(...);
+    @dagger.hilt.* <methods>;
+}
+
+# 保留我们自定义Compose组件和相关类不被混淆
+-keep public class com.btpj.lib_base.ui.widgets.*
+
+# 保留Parcelable序列化类不被混淆
+-keep class * implements kotlinx.parcelize.Parcelize
+-keepattributes Signature
+-keepattributes Exceptions
+
+-keepclassmembers class * {
+    ** Companion;
+}
+
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
 }
 
 # 所有实体类不能混淆 model文件夹下的所有实体类不能混淆
@@ -118,8 +118,26 @@
 -keep class com.btpj.wanandroid.data.** {*;}
 ############### Android开发中一些需要保留的公共部分end ##################
 
-
 ############### 第三方库中的混淆规则start ##############################
 # bugly混淆
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+# Retrofit混淆
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepattributes AnnotationDefault
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface * extends <1>
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+-keep,allowobfuscation,allowshrinking class retrofit2.Response

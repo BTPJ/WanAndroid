@@ -63,9 +63,9 @@ android {
 
         release {
             applicationIdSuffix = ".compose"
-            isMinifyEnabled = false // 开启混淆
-            isShrinkResources = false // 启动资源压缩
-            isZipAlignEnabled = false // 开启zipalign优化
+            isMinifyEnabled = true // 开启混淆
+            isShrinkResources = true // 启动资源压缩
+            isZipAlignEnabled = true // 开启zipalign优化
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -117,6 +117,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.leakcanary)
 }
 

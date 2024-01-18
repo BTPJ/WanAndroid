@@ -17,7 +17,7 @@ class SystemViewModel : BaseViewModel() {
     }
 
     /** 请求体系列表 */
-    fun fetchSystemList(pageNo: Int = 0) {
+    fun fetchSystemList() {
         launch({
             handleRequest(DataRepository.getTreeList(), { structureListLiveData.value = it.data })
         })

@@ -41,7 +41,8 @@ interface Api {
     @GET("article/list/{pageNo}/json")
     suspend fun getArticlePageList(
         @Path("pageNo") pageNo: Int,
-        @Query("page_size") pageSize: Int
+        @Query("page_size") pageSize: Int,
+        @Query("cid") cid: Int? = null
     ): ApiResponse<PageResponse<Article>>
 
     /** 收藏站内文章 */

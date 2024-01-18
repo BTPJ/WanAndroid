@@ -3,6 +3,7 @@ package com.btpj.wanandroid.ui.main.square.system
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Structure
 import com.btpj.wanandroid.databinding.ListItemSystemBinding
+import com.btpj.wanandroid.ui.main.square.system.details.SystemArticleListActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -32,6 +33,9 @@ class SystemAdapter :
                 setItemViewCacheSize(200) // 设置缓存大小为200，默认为2
                 adapter = SystemChildAdapter().apply {
                     setList(item.children)
+                    setOnItemClickListener { _, _, position ->
+                        SystemArticleListActivity.launch(context, item, position)
+                    }
                 }
             }
         }

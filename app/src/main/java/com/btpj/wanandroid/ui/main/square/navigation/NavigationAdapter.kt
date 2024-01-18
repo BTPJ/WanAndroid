@@ -1,9 +1,12 @@
 package com.btpj.wanandroid.ui.main.square.navigation
 
+import android.view.View
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.bean.Navigation
 import com.btpj.wanandroid.databinding.ListItemSystemBinding
+import com.btpj.wanandroid.ui.web.WebActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -32,6 +35,12 @@ class NavigationAdapter :
                 setItemViewCacheSize(200) // 设置缓存大小为200，默认为2
                 adapter = NavigationChildAdapter().apply {
                     setList(item.articles)
+                    setOnItemClickListener { _, _, position ->
+                        WebActivity.launch(
+                            context,
+                            item.articles[position]
+                        )
+                    }
                 }
             }
         }

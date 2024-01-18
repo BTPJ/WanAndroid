@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.data.bean.Article
-import com.btpj.wanandroid.data.bean.Classify
+import com.btpj.wanandroid.data.bean.Structure
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.main.square.ask.AskPage
 import com.btpj.wanandroid.ui.main.square.navigation.NavigationPage
@@ -45,7 +45,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SquarePage(
     navHostController: NavHostController,
-    onStructureClick: ((Classify) -> Unit)? = null,
+    onStructureClick: ((Structure, Int) -> Unit)? = null,
     onNavigationClick: ((Article) -> Unit)? = null,
     onArticleClick: (Article) -> Unit
 ) {
@@ -82,7 +82,9 @@ fun SquarePage(
                     )
                 }) {
                 titleList.forEachIndexed { index, title ->
-                    Tab(modifier = Modifier.height(52.dp),
+                    Tab(modifier = Modifier
+                        .height(52.dp)
+                        .padding(horizontal = 10.dp),
                         selected = pagerState.currentPage == index,
                         onClick = {
                             coroutineScope.launch {
@@ -93,7 +95,6 @@ fun SquarePage(
                     }
                 }
             }
-
         }
         Box(
             modifier = Modifier
@@ -118,8 +119,8 @@ fun SquarePage(
 
                         2 -> SystemPage(
                             lazyListState = lazyListStates[2],
-                            onStructureClick = { structure ->
-                                onStructureClick?.invoke(structure)
+                            onStructureClick = { structure, pageIndex ->
+                                onStructureClick?.invoke(structure, pageIndex)
                             })
 
                         3 -> NavigationPage(

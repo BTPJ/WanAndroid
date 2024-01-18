@@ -1,10 +1,13 @@
 package com.btpj.wanandroid.data.bean
 
+import android.os.Parcelable
 import com.btpj.lib_base.ui.widgets.ProvideItemKey
+import kotlinx.parcelize.Parcelize
 
 /**
  * @author LTP  2022/4/7
  */
+@Parcelize
 data class Structure(
     val author: String,
     val children: List<Classify>,
@@ -19,7 +22,7 @@ data class Structure(
     val parentChapterId: Int,
     val userControlSetTop: Boolean,
     val visible: Int
-) : ProvideItemKey {
+) : ProvideItemKey, Parcelable {
     override fun provideKey(): Int {
         return id
     }

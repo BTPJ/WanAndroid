@@ -17,6 +17,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.utils.CommonUtil
+import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Navigation
 
@@ -38,9 +41,23 @@ fun NavigationPage(
     navigationViewModel: NavigationViewModel = viewModel(),
     onNavigationClick: (Article) -> Unit
 ) {
+    val uiState = navigationViewModel.uiState.collectAsState().value
+    val collectData by App.appViewModel.collectEvent.observeAsState()
+
+    // 收藏事件监听
+    if (collectData != null) {
+        uiState.data?.forEach { navigation ->
+            navigation.articles.forEach {
+                if (it.id == collectData!!.id) {
+                    it.collect = collectData!!.collect
+                }
+            }
+        }
+    }
+
     RefreshList(
         contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
-        uiState = navigationViewModel.uiState.collectAsState().value,
+        uiState = uiState,
         lazyListState = lazyListState,
         onRefresh = { navigationViewModel.fetchNavigationList() },
         itemContent = { NavigationItem(it, onNavigationClick) }

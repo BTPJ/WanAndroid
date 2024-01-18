@@ -51,9 +51,10 @@ object DataRepository : Api {
 
     override suspend fun getArticlePageList(
         pageNo: Int,
-        pageSize: Int
+        pageSize: Int,
+        categoryId: Int?
     ): ApiResponse<PageResponse<Article>> {
-        return service.getArticlePageList(pageNo, pageSize)
+        return service.getArticlePageList(pageNo, pageSize, categoryId)
     }
 
     override suspend fun collectArticle(id: Int): ApiResponse<Any?> {

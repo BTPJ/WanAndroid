@@ -62,9 +62,9 @@ android {
 
         release {
             applicationIdSuffix = ".compose"
-            isMinifyEnabled = true // 开启混淆
-            isShrinkResources = true // 启动资源压缩
-            isZipAlignEnabled = true // 开启zipalign优化
+            isMinifyEnabled = false // 开启混淆
+            isShrinkResources = false // 启动资源压缩
+            isZipAlignEnabled = false // 开启zipalign优化
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

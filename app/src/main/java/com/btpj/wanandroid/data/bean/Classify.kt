@@ -1,8 +1,11 @@
 package com.btpj.wanandroid.data.bean
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Classify(
     val author: String,
-    val children: List<Any>,
     val courseId: Int,
     val cover: String,
     val desc: String,
@@ -14,4 +17,4 @@ data class Classify(
     val parentChapterId: Int,
     val userControlSetTop: Boolean,
     val visible: Int
-)
+) : Parcelable

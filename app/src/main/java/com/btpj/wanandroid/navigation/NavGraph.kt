@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.data.bean.Article
+import com.btpj.wanandroid.data.bean.Structure
 import com.btpj.wanandroid.ui.collect.CollectPage
 import com.btpj.wanandroid.ui.integral.rank.IntegralRankPage
 import com.btpj.wanandroid.ui.integral.record.IntegralRecordPage
@@ -21,6 +22,7 @@ import com.btpj.wanandroid.ui.main.home.HomePage
 import com.btpj.wanandroid.ui.main.mine.MinePage
 import com.btpj.wanandroid.ui.main.project.ProjectPage
 import com.btpj.wanandroid.ui.main.square.SquarePage
+import com.btpj.wanandroid.ui.main.square.system.details.SystemDetailsPage
 import com.btpj.wanandroid.ui.main.wechat.WechatPage
 import com.btpj.wanandroid.ui.search.SearchPage
 import com.btpj.wanandroid.ui.search.result.SearchResultPage
@@ -62,10 +64,31 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
                 navToWeb(navHostController, it)
             }
         }
-        composable(Route.SQUARE) {
-            SquarePage(navHostController) {
-                navToWeb(navHostController, it)
+        composable(Route.SYSTEM_DETAILS) {
+            it.arguments?.apply {
+                val structure = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    getParcelable("structure", Structure::class.java)
+                } else {
+                    getParcelable("structure")
+                }
+                val pageIndex = getInt("pageIndex")
+                structure?.let { it1 ->
+                    SystemDetailsPage(navHostController, it1, pageIndex) { article ->
+                        navToWeb(navHostController, article)
+                    }
+                }
             }
+        }
+        composable(Route.SQUARE) {
+            SquarePage(navHostController,
+                onStructureClick = { structure, pageIndex ->
+                    navHostController.navigate(
+                        Route.SYSTEM_DETAILS,
+                        bundleOf("structure" to structure, "pageIndex" to pageIndex)
+                    )
+                },
+                onNavigationClick = { navToWeb(navHostController, it) },
+                onArticleClick = { navToWeb(navHostController, it) })
         }
         composable(Route.WECHAT) {
             WechatPage {
@@ -124,19 +147,20 @@ fun NavGraph(navHostController: NavHostController, paddingValues: PaddingValues)
             AddArticlePage(navHostController = navHostController)
         }
         composable(Route.WEB) {
-            val webType: WebType? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.arguments?.getParcelable("webType", WebType::class.java)
-            } else {
-                it.arguments?.getParcelable("webType")
-            }
-
-            val collectedFlag: String? = it.arguments?.getString("collectedFlag")
-            webType?.let { it1 ->
-                WebPage(
-                    webType = it1,
-                    collectedFlag = collectedFlag,
-                    navHostController = navHostController
-                )
+            it.arguments?.apply {
+                val webType: WebType? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    getParcelable("webType", WebType::class.java)
+                } else {
+                    getParcelable("webType")
+                }
+                val collectedFlag: String? = getString("collectedFlag")
+                webType?.let { it1 ->
+                    WebPage(
+                        webType = it1,
+                        collectedFlag = collectedFlag,
+                        navHostController = navHostController
+                    )
+                }
             }
         }
         composable(Route.Search) {
@@ -195,5 +219,6 @@ object Route {
     const val INTEGRAL_RANK_RECORD = "integral_rank_record"
     const val Search = "search"
     const val SEARCH_RECORD = "search_record"
+    const val SYSTEM_DETAILS = "system_details"
 }
 

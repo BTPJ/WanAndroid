@@ -36,7 +36,7 @@ import com.btpj.wanandroid.data.bean.Structure
 fun SystemPage(
     lazyListState: LazyListState,
     systemViewModel: SystemViewModel = viewModel(),
-    onStructureClick: (Classify) -> Unit
+    onStructureClick: (Structure, Int) -> Unit
 ) {
     RefreshList(
         contentPadding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
@@ -49,13 +49,16 @@ fun SystemPage(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun StructureItem(structure: Structure, onStructureClick: (Classify) -> Unit) {
+fun StructureItem(structure: Structure, onStructureClick: (Structure, Int) -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.surface else Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Column(modifier = Modifier.padding(10.dp)) {
+        Column(
+            modifier = Modifier
+                .padding(10.dp)
+                .clickable { onStructureClick.invoke(structure, 0) }) {
             Text(
                 text = structure.name.toHtml().toString(),
                 color = LocalContentColor.current.copy(0.8f),
@@ -63,11 +66,11 @@ fun StructureItem(structure: Structure, onStructureClick: (Classify) -> Unit) {
                 fontSize = 16.sp
             )
             FlowRow(modifier = Modifier.padding(top = 10.dp)) {
-                structure.children.forEach { classify ->
+                structure.children.forEachIndexed { index, classify ->
                     Text(
                         modifier = Modifier
                             .padding(4.dp)
-                            .clickable { onStructureClick.invoke(classify) }
+                            .clickable { onStructureClick.invoke(structure, index) }
                             .background(LocalContentColor.current.copy(0.1f))
                             .padding(vertical = 6.dp, horizontal = 10.dp),
                         text = classify.name.toHtml().toString(),

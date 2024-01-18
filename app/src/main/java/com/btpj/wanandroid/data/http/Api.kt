@@ -37,11 +37,12 @@ interface Api {
     @GET("article/top/json")
     suspend fun getArticleTopList(): ApiResponse<List<Article>>
 
-    /** 获取首页文章数据 */
+    /** 获取首页/体系详情文章数据 */
     @GET("article/list/{pageNo}/json")
     suspend fun getArticlePageList(
         @Path("pageNo") pageNo: Int,
-        @Query("page_size") pageSize: Int
+        @Query("page_size") pageSize: Int,
+        @Query("cid") categoryId: Int? = null
     ): ApiResponse<PageResponse<Article>>
 
     /** 收藏站内文章 */

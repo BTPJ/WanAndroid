@@ -4,16 +4,16 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.btpj.wanandroid",
+  "applicationId": "com.btpj.wanandroid.compose",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 5,
-      "versionName": "1.5",
-      "outputFile": "WanAndroid_V1.5.apk"
+      "versionCode": 1,
+      "versionName": "1.0",
+      "outputFile": "WanAndroid_V1.0.apk"
     }
   ],
   "elementType": "File"

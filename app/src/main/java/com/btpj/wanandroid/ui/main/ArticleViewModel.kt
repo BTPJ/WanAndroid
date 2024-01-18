@@ -67,6 +67,10 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
                 ArticleType.Search -> DataRepository.getSearchDataByKey(
                     currentPage, PAGE_SIZE, searchKey ?: ""
                 )
+
+                ArticleType.SystemDetails -> DataRepository.getArticlePageList(
+                    currentPage, PAGE_SIZE, categoryId!!
+                )
             }
 
             handleRequest(response) {
@@ -119,5 +123,6 @@ open class ArticleViewModel : BaseViewModel<List<Article>>() {
         object Wechat : ArticleType()    // 公众号
         object Collect : ArticleType()    // 我收藏的文章
         object Search : ArticleType()    // 搜索到的文章
+        object SystemDetails : ArticleType()    // 搜索到的文章
     }
 }

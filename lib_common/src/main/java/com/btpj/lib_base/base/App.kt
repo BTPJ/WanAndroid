@@ -31,7 +31,7 @@ class App : Application(), ViewModelStoreOwner {
         super.onCreate()
         appContext = applicationContext
         mAppViewModelStore = ViewModelStore()
-        appViewModel = getAppViewModelProvider().get(AppViewModel::class.java)
+        appViewModel = getAppViewModelProvider()[AppViewModel::class.java]
 
         // MMKV初始化
         MMKV.initialize(this)

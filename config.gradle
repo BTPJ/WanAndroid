@@ -21,8 +21,8 @@ ext {
             espresso                     : "androidx.test.espresso:espresso-core:3.4.0",
 
             //----------- Jetpack----------------
-            viewModelKtx                 : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1",
-            liveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1",
+            viewModelKtx                 : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
+            liveDataKtx                  : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0",
             activityKtx                  : "androidx.activity:activity-ktx:1.2.3",
 
             //---------------UI相关-------------

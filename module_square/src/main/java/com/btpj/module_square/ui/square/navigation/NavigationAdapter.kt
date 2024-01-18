@@ -1,6 +1,7 @@
 package com.btpj.module_square.ui.square.navigation
 
 import com.btpj.lib_base.data.bean.Navigation
+import com.btpj.lib_base.export.ModuleWebApi
 import com.btpj.module_square.R
 import com.btpj.module_square.databinding.SquareListItemSystemBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -35,6 +36,9 @@ class NavigationAdapter :
                 setItemViewCacheSize(200) // 设置缓存大小为200，默认为2
                 adapter = NavigationChildAdapter().apply {
                     setList(item.articles)
+                    setOnItemClickListener { _, _, position ->
+                        ModuleWebApi.navToWebActivity(item.articles[position])
+                    }
                 }
             }
         }

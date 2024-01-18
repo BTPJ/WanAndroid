@@ -42,4 +42,12 @@ object DataRepository : BaseRepository(), Api {
     override suspend fun getNavigationList(): ApiResponse<List<Navigation>> {
         return apiCall { service.getNavigationList() }
     }
+
+    override suspend fun getSystemArticlePageList(
+        pageNo: Int,
+        pageSize: Int,
+        categoryId: Int
+    ): ApiResponse<PageResponse<Article>> {
+        return apiCall { service.getSystemArticlePageList(pageNo, pageSize, categoryId) }
+    }
 }

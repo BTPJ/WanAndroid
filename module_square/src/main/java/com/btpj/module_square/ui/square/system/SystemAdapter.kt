@@ -3,6 +3,7 @@ package com.btpj.module_square.ui.square.system
 import com.btpj.lib_base.data.bean.MySystem
 import com.btpj.module_square.R
 import com.btpj.module_square.databinding.SquareListItemSystemBinding
+import com.btpj.module_square.ui.square.system.details.SystemArticleListActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -35,6 +36,9 @@ class SystemAdapter :
                 setItemViewCacheSize(200) // 设置缓存大小为200，默认为2
                 adapter = SystemChildAdapter().apply {
                     setList(item.children)
+                    setOnItemClickListener { _, _, position ->
+                        SystemArticleListActivity.launch(context, item, position)
+                    }
                 }
             }
         }

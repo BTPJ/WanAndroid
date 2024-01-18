@@ -1,4 +1,5 @@
 apply from: "../module.build.gradle"
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace 'com.btpj.module_square'
@@ -11,4 +12,10 @@ android {
 
     //统一资源前缀，规范资源引用，会让编译器自动提示你不规范的命名
     resourcePrefix "square_"
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

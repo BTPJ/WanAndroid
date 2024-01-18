@@ -3,9 +3,9 @@ ext {
     isBuildModule = false
 
     android = [
-            compileSdk : 31,
-            minSdk     : 21,
-            targetSdk  : 31,
+            compileSdk : 34,
+            minSdk     : 24,
+            targetSdk  : 34,
             versionCode: 1,
             versionName: "1.0"
     ]
@@ -31,7 +31,7 @@ ext {
             // google官方的flex布局
             flexbox                      : 'com.google.android.flexbox:flexbox:3.0.0',
             // BaseRecyclerViewAdapterHelper
-            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7',
+            BaseRecyclerViewAdapterHelper: 'io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14',
             // material风格功能强大的Dialog
             materialDialogsCore          : 'com.afollestad.material-dialogs:core:3.3.0',
             materialDialogsLifecycle     : 'com.afollestad.material-dialogs:lifecycle:3.3.0',

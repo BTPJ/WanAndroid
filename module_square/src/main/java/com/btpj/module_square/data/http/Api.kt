@@ -37,4 +37,11 @@ interface Api {
     @GET("navi/json")
     suspend fun getNavigationList(): ApiResponse<List<Navigation>>
 
+    /** 获取体系文章列表数据 */
+    @GET("article/list/{pageNo}/json")
+    suspend fun getSystemArticlePageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int,
+        @Query("cid") categoryId: Int
+    ): ApiResponse<PageResponse<Article>>
 }

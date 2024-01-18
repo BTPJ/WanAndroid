@@ -3,6 +3,7 @@ package com.btpj.module_square.ui.square.system
 import com.btpj.lib_base.R
 import com.btpj.lib_base.data.bean.Classify
 import com.btpj.lib_base.databinding.CommonListItemTvBinding
+import com.btpj.module_square.ui.square.system.details.SystemArticleListActivity
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder

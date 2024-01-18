@@ -1,11 +1,12 @@
 package com.btpj.module_square.ui.square.system
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.btpj.lib_base.R
 import com.btpj.lib_base.base.BaseVMBFragment
 import com.btpj.lib_base.databinding.IncludeSwiperefreshRecyclerviewBinding
-import com.btpj.lib_base.ext.initColors
-import com.btpj.lib_base.R
 import com.btpj.lib_base.ext.getEmptyView
+import com.btpj.lib_base.ext.initColors
+import com.btpj.module_square.ui.square.system.details.SystemArticleListActivity
 
 /**
  * 广场Tab下的体系

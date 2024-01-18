@@ -5,7 +5,8 @@
 
 - MVVM版：使用kotlin+协程+liveData+viewModel+dataBinding构造的MVVM架构的单体项目
 - MVVM+组件化版：将MVVM版进行组件划分
-- compose版：利用Compose+Navigation+Hilt+Flow+ViewModel实现
+- compose版：基于Compose实现，(Compose+ViewModel+Flow+Navigation)
+
 - Flutter、uniApp后续都会进行改造
 
 ## 功能展示
@@ -19,6 +20,7 @@
 
 ## APK下载
 - https://raw.githubusercontent.com/BTPJ/WanAndroid/MVVM/app/release/WanAndroid_V1.5.apk
+- Compose：https://raw.githubusercontent.com/BTPJ/WanAndroid/Compose/app/release/WanAndroid_V1.0.apk
 
 ## 开源库
 - 图片处理：Glide
@@ -34,7 +36,7 @@
 ## 项目地址
 - [Github MVVM分支](https://github.com/BTPJ/WanAndroid/tree/MVVM)
 - [Github Component分支](https://github.com/BTPJ/WanAndroid/tree/Component)
-- [Github Compose分支](https://github.com/BTPJ/WanAndroid/tree/Compose)
+- [Github Component分支](https://github.com/BTPJ/WanAndroid/tree/Compose)
 
 ## 致谢
 - WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章

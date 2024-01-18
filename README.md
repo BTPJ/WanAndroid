@@ -5,7 +5,7 @@
 
 - MVVM版：使用kotlin+协程+liveData+viewModel+dataBinding构造的MVVM架构的单体项目
 - MVVM+组件化版：将MVVM版进行组件划分
-- compose版：基于Compose实现，(Compose+ViewModel+Flow+Navigation)
+- compose版：基于Compose实现，(Compose+ViewModel+Flow+Navigation+Material3)，完全适配暗黑模式
 
 - Flutter、uniApp后续都会进行改造
 

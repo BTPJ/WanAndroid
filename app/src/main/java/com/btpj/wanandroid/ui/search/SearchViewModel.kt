@@ -6,11 +6,14 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.HotSearch
 import com.btpj.wanandroid.data.local.CacheManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @author LTP  2022/4/19
  */
-class SearchViewModel : BaseViewModel<Unit>() {
+@HiltViewModel
+class SearchViewModel @Inject constructor() : BaseViewModel<Unit>() {
 
     /** 搜索历史数据 */
     private val _searchHistoryData = MutableLiveData<ArrayDeque<String>>()

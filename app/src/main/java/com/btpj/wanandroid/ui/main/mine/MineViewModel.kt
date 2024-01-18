@@ -4,8 +4,11 @@ import com.btpj.wanandroid.App
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MineViewModel : BaseViewModel<CoinInfo>() {
+@HiltViewModel
+class MineViewModel @Inject constructor() : BaseViewModel<CoinInfo>() {
 
     /** 获取个人积分 */
     fun fetchPoints() {

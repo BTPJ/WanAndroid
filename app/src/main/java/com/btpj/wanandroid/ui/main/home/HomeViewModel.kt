@@ -4,16 +4,18 @@ import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.data.bean.Banner
 import com.btpj.wanandroid.ui.main.ArticleViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 /**
  * @author LTP  2023/12/19
  */
-class HomeViewModel : ArticleViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ArticleViewModel() {
 
     private val _bannerList = MutableStateFlow<List<Banner>>(emptyList())
     val bannerList = _bannerList

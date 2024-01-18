@@ -2,10 +2,9 @@ package com.btpj.wanandroid.ui.main.square.ask
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
 /**
@@ -13,7 +12,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
  */
 @Composable
 fun AskPage(
-    askViewModel: AskViewModel = viewModel(),
+    askViewModel: AskViewModel = hiltViewModel(),
     lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {

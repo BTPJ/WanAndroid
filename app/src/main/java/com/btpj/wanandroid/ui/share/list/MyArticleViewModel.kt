@@ -3,8 +3,11 @@ package com.btpj.wanandroid.ui.share.list
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Article
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MyArticleViewModel : BaseViewModel<List<Article>>() {
+@HiltViewModel
+class MyArticleViewModel @Inject constructor() : BaseViewModel<List<Article>>() {
 
     companion object {
         /** 每页显示的条目大小 */

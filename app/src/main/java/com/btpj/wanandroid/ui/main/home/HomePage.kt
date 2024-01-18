@@ -18,7 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.btpj.lib_base.ui.widgets.Banner
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.R
@@ -35,7 +35,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomePage(
-    homeViewModel: HomeViewModel = viewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel(),
     onSearch: () -> Unit,
     onBannerClick: (Banner) -> Unit = {},
     onArticleClick: (Article) -> Unit

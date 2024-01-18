@@ -1,16 +1,18 @@
 package com.btpj.wanandroid.ui.web
 
-import androidx.compose.runtime.mutableStateOf
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CollectUrl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
 /**
  * @author LTP  2022/4/2
  */
-class WebViewModel : BaseViewModel<Unit>() {
+@HiltViewModel
+class WebViewModel  @Inject constructor(): BaseViewModel<Unit>() {
 
     private val _collectUrlList = MutableStateFlow<List<CollectUrl>>(emptyList())
     val collectUrlList: StateFlow<List<CollectUrl>> = _collectUrlList
@@ -57,7 +59,7 @@ class WebViewModel : BaseViewModel<Unit>() {
     fun collectUrl(
         name: String,
         link: String,
-        successCallBack: (CollectUrl: CollectUrl?) -> Unit = {}
+        successCallBack: (collectUrl: CollectUrl?) -> Unit = {}
     ) {
         launch({
             handleRequest(DataRepository.collectUrl(name, link)) {

@@ -31,10 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
-import com.btpj.lib_base.utils.LogUtil
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.CollectData
 import com.btpj.wanandroid.ui.theme.MyColor
@@ -53,7 +52,7 @@ import kotlinx.parcelize.Parcelize
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun WebPage(
-    webViewModel: WebViewModel = viewModel(),
+    webViewModel: WebViewModel = hiltViewModel(),
     webType: WebType,
     collectedFlag: String? = null, // null表示未知，"0"表示未收藏，"1"表示已收藏
     navHostController: NavHostController

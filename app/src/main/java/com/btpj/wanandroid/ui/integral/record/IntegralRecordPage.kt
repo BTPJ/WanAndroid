@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.ui.widgets.TitleBar
@@ -33,7 +33,7 @@ import com.btpj.wanandroid.data.bean.IntegralRecord
 @Composable
 fun IntegralRecordPage(
     navHostController: NavHostController,
-    integralRecordViewModel: IntegralRecordViewModel = viewModel()
+    integralRecordViewModel: IntegralRecordViewModel = hiltViewModel()
 ) {
     Column {
         TitleBar(title = "积分记录") { navHostController.popBackStack() }

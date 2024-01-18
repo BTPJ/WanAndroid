@@ -14,6 +14,7 @@ import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.navigation.AppScreen
 import com.btpj.wanandroid.navigation.Route
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
  *
  * @author LTP 2022/3/9
  */
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private lateinit var navHostController: NavHostController

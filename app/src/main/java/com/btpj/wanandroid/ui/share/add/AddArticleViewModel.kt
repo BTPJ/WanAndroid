@@ -3,8 +3,11 @@ package com.btpj.wanandroid.ui.share.add
 import com.btpj.lib_base.data.bean.ApiResponse
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AddArticleViewModel : BaseViewModel<Unit>() {
+@HiltViewModel
+class AddArticleViewModel @Inject constructor() : BaseViewModel<Unit>() {
 
     /**
      * 添加分享的文章

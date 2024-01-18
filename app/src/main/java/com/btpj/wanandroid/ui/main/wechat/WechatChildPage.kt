@@ -2,6 +2,7 @@ package com.btpj.wanandroid.ui.main.wechat
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.data.bean.Article
@@ -16,7 +17,7 @@ fun WechatChildPage(
     authorId: Int,
     lazyListState: LazyListState,
     // authorId作为key，确保每个作者的页面使用不同的ViewModel
-    wechatChildViewModel: WechatChildViewModel = viewModel(key = "$authorId"),
+    wechatChildViewModel: WechatChildViewModel = hiltViewModel(key = "$authorId"),
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(

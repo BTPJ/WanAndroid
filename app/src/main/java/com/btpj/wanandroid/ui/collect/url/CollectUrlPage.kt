@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.RefreshList
@@ -36,7 +37,7 @@ import com.btpj.wanandroid.ui.theme.MyColor
  */
 @Composable
 fun CollectUrlPage(
-    collectUrlViewModel: CollectUrlViewModel = viewModel(),
+    collectUrlViewModel: CollectUrlViewModel = hiltViewModel(),
     lazyListState: LazyListState,
     onUrlClick: (CollectUrl) -> Unit
 ) {

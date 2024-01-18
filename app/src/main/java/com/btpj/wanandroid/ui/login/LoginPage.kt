@@ -29,7 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.lib_base.ui.widgets.LoadingDialog
@@ -43,7 +43,10 @@ import com.btpj.wanandroid.navigation.Route
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(navHostController: NavHostController, loginViewModel: LoginViewModel = viewModel()) {
+fun LoginPage(
+    navHostController: NavHostController,
+    loginViewModel: LoginViewModel = hiltViewModel()
+) {
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }

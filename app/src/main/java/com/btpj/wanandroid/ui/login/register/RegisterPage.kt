@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.CoilImage
@@ -43,7 +44,7 @@ import com.btpj.wanandroid.data.local.UserManager
 @Composable
 fun RegisterPage(
     navHostController: NavHostController,
-    registerViewModel: RegisterViewModel = viewModel()
+    registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
 
     var username by rememberSaveable { mutableStateOf("") }

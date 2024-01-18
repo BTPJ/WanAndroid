@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.CusAlertDialog
@@ -47,7 +47,7 @@ import com.btpj.wanandroid.ui.theme.MyColor
 @Composable
 fun MyArticlePage(
     navHostController: NavHostController,
-    myArticleViewModel: MyArticleViewModel = viewModel(),
+    myArticleViewModel: MyArticleViewModel = hiltViewModel(),
     onArticleClick: (Article) -> Unit
 ) {
     val needRefresh by App.appViewModel.shareArticleEvent.observeAsState()

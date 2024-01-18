@@ -1,11 +1,14 @@
 package com.btpj.wanandroid.ui.search.result
 
 import com.btpj.wanandroid.ui.main.ArticleViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @author LTP  2022/4/19
  */
-class SearchResultViewModel : ArticleViewModel() {
+@HiltViewModel
+class SearchResultViewModel @Inject constructor() : ArticleViewModel() {
 
     /**
      * 请求搜索结果分页列表

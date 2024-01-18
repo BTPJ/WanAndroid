@@ -37,7 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ext.navigate
 import com.btpj.lib_base.ui.widgets.CoilImage
@@ -55,7 +55,7 @@ import com.btpj.wanandroid.ui.web.WebType
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MinePage(
-    mineViewModel: MineViewModel = viewModel(),
+    mineViewModel: MineViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
     val uiState by mineViewModel.uiState.collectAsState()
@@ -66,12 +66,12 @@ fun MinePage(
     }
 
     val pullRefreshState = rememberPullRefreshState(
-        refreshing = uiState?.showLoading ?: false,
+        refreshing = uiState.showLoading,
         onRefresh = { onRefresh() }
     )
 
     LaunchedEffect(key1 = Unit, block = {
-        if (uiState?.data == null || user == null) {
+        if (uiState.data == null || user == null) {
             onRefresh()
         }
     })
@@ -108,7 +108,7 @@ fun MinePage(
                             )
                             Text(
                                 modifier = Modifier.padding(top = 10.dp),
-                                text = "id: ${uiState?.data?.userId ?: "-"}   排名: ${uiState?.data?.rank ?: "-"}",
+                                text = "id: ${uiState.data?.userId ?: "-"}   排名: ${uiState.data?.rank ?: "-"}",
                                 color = MaterialTheme.colorScheme.onPrimary,
                                 fontSize = 14.sp
                             )
@@ -130,7 +130,7 @@ fun MinePage(
                                 fontSize = 14.sp
                             )
                             Text(
-                                text = uiState?.data?.coinCount?.toString() ?: "-",
+                                text = uiState.data?.coinCount?.toString() ?: "-",
                                 color = MaterialTheme.colorScheme.primary,
                                 fontSize = 15.sp
                             )
@@ -194,7 +194,7 @@ fun MinePage(
 
         user?.let {
             PullRefreshIndicator(
-                refreshing = uiState?.showLoading ?: false,
+                refreshing = uiState.showLoading,
                 state = pullRefreshState,
                 modifier = Modifier.align(Alignment.TopCenter)
             )

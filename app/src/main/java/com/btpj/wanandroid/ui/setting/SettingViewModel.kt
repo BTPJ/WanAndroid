@@ -8,12 +8,15 @@ import com.btpj.lib_base.utils.ToastUtil
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.local.UserManager
 import com.tencent.bugly.beta.Beta
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 /**
  * @author LTP  2022/4/11
  */
-class SettingViewModel : BaseViewModel<Nothing>() {
+@HiltViewModel
+class SettingViewModel @Inject constructor() : BaseViewModel<Unit>() {
     private val _showLogoutBtn = MutableLiveData<Boolean>()
     val showLogoutBtn = _showLogoutBtn
 

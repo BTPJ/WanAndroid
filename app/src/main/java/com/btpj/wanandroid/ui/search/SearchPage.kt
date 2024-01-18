@@ -36,6 +36,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
@@ -49,7 +50,7 @@ import com.btpj.wanandroid.data.local.CacheManager
 @Composable
 fun SearchPage(
     navHostController: NavHostController,
-    searchViewModel: SearchViewModel = viewModel(),
+    searchViewModel: SearchViewModel = hiltViewModel(),
     toSearchResultPage: (String) -> Unit
 ) {
     Column {

@@ -32,14 +32,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.btpj.lib_base.ext.navigate
 import com.btpj.lib_base.http.RetrofitManager
 import com.btpj.lib_base.ui.widgets.CusAlertDialog
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.local.UserManager
-import com.btpj.lib_base.ext.navigate
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.web.WebType
 
@@ -50,7 +50,7 @@ import com.btpj.wanandroid.ui.web.WebType
  */
 @Composable
 fun SettingPage(
-    navHostController: NavHostController, viewModel: SettingViewModel = viewModel()
+    navHostController: NavHostController, viewModel: SettingViewModel = hiltViewModel()
 ) {
     val showLogoutBtn by viewModel.showLogoutBtn.observeAsState()
     val haveNewVersion by viewModel.haveNewVersion.observeAsState()

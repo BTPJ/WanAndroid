@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
@@ -21,7 +22,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
 fun SearchResultPage(
     navHostController: NavHostController,
     searchKey: String,
-    searchResultViewModel: SearchResultViewModel = viewModel(),
+    searchResultViewModel: SearchResultViewModel = hiltViewModel(),
     onArticleClick: (Article) -> Unit
 ) {
     Column {

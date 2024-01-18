@@ -1,14 +1,17 @@
 package com.btpj.wanandroid
 
+import android.app.Application
 import com.btpj.lib_base.BaseApp
 import com.btpj.wanandroid.base.AppViewModel
 import com.tencent.bugly.Bugly
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * Application基类
  *
  * @author LTP  2022/3/21
  */
+@HiltAndroidApp
 class App : BaseApp() {
 
     companion object {

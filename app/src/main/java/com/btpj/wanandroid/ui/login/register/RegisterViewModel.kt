@@ -3,11 +3,14 @@ package com.btpj.wanandroid.ui.login.register
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.local.UserManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @author LTP  2022/3/9
  */
-class RegisterViewModel : BaseViewModel<String>() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor() : BaseViewModel<String>() {
 
     /**
      * 注册

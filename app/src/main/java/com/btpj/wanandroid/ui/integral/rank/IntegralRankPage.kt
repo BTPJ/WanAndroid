@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.btpj.lib_base.ext.navigate
@@ -39,7 +40,7 @@ import com.btpj.wanandroid.navigation.Route
 @Composable
 fun IntegralRankPage(
     navHostController: NavHostController,
-    integralRankViewModel: IntegralRankViewModel = viewModel()
+    integralRankViewModel: IntegralRankViewModel = hiltViewModel()
 ) {
 
     val myCoinInfo by integralRankViewModel.myCoinInfo.collectAsState()

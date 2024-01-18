@@ -1,16 +1,17 @@
-package com.btpj.wanandroid.ui.splash
+package com.btpj.wanandroid.navigation
 
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.local.CacheManager
-import kotlinx.coroutines.flow.MutableSharedFlow
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
 /**
  * @author LTP  2022/4/21
  */
-class SplashViewModel : BaseViewModel<Unit>() {
+@HiltViewModel
+class AppScreenViewModel @Inject constructor() : BaseViewModel<Unit>() {
 
     private val _isFirstUse = MutableStateFlow(CacheManager.isFirstUse())
     val isFirstUse: StateFlow<Boolean> = _isFirstUse

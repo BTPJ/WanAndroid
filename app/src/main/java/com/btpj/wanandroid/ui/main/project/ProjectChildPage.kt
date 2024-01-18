@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.CoilImage
@@ -45,7 +46,7 @@ fun ProjectChildPage(
     categoryId: Int,
     lazyListState: LazyListState,
     // 因为categoryId是动态的，所以需要添加key来确保每个categoryId对应一个ViewModel
-    projectChildViewModel: ProjectChildViewModel = viewModel(key = "$categoryId"),
+    projectChildViewModel: ProjectChildViewModel = hiltViewModel(key = "$categoryId"),
     onArticleClick: (Article) -> Unit
 ) {
     ArticleRefreshList(

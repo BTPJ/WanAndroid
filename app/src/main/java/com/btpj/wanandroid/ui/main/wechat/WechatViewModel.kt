@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.Classify
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class WechatViewModel : BaseViewModel<Nothing>() {
+@HiltViewModel
+class WechatViewModel @Inject constructor() : BaseViewModel<Unit>() {
 
     /** 项目标题列表LiveData */
     private val _authorTitleListLiveData = MutableLiveData<List<Classify>>()

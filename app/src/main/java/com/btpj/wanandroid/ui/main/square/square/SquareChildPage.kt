@@ -5,11 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.Article
 import com.btpj.wanandroid.ui.main.ArticleItem
-import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.wanandroid.ui.main.ArticleRefreshList
 
 /**
@@ -17,7 +16,7 @@ import com.btpj.wanandroid.ui.main.ArticleRefreshList
  */
 @Composable
 fun SquareChildPage(
-    squareChildViewModel: SquareChildViewModel = viewModel(),
+    squareChildViewModel: SquareChildViewModel = hiltViewModel(),
     lazyListState: LazyListState,
     onArticleClick: (Article) -> Unit
 ) {

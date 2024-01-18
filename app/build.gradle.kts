@@ -4,6 +4,7 @@ import org.gradle.kotlin.dsl.libs
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hiltAndroid)
     kotlin("kapt")
     id("kotlin-parcelize")
 }
@@ -112,6 +113,9 @@ dependencies {
     implementation(libs.bugly.update)
     implementation(libs.bugly.nativecrashreport)
     implementation(libs.accompanist.webview)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     debugImplementation(libs.leakcanary)
 }

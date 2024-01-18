@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.btpj.lib_base.ext.toHtml
 import com.btpj.lib_base.ui.widgets.RefreshList
 import com.btpj.lib_base.utils.CommonUtil
@@ -38,7 +38,7 @@ import com.btpj.wanandroid.data.bean.Navigation
 @Composable
 fun NavigationPage(
     lazyListState: LazyListState,
-    navigationViewModel: NavigationViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = hiltViewModel(),
     onNavigationClick: (Article) -> Unit
 ) {
     val uiState = navigationViewModel.uiState.collectAsState().value

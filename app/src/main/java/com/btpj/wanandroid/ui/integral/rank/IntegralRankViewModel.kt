@@ -4,10 +4,13 @@ import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.CoinInfo
 import com.btpj.wanandroid.data.local.UserManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class IntegralRankViewModel : BaseViewModel<List<CoinInfo>>() {
+@HiltViewModel
+class IntegralRankViewModel @Inject constructor() : BaseViewModel<List<CoinInfo>>() {
 
     /** 我的积分信息 */
     private val _myCoinInfo = MutableStateFlow<CoinInfo?>(null)

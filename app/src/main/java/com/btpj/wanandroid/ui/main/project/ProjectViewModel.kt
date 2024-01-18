@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import com.btpj.lib_base.base.BaseViewModel
 import com.btpj.wanandroid.data.DataRepository
 import com.btpj.wanandroid.data.bean.ProjectTitle
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * @author LTP  2023/12/19
  */
-class ProjectViewModel : BaseViewModel<Nothing>() {
+@HiltViewModel
+class ProjectViewModel @Inject constructor() : BaseViewModel<Unit>() {
 
     /** 项目标题列表LiveData */
     private val _projectTitleListLiveData = MutableLiveData<List<ProjectTitle>?>()

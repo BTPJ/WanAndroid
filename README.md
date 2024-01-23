@@ -36,7 +36,7 @@
 ## 项目地址
 - [Github MVVM分支](https://github.com/BTPJ/WanAndroid/tree/MVVM)
 - [Github Component分支](https://github.com/BTPJ/WanAndroid/tree/Component)
-- [Github Component分支](https://github.com/BTPJ/WanAndroid/tree/Compose)
+- [Github Compose分支](https://github.com/BTPJ/WanAndroid/tree/Compose)
 
 ## 致谢
 - WanAndroid网站提供的开放API, 和里面的一些优秀开源项目和文章

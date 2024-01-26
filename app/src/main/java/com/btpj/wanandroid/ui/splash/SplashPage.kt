@@ -35,11 +35,11 @@ fun SplashPage(onFinish: () -> Unit) {
             images = listOf(R.drawable.ic_splash, R.drawable.ic_splash2, R.drawable.ic_splash3),
             autoScroll = false,
             indicatorSize = 20,
-            indicatorModifier = Modifier.padding(bottom = 30.dp)
+            indicatorModifier = Modifier.padding(bottom = 50.dp)
         )
         if (pagerState.currentPage == imageList.size - 1) {
             Button(
-                modifier = Modifier.padding(bottom = 70.dp),
+                modifier = Modifier.padding(bottom = 90.dp),
                 onClick = { onFinish() }
             ) {
                 Text(text = stringResource(id = R.string.enter_immediately))

@@ -1,9 +1,10 @@
 package com.btpj.wanandroid.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsets
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
@@ -31,8 +32,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             navHostController = rememberNavController()
-            // 沉浸式状态栏
-            WindowCompat.setDecorFitsSystemWindows(window, false)
             AppScreen(navHostController)
         }
 

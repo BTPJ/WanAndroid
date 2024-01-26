@@ -77,7 +77,9 @@ fun Banner(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onBannerItemClick?.invoke(index) })
+                    .clickable(enabled = onBannerItemClick != null) {
+                        onBannerItemClick?.invoke(index)
+                    })
         }
 
         Row(

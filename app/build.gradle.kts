@@ -17,8 +17,8 @@ android {
         applicationId = "com.btpj.wanandroid"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         ndk {
             // 设置支持的SO库架构，以微信为基准只支持arm64-v8a即可，可以达到缩包的目的

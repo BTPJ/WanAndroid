@@ -36,6 +36,7 @@ import androidx.navigation.NavHostController
 import com.btpj.lib_base.ui.widgets.TitleBar
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.data.bean.CollectData
+import com.btpj.wanandroid.data.local.UserManager
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.google.accompanist.web.AccompanistWebChromeClient
 import com.google.accompanist.web.AccompanistWebViewClient
@@ -67,7 +68,7 @@ fun WebPage(
     val collectUrlList by webViewModel.collectUrlList.collectAsState()
 
     LaunchedEffect(webType.link) {
-        if (collectedFlag == null) {
+        if (collectedFlag == null && UserManager.isLogin()) {
             webViewModel.fetchCollectUrlList()
         }
     }

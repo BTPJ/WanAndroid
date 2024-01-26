@@ -44,6 +44,7 @@ import com.btpj.lib_base.ui.widgets.CoilImage
 import com.btpj.wanandroid.App
 import com.btpj.wanandroid.R
 import com.btpj.wanandroid.data.local.UserManager
+import com.btpj.wanandroid.ext.navigateNeedLogin
 import com.btpj.wanandroid.navigation.Route
 import com.btpj.wanandroid.ui.theme.MyColor
 import com.btpj.wanandroid.ui.web.WebType
@@ -143,7 +144,7 @@ fun MinePage(
                             tint = MyColor.Red_FF4A57
                         )
                     }, title = stringResource(id = R.string.my_collect)) {
-                        navHostController.navigate(Route.MY_COLLECT)
+                        navHostController.navigateNeedLogin(Route.MY_COLLECT)
                     }
 
                     ListItemWithIcon(icon = {
@@ -153,7 +154,7 @@ fun MinePage(
                             tint = MyColor.Blue_4cd2f5
                         )
                     }, title = stringResource(id = R.string.my_share_article)) {
-                        navHostController.navigate(Route.SHARE_LIST)
+                        navHostController.navigateNeedLogin(Route.SHARE_LIST)
                     }
 
                     Divider(

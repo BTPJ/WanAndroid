@@ -23,10 +23,13 @@
 - Compose：https://raw.githubusercontent.com/BTPJ/WanAndroid/Compose/app/release/WanAndroid_V1.0.apk
 
 ## 开源库
-- 图片处理：koil-compose
-- 依赖注入hilt
+- 图片处理：Glide
+- 强大的Adapter：BaseRecyclerViewAdapterHelper
 - 网络框架：Retrofit
 - 基于MMKV内存映射的移动端通用 key-value 组件-MMKV
+- 基于Android WebView的一个强大的库-Agentweb
+- MD风格的material-dialogs对话框
+- 屏幕适配：AndroidAutoSize
 - 内存泄漏分析：leakcanary
 - bugly应用升级与错误上传
 
